@@ -1,4 +1,4 @@
-package sgbr_web.servlet.teste;
+package sgbr.web.servlet.teste;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;

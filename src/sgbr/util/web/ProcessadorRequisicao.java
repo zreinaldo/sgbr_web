@@ -8,9 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementacao da class ProcessadorRequisicao
+ * processador de requisicao 
+ * metodos comuns a todos os servlets
+ * 
+ * @author Reinaldo
+ *
  */
 public abstract class ProcessadorRequisicao extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4175700659909543233L;
 
 	/**
 	 * parametro/atributo do request que representa o metodo da servlet que sera

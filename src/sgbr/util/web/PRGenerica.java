@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class PRGenerica
+ *  
+ * @author Reinaldo
+ *
  */
-@SuppressWarnings("serial")
 public abstract class PRGenerica extends ProcessadorRequisicao {
 
 	public void processar(HttpServletRequest pRequest, HttpServletResponse pResponse)
