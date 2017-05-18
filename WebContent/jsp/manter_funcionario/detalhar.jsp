@@ -7,8 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<FORM name="form_principal" method="post" action="">
+<input type="button" value="Consultar" hi
+								onclick=" window.history.back();"
+								id="consultar">
 
-</FORM>
+<button ></button>
 </body>
 </html>

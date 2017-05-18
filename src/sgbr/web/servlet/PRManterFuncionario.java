@@ -16,17 +16,19 @@ import sgbr.util.web.PRManterCadastro;
 public class PRManterFuncionario extends PRManterCadastro {
 	private static final long serialVersionUID = 1L;
 
+	
+	public static final String NM_SERVLET = "PRManterFuncionario";
+	public static final String NM_JSP_CONSULTA = "/jsp/manter_funcionario/consulta.jsp";
+	public static final String NM_JSP_INCLUIR = "/jsp/manter_funcionario/incluir.jsp";
+	public static final String NM_JSP_ALTERAR =  "/jsp/manter_funcionario/alterar.jsp";
+	public static final String NM_JSP_DETALHAR = "/jsp/manter_funcionario/detalhar.jsp";
 
 	private FachadaSGBR aFachadaSGBR;
 
 	
 	public void init() throws ServletException {
-		try {
-			// Inicializa Controlador				
-			this.aFachadaSGBR = FachadaSGBR.getInstancia();
-		} catch (Exception e) {
-			throw new ServletException("Erro inicializando a Servlet", e);
-		}
+		System.out.println("Método init()");
+		this.aFachadaSGBR = FachadaSGBR.getInstancia();
 	}
 	/*
 	 * (non-Javadoc)
@@ -52,7 +54,7 @@ public class PRManterFuncionario extends PRManterCadastro {
 		OTDFuncionario otdFuncionario = new OTDFuncionario();
 		
 		
-		this.aFachadaSGBR.incluirFuncionario(otdFuncionario);
+//		this.aFachadaSGBR.incluirFuncionario(otdFuncionario);
 
 	}
 
@@ -114,6 +116,8 @@ public class PRManterFuncionario extends PRManterCadastro {
 	@Override
 	public void exibirConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 		// TODO Auto-generated method stub
+//		FachadaSGBR aFachadaSGBR = FachadaSGBR.getInstancia();
+		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
 	}
 
@@ -126,7 +130,10 @@ public class PRManterFuncionario extends PRManterCadastro {
 	@Override
 	public void processarConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 		// TODO Auto-generated method stub
-
+		
+		this.aFachadaSGBR.toString();
+		System.out.println("oiiioioioioi");
+		this.redirecionar(this.NM_JSP_DETALHAR, pRequest, pResponse);
 	}
 
 	/*
