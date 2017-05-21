@@ -16,20 +16,38 @@ import sgbr.util.web.PRManterCadastro;
 public class PRManterFuncionario extends PRManterCadastro {
 	private static final long serialVersionUID = 1L;
 
-	
+	public static final String ID_REQ_ATR_nmFuncionario = "nmFuncionario";
+	public static final String ID_REQ_ATR_tpCargo = "nmCargo";
+	public static final String ID_REQ_ATR_nuCPF = "nuCPF";
+	public static final String ID_REQ_ATR_nuRG = "nuRG";
+	public static final String ID_REQ_ATR_nuCarteira = "nuCarteira";
+	public static final String ID_REQ_ATR_nmBanco = "nmBanco";
+	public static final String ID_REQ_ATR_nuAgencia = "nuAgencia";
+	public static final String ID_REQ_ATR_nuCC = "nuCC";
+	public static final String ID_REQ_ATR_vlSalario = "vlSalario";
+	public static final String ID_REQ_ATR_dtAdmissao = "dtAdmissao";
+	public static final String ID_REQ_ATR_dtNascimento = "dtNascimentoAdmissao";
+	public static final String ID_REQ_ATR_email = "email";
+	public static final String ID_REQ_ATR_nmUF = "nmUF";
+	public static final String ID_REQ_ATR_nmCidade = "nmCidade";
+	public static final String ID_REQ_ATR_nmBairro = "nmBairro";
+	public static final String ID_REQ_ATR_nmLogradouro = "nmLogradouro";
+	public static final String ID_REQ_ATR_nuLogradouro = "nuLogradouro";
+	public static final String ID_REQ_ATR_nuCEP = "nuCEP";
+
 	public static final String NM_SERVLET = "PRManterFuncionario";
 	public static final String NM_JSP_CONSULTA = "/jsp/manter_funcionario/consulta.jsp";
 	public static final String NM_JSP_INCLUIR = "/jsp/manter_funcionario/incluir.jsp";
-	public static final String NM_JSP_ALTERAR =  "/jsp/manter_funcionario/alterar.jsp";
+	public static final String NM_JSP_ALTERAR = "/jsp/manter_funcionario/alterar.jsp";
 	public static final String NM_JSP_DETALHAR = "/jsp/manter_funcionario/detalhar.jsp";
 
 	private FachadaSGBR aFachadaSGBR;
 
-	
 	public void init() throws ServletException {
 		System.out.println("Método init()");
 		this.aFachadaSGBR = FachadaSGBR.getInstancia();
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -39,7 +57,7 @@ public class PRManterFuncionario extends PRManterCadastro {
 	@Override
 	public void exibirInclusao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 		// TODO Auto-generated method stub
-
+		this.redirecionar(this.NM_JSP_INCLUIR, pRequest, pResponse);
 	}
 
 	/*
@@ -50,11 +68,58 @@ public class PRManterFuncionario extends PRManterCadastro {
 	 */
 	@Override
 	public void processarInclusao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
-		// TODO Auto-generated method stub
+
+		String nmFuncionario = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_nmFuncionario, pRequest);
+		String tpCargo = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_tpCargo, pRequest);
+		String nuCPF = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCPF,
+				pRequest);
+		String nuRG = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuRG, pRequest);
+		String nuCarteira = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCarteira, pRequest);
+		String nmBanco = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmBanco, pRequest);
+		String nuAgencia = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuAgencia,
+				pRequest);
+		String nuCC = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCC, pRequest);
+		String vlSalario = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_vlSalario,
+				pRequest);
+		String dtAdmissao = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_dtAdmissao,
+				pRequest);
+		
+		String nmUF = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmUF, pRequest);
+		String nmCidade = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmCidade, pRequest);
+		String nmBairro = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmBairro, pRequest);
+		String nmLogradouro = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmLogradouro,
+				pRequest);
+		String nuLogradouro = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuLogradouro,
+				pRequest);
+		String nuCEP = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCEP, pRequest);
+		
+		String dtNascimemnto = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_dtNascimento,
+				pRequest);
+		String email = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_email, pRequest);
+
+
 		OTDFuncionario otdFuncionario = new OTDFuncionario();
-		
-		
-//		this.aFachadaSGBR.incluirFuncionario(otdFuncionario);
+		otdFuncionario.setNmFuncionario(nmFuncionario);
+
+		otdFuncionario.setNuCPF(nuCPF);
+		otdFuncionario.setNuRG(nuRG);
+		otdFuncionario.setNuCarteira(nuCarteira);
+		otdFuncionario.setNmBanco(nmBanco);
+		otdFuncionario.setNuAgencia(nuAgencia);
+		otdFuncionario.setNuCC(nuCC);
+		otdFuncionario.setVlSalario(Double.valueOf(vlSalario));
+		otdFuncionario.setTpFuncionario(Integer.valueOf(tpCargo));
+		otdFuncionario.setDtAdmissao(dtAdmissao);
+		otdFuncionario.setNmUF(nmUF);
+		otdFuncionario.setNmCidade(nmCidade);
+		otdFuncionario.setNmBairro(nmBairro);
+		otdFuncionario.setNmLogradouro(nmLogradouro);
+		otdFuncionario.setNuLogradouro(nuLogradouro);
+		otdFuncionario.setNuCEP(nuCEP);
+		otdFuncionario.setDtNascimento(dtNascimemnto);
+		otdFuncionario.setEmail(email);
+
+		this.aFachadaSGBR.incluirFuncionario(otdFuncionario);
 
 	}
 
@@ -116,7 +181,7 @@ public class PRManterFuncionario extends PRManterCadastro {
 	@Override
 	public void exibirConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 		// TODO Auto-generated method stub
-//		FachadaSGBR aFachadaSGBR = FachadaSGBR.getInstancia();
+		// FachadaSGBR aFachadaSGBR = FachadaSGBR.getInstancia();
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
 	}
@@ -130,7 +195,7 @@ public class PRManterFuncionario extends PRManterCadastro {
 	@Override
 	public void processarConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 		this.aFachadaSGBR.toString();
 		System.out.println("oiiioioioioi");
 		this.redirecionar(this.NM_JSP_DETALHAR, pRequest, pResponse);

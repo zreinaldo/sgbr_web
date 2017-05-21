@@ -1,5 +1,6 @@
+<%@page import="sgbr.web.servlet.PRManterFuncionario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,8 +8,176 @@
 <title>Insert title here</title>
 </head>
 <body>
-<FORM name="form_principal" method="post" action="">
+	<script type="text/javascript">
+		function submeterFormulario(pServlet, pEvento) {
+			alert(pServlet);
+			alert(pEvento);
+			document.form_principal.action = pServlet;
+			evento = eval("document.form_principal.evento");
+			if (evento != null) {
+				evento.value = pEvento;
+			}
 
-</FORM>
+			document.form_principal.submit();
+
+		}
+	</script>
+	<FORM name="form_principal" method="post" action="">
+
+		<INPUT type="hidden" id="evento"
+			name="<%=PRManterFuncionario.ID_REQ_EVENTO%>" value="">
+
+
+		<fieldset>
+			<table>
+				<tr>
+					<td><label for="nmCargo">Cargo:</label></td>
+
+					<td><select id="<%=PRManterFuncionario.ID_REQ_ATR_nmCargo%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nmCargo%>">
+							<option value="1" >Garçon</option>
+							<option value="2" selected="selected">Caixa</option>
+							<option value="3">Gerente</option>
+							<option value="4">Serviços-Gerais</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td><label for="nomeCliente">Nome:</label></td>
+					<td><input type="text"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nmFuncionario%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nmFuncionario%>"
+						maxlength="58"></td>
+				</tr>
+				<tr>
+					<td><label for="nuCPF">CPF:</label></td>
+					<td><input type="text"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nuCPF%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nuCPF%>" maxlength="58"></td>
+				</tr>
+
+				<tr>
+					<td><label for="nuRG">RG:</label></td>
+					<td><input type="text"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nuRG%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nuRG%>" maxlength="58"></td>
+				</tr>
+				<tr>
+					<td><label for="nuCarteira">Carteira de Trabalho:</label></td>
+					<td><input
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nmFuncionario%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nmFuncionario%>"
+						name="nmFuncionario" maxlength="58"></td>
+				</tr>
+
+				<tr>
+					<td><label for="dtNascimento">Data Nascimento:</label></td>
+					<td><input
+						id="<%=PRManterFuncionario.ID_REQ_ATR_dtNascimento%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_dtNascimento%>"
+						name="nmFuncionario" maxlength="58"></td>
+				</tr>
+
+				<tr>
+					<td><label for="email">E-mail:</label></td>
+					<td><input id="<%=PRManterFuncionario.ID_REQ_ATR_email%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_email%>"
+						name="nmFuncionario" maxlength="58"></td>
+				</tr>
+
+				<td><label for="nomeCliente">Dados Bancarios</label></td>
+				<td>-</td>
+				<tr>
+					<td><label for="nmBanco">Banco:</label></td>
+					<td><input type="text"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nmBanco%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nmBanco%>" maxlength="58"></td>
+				</tr>
+				<tr>
+					<td><label for="nuAgencia">Agência:</label></td>
+					<td><input type="text"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nuAgencia%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nuAgencia%>"
+						maxlength="58"></td>
+				</tr>
+				<tr>
+					<td><label for="nuCC">Número Conta Corrente:</label></td>
+					<td><input type="text"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nuCC%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nuCC%>" maxlength="58"></td>
+				</tr>
+
+				<tr>
+					<td><label for="vlSalario">Salário:</label></td>
+					<td><input type="text"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_vlSalario%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_vlSalario%>"
+						maxlength="58"></td>
+				</tr>
+				<tr>
+					<td><label for="dtAdmissao">Data Admissão:</label></td>
+					<td><input type="text"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_dtAdmissao%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_dtAdmissao%>"
+						maxlength="58"></td>
+				</tr>
+				<td><label for="nomeCliente">Endereço</label></td>
+				<td>-</td>
+				</tr>
+				<tr>
+				
+					<td><label for="nmUF">Estado:</label></td>
+					<td><select id="<%=PRManterFuncionario.ID_REQ_ATR_nmUF%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nmUF%>">
+							<option value="PE">Pernambuco</option>
+							<option value="PB" selected="selected">Paraiba</option>
+							<option value="RJ">Rio de Janeiro</option>
+							<option value="AL">Alagoas</option>
+					</select></td>
+				</tr>
+
+
+				</tr>
+				<tr>
+					<td><label for="nmCidade">Cidade:</label></td>
+					<td><input type="text"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nmCidade%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nmCidade%>" maxlength="58"></td>
+				</tr>
+				<tr>
+					<td><label for="nmBairro">Bairro:</label></td>
+					<td><input type="text"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nmBairro%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nmBairro%>" maxlength="58"></td>
+				</tr>
+				</tr>
+				<tr>
+					<td><label for="nmLogradouro">Logradouro:</label></td>
+					<td><input type="text"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nmLogradouro%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nmLogradouro%>"
+						maxlength="58" size="50"> <label for="nuLogradouro">Número:</label><input
+						type="text" id="<%=PRManterFuncionario.ID_REQ_ATR_nuLogradouro%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nuLogradouro%>"
+						maxlength="8" size="10"></td>
+				</tr>
+				</tr>
+				</tr>
+				<tr>
+					<td><label for="nuCEP">CEP:</label></td>
+					<td><input type="text"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nuCEP%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nuCEP%>" maxlength="58"></td>
+				</tr>
+				<tr>
+					<td colspan="2" id="botoes"><input type="button"
+						value="Incluir"
+						onclick="submeterFormulario('<%=PRManterFuncionario.NM_SERVLET%>','<%=PRManterFuncionario.EVENTO_PROCESSAR_INCLUSAO%>')"
+						id="consultar"><input type="button" value="Home"
+						onClick=""></td>
+				</tr>
+			</table>
+
+		</fieldset>
+	</FORM>
 </body>
 </html>

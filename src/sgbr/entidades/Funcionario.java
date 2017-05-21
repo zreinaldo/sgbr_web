@@ -19,16 +19,17 @@ import sgbr.util.OTDFuncionario;
  * @author Reinaldo
  *
  */
-public class Funcionario extends Pessoa {
+public class Funcionario extends EntidadeGenerica {
 
 	/*
 	 * constantes referentes aos atributos do banco
 	 */
 	public static final String NM_COLUNA_FUNCIONARIO_CD = "FUNCIONARIO_CD";
 	public static final String NM_COLUNA_PESSOA_CD = "PESSOA_CD";
-	public static final String NM_COLUNA_FUNCIONARIO_TP = "FUNCIONARIO_TP";
+	public static final String NM_COLUNA_FUNCIONARIO_TP = "TIPO_FUNCIONARIO_CD";
 	public static final String NM_COLUNA_FUNCIONARIO_BANCO_AGENCIA = "FUNCIONARIO_BANCO_AGENCIA";
 	public static final String NM_COLUNA_FUNCIONARIO_BANCO_CONTA = "FUNCIONARIO_BANCO_CONTA";
+	public static final String NM_COLUNA_FUNCIONARIO_BANCO_NM = "FUNCIONARIO_BANCO_NM";
 	public static final String NM_COLUNA_FUNCIONARIO_SALARIO = "FUNCIONARIO_SALARIO";
 	public static final String NM_COLUNA_FUNCIONARIO_DT_ADMISSAO = "FUNCIONARIO_DT_ADMISSAO";
 
@@ -37,9 +38,9 @@ public class Funcionario extends Pessoa {
 	private int tpFuncionario;
 	private String nuBancoAgencia;
 	private String nuBancoConta;
+	private String nmBanco;
 	private Double vlSalario;
 	private Date dtAdmissao;
-
 	
 	/**
 	 * contrutor
@@ -48,7 +49,6 @@ public class Funcionario extends Pessoa {
 		super();
 	}
 
-	
 	/**
 	 * @param pCdFuncionario
 	 * @param pCdPessoa
@@ -58,6 +58,24 @@ public class Funcionario extends Pessoa {
 		cdFuncionario = pCdFuncionario;
 		cdPessoa = pCdPessoa;
 	}
+	
+	
+
+	/**
+	 * @return the nmBanco
+	 */
+	public String getNmBanco() {
+		return nmBanco;
+	}
+
+	/**
+	 * @param pNmBanco
+	 *            the nmBanco to set
+	 */
+	public void setNmBanco(String pNmBanco) {
+		this.nmBanco = pNmBanco;
+	}
+
 
 	/**
 	 * @return the cdFuncionario
@@ -163,5 +181,5 @@ public class Funcionario extends Pessoa {
 	public void setDtAdmissao(Date pDtAdmissao) {
 		dtAdmissao = pDtAdmissao;
 	}
-		
+
 }

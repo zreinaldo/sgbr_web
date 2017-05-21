@@ -5,7 +5,10 @@ package sgbr.regras.funcionario;
 
 import sgbr.cadastros.sql.DAOFuncionario;
 import sgbr.cadastros.sql.DAOPessoa;
+import sgbr.entidades.Funcionario;
+import sgbr.entidades.Pessoa;
 import sgbr.util.OTDFuncionario;
+import sgbr.util.Util;
 
 /**
  * @author Reinaldo
@@ -36,11 +39,31 @@ public class RNIncluirFuncionario {
 	}
 
 	public void processar(OTDFuncionario pOtdFuncionario) {
-
+		Pessoa pessoa = new Pessoa();
+		Funcionario funcionario = new Funcionario();
 		try {
-			DAOPessoa.getInstancia().incluir(null);
 
-			DAOFuncionario.getInstancia().incluir(null);
+			pessoa.setNmPessoa(pOtdFuncionario.getNmFuncionario());
+			pessoa.setDtNascPessoa(Util.formataData(pOtdFuncionario.getDtNascimento()));
+			pessoa.setEePessoa(pOtdFuncionario.getEmail());
+			pessoa.setNmBairro(pOtdFuncionario.getNmBairro());
+			pessoa.setNmCidade(pOtdFuncionario.getNmCidade());
+			pessoa.setNmLogradouro(pOtdFuncionario.getNmLogradouro());
+			pessoa.setNmUF(pOtdFuncionario.getNmUF());
+			pessoa.setNuLogradouro(pOtdFuncionario.getNuLogradouro());
+
+
+			pessoa = DAOPessoa.getInstancia().incluir(pessoa);
+
+			funcionario.setCdPessoa(pessoa.getCdPessoa());
+			funcionario.setVlSalario(pOtdFuncionario.getVlSalario());
+			funcionario.setTpFuncionario( pOtdFuncionario.getTpFuncionario());
+			funcionario.setDtAdmissao(Util.formataData(pOtdFuncionario.getDtAdmissao()));
+			funcionario.setNuBancoAgencia(pOtdFuncionario.getNuAgencia());
+			funcionario.setNuBancoConta(pOtdFuncionario.getNuCC());
+			funcionario.setNuBancoAgencia(pOtdFuncionario.getNuAgencia());
+			funcionario.setNmBanco(pOtdFuncionario.getNmBanco());			
+			DAOFuncionario.getInstancia().incluir(funcionario);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

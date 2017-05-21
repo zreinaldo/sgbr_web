@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class PRGenerica extends ProcessadorRequisicao {
 
+    //metodo comum que vai chamar os metodos dos servlets
 	public void processar(HttpServletRequest pRequest, HttpServletResponse pResponse)
 			throws ServletException, IOException {
 		try {

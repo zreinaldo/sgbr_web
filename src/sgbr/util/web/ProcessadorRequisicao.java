@@ -72,6 +72,9 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 	 */
 	public static final String EVENTO_EXIBIR_DETALHAMENTO_CONSULTA = "exibirDetalhamentoConsulta";
 	
+	
+	public static final String NM_JSP_SUCESSO = "/jsp/util/sucesso.jsp";
+	
 	/**
 	 * implementao doget
 	 */

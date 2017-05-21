@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 
 import sgbr.cadastros.IntfDAOPessoa;
 import sgbr.entidades.Pessoa;
@@ -49,18 +50,32 @@ public class DAOPessoa extends DAO_MYSQL implements IntfDAOPessoa {
 	@Override
 	public Pessoa incluir(Pessoa pPessoa) throws SQLException {
 		Connection conexao = null;
-		PreparedStatement preStmt = null;
+		PreparedStatement ppSt = null;
 
 		conexao = this.getConection();
 
-		String sql = "INSERT INTO mydb.pessoa (" + Pessoa.NM_COLUNA_PESSOA_NM + "," + Pessoa.NM_COLUNA_PESSOA_EE + ","
-				+ Pessoa.NM_COLUNA_PESSOA_DT_NASC + ") VALUES(?,?,?)";
+		pPessoa.setDhIncusaoRegistro(new Timestamp(System.currentTimeMillis()));
+		pPessoa.setDhAlteracaoRegistro(new Timestamp(System.currentTimeMillis()));
 
-		PreparedStatement ppSt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		String sql = "INSERT INTO mydb.pessoa (" + Pessoa.NM_COLUNA_PESSOA_NM + "," + Pessoa.NM_COLUNA_PESSOA_EE + ","
+				+ Pessoa.NM_COLUNA_PESSOA_DT_NASC + "," + Pessoa.NM_COLUNA_PESSOA_ENDERECO_BAIRRO_NM + ","
+				+ Pessoa.NM_COLUNA_PESSOA_ENDERECO_LOGRADOURO_NM + "," + Pessoa.NM_COLUNA_PESSOA_ENDERECO_LOGRADOURO_NU
+				+ "," + Pessoa.NM_COLUNA_PESSOA_ENDERECO_CIDADE + "," + Pessoa.NM_COLUNA_PESSOA_ENDERECO_UF + ","
+				+ Pessoa.NM_COLUNA_DH_INCLUSAO_REGISTRO + "," + Pessoa.NM_COLUNA_DH_ALTERACAO_REGISTRO
+				+ ") VALUES(?,?,?,?,?,?,?,?,?,?)";
+
+		ppSt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 		ppSt.setString(1, pPessoa.getNmPessoa());
 		ppSt.setString(2, pPessoa.getEePessoa());
 		ppSt.setDate(3, pPessoa.getDtNascPessoa());
+		ppSt.setString(4, pPessoa.getNmBairro());
+		ppSt.setString(5, pPessoa.getNmLogradouro());
+		ppSt.setString(6, pPessoa.getNuLogradouro());
+		ppSt.setString(7, pPessoa.getNmCidade());
+		ppSt.setString(8, pPessoa.getNmUF());
+		ppSt.setTimestamp(9, pPessoa.getDhIncusaoRegistro());
+		ppSt.setTimestamp(10, pPessoa.getDhAlteracaoRegistro());
 
 		ppSt.execute();
 
