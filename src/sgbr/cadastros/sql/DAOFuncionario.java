@@ -123,8 +123,34 @@ public class DAOFuncionario extends DAO_MYSQL implements IntfDAOFuncionario {
 	 */
 	@Override
 	public Funcionario consultarPorChavePrimaria(Funcionario pFuncionario) throws SQLException {
-		// TODO Auto-generated method stub
+
+		Connection conexao = null;
+		PreparedStatement preStmt = null;
+
+		conexao = this.getConection();
+
+		String sql = "SELECT * FROM MYDB.PESSOA inner join MYDB.FUNCIONARIO on MYDB.FUNCIONARIO.pessoa_cd = MYDB.pessoa.pessoa_cd"
+				+ "inner join MYDB.pessoa_documento on MYDB.pessoa.pessoa_cd = MYDB.pessoa_documento.pessoa_cd and MYDB.pessoa_documento.tipo_documento_cd = 1";
+
+		PreparedStatement ppSt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//
+//		ppSt.setString(1, pPessoa.getNmPessoa());
+//		ppSt.setString(2, pPessoa.getEePessoa());
+//		ppSt.setDate(3, pPessoa.getDtNascPessoa());
+//
+//		ppSt.execute();
+//
+//		ResultSet rs = ppSt.getGeneratedKeys();
+//
+//		while (rs.next()) {
+//			// pega o valor do sequencial inserido
+//			pPessoa.setCdPessoa(rs.getInt(1));
+//		}
+
+		ppSt.close();
+		conexao.close();
 		return null;
+
 	}
 
 }

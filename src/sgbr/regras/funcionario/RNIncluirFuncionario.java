@@ -5,8 +5,11 @@ package sgbr.regras.funcionario;
 
 import sgbr.cadastros.sql.DAOFuncionario;
 import sgbr.cadastros.sql.DAOPessoa;
+import sgbr.cadastros.sql.DAOPessoaDocumento;
 import sgbr.entidades.Funcionario;
 import sgbr.entidades.Pessoa;
+import sgbr.entidades.PessoaDocumento;
+import sgbr.util.Constantes;
 import sgbr.util.OTDFuncionario;
 import sgbr.util.Util;
 
@@ -41,6 +44,7 @@ public class RNIncluirFuncionario {
 	public void processar(OTDFuncionario pOtdFuncionario) {
 		Pessoa pessoa = new Pessoa();
 		Funcionario funcionario = new Funcionario();
+		PessoaDocumento pessoaDocumento = new PessoaDocumento();
 		try {
 
 			pessoa.setNmPessoa(pOtdFuncionario.getNmFuncionario());
@@ -64,10 +68,26 @@ public class RNIncluirFuncionario {
 			funcionario.setNuBancoAgencia(pOtdFuncionario.getNuAgencia());
 			funcionario.setNmBanco(pOtdFuncionario.getNmBanco());			
 			DAOFuncionario.getInstancia().incluir(funcionario);
+			
+			
+			pessoaDocumento.setCdPessoa(pessoa.getCdPessoa());
+			pessoaDocumento.setNuDocumento(pOtdFuncionario.getNuCPF());
+			pessoaDocumento.setTpDocumento(Constantes.CD_TIPO_DOCUMENTO_CPF);			
+			DAOPessoaDocumento.getInstancia().incluir(pessoaDocumento);
 
+			pessoaDocumento = new PessoaDocumento();
+			pessoaDocumento.setCdPessoa(pessoa.getCdPessoa());
+			pessoaDocumento.setNuDocumento(pOtdFuncionario.getNuRG());
+			pessoaDocumento.setTpDocumento(Constantes.CD_TIPO_DOCUMENTO_RG);			
+			DAOPessoaDocumento.getInstancia().incluir(pessoaDocumento);
+			
+			pessoaDocumento = new PessoaDocumento();
+			pessoaDocumento.setCdPessoa(pessoa.getCdPessoa());
+			pessoaDocumento.setNuDocumento(pOtdFuncionario.getNuCarteira());
+			pessoaDocumento.setTpDocumento(Constantes.CD_TIPO_DOCUMENTO_CARTEIRA_TRABALHO);
+			
+			DAOPessoaDocumento.getInstancia().incluir(pessoaDocumento);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-
 			// TODO gerar erro generico
 			e.printStackTrace();
 		}

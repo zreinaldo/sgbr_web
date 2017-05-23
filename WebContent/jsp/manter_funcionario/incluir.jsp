@@ -1,3 +1,4 @@
+<%@page import="sgbr.web.servlet.selects.SelectTipoFuncionario"%>
 <%@page import="sgbr.web.servlet.PRManterFuncionario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -5,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Cadastro Funcionario</title>
 </head>
 <body>
 	<script type="text/javascript">
@@ -33,14 +34,22 @@
 				<tr>
 					<td><label for="nmCargo">Cargo:</label></td>
 
-					<td><select id="<%=PRManterFuncionario.ID_REQ_ATR_nmCargo%>"
-						name="<%=PRManterFuncionario.ID_REQ_ATR_nmCargo%>">
-							<option value="1" >Garçon</option>
+					<td><select id="<%=PRManterFuncionario.ID_REQ_ATR_tpCargo%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_tpCargo%>">
+							<option value="1">Garçon</option>
 							<option value="2" selected="selected">Caixa</option>
 							<option value="3">Gerente</option>
 							<option value="4">Serviços-Gerais</option>
 					</select></td>
 				</tr>
+				
+				<tr>
+					<td><label for="nmCargo">Cargo:</label></td>
+
+					<td><%= SelectTipoFuncionario.getInstancia().getHTML(request, PRManterFuncionario.ID_REQ_ATR_tpCargo, PRManterFuncionario.ID_REQ_ATR_tpCargo, "2")%></td>
+				</tr>
+								
+
 				<tr>
 					<td><label for="nomeCliente">Nome:</label></td>
 					<td><input type="text"
@@ -63,10 +72,9 @@
 				</tr>
 				<tr>
 					<td><label for="nuCarteira">Carteira de Trabalho:</label></td>
-					<td><input
-						id="<%=PRManterFuncionario.ID_REQ_ATR_nmFuncionario%>"
-						name="<%=PRManterFuncionario.ID_REQ_ATR_nmFuncionario%>"
-						name="nmFuncionario" maxlength="58"></td>
+					<td><input id="<%=PRManterFuncionario.ID_REQ_ATR_nuCarteira%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nuCarteira%>"
+						maxlength="58"></td>
 				</tr>
 
 				<tr>
@@ -74,14 +82,13 @@
 					<td><input
 						id="<%=PRManterFuncionario.ID_REQ_ATR_dtNascimento%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_dtNascimento%>"
-						name="nmFuncionario" maxlength="58"></td>
+						maxlength="58"></td>
 				</tr>
 
 				<tr>
 					<td><label for="email">E-mail:</label></td>
 					<td><input id="<%=PRManterFuncionario.ID_REQ_ATR_email%>"
-						name="<%=PRManterFuncionario.ID_REQ_ATR_email%>"
-						name="nmFuncionario" maxlength="58"></td>
+						name="<%=PRManterFuncionario.ID_REQ_ATR_email%>" maxlength="58"></td>
 				</tr>
 
 				<td><label for="nomeCliente">Dados Bancarios</label></td>
@@ -121,10 +128,8 @@
 						maxlength="58"></td>
 				</tr>
 				<td><label for="nomeCliente">Endereço</label></td>
-				<td>-</td>
-				</tr>
+				<td>-</td>			
 				<tr>
-				
 					<td><label for="nmUF">Estado:</label></td>
 					<td><select id="<%=PRManterFuncionario.ID_REQ_ATR_nmUF%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nmUF%>">
@@ -133,9 +138,6 @@
 							<option value="RJ">Rio de Janeiro</option>
 							<option value="AL">Alagoas</option>
 					</select></td>
-				</tr>
-
-
 				</tr>
 				<tr>
 					<td><label for="nmCidade">Cidade:</label></td>
@@ -149,7 +151,7 @@
 						id="<%=PRManterFuncionario.ID_REQ_ATR_nmBairro%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nmBairro%>" maxlength="58"></td>
 				</tr>
-				</tr>
+				
 				<tr>
 					<td><label for="nmLogradouro">Logradouro:</label></td>
 					<td><input type="text"
@@ -159,9 +161,7 @@
 						type="text" id="<%=PRManterFuncionario.ID_REQ_ATR_nuLogradouro%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nuLogradouro%>"
 						maxlength="8" size="10"></td>
-				</tr>
-				</tr>
-				</tr>
+				</tr>				
 				<tr>
 					<td><label for="nuCEP">CEP:</label></td>
 					<td><input type="text"

@@ -19,6 +19,29 @@ import sgbr.util.DAO_MYSQL;
  */
 public class DAOPessoaDocumento extends DAO_MYSQL implements IntfDAOPessoaDocumento {
 
+	
+
+	private static DAOPessoaDocumento aDAOPessoaDocumento = new DAOPessoaDocumento();
+
+	/**
+	 * Cria um novo objeto DAOPessoa.
+	 */
+	private DAOPessoaDocumento() {
+		super();
+	}
+
+	/**
+	 * - implementacao do singleton
+	 *
+	 * @return
+	 */
+	public static DAOPessoaDocumento getInstancia() {
+		if (DAOPessoaDocumento.aDAOPessoaDocumento == null) {
+			DAOPessoaDocumento.aDAOPessoaDocumento = new DAOPessoaDocumento();
+		}
+
+		return DAOPessoaDocumento.aDAOPessoaDocumento;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -27,7 +50,6 @@ public class DAOPessoaDocumento extends DAO_MYSQL implements IntfDAOPessoaDocume
 	 */
 	@Override
 	public void incluir(PessoaDocumento pPessoaDocumento) throws SQLException {
-		// TODO Auto-generated method stub
 
 		Connection conexao = null;
 		PreparedStatement ppSt = null;
@@ -42,8 +64,10 @@ public class DAOPessoaDocumento extends DAO_MYSQL implements IntfDAOPessoaDocume
 				+ PessoaDocumento.NM_COLUNA_DH_INCLUSAO_REGISTRO + "," + PessoaDocumento.NM_COLUNA_DH_ALTERACAO_REGISTRO
 				+ ") VALUES (?,?,?,?,?)";
 
-		ppSt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
+		ppSt = conexao.prepareStatement(sql);
+
+		
 		ppSt.setInt(1, pPessoaDocumento.getTpDocumento());
 		ppSt.setInt(2, pPessoaDocumento.getCdPessoa());
 		ppSt.setString(3, pPessoaDocumento.getNuDocumento());

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class DAO_MYSQL {
 
 	//para pegar a conexao
-	public static Connection getConection() throws SQLException {
+	protected static Connection getConection() throws SQLException {
 
 		Connection conn = null;
 		try {

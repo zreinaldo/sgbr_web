@@ -16,11 +16,18 @@ import sgbr.util.web.PRManterCadastro;
 public class PRManterFuncionario extends PRManterCadastro {
 	private static final long serialVersionUID = 1L;
 
+	public static final String ID_REQ_ATR_tpDocumento = "tpDocumento";
+	public static final String ID_REQ_ATR_nuDocumento = "nuDocumento";
 	public static final String ID_REQ_ATR_nmFuncionario = "nmFuncionario";
-	public static final String ID_REQ_ATR_tpCargo = "nmCargo";
+
+	//FIXME retirar campos
+	public static final String ID_REQ_ATR_tpCargo = "nmCargo";	
 	public static final String ID_REQ_ATR_nuCPF = "nuCPF";
 	public static final String ID_REQ_ATR_nuRG = "nuRG";
 	public static final String ID_REQ_ATR_nuCarteira = "nuCarteira";
+	//fim FIXME
+	
+	
 	public static final String ID_REQ_ATR_nmBanco = "nmBanco";
 	public static final String ID_REQ_ATR_nuAgencia = "nuAgencia";
 	public static final String ID_REQ_ATR_nuCC = "nuCC";
@@ -66,6 +73,7 @@ public class PRManterFuncionario extends PRManterCadastro {
 	 * @see sgbr.util.web.PRManterCadastro#processarInclusao(javax.servlet.http.
 	 * HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
+	@SuppressWarnings("static-access")
 	@Override
 	public void processarInclusao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 
@@ -194,10 +202,13 @@ public class PRManterFuncionario extends PRManterCadastro {
 	 */
 	@Override
 	public void processarConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
-		// TODO Auto-generated method stub
-
-		this.aFachadaSGBR.toString();
-		System.out.println("oiiioioioioi");
+		
+		String tpDocumento = this.getParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_tpDocumento, true, pRequest);
+		String nuDocumento = this.getParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuDocumento, true, pRequest);
+		String tpCargo = this.getParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_tpCargo, true, pRequest);
+		String nmFuncionario = this.getParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmFuncionario, true, pRequest);
+		
+		
 		this.redirecionar(this.NM_JSP_DETALHAR, pRequest, pResponse);
 	}
 

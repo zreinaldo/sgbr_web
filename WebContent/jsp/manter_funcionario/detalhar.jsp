@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<input type="button" value="Consultar" hi
+<input type="button" value="Consultar" 
 								onclick=" window.history.back();"
 								id="consultar">
 

@@ -1,3 +1,5 @@
+<%@page import="sgbr.web.servlet.selects.SelectTipoDocumento"%>
+<%@page import="sgbr.web.servlet.selects.SelectTipoFuncionario"%>
 <%@page import="sgbr.web.servlet.PRManterFuncionario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -7,6 +9,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
+<%
+
+String tpDocumento = PRManterFuncionario.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_tpDocumento, request);
+String tpFuncionario = PRManterFuncionario.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_tpCargo, request);
+
+
+
+
+
+
+
+
+%>
+
+
 <body>
 	<script type="text/javascript">
 		function submeterFormulario(pServlet, pEvento) {
@@ -30,29 +47,36 @@
 
 		<fieldset>
 			<table>
+			
+							
 				<tr>
-					<td><label for="nomeCliente">Nome:</label></td>
-					<td><input type="text" id="nmFuncionario" name="nmFuncionario"
-						maxlength="58"></td>
+					<td><label for="tpDocumento">Tipo Documento:</label></td>
+					<td><%= SelectTipoDocumento.getInstancia().getHTML(request, PRManterFuncionario.ID_REQ_ATR_tpDocumento, PRManterFuncionario.ID_REQ_ATR_tpDocumento, tpDocumento)%></td>
 				</tr>
+				
 				<tr>
-					<td><label for="nomeCliente">CPF:</label></td>
-					<td><input type="text" id="nuCPF" name="nuCPF" maxlength="58"></td>
+					<td><label for="nuDocumento">Número Documento:</label></td>
+					<td><input type="text" id="<%=PRManterFuncionario.ID_REQ_ATR_nuDocumento%>" name="<%=PRManterFuncionario.ID_REQ_ATR_nuDocumento%>" maxlength="15"></td>
 				</tr>
+				
 				<tr>
-					<td><label for="nomeCliente">Nome:</label></td>
-					<td><input type="text" id="nmFuncionario" name="nmFuncionario"
-						maxlength="58"></td>
+					<td><label for="nomeCliente">Cargo:</label></td>
+					<td><%=SelectTipoFuncionario.getInstancia().getHTML(request, PRManterFuncionario.ID_REQ_ATR_tpCargo, PRManterFuncionario.ID_REQ_ATR_tpCargo, tpFuncionario) %></td>
 				</tr>
+			
+				<tr>
+					<td><label for="nomeCliente">Nome Funcionario:</label></td>
+					<td><input type="text" id="<%=PRManterFuncionario.ID_REQ_ATR_nmFuncionario%>" name="<%=PRManterFuncionario.ID_REQ_ATR_nmFuncionario%>"
+						maxlength="45"></td>
+				</tr>		
 
 				<tr>
-					<td colspan="2" id="botoes"><input type="button"
-						value="Consultar"
-						onclick="submeterFormulario('<%=PRManterFuncionario.NM_SERVLET%>','<%=PRManterFuncionario.EVENTO_EXIBIR_INCLUSAO%>')"
-						id="consultar"> <input type="button" value="Pesquisar"
-						onclick="submeterFormulario(PRManterFuncionario,processarFiltroConsulta)">
-						<input type="button" value="Novo" OnClick=""> <input
-						type="button" value="Home" onClick=""></td>
+					<td colspan="2" id="botoes">
+					    <input type="button" value="Incluir"	onclick="submeterFormulario('<%=PRManterFuncionario.NM_SERVLET%>','<%=PRManterFuncionario.EVENTO_EXIBIR_INCLUSAO%>')" id="incluir"> 
+					    <input type="button" value="Consultar"	onclick="submeterFormulario('<%=PRManterFuncionario.NM_SERVLET%>','<%=PRManterFuncionario.EVENTO_PROCESSAR_CONSULTA%>')" id="consultar">
+					    <input type="button" value="Alterar" OnClick=""> 
+					    <input type="button" value="Excluir" onClick="">
+					</td>
 				</tr>
 			</table>
 

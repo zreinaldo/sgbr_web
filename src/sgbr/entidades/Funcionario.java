@@ -4,11 +4,8 @@
 package sgbr.entidades;
 
 import java.sql.Date;
-import java.sql.SQLException;
 
-import sgbr.cadastros.sql.DAOFuncionario;
 import sgbr.util.EntidadeGenerica;
-import sgbr.util.OTDFuncionario;
 
 /**
  * Table: funcionario Columns: FUNCIONARIO_CD int(11) AI PK PESSOA_CD int(11) PK
