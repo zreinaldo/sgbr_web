@@ -31,18 +31,7 @@
 
 		<fieldset>
 			<table>
-				<tr>
-					<td><label for="nmCargo">Cargo:</label></td>
-
-					<td><select id="<%=PRManterFuncionario.ID_REQ_ATR_tpCargo%>"
-						name="<%=PRManterFuncionario.ID_REQ_ATR_tpCargo%>">
-							<option value="1">Garçon</option>
-							<option value="2" selected="selected">Caixa</option>
-							<option value="3">Gerente</option>
-							<option value="4">Serviços-Gerais</option>
-					</select></td>
-				</tr>
-				
+					
 				<tr>
 					<td><label for="nmCargo">Cargo:</label></td>
 
@@ -51,7 +40,7 @@
 								
 
 				<tr>
-					<td><label for="nomeCliente">Nome:</label></td>
+					<td><label for="nmFuncionario">Nome:</label></td>
 					<td><input type="text"
 						id="<%=PRManterFuncionario.ID_REQ_ATR_nmFuncionario%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nmFuncionario%>"
@@ -91,7 +80,7 @@
 						name="<%=PRManterFuncionario.ID_REQ_ATR_email%>" maxlength="58"></td>
 				</tr>
 
-				<td><label for="nomeCliente">Dados Bancarios</label></td>
+				<td><label for="dadosBancarios">Dados Bancarios</label></td>
 				<td>-</td>
 				<tr>
 					<td><label for="nmBanco">Banco:</label></td>
@@ -127,7 +116,7 @@
 						name="<%=PRManterFuncionario.ID_REQ_ATR_dtAdmissao%>"
 						maxlength="58"></td>
 				</tr>
-				<td><label for="nomeCliente">Endereço</label></td>
+				<td><label for="dadosEndereco">Dados do Endereço</label></td>
 				<td>-</td>			
 				<tr>
 					<td><label for="nmUF">Estado:</label></td>

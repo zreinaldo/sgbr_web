@@ -48,7 +48,7 @@ public class RNIncluirFuncionario {
 		try {
 
 			pessoa.setNmPessoa(pOtdFuncionario.getNmFuncionario());
-			pessoa.setDtNascPessoa(Util.formataData(pOtdFuncionario.getDtNascimento()));
+			pessoa.setDtNascPessoa(pOtdFuncionario.getDtNascimento());
 			pessoa.setEePessoa(pOtdFuncionario.getEmail());
 			pessoa.setNmBairro(pOtdFuncionario.getNmBairro());
 			pessoa.setNmCidade(pOtdFuncionario.getNmCidade());
@@ -62,7 +62,7 @@ public class RNIncluirFuncionario {
 			funcionario.setCdPessoa(pessoa.getCdPessoa());
 			funcionario.setVlSalario(pOtdFuncionario.getVlSalario());
 			funcionario.setTpFuncionario( pOtdFuncionario.getTpFuncionario());
-			funcionario.setDtAdmissao(Util.formataData(pOtdFuncionario.getDtAdmissao()));
+			funcionario.setDtAdmissao(pOtdFuncionario.getDtAdmissao());
 			funcionario.setNuBancoAgencia(pOtdFuncionario.getNuAgencia());
 			funcionario.setNuBancoConta(pOtdFuncionario.getNuCC());
 			funcionario.setNuBancoAgencia(pOtdFuncionario.getNuAgencia());

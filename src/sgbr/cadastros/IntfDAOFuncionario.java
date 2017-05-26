@@ -29,9 +29,4 @@ public interface IntfDAOFuncionario {
 	 */
 	public void excluir(Funcionario pFuncionario) throws SQLException;
 
-	/**
-	 * @param pFuncionario
-	 * @return
-	 */
-	public Funcionario consultarPorChavePrimaria(Funcionario pFuncionario) throws SQLException;
 }

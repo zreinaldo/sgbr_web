@@ -28,6 +28,7 @@ public class Pessoa extends EntidadeGenerica {
 	public static final String NM_COLUNA_PESSOA_ENDERECO_LOGRADOURO_NU = "PESSOA_ENDERECO_LOGRADOURO_NU";
 	public static final String NM_COLUNA_PESSOA_ENDERECO_CIDADE = "PESSOA_ENDERECO_CIDADE";
 	public static final String NM_COLUNA_PESSOA_ENDERECO_UF = "PESSOA_ENDERECO_UF";
+	public static final String NM_COLUNA_PESSOA_ENDERECO_CEP = "PESSOA_ENDERECO_CEP";
 
 	private int cdPessoa;
 	private String nmPessoa;
@@ -38,6 +39,7 @@ public class Pessoa extends EntidadeGenerica {
 	private String nmBairro;
 	private String nmCidade;
 	private String nmUF;
+	private String nmCEP;
 
 	/**
 	 * @param pCdPessoa
@@ -190,4 +192,19 @@ public class Pessoa extends EntidadeGenerica {
 		this.nmUF = pNmUF;
 	}
 
+	/**
+	 * @return the nmCEP
+	 */
+	public String getNmCEP() {
+		return nmCEP;
+	}
+
+	/**
+	 * @param pNmCEP the nmCEP to set
+	 */
+	public void setNmCEP(String pNmCEP) {
+		this.nmCEP = pNmCEP;
+	}
+
 }
+

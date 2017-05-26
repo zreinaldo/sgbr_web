@@ -3,13 +3,13 @@
  */
 package sgbr.util;
 
-import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * @author Reinaldo
  *
  */
-public class OTDFuncionario implements Serializable {
+public class OTDFuncionario  {
 
 	/**
 	 * 
@@ -24,21 +24,26 @@ public class OTDFuncionario implements Serializable {
 	private String nuAgencia;
 	private String nuCC;
 	private Double vlSalario;
-	private String dtAdmissao;
+	private Date dtAdmissao;
 	private String nmUF;
 	private String nmCidade;
 	private String nmBairro;
 	private String nmLogradouro;
 	private String nuLogradouro;
 	private String nuCEP;
-	private String dtNascimento;
+	private Date dtNascimento;
 	private String email;
 	private Integer tpFuncionario;
+	private String dsFuncionario;
+	private Integer cdFuncionario;
+	private Integer cdPessoa;
+	private Date dtDemissao;
+	
 
 	/**
 	 * @return the dtNascimento
 	 */
-	public String getDtNascimento() {
+	public Date getDtNascimento() {
 		return dtNascimento;
 	}
 
@@ -46,7 +51,7 @@ public class OTDFuncionario implements Serializable {
 	 * @param pDtNascimento
 	 *            the dtNascimento to set
 	 */
-	public void setDtNascimento(String pDtNascimento) {
+	public void setDtNascimento(Date pDtNascimento) {
 		this.dtNascimento = pDtNascimento;
 	}
 
@@ -189,7 +194,7 @@ public class OTDFuncionario implements Serializable {
 	/**
 	 * @return the dtAdmissao
 	 */
-	public String getDtAdmissao() {
+	public Date getDtAdmissao() {
 		return dtAdmissao;
 	}
 
@@ -197,9 +202,10 @@ public class OTDFuncionario implements Serializable {
 	 * @param pDtAdmissao
 	 *            the dtAdmissao to set
 	 */
-	public void setDtAdmissao(String pDtAdmissao) {
+	public void setDtAdmissao(Date pDtAdmissao) {
 		this.dtAdmissao = pDtAdmissao;
 	}
+	
 
 	/**
 	 * @return the nmUF
@@ -304,6 +310,62 @@ public class OTDFuncionario implements Serializable {
 	 */
 	public void setTpFuncionario(Integer pTpFuncionario) {
 		this.tpFuncionario = pTpFuncionario;
+	}
+
+	/**
+	 * @return the dsFuncionario
+	 */
+	public String getDsFuncionario() {
+		return dsFuncionario;
+	}
+
+	/**
+	 * @param pDsFuncionario the dsFuncionario to set
+	 */
+	public void setDsFuncionario(String pDsFuncionario) {
+		this.dsFuncionario = pDsFuncionario;
+	}
+
+	/**
+	 * @return the cdFuncionario
+	 */
+	public Integer getCdFuncionario() {
+		return cdFuncionario;
+	}
+
+	/**
+	 * @param pCdFuncionario the cdFuncionario to set
+	 */
+	public void setCdFuncionario(Integer pCdFuncionario) {
+		this.cdFuncionario = pCdFuncionario;
+	}
+
+	/**
+	 * @return the cdPessoa
+	 */
+	public Integer getCdPessoa() {
+		return cdPessoa;
+	}
+
+	/**
+	 * @param pCdPessoa the cdPessoa to set
+	 */
+	public void setCdPessoa(Integer pCdPessoa) {
+		this.cdPessoa = pCdPessoa;
+	}
+
+	/**
+	 * @return the dtDemissao
+	 */
+	public Date getDtDemissao() {
+		return dtDemissao;
+	}
+
+	/**
+	 * @param pDtDemissao the dtDemissao to set
+	 */
+	public void setDtDemissao(Date pDtDemissao) {
+		this.dtDemissao = pDtDemissao;
 	}
 
 }

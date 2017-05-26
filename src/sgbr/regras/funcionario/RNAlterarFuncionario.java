@@ -5,6 +5,8 @@ package sgbr.regras.funcionario;
 
 import sgbr.cadastros.sql.DAOFuncionario;
 import sgbr.cadastros.sql.DAOPessoa;
+import sgbr.entidades.Funcionario;
+import sgbr.entidades.Pessoa;
 import sgbr.util.OTDFuncionario;
 
 /**
@@ -40,13 +42,36 @@ public class RNAlterarFuncionario {
 	public void processar(OTDFuncionario pOtdFuncionario) {
 
 		try {
-			DAOPessoa.getInstancia().alterar(null);
+			Pessoa pessoa = new Pessoa();
 
-			DAOFuncionario.getInstancia().alterar(null);
+			pessoa.setCdPessoa(pOtdFuncionario.getCdPessoa());
+			pessoa.setNmPessoa(pOtdFuncionario.getNmFuncionario());
+			pessoa.setDtNascPessoa(pOtdFuncionario.getDtNascimento());
+			pessoa.setEePessoa(pOtdFuncionario.getEmail());
+			pessoa.setNmBairro(pOtdFuncionario.getNmBairro());
+			pessoa.setNmCidade(pOtdFuncionario.getNmCidade());
+			pessoa.setNmLogradouro(pOtdFuncionario.getNmLogradouro());
+			pessoa.setNmUF(pOtdFuncionario.getNmUF());
+			pessoa.setNuLogradouro(pOtdFuncionario.getNuLogradouro());
+
+			DAOPessoa.getInstancia().alterar(pessoa);
+			
+			Funcionario funcionario = new Funcionario();
+			
+			funcionario.setCdPessoa(pOtdFuncionario.getCdPessoa());
+			funcionario.setCdFuncionario(pOtdFuncionario.getCdFuncionario());
+			funcionario.setVlSalario(pOtdFuncionario.getVlSalario());
+			funcionario.setTpFuncionario( pOtdFuncionario.getTpFuncionario());
+			funcionario.setDtAdmissao(pOtdFuncionario.getDtAdmissao());
+			funcionario.setNuBancoAgencia(pOtdFuncionario.getNuAgencia());
+			funcionario.setNuBancoConta(pOtdFuncionario.getNuCC());
+			funcionario.setNuBancoAgencia(pOtdFuncionario.getNuAgencia());
+			funcionario.setNmBanco(pOtdFuncionario.getNmBanco());			
+			DAOFuncionario.getInstancia().alterar(funcionario);
+
+
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-
 			// TODO gerar erro generico
 			e.printStackTrace();
 		}

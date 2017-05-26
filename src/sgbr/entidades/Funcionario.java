@@ -29,6 +29,7 @@ public class Funcionario extends EntidadeGenerica {
 	public static final String NM_COLUNA_FUNCIONARIO_BANCO_NM = "FUNCIONARIO_BANCO_NM";
 	public static final String NM_COLUNA_FUNCIONARIO_SALARIO = "FUNCIONARIO_SALARIO";
 	public static final String NM_COLUNA_FUNCIONARIO_DT_ADMISSAO = "FUNCIONARIO_DT_ADMISSAO";
+	public static final String NM_COLUNA_FUNCIONARIO_DT_DEMISSAO = "FUNCIONARIO_DT_DEMISSAO";
 
 	private int cdFuncionario;
 	private int cdPessoa;
@@ -38,7 +39,8 @@ public class Funcionario extends EntidadeGenerica {
 	private String nmBanco;
 	private Double vlSalario;
 	private Date dtAdmissao;
-	
+	private Date dtDemissao;
+
 	/**
 	 * contrutor
 	 */
@@ -55,8 +57,6 @@ public class Funcionario extends EntidadeGenerica {
 		cdFuncionario = pCdFuncionario;
 		cdPessoa = pCdPessoa;
 	}
-	
-	
 
 	/**
 	 * @return the nmBanco
@@ -72,7 +72,6 @@ public class Funcionario extends EntidadeGenerica {
 	public void setNmBanco(String pNmBanco) {
 		this.nmBanco = pNmBanco;
 	}
-
 
 	/**
 	 * @return the cdFuncionario
@@ -177,6 +176,21 @@ public class Funcionario extends EntidadeGenerica {
 	 */
 	public void setDtAdmissao(Date pDtAdmissao) {
 		dtAdmissao = pDtAdmissao;
+	}
+
+	/**
+	 * @return the dtDemissao
+	 */
+	public Date getDtDemissao() {
+		return dtDemissao;
+	}
+
+	/**
+	 * @param pDtDemissao
+	 *            the dtDemissao to set
+	 */
+	public void setDtDemissao(Date pDtDemissao) {
+		this.dtDemissao = pDtDemissao;
 	}
 
 }

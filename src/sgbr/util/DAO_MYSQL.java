@@ -4,7 +4,9 @@
 package sgbr.util;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -13,6 +15,16 @@ import java.sql.SQLException;
  *
  */
 public class DAO_MYSQL {
+	
+	protected static Date getDateOpcional (ResultSet pRs, String pCampo) {
+		Date retorno = null;
+		try {
+			retorno = pRs.getDate(pCampo) != null ? pRs.getDate(pCampo) : null;
+		} catch (SQLException e) {			
+		} 
+		return retorno;
+	}
+
 
 	//para pegar a conexao
 	protected static Connection getConection() throws SQLException {

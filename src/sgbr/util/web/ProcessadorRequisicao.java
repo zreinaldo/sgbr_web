@@ -209,6 +209,20 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 	}
 
 	/**
+	 * retorna um atributo opcional
+	 * @param pNmAtributo
+	 * @param pRetornarVazioSeAtributoNaoEncontrado
+	 * @param pRequest
+	 * @return
+	 * @throws Exception
+	 */
+	public static Object getAtributoOpcional(String pNmAtributo,	HttpServletRequest pRequest) throws Exception {
+
+		return pRequest.getAttribute(pNmAtributo);
+	}
+
+	
+	/**
 	 * pega o atributo ou o parametro do request
 	 * 
 	 * @param pNmAtributo
@@ -231,9 +245,11 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 
 	/**
 	 * Método utilizado para se obter o evento padrao da servlet
+	 * basicamente para ter um metodo abstrato que sera implementado apenas na PRConsultar
+	 * 
 	 *
 	 * @return
-	 */
+	 */	
 	public abstract String getEventoPadrao();
 
 }

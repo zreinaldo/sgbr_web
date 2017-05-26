@@ -26,6 +26,7 @@ public class FachadaSGBR {
 	 * Cria um novo objeto FachadaSGBR.
 	 */
 	private FachadaSGBR() {
+
 		super();
 	}
 
@@ -46,12 +47,49 @@ public class FachadaSGBR {
 		ControladorFuncionario.getInstancia().incluirFuncionario(pOTDFuncionario);
 	}
 
-	public Collection<TipoFuncionario> consultaTodosRegistrosTipoFuncionario(boolean pInRetornarApenasVigentes) throws SQLException {
-		return ControladorTipoFuncionario.getInstancia().consultaTodosRegistrosTipoFuncionario(pInRetornarApenasVigentes);
+	/**
+	 * consulta todos os dados de um funcionario
+	 * 
+	 * @param pCdFuncionario
+	 * @param pCdPessoa
+	 * @return
+	 * @throws SQLException
+	 */
+	public OTDFuncionario consultarDadosFuncionario(Integer pCdFuncionario, Integer pCdPessoa) throws SQLException {
+		return ControladorFuncionario.getInstancia().consultarDadosFuncionario(pCdFuncionario, pCdPessoa);
+	}
+
+	/**
+	 * 
+	 * @param pInRetornarApenasVigentes
+	 * @return
+	 * @throws SQLException
+	 */
+	public Collection<TipoFuncionario> consultaTodosRegistrosTipoFuncionario(boolean pInRetornarApenasVigentes)
+			throws SQLException {
+		return ControladorTipoFuncionario.getInstancia()
+				.consultaTodosRegistrosTipoFuncionario(pInRetornarApenasVigentes);
+	}
+
+	/**
+	 * @param pInRetornarApenasVigentes
+	 * @return
+	 * @throws SQLException
+	 */
+	public Collection<TipoDocumento> consultaTodosRegistrosTipoDocumento(boolean pInRetornarApenasVigentes)
+			throws SQLException {
+		return ControladorTipoDocumento.getInstancia().consultaTodosRegistrosTipoDocumento(pInRetornarApenasVigentes);
+	}
+
+
+	public ArrayList<OTDFuncionario> consultaTelaManterFuncionario(String pNome, String pTpDocumento,
+			String pNuDocumento, String pTpFuncionario, boolean pInAtivos) throws SQLException {
+		return ControladorFuncionario.getInstancia().consultaTelaManterFuncionario(pNome, pTpDocumento, pNuDocumento,
+				pTpFuncionario, pInAtivos);
 	}
 	
-	public Collection<TipoDocumento> consultaTodosRegistrosTipoDocumento(boolean pInRetornarApenasVigentes) throws SQLException {
-		return ControladorTipoDocumento.getInstancia().consultaTodosRegistrosTipoDocumento(pInRetornarApenasVigentes);
+	public void alterarFuncionario(OTDFuncionario pOTDFuncionario) {
+		ControladorFuncionario.getInstancia().alterarFuncionario(pOTDFuncionario);		
 	}
 
 }

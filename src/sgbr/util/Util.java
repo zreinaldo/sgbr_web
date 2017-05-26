@@ -25,4 +25,15 @@ public class Util {
 		}
 		return date;
 	}
+	
+	
+	public static String formataDataParaString (Date pData) {
+		
+		if (pData == null) {
+			return "";
+		}
+
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+	         return formato.format(pData);
+	}
 }

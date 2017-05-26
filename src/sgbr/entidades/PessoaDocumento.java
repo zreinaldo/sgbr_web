@@ -7,8 +7,8 @@ import sgbr.util.EntidadeGenerica;
 
 /**
  * 
- * Table: pessoa_documento Columns: TIPO_DOCUMENTO_CD int(11) PK PESSOA_CD
- * int(11) PK PESSOA_DOCUMENTO_NU varchar(45) DH_INCLUSAO timestamp(6)
+ * Table: pessoa_documento Columns: TIPO_DOCUMENTO_CD Integer(11) PK PESSOA_CD
+ * Integer(11) PK PESSOA_DOCUMENTO_NU varchar(45) DH_INCLUSAO timestamp(6)
  * DH_ALTERACAO timestamp(6)
  * 
  * @author Reinaldo
@@ -20,14 +20,25 @@ public class PessoaDocumento extends EntidadeGenerica {
 	public static final String NM_COLUNA_TIPO_DOCUMENTO_CD = "TIPO_DOCUMENTO_CD";
 	public static final String NM_COLUNA_PESSOA_DOCUMENTO_NU = "PESSOA_DOCUMENTO_NU";
 
-	private int cdPessoa;
-	private int tpDocumento;
+	private Integer cdPessoa;
+	private Integer tpDocumento;
 	private String nuDocumento;
 
+	public PessoaDocumento (Integer pCdPessoa, Integer pTpDocumento) {
+		this.cdPessoa = pCdPessoa;
+		this.tpDocumento = pTpDocumento;
+	}
+	
+	/**
+	 * 
+	 */
+	public PessoaDocumento(){
+		
+	}
 	/**
 	 * @return the cdPessoa
 	 */
-	public int getCdPessoa() {
+	public Integer getCdPessoa() {
 		return cdPessoa;
 	}
 
@@ -35,14 +46,14 @@ public class PessoaDocumento extends EntidadeGenerica {
 	 * @param pCdPessoa
 	 *            the cdPessoa to set
 	 */
-	public void setCdPessoa(int pCdPessoa) {
+	public void setCdPessoa(Integer pCdPessoa) {
 		this.cdPessoa = pCdPessoa;
 	}
 
 	/**
 	 * @return the tpDocumento
 	 */
-	public int getTpDocumento() {
+	public Integer getTpDocumento() {
 		return tpDocumento;
 	}
 
@@ -50,7 +61,7 @@ public class PessoaDocumento extends EntidadeGenerica {
 	 * @param pTpDocumento
 	 *            the tpDocumento to set
 	 */
-	public void setTpDocumento(int pTpDocumento) {
+	public void setTpDocumento(Integer pTpDocumento) {
 		this.tpDocumento = pTpDocumento;
 	}
 

@@ -66,7 +66,7 @@ public class DAOPessoa extends DAO_MYSQL implements IntfDAOPessoa {
 
 		ppSt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-		ppSt.setString(1, pPessoa.getNmPessoa());
+		ppSt.setString(1, pPessoa.getNmPessoa().toUpperCase());
 		ppSt.setString(2, pPessoa.getEePessoa());
 		ppSt.setDate(3, pPessoa.getDtNascPessoa());
 		ppSt.setString(4, pPessoa.getNmBairro());

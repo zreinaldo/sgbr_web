@@ -5,6 +5,7 @@ package sgbr.cadastros.sql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
@@ -18,8 +19,6 @@ import sgbr.util.DAO_MYSQL;
  *
  */
 public class DAOPessoaDocumento extends DAO_MYSQL implements IntfDAOPessoaDocumento {
-
-	
 
 	private static DAOPessoaDocumento aDAOPessoaDocumento = new DAOPessoaDocumento();
 
@@ -42,6 +41,7 @@ public class DAOPessoaDocumento extends DAO_MYSQL implements IntfDAOPessoaDocume
 
 		return DAOPessoaDocumento.aDAOPessoaDocumento;
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -64,10 +64,8 @@ public class DAOPessoaDocumento extends DAO_MYSQL implements IntfDAOPessoaDocume
 				+ PessoaDocumento.NM_COLUNA_DH_INCLUSAO_REGISTRO + "," + PessoaDocumento.NM_COLUNA_DH_ALTERACAO_REGISTRO
 				+ ") VALUES (?,?,?,?,?)";
 
-
 		ppSt = conexao.prepareStatement(sql);
 
-		
 		ppSt.setInt(1, pPessoaDocumento.getTpDocumento());
 		ppSt.setInt(2, pPessoaDocumento.getCdPessoa());
 		ppSt.setString(3, pPessoaDocumento.getNuDocumento());
@@ -114,6 +112,39 @@ public class DAOPessoaDocumento extends DAO_MYSQL implements IntfDAOPessoaDocume
 	 */
 	@Override
 	public PessoaDocumento consultarPorChavePrimaria(PessoaDocumento pPessoaDocumento) throws SQLException {
+
+		Connection conexao = null;
+
+		PessoaDocumento pessoaDocumento = null;
+
+		conexao = this.getConection();
+
+		String sql = "SELECT * FROM mydb.pessoa_documento WHERE PESSOA_CD =  " + pPessoaDocumento.getCdPessoa()
+				+ " AND TIPO_DOCUMENTO_CD = " + pPessoaDocumento.getTpDocumento();
+
+		Statement stm = conexao.createStatement();
+
+		ResultSet rs = stm.executeQuery(sql);
+
+		while (rs.next()) {
+			pessoaDocumento = new PessoaDocumento();
+
+			pessoaDocumento.setCdPessoa(rs.getInt(PessoaDocumento.NM_COLUNA_PESSOA_CD));
+			pessoaDocumento.setNuDocumento(rs.getString(PessoaDocumento.NM_COLUNA_PESSOA_DOCUMENTO_NU));
+			pessoaDocumento.setTpDocumento(rs.getInt(PessoaDocumento.NM_COLUNA_TIPO_DOCUMENTO_CD));
+			pessoaDocumento.setDhAlteracaoRegistro(rs.getTimestamp(PessoaDocumento.NM_COLUNA_DH_ALTERACAO_REGISTRO));
+			pessoaDocumento.setDhIncusaoRegistro(rs.getTimestamp(PessoaDocumento.NM_COLUNA_DH_INCLUSAO_REGISTRO));
+
+		}
+
+		rs.close();
+		stm.close();
+		conexao.close();
+		return pessoaDocumento;
+
+	}
+
+	public PessoaDocumento consultarPesssoaDocumento(PessoaDocumento pPessoaDocumento) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
