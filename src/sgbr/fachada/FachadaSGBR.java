@@ -43,8 +43,27 @@ public class FachadaSGBR {
 		return FachadaSGBR.aFachadaSGBR;
 	}
 
+	/**
+	 * inclui os dados do funcionario
+	 * @param pOTDFuncionario
+	 */
 	public void incluirFuncionario(OTDFuncionario pOTDFuncionario) {
 		ControladorFuncionario.getInstancia().incluirFuncionario(pOTDFuncionario);
+	}
+
+	/**
+	 *  altera os dados do funcionario
+	 * @param pOTDFuncionario
+	 */
+	public void alterarFuncionario(OTDFuncionario pOTDFuncionario) {
+		ControladorFuncionario.getInstancia().alterarFuncionario(pOTDFuncionario);
+	}
+	/**
+	 * exclui os dados do funcionario
+	 * @param pOTDFuncionario
+	 */
+	public void excluirFuncionario(OTDFuncionario pOTDFuncionario) {
+		ControladorFuncionario.getInstancia().excluirFuncionario(pOTDFuncionario);
 	}
 
 	/**
@@ -81,15 +100,22 @@ public class FachadaSGBR {
 		return ControladorTipoDocumento.getInstancia().consultaTodosRegistrosTipoDocumento(pInRetornarApenasVigentes);
 	}
 
-
+	/**
+	 * consulta utilizada na tela manter funcionario
+	 * @param pNome
+	 * @param pTpDocumento
+	 * @param pNuDocumento
+	 * @param pTpFuncionario
+	 * @param pInAtivos
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<OTDFuncionario> consultaTelaManterFuncionario(String pNome, String pTpDocumento,
 			String pNuDocumento, String pTpFuncionario, boolean pInAtivos) throws SQLException {
 		return ControladorFuncionario.getInstancia().consultaTelaManterFuncionario(pNome, pTpDocumento, pNuDocumento,
 				pTpFuncionario, pInAtivos);
 	}
-	
-	public void alterarFuncionario(OTDFuncionario pOTDFuncionario) {
-		ControladorFuncionario.getInstancia().alterarFuncionario(pOTDFuncionario);		
-	}
+
+
 
 }

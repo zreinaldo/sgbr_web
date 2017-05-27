@@ -63,18 +63,32 @@ public class RNConsultarDadosFuncionario {
 	 * @throws SQLException
 	 */
 	private void setDocumentosFuncionario(OTDFuncionario otdFuncionario) throws SQLException {
-		PessoaDocumento pessoaDocumento = new PessoaDocumento(otdFuncionario.getCdPessoa(),
-				Constantes.CD_TIPO_DOCUMENTO_CPF);
+	
 
-		pessoaDocumento = DAOPessoaDocumento.getInstancia().consultarPorChavePrimaria(pessoaDocumento);
-		otdFuncionario.setNuCPF(pessoaDocumento.getNuDocumento());
+		otdFuncionario.setNuCPF(this.getNuDocumento(otdFuncionario.getCdPessoa(),
+				Constantes.CD_TIPO_DOCUMENTO_CPF));
+		otdFuncionario.setNuCarteira(this.getNuDocumento(otdFuncionario.getCdPessoa(),
+				Constantes.CD_TIPO_DOCUMENTO_CARTEIRA_TRABALHO));
 
-		pessoaDocumento.setTpDocumento(Constantes.CD_TIPO_DOCUMENTO_CARTEIRA_TRABALHO);
-		pessoaDocumento = DAOPessoaDocumento.getInstancia().consultarPorChavePrimaria(pessoaDocumento);
-		otdFuncionario.setNuCarteira(pessoaDocumento.getNuDocumento());
+		otdFuncionario.setNuRG(this.getNuDocumento(otdFuncionario.getCdPessoa(),
+				Constantes.CD_TIPO_DOCUMENTO_RG));
+	}
+	
+	
+	private String getNuDocumento (Integer pCdPessoa, Integer pTpDocumento) {
 
-		pessoaDocumento.setTpDocumento(Constantes.CD_TIPO_DOCUMENTO_RG);
-		pessoaDocumento = DAOPessoaDocumento.getInstancia().consultarPorChavePrimaria(pessoaDocumento);
-		otdFuncionario.setNuRG(pessoaDocumento.getNuDocumento());
+		String retorno = "";
+		PessoaDocumento pessoaDocumento = new PessoaDocumento(pCdPessoa,pTpDocumento);
+
+		try {
+			pessoaDocumento = DAOPessoaDocumento.getInstancia().consultarPorChavePrimaria(pessoaDocumento);
+		} catch (SQLException e) {			
+		}
+		
+		if(pessoaDocumento != null) {
+		 retorno = pessoaDocumento.getNuDocumento();
+		}
+		
+		return retorno;
 	}
 }

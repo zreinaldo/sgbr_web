@@ -26,7 +26,7 @@ public abstract class SelectGenerico {
 	 * @throws Exception
 	 */
 	public abstract String getHTML(HttpServletRequest pRequest, String pNmSelect, String pIdSelect,
-			String pCampoSelecionado) throws Exception;
+			String pCampoSelecionado,boolean pObrigatorio, boolean pComTodos) throws Exception;
 
 	/**
 	 * deverar ser utilizado para montar o html
@@ -39,7 +39,7 @@ public abstract class SelectGenerico {
 	 * @throws Exception
 	 */
 	protected abstract String getColecaoComoHTMLSelect(Collection<?> pColecao, String pNmSelect, String pIdSelect,
-			String pCampoSelecionado) throws Exception;
+			String pCampoSelecionado,boolean pObrigatorio, boolean pComTodos) throws Exception;
 
 	/**
 	 * @param pNmSelect

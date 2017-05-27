@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import sgbr.cadastros.sql.DAOFuncionario;
 import sgbr.regras.funcionario.RNAlterarFuncionario;
 import sgbr.regras.funcionario.RNConsultarDadosFuncionario;
+import sgbr.regras.funcionario.RNExcluirFuncionario;
 import sgbr.regras.funcionario.RNIncluirFuncionario;
 import sgbr.util.OTDFuncionario;
 
@@ -49,7 +50,7 @@ public class ControladorFuncionario {
 	}
 
 	public void excluirFuncionario(OTDFuncionario pOTDFuncionario) {
-
+        RNExcluirFuncionario.getInstancia().processar(pOTDFuncionario);
 	}
 
 	/**

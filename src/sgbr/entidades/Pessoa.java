@@ -39,7 +39,7 @@ public class Pessoa extends EntidadeGenerica {
 	private String nmBairro;
 	private String nmCidade;
 	private String nmUF;
-	private String nmCEP;
+	private String nuCEP;
 
 	/**
 	 * @param pCdPessoa
@@ -195,15 +195,15 @@ public class Pessoa extends EntidadeGenerica {
 	/**
 	 * @return the nmCEP
 	 */
-	public String getNmCEP() {
-		return nmCEP;
+	public String getNuCEP() {
+		return nuCEP;
 	}
 
 	/**
 	 * @param pNmCEP the nmCEP to set
 	 */
-	public void setNmCEP(String pNmCEP) {
-		this.nmCEP = pNmCEP;
+	public void setNuCEP(String pNuCEP) {
+		this.nuCEP = pNuCEP;
 	}
 
 }

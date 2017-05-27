@@ -39,7 +39,7 @@ public class SelectTipoDocumento extends SelectGenerico {
 	 * HttpServletRequest, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public String getHTML(HttpServletRequest pRequest, String pNmSelect, String pIdSelect, String pCampoSelecionado)
+	public String getHTML(HttpServletRequest pRequest, String pNmSelect, String pIdSelect, String pCampoSelecionado,boolean pObrigatorio, boolean pComTodos)
 			throws Exception {
 
 		String html = "";
@@ -47,7 +47,7 @@ public class SelectTipoDocumento extends SelectGenerico {
 
 		colecao = FachadaSGBR.getInstancia().consultaTodosRegistrosTipoDocumento(true);
 
-		html = this.getColecaoComoHTMLSelect(colecao, pNmSelect, pIdSelect, pCampoSelecionado);
+		html = this.getColecaoComoHTMLSelect(colecao, pNmSelect, pIdSelect, pCampoSelecionado,pObrigatorio,pComTodos);
 
 		return html;
 	}
@@ -60,13 +60,13 @@ public class SelectTipoDocumento extends SelectGenerico {
 	 */
 	@Override
 	protected String getColecaoComoHTMLSelect(Collection<?> pColecao, String pNmSelect, String pIdSelect,
-			String pCampoSelecionado) throws Exception {
+			String pCampoSelecionado,boolean pObrigatorio, boolean pComTodos) throws Exception {
 
 		Iterator it;
 		StringBuffer bufferHtml = new StringBuffer(200);
 		TipoDocumento tipoFuncionario = null;
 
-		this.criarSelect(pNmSelect, pIdSelect, bufferHtml, false, true);
+		this.criarSelect(pNmSelect, pIdSelect, bufferHtml, pObrigatorio, pComTodos);
 
 		it = pColecao.iterator();
 		while (it.hasNext()) {

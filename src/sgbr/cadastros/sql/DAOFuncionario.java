@@ -112,16 +112,10 @@ public class DAOFuncionario extends DAO_MYSQL implements IntfDAOFuncionario {
 		PreparedStatement ppSt = null;
 		conexao = this.getConection();
 
-String sql = "UPDATE MYDB.FUNCIONARIO SET "
-		+ "TIPO_FUNCIONARIO_CD = ?"
-		+ ",FUNCIONARIO_BANCO_AGENCIA = ?"
-		+ ",FUNCIONARIO_BANCO_CONTA = ?"
-		+ ",FUNCIONARIO_SALARIO = ?"
-		+ ",FUNCIONARIO_DT_ADMISSAO  = ?"
-		+ ",FUNCIONARIO_DT_DEMISSAO  = ?"
-		+ ",FUNCIONARIO_BANCO_NM  = ?"
-		+ ",DH_ALTERACAO  = current_timestamp "		
-		+ "WHERE FUNCIONARIO_CD = ? and PESSOA_CD = ?";
+		String sql = "UPDATE MYDB.FUNCIONARIO SET " + "TIPO_FUNCIONARIO_CD = ?" + ",FUNCIONARIO_BANCO_AGENCIA = ?"
+				+ ",FUNCIONARIO_BANCO_CONTA = ?" + ",FUNCIONARIO_SALARIO = ?" + ",FUNCIONARIO_DT_ADMISSAO  = ?"
+				+ ",FUNCIONARIO_DT_DEMISSAO  = ?" + ",FUNCIONARIO_BANCO_NM  = ?" + ",DH_ALTERACAO  = current_timestamp "
+				+ "WHERE FUNCIONARIO_CD = ? and PESSOA_CD = ?";
 
 		ppSt = conexao.prepareStatement(sql);
 
@@ -131,11 +125,11 @@ String sql = "UPDATE MYDB.FUNCIONARIO SET "
 		ppSt.setDouble(4, pFuncionario.getVlSalario());
 		ppSt.setDate(5, pFuncionario.getDtAdmissao());
 		ppSt.setDate(6, pFuncionario.getDtDemissao());
-		ppSt.setString(7, pFuncionario.getNmBanco());		
-        ppSt.setInt(8, pFuncionario.getCdFuncionario());
+		ppSt.setString(7, pFuncionario.getNmBanco());
+		ppSt.setInt(8, pFuncionario.getCdFuncionario());
 		ppSt.setInt(9, pFuncionario.getCdPessoa());
 
-		ppSt.execute();		
+		ppSt.execute();
 	}
 
 	/*
@@ -146,7 +140,18 @@ String sql = "UPDATE MYDB.FUNCIONARIO SET "
 	 */
 	@Override
 	public void excluir(Funcionario pFuncionario) throws SQLException {
-		// TODO Auto-generated method stub
+
+		String sqlConector = "";
+		Connection conexao = null;
+
+		conexao = this.getConection();
+
+		String sql = "DELETE FROM MYDB.FUNCIONARIO WHERE PESSOA_CD = " + pFuncionario.getCdPessoa()
+				+ " AND FUNCIONARIO_CD = " + pFuncionario.getCdFuncionario();
+
+		Statement stm = conexao.createStatement();
+
+		stm.execute(sql);
 
 	}
 

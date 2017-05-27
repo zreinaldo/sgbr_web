@@ -53,6 +53,7 @@ public class RNAlterarFuncionario {
 			pessoa.setNmLogradouro(pOtdFuncionario.getNmLogradouro());
 			pessoa.setNmUF(pOtdFuncionario.getNmUF());
 			pessoa.setNuLogradouro(pOtdFuncionario.getNuLogradouro());
+			pessoa.setNuCEP(pOtdFuncionario.getNuCEP());
 
 			DAOPessoa.getInstancia().alterar(pessoa);
 			
@@ -63,6 +64,7 @@ public class RNAlterarFuncionario {
 			funcionario.setVlSalario(pOtdFuncionario.getVlSalario());
 			funcionario.setTpFuncionario( pOtdFuncionario.getTpFuncionario());
 			funcionario.setDtAdmissao(pOtdFuncionario.getDtAdmissao());
+			funcionario.setDtDemissao(pOtdFuncionario.getDtDemissao());
 			funcionario.setNuBancoAgencia(pOtdFuncionario.getNuAgencia());
 			funcionario.setNuBancoConta(pOtdFuncionario.getNuCC());
 			funcionario.setNuBancoAgencia(pOtdFuncionario.getNuAgencia());
@@ -70,7 +72,9 @@ public class RNAlterarFuncionario {
 			DAOFuncionario.getInstancia().alterar(funcionario);
 
 
+			//FIXME alterar o pessoaDocumento
 
+			
 		} catch (Exception e) {
 			// TODO gerar erro generico
 			e.printStackTrace();

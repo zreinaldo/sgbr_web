@@ -38,7 +38,7 @@ public class SelectTipoFuncionario extends SelectGenerico {
 	 * @see sgbr.util.web.SelectGenerico#getHTML(javax.servlet.http.
 	 * HttpServletRequest, java.lang.String, java.lang.String, java.lang.String)
 	 */
-	public String getHTML(HttpServletRequest pRequest, String pNmSelect, String pIdSelect, String pCampoSelecionado)
+	public String getHTML(HttpServletRequest pRequest, String pNmSelect, String pIdSelect, String pCampoSelecionado,boolean pObrigatorio, boolean pComTodos)
 			throws Exception {
 
 		String html = "";
@@ -46,7 +46,7 @@ public class SelectTipoFuncionario extends SelectGenerico {
 
 		colecao = FachadaSGBR.getInstancia().consultaTodosRegistrosTipoFuncionario(true);
 
-		html = this.getColecaoComoHTMLSelect(colecao, pNmSelect, pIdSelect, pCampoSelecionado);
+		html = this.getColecaoComoHTMLSelect(colecao, pNmSelect, pIdSelect, pCampoSelecionado,pObrigatorio,pComTodos);
 
 		return html;
 	}
@@ -58,13 +58,13 @@ public class SelectTipoFuncionario extends SelectGenerico {
 	 * Collection, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	protected String getColecaoComoHTMLSelect(Collection<?> pColecao, String pNmSelect, String pIdSelect,
-			String pCampoSelecionado) throws Exception {
+			String pCampoSelecionado,boolean pObrigatorio, boolean pComTodos ) throws Exception {
 
 		Iterator it;
 		StringBuffer bufferHtml = new StringBuffer(200);
 		TipoFuncionario tipoFuncionario = null;
 
-		this.criarSelect(pNmSelect, pIdSelect, bufferHtml,false,true);
+		this.criarSelect(pNmSelect, pIdSelect, bufferHtml,pObrigatorio,pComTodos);
 
 		it = pColecao.iterator();
 		while (it.hasNext()) {

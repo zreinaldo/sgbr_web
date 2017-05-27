@@ -55,6 +55,7 @@ public class RNIncluirFuncionario {
 			pessoa.setNmLogradouro(pOtdFuncionario.getNmLogradouro());
 			pessoa.setNmUF(pOtdFuncionario.getNmUF());
 			pessoa.setNuLogradouro(pOtdFuncionario.getNuLogradouro());
+			pessoa.setNuCEP(pOtdFuncionario.getNuCEP());
 
 
 			pessoa = DAOPessoa.getInstancia().incluir(pessoa);

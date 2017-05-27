@@ -62,7 +62,6 @@ public class PRManterFuncionario extends PRManterCadastro {
 	private FachadaSGBR aFachadaSGBR;
 
 	public void init() throws ServletException {
-		System.out.println("Método init()");
 		this.aFachadaSGBR = FachadaSGBR.getInstancia();
 	}
 
@@ -74,7 +73,6 @@ public class PRManterFuncionario extends PRManterCadastro {
 	 */
 	@Override
 	public void exibirInclusao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
-		// TODO Auto-generated method stub
 		this.redirecionar(this.NM_JSP_INCLUIR, pRequest, pResponse);
 	}
 
@@ -139,6 +137,8 @@ public class PRManterFuncionario extends PRManterCadastro {
 		otdFuncionario.setEmail(email);
 
 		this.aFachadaSGBR.incluirFuncionario(otdFuncionario);
+		
+		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
 	}
 
@@ -207,6 +207,8 @@ public class PRManterFuncionario extends PRManterCadastro {
 				pRequest);
 		String cdFuncionario = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_cdFuncionario, pRequest);
 
+		String dtDemissao = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_dtDemissao,
+				pRequest);
 
 		OTDFuncionario otdFuncionario = new OTDFuncionario();
 		
@@ -230,6 +232,7 @@ public class PRManterFuncionario extends PRManterCadastro {
 		otdFuncionario.setNuLogradouro(nuLogradouro);
 		otdFuncionario.setNuCEP(nuCEP);
 		otdFuncionario.setDtNascimento(!dtNascimemnto.isEmpty() ? Util.formataData(dtNascimemnto) : null);
+		otdFuncionario.setDtDemissao(!dtDemissao.isEmpty() ? Util.formataData(dtDemissao) : null);
 		otdFuncionario.setEmail(email);
 
 		this.aFachadaSGBR.alterarFuncionario(otdFuncionario);
@@ -249,7 +252,18 @@ public class PRManterFuncionario extends PRManterCadastro {
 	 */
 	@Override
 	public void exibirExclusao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
-		// TODO Auto-generated method stub
+
+		String valueRadio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_funcionario, pRequest);
+		
+		String[] valores = valueRadio.split(",",2);
+		
+		
+		
+		OTDFuncionario otdFuncionario =  this.aFachadaSGBR.consultarDadosFuncionario(Integer.valueOf(valores[0]), Integer.valueOf(valores[1]));
+		
+		pRequest.setAttribute(this.ID_REQ_ATR_otdFuncionario, otdFuncionario);
+		pRequest.setAttribute(this.ID_REQ_indicadorExclusao, true);
+		this.redirecionar(this.NM_JSP_DETALHAR, pRequest, pResponse);
 
 	}
 
@@ -261,7 +275,26 @@ public class PRManterFuncionario extends PRManterCadastro {
 	 */
 	@Override
 	public void processarExclusao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
-		// TODO Auto-generated method stub
+
+		String cdPessoa = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_cdPessoa,
+				pRequest);
+		String cdFuncionario = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_cdFuncionario, pRequest);
+		
+		String nuCPF = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCPF, pRequest);
+		String nuRG = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuRG, pRequest);
+		String nuCarteira = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCarteira, pRequest);
+
+		OTDFuncionario otdFuncionario = new OTDFuncionario();
+		
+		otdFuncionario.setCdFuncionario(Integer.valueOf(cdFuncionario));
+		otdFuncionario.setCdPessoa(Integer.valueOf(cdPessoa));
+		otdFuncionario.setNuCPF(nuCPF);
+		otdFuncionario.setNuRG(nuRG);
+		otdFuncionario.setNuCarteira(nuCarteira);
+		
+		this.aFachadaSGBR.excluirFuncionario(otdFuncionario);
+		
+		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
 	}
 
@@ -302,7 +335,7 @@ public class PRManterFuncionario extends PRManterCadastro {
 		}
 		
 		
-		ArrayList<OTDFuncionario> otdResposta = this.aFachadaSGBR.consultaTelaManterFuncionario(nmFuncionario, tpDocumento, nuDocumento, tpCargo, true);
+		ArrayList<OTDFuncionario> otdResposta = this.aFachadaSGBR.consultaTelaManterFuncionario(nmFuncionario, tpDocumento, nuDocumento, tpCargo, false);
 		
 		pRequest.setAttribute(this.ID_REQ_ATR_otdFuncionario, otdResposta);
 		
@@ -324,7 +357,18 @@ public class PRManterFuncionario extends PRManterCadastro {
 	@Override
 	public void exibirDetalhamentoConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse)
 			throws Exception {
-		// TODO Auto-generated method stub
+
+		String valueRadio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_funcionario, pRequest);
+		
+		String[] valores = valueRadio.split(",",2);
+		
+		
+		
+		OTDFuncionario otdFuncionario =  this.aFachadaSGBR.consultarDadosFuncionario(Integer.valueOf(valores[0]), Integer.valueOf(valores[1]));
+		
+		pRequest.setAttribute(this.ID_REQ_ATR_otdFuncionario, otdFuncionario);
+		pRequest.setAttribute(this.ID_REQ_indicadorExclusao, false);
+		this.redirecionar(this.NM_JSP_DETALHAR, pRequest, pResponse);
 
 	}
 

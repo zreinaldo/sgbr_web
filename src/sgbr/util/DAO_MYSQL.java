@@ -36,8 +36,6 @@ public class DAO_MYSQL {
 			
 			conn = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/mydb", "root", "003284");
-			
-			System.out.println("Conexão com o banco estabelecida com sucesso!");
 
 		} catch (ClassNotFoundException eDrive) {
 			System.out.println("Atenção: Drive não encontrado!");

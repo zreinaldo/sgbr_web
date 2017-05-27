@@ -99,8 +99,18 @@ public class DAOPessoaDocumento extends DAO_MYSQL implements IntfDAOPessoaDocume
 	 */
 	@Override
 	public void excluir(PessoaDocumento pPessoaDocumento) throws SQLException {
-		// TODO Auto-generated method stub
 
+		String sqlConector = "";
+		Connection conexao = null;
+
+		conexao = this.getConection();
+
+		String sql = "DELETE FROM mydb.pessoa_documento where PESSOA_CD = " + pPessoaDocumento.getCdPessoa()
+				+ " and TIPO_DOCUMENTO_CD = " + pPessoaDocumento.getTpDocumento();
+
+		Statement stm = conexao.createStatement();
+
+		stm.execute(sql);
 	}
 
 	/*
