@@ -7,12 +7,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import sgbr.controlador.ControladorComanda;
 import sgbr.controlador.ControladorFuncionario;
+import sgbr.controlador.ControladorItemCardapio;
 import sgbr.controlador.ControladorTipoDocumento;
 import sgbr.controlador.ControladorTipoFuncionario;
+import sgbr.entidades.Comanda;
+import sgbr.entidades.ItemCardapio;
 import sgbr.entidades.TipoDocumento;
 import sgbr.entidades.TipoFuncionario;
+import sgbr.util.OTDComanda;
 import sgbr.util.OTDFuncionario;
+import sgbr.util.OTDItemCardapio;
+import sgbr.util.OTDTipoFuncionario;
 
 /**
  * @author Reinaldo
@@ -77,6 +84,35 @@ public class FachadaSGBR {
 	public OTDFuncionario consultarDadosFuncionario(Integer pCdFuncionario, Integer pCdPessoa) throws SQLException {
 		return ControladorFuncionario.getInstancia().consultarDadosFuncionario(pCdFuncionario, pCdPessoa);
 	}
+	
+	
+	
+
+	public void incluirTipoFuncionario(TipoFuncionario pTipoFuncionario) throws SQLException {
+		ControladorTipoFuncionario.getInstancia().incluir(pTipoFuncionario);
+	}
+
+
+	public void alterarTipoFuncionario(TipoFuncionario pTipoFuncionario) throws SQLException {
+		ControladorTipoFuncionario.getInstancia().alterar(pTipoFuncionario);
+	}
+
+	public void excluirTipoFuncionario(TipoFuncionario pTipoFuncionario) throws SQLException {
+		ControladorTipoFuncionario.getInstancia().excluir(pTipoFuncionario);
+	}
+
+
+	public ArrayList<OTDTipoFuncionario> consultaTelaManterTipoFuncionario(String pCdTipoFuncionario, String pDsTipoFuncionario) throws SQLException {
+		return ControladorTipoFuncionario.getInstancia().consultaTelaManterTipoFuncionario(pCdTipoFuncionario, pDsTipoFuncionario);
+	}
+	
+	public TipoFuncionario consultaTipoFuncionarioPorChavePrimaria(TipoFuncionario pTipoFuncionario) throws SQLException {
+		return ControladorTipoFuncionario.getInstancia().consultaPorChavePrimaria(pTipoFuncionario);
+	}
+
+	
+	
+	
 
 	/**
 	 * 
@@ -116,6 +152,65 @@ public class FachadaSGBR {
 				pTpFuncionario, pInAtivos);
 	}
 
+	public ArrayList<OTDComanda> consultaTelaManterComanda(String pCodigo, String pSituacao) throws SQLException {
+		return ControladorComanda.getInstancia().consultaTelaManterComanda(pCodigo, pSituacao);
+	}
+	
+	public void incluirComanda(Integer pQtdComandas) throws SQLException {
+		ControladorComanda.getInstancia().incluir(pQtdComandas);
+		
+	}
+	
+	public Comanda consultaComandaPorChavePrimaria(Comanda pComanda) throws SQLException {
+		return ControladorComanda.getInstancia().consultaPorChavePrimaria(pComanda);
+		
+	}
+	
+	public void alterarComanda(Comanda pComanda) throws SQLException {
+		ControladorComanda.getInstancia().alterar(pComanda);
+		
+	}
+	
+	public void excluirComanda(Comanda pComanda) throws SQLException {
+		ControladorComanda.getInstancia().excluir(pComanda);
+		
+	}
+	
+	
 
+
+	public void incluirItemCardapio(ItemCardapio pItemCardapio) throws SQLException {
+		ControladorItemCardapio.getInstancia().incluir(pItemCardapio);
+	}
+
+
+	public void alterarItemCardapio(ItemCardapio pItemCardapio) throws SQLException {
+		ControladorItemCardapio.getInstancia().alterar(pItemCardapio);
+	}
+
+	public void excluirItemCardapio(ItemCardapio pItemCardapio) throws SQLException {
+		ControladorItemCardapio.getInstancia().excluir(pItemCardapio);
+	}
+
+
+	public ArrayList<OTDItemCardapio> consultaTelaManterItemCardapio(String pCdItemCardapio, String pNmItemCardapio) throws SQLException {
+		return ControladorItemCardapio.getInstancia().consultaTelaManterItemCardapio(pCdItemCardapio, pNmItemCardapio);
+	}
+	
+	public ItemCardapio consultaItemCardapioPorChavePrimaria(ItemCardapio pItemCardapio) throws SQLException {
+		return ControladorItemCardapio.getInstancia().consultaPorChavePrimaria(pItemCardapio);
+	}
+
+	/**
+	 * 
+	 * @param pInRetornarApenasVigentes
+	 * @return
+	 * @throws SQLException
+	 */
+	public Collection<ItemCardapio> consultaTodosRegistrosItemCardapio(boolean pInRetornarApenasVigentes)
+			throws SQLException {
+		return ControladorItemCardapio.getInstancia()
+				.consultaTodosRegistrosItemCardapio(pInRetornarApenasVigentes);
+	}
 
 }

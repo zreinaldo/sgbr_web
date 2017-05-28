@@ -54,27 +54,27 @@
 
 				<tr>
 					<td><label for="nmFuncionario" >Nome:</label></td>
-					<td><input type="text" readonly="readonly"
+					<td><input type="text" disabled="disabled"
 						id="<%=PRManterFuncionario.ID_REQ_ATR_nmFuncionario%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nmFuncionario%>" value="<%=otdFuncionario.getNmFuncionario() %>"
 						maxlength="58"></td>
 				</tr>
 				<tr>
 					<td><label for="nuCPF">CPF:</label></td>
-					<td><input type="text" readonly="readonly"
+					<td><input type="text" disabled="disabled"
 						id="<%=PRManterFuncionario.ID_REQ_ATR_nuCPF%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nuCPF%>" maxlength="58" value="<%=otdFuncionario.getNuCPF()%>"> </td>
 				</tr>
 
 				<tr>
 					<td><label for="nuRG">RG:</label></td>
-					<td><input type="text" readonly="readonly"
+					<td><input type="text" disabled="disabled"
 						id="<%=PRManterFuncionario.ID_REQ_ATR_nuRG%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nuRG%>" maxlength="58" value="<%=otdFuncionario.getNuRG() %>" ></td>
 				</tr>
 				<tr>
 					<td><label for="nuCarteira">Carteira de Trabalho:</label></td>
-					<td><input id="<%=PRManterFuncionario.ID_REQ_ATR_nuCarteira%>" readonly="readonly"
+					<td><input id="<%=PRManterFuncionario.ID_REQ_ATR_nuCarteira%>" disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nuCarteira%>"
 						maxlength="58" value="<%=otdFuncionario.getNuCarteira() %>" ></td>
 				</tr>
@@ -82,7 +82,7 @@
 				<tr>
 					<td><label for="dtNascimento">Data Nascimento:</label></td>
 					<td><input
-						id="<%=PRManterFuncionario.ID_REQ_ATR_dtNascimento%>" readonly="readonly"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_dtNascimento%>" disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_dtNascimento%>"
 						maxlength="58" value="<%=Util.formataDataParaString(otdFuncionario.getDtNascimento()) %>"></td>
 				</tr>
@@ -90,7 +90,7 @@
 
 				<tr>
 					<td><label for="email">E-mail:</label></td>
-					<td><input id="<%=PRManterFuncionario.ID_REQ_ATR_email%>" readonly="readonly"
+					<td><input id="<%=PRManterFuncionario.ID_REQ_ATR_email%>" disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_email%>" maxlength="58" value="<%=otdFuncionario.getEmail() %>"></td>
 				</tr>
 
@@ -99,34 +99,34 @@
 				<tr>
 					<td><label for="nmBanco">Banco:</label></td>
 					<td><input type="text"
-						id="<%=PRManterFuncionario.ID_REQ_ATR_nmBanco%>" readonly="readonly"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nmBanco%>" disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nmBanco%>" maxlength="58" value="<%=otdFuncionario.getNmBanco() %>"></td>
 				</tr>
 				<tr>
 					<td><label for="nuAgencia">Agência:</label></td>
 					<td><input type="text"
-						id="<%=PRManterFuncionario.ID_REQ_ATR_nuAgencia%>" readonly="readonly"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nuAgencia%>" disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nuAgencia%>"
 						maxlength="58" value="<%=otdFuncionario.getNuAgencia() %>"></td>
 				</tr>
 				<tr>
 					<td><label for="nuCC">Número Conta Corrente:</label></td>
 					<td><input type="text"
-						id="<%=PRManterFuncionario.ID_REQ_ATR_nuCC%>" readonly="readonly"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nuCC%>" disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nuCC%>" maxlength="58" value="<%=otdFuncionario.getNuCC() %>" ></td>
 				</tr>
 
 				<tr>
 					<td><label for="vlSalario">Salário:</label></td>
 					<td><input type="text"
-						id="<%=PRManterFuncionario.ID_REQ_ATR_vlSalario%>" readonly="readonly"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_vlSalario%>" disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_vlSalario%>"
 						maxlength="58" value="<%=otdFuncionario.getVlSalario() %>"></td>
 				</tr>
 				<tr>
 					<td><label for="dtAdmissao">Data Admissão:</label></td>
 					<td><input type="text"
-						id="<%=PRManterFuncionario.ID_REQ_ATR_dtAdmissao%>" readonly="readonly"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_dtAdmissao%>" disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_dtAdmissao%>"
 						maxlength="58" value="<%=Util.formataDataParaString(otdFuncionario.getDtAdmissao()) %>"></td>
 				</tr>
@@ -135,7 +135,7 @@
 				<tr>
 					<td><label for="dtDemissao">Data Demissão:</label></td>
 					<td><input type="text"
-						id="<%=PRManterFuncionario.ID_REQ_ATR_dtDemissao%>" readonly="readonly"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_dtDemissao%>" disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_dtDemissao%>"
 						maxlength="58" value="<%=Util.formataDataParaString(otdFuncionario.getDtDemissao()) %>"></td>
 				</tr>
@@ -144,7 +144,7 @@
 				<td>-</td>			
 				<tr>
 					<td><label for="nmUF">Estado:</label></td>
-					<td><select id="<%=PRManterFuncionario.ID_REQ_ATR_nmUF%>" readonly="readonly"
+					<td><select id="<%=PRManterFuncionario.ID_REQ_ATR_nmUF%>" disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nmUF%>">
 							<option value="PE">Pernambuco</option>
 							<option value="PB" selected="selected">Paraiba</option>
@@ -155,20 +155,20 @@
 				<tr>
 					<td><label for="nmCidade">Cidade:</label></td>
 					<td><input type="text"
-						id="<%=PRManterFuncionario.ID_REQ_ATR_nmCidade%>" readonly="readonly"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nmCidade%>" disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nmCidade%>" maxlength="58" value="<%=otdFuncionario.getNmCidade()%>"></td>
 				</tr>
 				<tr>
 					<td><label for="nmBairro">Bairro:</label></td>
 					<td><input type="text"
-						id="<%=PRManterFuncionario.ID_REQ_ATR_nmBairro%>" readonly="readonly"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nmBairro%>" disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nmBairro%>" maxlength="58"value="<%=otdFuncionario.getNmBairro()%>" ></td>
 				</tr>
 				
 				<tr>
 					<td><label for="nmLogradouro">Logradouro:</label></td>
 					<td><input type="text"
-						id="<%=PRManterFuncionario.ID_REQ_ATR_nmLogradouro%>" readonly="readonly"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nmLogradouro%>" disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nmLogradouro%>"
 						maxlength="58" size="50" value="<%=otdFuncionario.getNmLogradouro()%>"> <label for="nuLogradouro">Número:</label><input
 						type="text" id="<%=PRManterFuncionario.ID_REQ_ATR_nuLogradouro%>"
@@ -178,7 +178,7 @@
 				<tr>
 					<td><label for="nuCEP">CEP:</label></td>
 					<td><input type="text"
-						id="<%=PRManterFuncionario.ID_REQ_ATR_nuCEP%>" readonly="readonly"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nuCEP%>" disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nuCEP%>" maxlength="58" value="<%=otdFuncionario.getNuCEP()%>"></td>
 				</tr>
 				<tr>

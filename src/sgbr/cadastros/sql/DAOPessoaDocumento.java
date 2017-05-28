@@ -23,7 +23,7 @@ public class DAOPessoaDocumento extends DAO_MYSQL implements IntfDAOPessoaDocume
 	private static DAOPessoaDocumento aDAOPessoaDocumento = new DAOPessoaDocumento();
 
 	/**
-	 * Cria um novo objeto DAOPessoa.
+	 * Cria um novo objeto DAOPessoaDocumento.
 	 */
 	private DAOPessoaDocumento() {
 		super();

@@ -4,32 +4,32 @@
 package sgbr.web.servlet.selects;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 
-import sgbr.entidades.TipoFuncionario;
-import sgbr.fachada.FachadaSGBR;
+import sgbr.util.Constantes;
 import sgbr.util.web.SelectGenerico;
 
 /**
  * @author Reinaldo
  *
  */
-public class SelectTipoFuncionario extends SelectGenerico {
+public class SelectSituacaoItemCardapio extends SelectGenerico {
 
-	private static SelectTipoFuncionario aSelectTipoFuncionario = new SelectTipoFuncionario();
+	private static SelectSituacaoItemCardapio aSelectSituacaoItemCardapio = new SelectSituacaoItemCardapio();
 
-	private SelectTipoFuncionario() {
+	private SelectSituacaoItemCardapio() {
 		super();
 	}
 
-	public static SelectTipoFuncionario getInstancia() {
-		if (SelectTipoFuncionario.aSelectTipoFuncionario == null) {
-			SelectTipoFuncionario.aSelectTipoFuncionario = new SelectTipoFuncionario();
+	public static SelectSituacaoItemCardapio getInstancia() {
+		if (SelectSituacaoItemCardapio.aSelectSituacaoItemCardapio == null) {
+			SelectSituacaoItemCardapio.aSelectSituacaoItemCardapio = new SelectSituacaoItemCardapio();
 		}
 
-		return SelectTipoFuncionario.aSelectTipoFuncionario;
+		return SelectSituacaoItemCardapio.aSelectSituacaoItemCardapio;
 	}
 
 	/*
@@ -38,13 +38,13 @@ public class SelectTipoFuncionario extends SelectGenerico {
 	 * @see sgbr.util.web.SelectGenerico#getHTML(javax.servlet.http.
 	 * HttpServletRequest, java.lang.String, java.lang.String, java.lang.String)
 	 */
+	@Override
 	public String getHTML(HttpServletRequest pRequest, String pNmSelect, String pIdSelect, String pCampoSelecionado,boolean pObrigatorio, boolean pComTodos)
 			throws Exception {
 
 		String html = "";
-		Collection<TipoFuncionario> colecao = null;
-
-		colecao = FachadaSGBR.getInstancia().consultaTodosRegistrosTipoFuncionario(true);
+		Collection<String> colecao = null;
+	
 
 		html = this.getColecaoComoHTMLSelect(colecao, pNmSelect, pIdSelect, pCampoSelecionado,pObrigatorio,pComTodos);
 
@@ -57,22 +57,19 @@ public class SelectTipoFuncionario extends SelectGenerico {
 	 * @see sgbr.util.web.SelectGenerico#getColecaoComoHTMLSelect(java.util.
 	 * Collection, java.lang.String, java.lang.String, java.lang.String)
 	 */
+	@Override
 	protected String getColecaoComoHTMLSelect(Collection<?> pColecao, String pNmSelect, String pIdSelect,
-			String pCampoSelecionado,boolean pObrigatorio, boolean pComTodos ) throws Exception {
+			String pCampoSelecionado,boolean pObrigatorio, boolean pComTodos) throws Exception {
 
 		Iterator it;
 		StringBuffer bufferHtml = new StringBuffer(200);
-		TipoFuncionario tipoFuncionario = null;
+		HashMap<String,String> hash = null;
 
-		this.criarSelect(pNmSelect, pIdSelect, bufferHtml,pObrigatorio,pComTodos);
-
-		it = pColecao.iterator();
-		while (it.hasNext()) {
-			tipoFuncionario = (TipoFuncionario) it.next();
-			this.valoresOptions(bufferHtml, pCampoSelecionado, tipoFuncionario.getCdTpFuncionario().toString(),
-					tipoFuncionario.getDsTpFuncionario());
-
-		}
+		this.criarSelect(pNmSelect, pIdSelect, bufferHtml, pObrigatorio, pComTodos);
+		
+			this.valoresOptions(bufferHtml, pCampoSelecionado, Constantes.SI_ITEM_CARDAPIO_DISPONIVEL, "DISPONÍVEL");
+			this.valoresOptions(bufferHtml, pCampoSelecionado, Constantes.SI_ITEM_CARDAPIO_INDISPONIVEL, "INDISPONÍVEL");
+			this.valoresOptions(bufferHtml, pCampoSelecionado, Constantes.SI_ITEM_CARDAPIO_TEMPORARIAMENTE_INDISPONIVEL, "TEMPORARIAMENTE INDISPONÍVEL");
 
 		this.finalizarSelect(bufferHtml);
 

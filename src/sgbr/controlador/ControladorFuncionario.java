@@ -50,7 +50,7 @@ public class ControladorFuncionario {
 	}
 
 	public void excluirFuncionario(OTDFuncionario pOTDFuncionario) {
-        RNExcluirFuncionario.getInstancia().processar(pOTDFuncionario);
+		RNExcluirFuncionario.getInstancia().processar(pOTDFuncionario);
 	}
 
 	/**

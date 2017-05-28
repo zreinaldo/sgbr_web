@@ -16,18 +16,18 @@ public class EntidadeTipoGenerica extends EntidadeGenerica {
 	private Date dtFimVigencia;
 
 	/**
-	 * @return the dtFImVigencia
+	 * @return the dtFimVigencia
 	 */
-	public Date getDtFImVigencia() {
+	public Date getDtFimVigencia() {
 		return dtFimVigencia;
 	}
 
 	/**
-	 * @param pDtFImVigencia
+	 * @param pDtFimVigencia
 	 *            the dtFImVigencia to set
 	 */
-	public void setDtFimVigencia(Date pDtFImVigencia) {
-		this.dtFimVigencia = pDtFImVigencia;
+	public void setDtFimVigencia(Date pDtFimVigencia) {
+		this.dtFimVigencia = pDtFimVigencia;
 	}
 
 }

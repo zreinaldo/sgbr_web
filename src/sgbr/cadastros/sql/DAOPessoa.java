@@ -104,7 +104,6 @@ public class DAOPessoa extends DAO_MYSQL implements IntfDAOPessoa {
 	public void alterar(Pessoa pPessoa) throws SQLException {
 
 		Connection conexao = null;
-		PreparedStatement preStmt = null;
 
 		conexao = this.getConection();
 

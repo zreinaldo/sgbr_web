@@ -1,24 +1,19 @@
 /**
  * 
  */
-package sgbr.entidades;
+package sgbr.util;
 
-import sgbr.util.EntidadeTipoGenerica;
+import java.sql.Date;
 
 /**
- * Table: tipo_funcionario Columns: TIPO_FUNCIONARIO_CD Integer(11) PK
- * TIPO_FUNCIONARIO_DS varchar(45)
- * 
  * @author Reinaldo
  *
  */
-public class TipoFuncionario extends EntidadeTipoGenerica {
-
-	public static final String NM_COLUNA_TIPO_FUNCIONARIO_CD = "TIPO_FUNCIONARIO_CD";
-	public static final String NM_COLUNA_TIPO_FUNCIONARIO_DS = "TIPO_FUNCIONARIO_DS";
+public class OTDTipoFuncionario {
 
 	private Integer cdTpFuncionario;
 	private String dsTpFuncionario;
+	private Date dtFimVigencia;
 
 	/**
 	 * @return the cdTpFuncionario
@@ -49,5 +44,20 @@ public class TipoFuncionario extends EntidadeTipoGenerica {
 	public void setDsTpFuncionario(String pDsTpFuncionario) {
 		this.dsTpFuncionario = pDsTpFuncionario;
 	}
+	
+	
+	/**
+	 * @return the dtFimVigencia
+	 */
+	public Date getDtFimVigencia() {
+		return dtFimVigencia;
+	}
 
+	/**
+	 * @param pDtFimVigencia
+	 *            the dtFImVigencia to set
+	 */
+	public void setDtFimVigencia(Date pDtFimVigencia) {
+		this.dtFimVigencia = pDtFimVigencia;
+	}
 }

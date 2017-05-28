@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class DAO_MYSQL {
 	
-	protected static Date getDateOpcional (ResultSet pRs, String pCampo) {
+	protected Date getDateOpcional (ResultSet pRs, String pCampo) {
 		Date retorno = null;
 		try {
 			retorno = pRs.getDate(pCampo) != null ? pRs.getDate(pCampo) : null;
@@ -27,7 +27,7 @@ public class DAO_MYSQL {
 
 
 	//para pegar a conexao
-	protected static Connection getConection() throws SQLException {
+	protected Connection getConection() throws SQLException {
 
 		Connection conn = null;
 		try {

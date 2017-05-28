@@ -11,7 +11,6 @@ import sgbr.entidades.Pessoa;
 import sgbr.entidades.PessoaDocumento;
 import sgbr.util.Constantes;
 import sgbr.util.OTDFuncionario;
-import sgbr.util.Util;
 
 /**
  * @author Reinaldo

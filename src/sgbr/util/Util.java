@@ -25,15 +25,20 @@ public class Util {
 		}
 		return date;
 	}
-	
-	
-	public static String formataDataParaString (Date pData) {
-		
+
+	public static String formataDataParaString(Date pData) {
+
 		if (pData == null) {
 			return "";
 		}
 
-			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-	         return formato.format(pData);
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		return formato.format(pData);
+	}
+
+	public static Date getDataHoje() {
+		java.util.Date dt = new java.util.Date();
+
+		return new Date(dt.getTime());
 	}
 }
