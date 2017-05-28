@@ -13,14 +13,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import sgbr.cadastros.IntfDAOItemCardapio;
-import sgbr.entidades.Comanda;
-import sgbr.entidades.Funcionario;
-import sgbr.entidades.Pessoa;
 import sgbr.entidades.ItemCardapio;
 import sgbr.util.DAO_MYSQL;
-import sgbr.util.OTDComanda;
-import sgbr.util.OTDFuncionario;
 import sgbr.util.OTDItemCardapio;
+import sgbr.util.Util;
 
 /**
  * @author Reinaldo
@@ -64,14 +60,19 @@ public class DAOItemCardapio extends DAO_MYSQL implements IntfDAOItemCardapio {
 		pItemCardapio.setDhIncusaoRegistro(new Timestamp(System.currentTimeMillis()));
 		pItemCardapio.setDhAlteracaoRegistro(new Timestamp(System.currentTimeMillis()));
 
-		String sql = "INSERT INTO mydb.TIPO_FUNCIONARIO (" + ItemCardapio.NM_COLUNA_TIPO_FUNCIONARIO_DS + "," 
-		+ ItemCardapio.NM_COLUNA_DH_INCLUSAO_REGISTRO + "," + ItemCardapio.NM_COLUNA_DH_ALTERACAO_REGISTRO +  ") VALUES(?,?,?)";
+		
+		String sql = "INSERT INTO mydb.ITEM_CARDAPIO (" + ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM + "," 
+				 + ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_VL + "," 
+				  + ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_SI + "," 
+		+ ItemCardapio.NM_COLUNA_DH_INCLUSAO_REGISTRO + "," + ItemCardapio.NM_COLUNA_DH_ALTERACAO_REGISTRO +  ") VALUES(?,?,?,?,?)";
 
 		ppSt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-		ppSt.setString(1, pItemCardapio.getDsTpFuncionario().toUpperCase());		
-		ppSt.setTimestamp(2, pItemCardapio.getDhIncusaoRegistro());
-		ppSt.setTimestamp(3, pItemCardapio.getDhAlteracaoRegistro());
+		ppSt.setString(1, pItemCardapio.getNmItemCardapio().toUpperCase());
+		ppSt.setDouble(2, pItemCardapio.getVlItemCardapio());
+		ppSt.setString(3, pItemCardapio.getSiItemCardapio().toUpperCase());
+		ppSt.setTimestamp(4, pItemCardapio.getDhIncusaoRegistro());
+		ppSt.setTimestamp(5, pItemCardapio.getDhAlteracaoRegistro());
 
 		ppSt.execute();
 
@@ -79,7 +80,7 @@ public class DAOItemCardapio extends DAO_MYSQL implements IntfDAOItemCardapio {
 
 		while (rs.next()) {
 			// pega o valor do sequencial inserido
-			pItemCardapio.setCdTpFuncionario(rs.getInt(1));
+			pItemCardapio.setCdItemCardapio(rs.getInt(1));
 		}
 
 		ppSt.close();
@@ -97,17 +98,20 @@ public class DAOItemCardapio extends DAO_MYSQL implements IntfDAOItemCardapio {
 
 		conexao = this.getConection();
 
-		String sql = "UPDATE mydb.TIPO_FUNCIONARIO SET " + " TIPO_FUNCIONARIO_DS = ?, " + " DT_FIM_VIGENCIA = ? ,"  + "DH_ALTERACAO = current_timestamp ";
+		String sql = "UPDATE mydb.ITEM_CARDAPIO SET  " 
+		+ ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM +" = ?, "  
+		+ ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_VL +" = ?, " 
+		+   ItemCardapio.NM_COLUNA_DH_ALTERACAO_REGISTRO +" = CURRENT_TIMESTAMP " ;
 		
-		sql = sql + " WHERE TIPO_FUNCIONARIO_CD = ? ";
+		sql = sql + " WHERE " + ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_CD +" = ? ";
 
 		PreparedStatement ppSt = conexao.prepareStatement(sql);
 
-		ppSt.setString(1, pItemCardapio.getDsTpFuncionario());
+		ppSt.setString(1, pItemCardapio.getNmItemCardapio());
 				
-		ppSt.setDate(2, pItemCardapio.getDtFimVigencia());
+		ppSt.setDouble(2, pItemCardapio.getVlItemCardapio());
 		
-		ppSt.setInt(3, pItemCardapio.getCdTpFuncionario());
+		ppSt.setInt(3, pItemCardapio.getCdItemCardapio());
 		ppSt.execute();
 
 		ppSt.close();
@@ -124,12 +128,12 @@ public class DAOItemCardapio extends DAO_MYSQL implements IntfDAOItemCardapio {
 
 		conexao = this.getConection();
 
-		String sql = "delete from mydb.TIPO_FUNCIONARIO WHERE TIPO_FUNCIONARIO_CD  = ?";
+		String sql = "delete from mydb.ITEM_CARDAPIO WHERE " + ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_CD + " = ?";
 
 		PreparedStatement ppSt = conexao.prepareStatement(sql);
 
 		
-		ppSt.setInt(1, pItemCardapio.getCdTpFuncionario());
+		ppSt.setInt(1, pItemCardapio.getCdItemCardapio());
 		
 
 		ppSt.execute();
@@ -146,15 +150,15 @@ public class DAOItemCardapio extends DAO_MYSQL implements IntfDAOItemCardapio {
 		
 		Connection conexao = null;
 		PreparedStatement ppSt = null;
-		ItemCardapio tpFuncionario = null;
+		ItemCardapio itemCardapio = null;
 		Collection<ItemCardapio> colecaoItemCardapio = new ArrayList<ItemCardapio>();
 
 		conexao = this.getConection();
 		
-		String sql = "SELECT * FROM mydb.tipo_funcionario ";
+		String sql = "SELECT * FROM mydb.ITEM_CARDAPIO ";
 		
 		if (pInRetornarApenasVigentes){
-			sql = sql + " where mydb.tipo_funcionario.dt_fim_vigencia is null";
+			sql = sql + " where mydb.ITEM_CARDAPIO.dt_fim_vigencia is null";
 		}
 
 		Statement stm = conexao.createStatement();
@@ -162,13 +166,13 @@ public class DAOItemCardapio extends DAO_MYSQL implements IntfDAOItemCardapio {
 		ResultSet rs = stm.executeQuery(sql);
 
 		while (rs.next()) {
-			tpFuncionario = new ItemCardapio();
-			tpFuncionario.setCdTpFuncionario(rs.getInt(ItemCardapio.NM_COLUNA_TIPO_FUNCIONARIO_CD));
-			tpFuncionario.setDsTpFuncionario(rs.getString(ItemCardapio.NM_COLUNA_TIPO_FUNCIONARIO_DS));
-			tpFuncionario.setDhIncusaoRegistro(rs.getTimestamp(ItemCardapio.NM_COLUNA_DH_INCLUSAO_REGISTRO));
-			tpFuncionario.setDhAlteracaoRegistro(rs.getTimestamp(ItemCardapio.NM_COLUNA_DH_ALTERACAO_REGISTRO));
-			tpFuncionario.setDtFimVigencia(rs.getDate(ItemCardapio.NM_COLUNA_DT_FIM_VIGENCIA));
-			colecaoItemCardapio.add(tpFuncionario);
+			itemCardapio = new ItemCardapio();
+			itemCardapio.setCdItemCardapio(rs.getInt(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_CD));
+			itemCardapio.setNmItemCardapio(rs.getString(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM));
+			itemCardapio.setDhIncusaoRegistro(rs.getTimestamp(ItemCardapio.NM_COLUNA_DH_INCLUSAO_REGISTRO));
+			itemCardapio.setDhAlteracaoRegistro(rs.getTimestamp(ItemCardapio.NM_COLUNA_DH_ALTERACAO_REGISTRO));
+			itemCardapio.setVlItemCardapio(rs.getDouble(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_VL));
+			colecaoItemCardapio.add(itemCardapio);
 		}
 
 		rs.close();
@@ -184,7 +188,7 @@ public class DAOItemCardapio extends DAO_MYSQL implements IntfDAOItemCardapio {
 	/* (non-Javadoc)
 	 * @see sgbr.cadastros.IntfDAOItemCardapio#consultaTelaManterItemCardapio(java.lang.String, java.lang.String)
 	 */
-	public ArrayList<OTDItemCardapio> consultaTelaManterItemCardapio(String pCdItemCardapio, String pDsItemCardapio) throws SQLException {
+	public ArrayList<OTDItemCardapio> consultaTelaManterItemCardapio(String pCdItemCardapio, String pDsItemCardapio, String pSiItemCaradapio) throws SQLException {
 
 		String sqlWhere = "";
 		String sqlConector = "";
@@ -193,19 +197,25 @@ public class DAOItemCardapio extends DAO_MYSQL implements IntfDAOItemCardapio {
 		OTDItemCardapio otdItemCardapio = null;
 
 		conexao = this.getConection();
-		String sql = "SELECT " + "MYDB.TIPO_FUNCIONARIO.TIPO_FUNCIONARIO_CD, " 
-				+ "MYDB.TIPO_FUNCIONARIO.TIPO_FUNCIONARIO_DS,  "
-				+ "MYDB.TIPO_FUNCIONARIO.DT_FIM_VIGENCIA " 				
-				+ "FROM MYDB.TIPO_FUNCIONARIO ";
+		String sql = "SELECT " + "MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_CD, " 
+				+ "MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_NM,  "
+				+ "MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_SI,  "
+				+ "MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_VL  "
+				+ "FROM MYDB.ITEM_CARDAPIO ";
 			
 
 		if (!pCdItemCardapio.isEmpty()) {
-			sqlWhere = sqlWhere + sqlConector + "	MYDB.TIPO_FUNCIONARIO.TIPO_FUNCIONARIO_CD = " + pCdItemCardapio;
+			sqlWhere = sqlWhere + sqlConector + "	MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_CD = " + pCdItemCardapio;
 			sqlConector = " \n AND ";
 		}
 		
 		if (!pDsItemCardapio.isEmpty()) {
-			sqlWhere =  sqlWhere + sqlConector + "MYDB.TIPO_FUNCIONARIO.TIPO_FUNCIONARIO_DS LIKE '%" + pDsItemCardapio.toUpperCase() + "%'";
+			sqlWhere =  sqlWhere + sqlConector + "MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_NM LIKE '%" + pDsItemCardapio.toUpperCase() + "%'";
+			sqlConector = " \n AND ";
+		}
+		
+		if (!pSiItemCaradapio.isEmpty()) {
+			sqlWhere = sqlWhere + sqlConector + "	MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_SI = '" + pSiItemCaradapio + "'";
 			sqlConector = " \n AND ";
 		}
 
@@ -220,9 +230,11 @@ public class DAOItemCardapio extends DAO_MYSQL implements IntfDAOItemCardapio {
 
 		while (rs.next()) {
 			otdItemCardapio = new OTDItemCardapio();
-			otdItemCardapio.setCdTpFuncionario(rs.getInt(ItemCardapio.NM_COLUNA_TIPO_FUNCIONARIO_CD));
-			otdItemCardapio.setDsTpFuncionario(rs.getString(ItemCardapio.NM_COLUNA_TIPO_FUNCIONARIO_DS));
-			otdItemCardapio.setDtFimVigencia(rs.getDate(ItemCardapio.NM_COLUNA_DT_FIM_VIGENCIA));
+			otdItemCardapio.setCdItemCardapio(rs.getInt(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_CD));
+			otdItemCardapio.setNmItemCardapio(rs.getString(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM));
+			otdItemCardapio.setSiItemCardapio(rs.getString(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_SI));
+			otdItemCardapio.setDsSiItemCardapio(Util.getDsSiItemCardapio(rs.getString(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_SI)));
+			otdItemCardapio.setVlItemCardapio(rs.getDouble(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_VL));
 			
 
 			arrayResposta.add(otdItemCardapio);
@@ -248,10 +260,10 @@ public class DAOItemCardapio extends DAO_MYSQL implements IntfDAOItemCardapio {
 
 		conexao = this.getConection();
 
-		String sql = "select * from mydb.TIPO_FUNCIONARIO";
+		String sql = "select * from mydb.ITEM_CARDAPIO";
 
-		if (pItemCardapio.getCdTpFuncionario() != null) {
-			sqlWhere = sqlWhere + sqlConector + "mydb.TIPO_FUNCIONARIO.TIPO_FUNCIONARIO_CD = " + pItemCardapio.getCdTpFuncionario();
+		if (pItemCardapio.getCdItemCardapio() != null) {
+			sqlWhere = sqlWhere + sqlConector + "mydb.ITEM_CARDAPIO.ITEM_CARDAPIO_CD = " + pItemCardapio.getCdItemCardapio();
 			sqlConector = " \n AND ";
 		}
 
@@ -266,11 +278,13 @@ public class DAOItemCardapio extends DAO_MYSQL implements IntfDAOItemCardapio {
 
 		while (rs.next()) {
 			itemCardapio = new ItemCardapio();
-			itemCardapio.setCdTpFuncionario(rs.getInt(ItemCardapio.NM_COLUNA_TIPO_FUNCIONARIO_CD));
-			itemCardapio.setDsTpFuncionario(rs.getString(ItemCardapio.NM_COLUNA_TIPO_FUNCIONARIO_DS));
+			itemCardapio.setCdItemCardapio(rs.getInt(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_CD));
+			itemCardapio.setNmItemCardapio(rs.getString(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM));
+			itemCardapio.setSiItemCardapio(rs.getString(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_SI));
+			itemCardapio.setVlItemCardapio(rs.getDouble(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_VL));
 			itemCardapio.setDhIncusaoRegistro(rs.getTimestamp(ItemCardapio.NM_COLUNA_DH_INCLUSAO_REGISTRO));
 			itemCardapio.setDhAlteracaoRegistro(rs.getTimestamp( ItemCardapio.NM_COLUNA_DH_ALTERACAO_REGISTRO));
-			itemCardapio.setDtFimVigencia(this.getDateOpcional(rs, ItemCardapio.NM_COLUNA_DT_FIM_VIGENCIA));
+			
 
 		}
 

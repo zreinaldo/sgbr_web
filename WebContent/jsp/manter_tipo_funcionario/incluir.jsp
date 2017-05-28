@@ -10,7 +10,7 @@
 <SCRIPT language="JavaScript" type="text/javascript" src="js/funcoes_comuns.js"></SCRIPT>
 <body>
 	<FORM name="form_principal" method="post" action="">
-
+<%@ include file = "../../jsp/util/menu.jsp" %>
 		<INPUT type="hidden" id="evento"
 			name="<%=PRManterTipoFuncionario.ID_REQ_EVENTO%>" value="">
 
@@ -20,7 +20,7 @@
 							
 
 				<tr>
-					<td><label for="qtdDemandas">Descrição Tipo Funcionário:</label></td>
+					<td><label for="dsTipoFuncionario">Descrição Tipo Funcionário:</label></td>
 					<td><input type="text" required 
 						id="<%=PRManterTipoFuncionario.ID_REQ_ATR_dsTipoFuncionario%>"
 						name="<%=PRManterTipoFuncionario.ID_REQ_ATR_dsTipoFuncionario%>"
@@ -31,7 +31,7 @@
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Incluir"
 						onclick="submeterFormulario('<%=PRManterTipoFuncionario.NM_SERVLET%>','<%=PRManterTipoFuncionario.EVENTO_PROCESSAR_INCLUSAO%>')"
-						id="consultar"> <input type="submit"></td>
+						id="consultar"></td>
 				</tr>
 			</table>
 

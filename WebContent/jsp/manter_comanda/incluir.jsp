@@ -32,7 +32,7 @@
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Incluir"
 						onclick="submeterFormulario('<%=PRManterComanda.NM_SERVLET%>','<%=PRManterComanda.EVENTO_PROCESSAR_INCLUSAO%>')"
-						id="consultar"> <input type="submit"></td>
+						id="consultar"></td>
 				</tr>
 			</table>
 

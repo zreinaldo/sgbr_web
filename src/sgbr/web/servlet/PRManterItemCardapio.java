@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import sgbr.entidades.ItemCardapio;
 import sgbr.fachada.FachadaSGBR;
+import sgbr.util.Constantes;
 import sgbr.util.OTDItemCardapio;
-import sgbr.util.Util;
 import sgbr.util.web.PRManterCadastro;
 
 /**
@@ -71,7 +71,14 @@ public class PRManterItemCardapio extends PRManterCadastro{
 		ItemCardapio itemCardapio = new ItemCardapio();
 		
 		String nmItemCardapio = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_nmItemCardapio, pRequest);
+		String vlItemCardapio = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_vlItemCardapio, pRequest);
+		String siItemCardapio = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_siItemCardapio, pRequest);
+		
+		vlItemCardapio = vlItemCardapio.replaceAll(",", ".");
+		
 		itemCardapio.setNmItemCardapio(nmItemCardapio);
+		itemCardapio.setSiItemCardapio(siItemCardapio);
+		itemCardapio.setVlItemCardapio(Double.valueOf(vlItemCardapio));
 		
 		this.aFachadaSGBR.incluirItemCardapio(itemCardapio);
 		
@@ -108,15 +115,18 @@ public class PRManterItemCardapio extends PRManterCadastro{
 	 */
 	@Override
 	public void processarAlteracao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
-   
+		ItemCardapio itemCardapio = new ItemCardapio();
 		String cdItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdItemCardapio, pRequest);
 		String nmItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nmItemCardapio, pRequest);
-//		String dtFimVigencia = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dtFimVigencia, pRequest);
-
-         ItemCardapio itemCardapio = new ItemCardapio();
+		String vlItemCardapio = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_vlItemCardapio, pRequest);
+		String siItemCardapio = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_siItemCardapio, pRequest);
+		
+		vlItemCardapio = vlItemCardapio.replaceAll(",", ".");
+		
+		itemCardapio.setNmItemCardapio(nmItemCardapio);
+		itemCardapio.setSiItemCardapio(siItemCardapio);
+		itemCardapio.setVlItemCardapio(Double.valueOf(vlItemCardapio));
          itemCardapio.setCdItemCardapio(Integer.valueOf(cdItemCardapio));    
-         itemCardapio.setNmItemCardapio(nmItemCardapio);    
-//         itemCardapio.setDtFimVigencia(!dtFimVigencia.isEmpty() ? Util.formataData(dtFimVigencia) : null);
 		this.aFachadaSGBR.alterarItemCardapio(itemCardapio);
 //		
 		
@@ -195,8 +205,13 @@ public class PRManterItemCardapio extends PRManterCadastro{
 	public void processarConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 		
 		String cdItemCardapio = this.getParametroStringOpcional(this.ID_REQ_ATR_cdItemCardapio, true, pRequest);
-		 String nmItemCardapio = this.getParametroStringOpcional(this.ID_REQ_ATR_nmItemCardapio, true, pRequest);
-		ArrayList<OTDItemCardapio> otdResposta = this.aFachadaSGBR.consultaTelaManterItemCardapio(cdItemCardapio, nmItemCardapio);
+		String nmItemCardapio = this.getParametroStringOpcional(this.ID_REQ_ATR_nmItemCardapio, true, pRequest);
+		String siItemCardapio = this.getParametroStringOpcional(this.ID_REQ_ATR_siItemCardapio, true, pRequest);
+		
+		if (siItemCardapio.equals(Constantes.CD_TODOS)){
+			siItemCardapio = "";
+		}
+		ArrayList<OTDItemCardapio> otdResposta = this.aFachadaSGBR.consultaTelaManterItemCardapio(cdItemCardapio, nmItemCardapio, siItemCardapio);
 		
 		pRequest.setAttribute(this.ID_REQ_ATR_otdItemCardapio, otdResposta);
 		

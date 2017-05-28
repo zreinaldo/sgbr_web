@@ -25,7 +25,7 @@ public interface IntfDAOItemCardapio {
 	
 	public Collection<ItemCardapio> consultaTodosRegistros( boolean pInRetornarApenasVigentes)  throws SQLException;
 	
-	public ArrayList<OTDItemCardapio> consultaTelaManterItemCardapio(String pCdItemCardapio, String pDsItemCardapio) throws SQLException;
+	public ArrayList<OTDItemCardapio> consultaTelaManterItemCardapio(String pCdItemCardapio, String pDsItemCardapio, String pSiItemCardapio ) throws SQLException;
 	
 	public ItemCardapio consultaPorChavePrimaria(ItemCardapio pItemCardapio) throws SQLException;
 	

@@ -18,8 +18,8 @@
 
 String cdItemCardapio = PRManterItemCardapio.getAtributoOuParametroStringOpcional(PRManterItemCardapio.ID_REQ_ATR_cdItemCardapio, request);
 String nmItemCardapio = PRManterItemCardapio.getAtributoOuParametroStringOpcional(PRManterItemCardapio.ID_REQ_ATR_nmItemCardapio, request);
-String vlItemCardapio = PRManterItemCardapio.getAtributoOuParametroStringOpcional(PRManterItemCardapio.ID_REQ_ATR_vlItemCardapio, request);
 String siItemCardapio = PRManterItemCardapio.getAtributoOuParametroStringOpcional(PRManterItemCardapio.ID_REQ_ATR_siItemCardapio, request);
+
 
 
 ArrayList<OTDItemCardapio> otd =  (ArrayList)PRManterItemCardapio.getAtributoOpcional(PRManterItemCardapio.ID_REQ_ATR_otdItemCardapio,request); 
@@ -60,7 +60,7 @@ if (otd == null) {
 							
 				<tr>
 					<td><label for="siItemCardapio">Situação:</label></td>
-					<td><%= SelectSituacaoItemCardapio.getInstancia().getHTML(request, PRManterItemCardapio.ID_REQ_ATR_siItemCardapio, PRManterItemCardapio.ID_REQ_ATR_siItemCardapio, siItemCardapio,false,false)%></td>
+					<td><%= SelectSituacaoItemCardapio.getInstancia().getHTML(request, PRManterItemCardapio.ID_REQ_ATR_siItemCardapio, PRManterItemCardapio.ID_REQ_ATR_siItemCardapio, siItemCardapio,false,true)%></td>
 				</tr>
 								
 				
@@ -86,7 +86,7 @@ if (otd == null) {
 						<td><%=campos.getCdItemCardapio()%></td>
 						<td><%=campos.getNmItemCardapio()%></td>
 						<td><%=campos.getVlItemCardapio()%></td>
-						<td><%=campos.getSiItemCardapio()%></td>
+						<td><%=Util.getDsSiItemCardapio(campos.getSiItemCardapio())%></td>
 						
 					</tr>
 			<%} %>	

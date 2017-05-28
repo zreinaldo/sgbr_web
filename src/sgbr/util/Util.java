@@ -41,4 +41,25 @@ public class Util {
 
 		return new Date(dt.getTime());
 	}
+	
+	
+	public static String getDsSiItemCardapio(String pSiItemCardapio) {
+		String dsSiItemCardapio;
+
+		switch (pSiItemCardapio) {
+		case Constantes.SI_ITEM_CARDAPIO_DISPONIVEL:
+			dsSiItemCardapio = "DISPONÍVEL";
+			break;
+		case Constantes.SI_ITEM_CARDAPIO_INDISPONIVEL:
+			dsSiItemCardapio = "INDISPONÍVEL";
+			break;
+		case Constantes.SI_ITEM_CARDAPIO_TEMPORARIAMENTE_INDISPONIVEL:
+			dsSiItemCardapio = "TEMPORARIAMENTE INDISPONÍVEL";
+			break;
+
+		default: dsSiItemCardapio = "";
+			break;
+		}
+		return dsSiItemCardapio;
+	}
 }

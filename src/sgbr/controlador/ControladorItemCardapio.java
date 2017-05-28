@@ -62,9 +62,9 @@ public class ControladorItemCardapio {
 	 * @return
 	 * @throws SQLException
 	 */
-	public ArrayList<OTDItemCardapio> consultaTelaManterItemCardapio(String pCdItemCardapio, String pDsItemCardapio) throws SQLException {
+	public ArrayList<OTDItemCardapio> consultaTelaManterItemCardapio(String pCdItemCardapio, String pDsItemCardapio, String pSiItemCardapio) throws SQLException {
 
-		return DAOItemCardapio.getInstancia().consultaTelaManterItemCardapio(pCdItemCardapio,pDsItemCardapio);
+		return DAOItemCardapio.getInstancia().consultaTelaManterItemCardapio(pCdItemCardapio,pDsItemCardapio, pSiItemCardapio);
 	}
 	
 	public void incluir (ItemCardapio pItemCardapio) throws SQLException {		

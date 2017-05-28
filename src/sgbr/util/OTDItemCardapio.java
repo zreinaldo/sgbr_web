@@ -13,6 +13,7 @@ public class OTDItemCardapio {
 	private String nmItemCardapio;
 	private Double vlItemCardapio;
 	private String siItemCardapio;
+	private String dsSiItemCardapio;
 	/**
 	 * @return the cdItemCardapio
 	 */
@@ -60,6 +61,18 @@ public class OTDItemCardapio {
 	 */
 	public void setSiItemCardapio(String pSiItemCardapio) {
 		this.siItemCardapio = pSiItemCardapio;
+	}
+	/**
+	 * @return the dsSiItemCardapio
+	 */
+	public String getDsSiItemCardapio() {
+		return this.dsSiItemCardapio;
+	}
+	/**
+	 * @param pDsSiItemCardapio the dsSiItemCardapio to set
+	 */
+	public void setDsSiItemCardapio(String pDsSiItemCardapio) {
+		this.dsSiItemCardapio = pDsSiItemCardapio;
 	}
 
 }

@@ -19,7 +19,6 @@ DH_ALTERACAO timestamp(6)
  *
  */
 public class ItemCardapio extends EntidadeGenerica {
-
 	public static final String NM_COLUNA_ITEM_CARDAPIO_CD = "ITEM_CARDAPIO_CD";
 	public static final String NM_COLUNA_ITEM_CARDAPIO_NM = "ITEM_CARDAPIO_NM";
 	public static final String NM_COLUNA_ITEM_CARDAPIO_VL = "ITEM_CARDAPIO_VL";
@@ -78,5 +77,7 @@ public class ItemCardapio extends EntidadeGenerica {
 	public void setSiItemCardapio(String pSiItemCardapio) {
 		this.siItemCardapio = pSiItemCardapio;
 	}
+	
+	
 	
 }

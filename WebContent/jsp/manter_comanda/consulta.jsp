@@ -1,9 +1,6 @@
 <%@page import="sgbr.util.OTDComanda"%>
 <%@page import="sgbr.util.Util"%>
-<%@page import="sgbr.util.OTDFuncionario"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="sgbr.web.servlet.selects.SelectTipoDocumento"%>
-<%@page import="sgbr.web.servlet.selects.SelectTipoFuncionario"%>
 <%@page import="sgbr.web.servlet.PRManterComanda"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -14,8 +11,24 @@
 <title>Manter Funcionario</title>
 
 <SCRIPT language="JavaScript" type="text/javascript" src="js/funcoes_comuns.js"></SCRIPT>
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
 
-</head>
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
 <%
 
 String cdComanda = PRManterComanda.getAtributoOuParametroStringOpcional(PRManterComanda.ID_REQ_ATR_cdComanda, request);

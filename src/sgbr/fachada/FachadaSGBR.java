@@ -193,8 +193,8 @@ public class FachadaSGBR {
 	}
 
 
-	public ArrayList<OTDItemCardapio> consultaTelaManterItemCardapio(String pCdItemCardapio, String pNmItemCardapio) throws SQLException {
-		return ControladorItemCardapio.getInstancia().consultaTelaManterItemCardapio(pCdItemCardapio, pNmItemCardapio);
+	public ArrayList<OTDItemCardapio> consultaTelaManterItemCardapio(String pCdItemCardapio, String pNmItemCardapio, String pSiItemCardapio) throws SQLException {
+		return ControladorItemCardapio.getInstancia().consultaTelaManterItemCardapio(pCdItemCardapio, pNmItemCardapio, pSiItemCardapio);
 	}
 	
 	public ItemCardapio consultaItemCardapioPorChavePrimaria(ItemCardapio pItemCardapio) throws SQLException {

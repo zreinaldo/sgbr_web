@@ -61,7 +61,7 @@
 					<td><label for="dtFimValidade">Situação:</label></td>
 					<td><input type="text"
 						id="<%=PRManterItemCardapio.ID_REQ_ATR_siItemCardapio%>"
-						name="<%=PRManterItemCardapio.ID_REQ_ATR_siItemCardapio%>" maxlength="58" value="<%itemCardapio.getSiItemCardapio()%>"> </td>
+						name="<%=PRManterItemCardapio.ID_REQ_ATR_siItemCardapio%>" maxlength="58" value="<%=itemCardapio.getSiItemCardapio()%>"> </td>
 				</tr>
 
 				
