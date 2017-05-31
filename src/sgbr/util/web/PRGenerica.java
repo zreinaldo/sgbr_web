@@ -31,6 +31,7 @@ public abstract class PRGenerica extends ProcessadorRequisicao {
 
 		} catch (Exception e) {
 
+
 			e.printStackTrace();
 
 		}

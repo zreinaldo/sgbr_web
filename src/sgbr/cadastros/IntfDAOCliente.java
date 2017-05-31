@@ -29,9 +29,4 @@ public interface IntfDAOCliente {
 	 */
 	public void excluir(Cliente pCliente) throws SQLException;
 
-	/**
-	 * @param pCliente
-	 * @return
-	 */
-	public Cliente consultarPorChavePrimaria(Cliente pCliente) throws SQLException;
 }

@@ -117,9 +117,7 @@ public class PRManterTipoFuncionario extends PRManterCadastro{
          tipoFuncionario.setDsTpFuncionario(dsTipoFuncionario);    
          tipoFuncionario.setDtFimVigencia(!dtFimVigencia.isEmpty() ? Util.formataData(dtFimVigencia) : null);
 		this.aFachadaSGBR.alterarTipoFuncionario(tipoFuncionario);
-//		
-		
-		
+
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 		
 

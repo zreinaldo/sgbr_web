@@ -6,11 +6,9 @@ package sgbr.regras.cliente;
 import java.sql.SQLException;
 
 import sgbr.cadastros.sql.DAOCliente;
-import sgbr.cadastros.sql.DAOFuncionario;
 import sgbr.cadastros.sql.DAOPessoa;
 import sgbr.cadastros.sql.DAOPessoaDocumento;
 import sgbr.entidades.Cliente;
-import sgbr.entidades.Funcionario;
 import sgbr.entidades.Pessoa;
 import sgbr.entidades.PessoaDocumento;
 import sgbr.util.Constantes;

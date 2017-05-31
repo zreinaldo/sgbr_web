@@ -9,11 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import sgbr.cadastros.IntfDAOCliente;
 import sgbr.entidades.Cliente;
+import sgbr.entidades.Pessoa;
 import sgbr.entidades.PessoaDocumento;
 import sgbr.util.DAO_MYSQL;
+import sgbr.util.OTDCliente;
 
 /**
  * @author Reinaldo
@@ -61,10 +64,9 @@ public class DAOCliente extends DAO_MYSQL implements IntfDAOCliente {
 		String sql = "INSERT into mydb.cliente (PESSOA_CD,DH_INCLUSAO) values (?,?);";
 
 		ppSt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		;
-
-		ppSt.setInt(2, pCliente.getCdPessoa());
-		ppSt.setTimestamp(4, pCliente.getDhIncusaoRegistro());
+		
+		ppSt.setInt(1, pCliente.getCdPessoa());
+		ppSt.setTimestamp(2, pCliente.getDhIncusaoRegistro());
 
 		ppSt.execute();
 
@@ -99,21 +101,141 @@ public class DAOCliente extends DAO_MYSQL implements IntfDAOCliente {
 	 */
 	@Override
 	public void excluir(Cliente pCliente) throws SQLException {
-		// TODO Auto-generated method stub
+
+		String sqlConector = "";
+		Connection conexao = null;
+
+		conexao = this.getConection();
+
+		String sql = "delete from mydb.cliente  WHERE PESSOA_CD = " + pCliente.getCdPessoa() + " and CLIENTE_CD = " + pCliente.getCdCliente();
+
+		Statement stm = conexao.createStatement();
+
+		stm.execute(sql);
+
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * sgbr.cadastros.IntfDAOCliente#consultarPorChavePrimaria(sgbr.entidades.
-	 * Cliente)
-	 */
-	@Override
-	public Cliente consultarPorChavePrimaria(Cliente pCliente) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public ArrayList<OTDCliente> consultaTelaManterCliente(String pNome, String pTpDocumento,
+			String pNuDocumento) throws SQLException {
+
+		String sqlWhere = "";
+		String sqlConector = "";
+		Connection conexao = null;
+		ArrayList<OTDCliente> arrayResposta = new ArrayList<>();
+		OTDCliente otdCliente = null;
+
+		conexao = this.getConection();
+
+		String sql = "SELECT mydb.cliente.pessoa_cd"
+				+ ",mydb.cliente.cliente_cd"
+				+ ", mydb.pessoa.PESSOA_NM"
+				+ ", mydb.pessoa.PESSOA_EE"
+				+ ",mydb.pessoa.PESSOA_DT_NASC"
+				+ " FROM mydb.cliente inner join mydb.pessoa on mydb.pessoa.PESSOA_CD = mydb.cliente.PESSOA_CD "
+				+ " inner join mydb.pessoa_documento on mydb.pessoa_documento.PESSOA_CD = mydb.pessoa.PESSOA_CD";
+
+		if (!pNome.isEmpty()) {
+			sqlWhere = sqlWhere + sqlConector + "MYDB.PESSOA.PESSOA_NM LIKE '%" + pNome.toUpperCase() + "%'";
+			sqlConector = " \n AND ";
+		}
+
+		if (!pTpDocumento.isEmpty()) {
+			sqlWhere = sqlWhere + sqlConector
+					+ " EXISTS (SELECT 1 FROM MYDB.PESSOA_DOCUMENTO WHERE TIPO_DOCUMENTO_CD = " + pTpDocumento
+					+ " AND MYDB.PESSOA_DOCUMENTO.PESSOA_DOCUMENTO_NU = '" + pNuDocumento
+					+ "' AND MYDB.PESSOA.PESSOA_CD = MYDB.PESSOA_DOCUMENTO.PESSOA_CD)";
+			sqlConector = " \n AND ";
+		}
+
+
+		// Constroi SQL completo
+		if (sqlWhere.length() != 0) {
+			sql = sql + " \n WHERE " + sqlWhere;
+		}
+
+		Statement stm = conexao.createStatement();
+
+		ResultSet rs = stm.executeQuery(sql);
+
+		while (rs.next()) {
+			otdCliente = new OTDCliente();
+			otdCliente.setCdPessoa(rs.getInt(Cliente.NM_COLUNA_PESSOA_CD));
+			otdCliente.setCdCliente(rs.getInt(Cliente.NM_COLUNA_CLIENTE_CD));
+			otdCliente.setNmCliente(rs.getString(Pessoa.NM_COLUNA_PESSOA_NM).toUpperCase());
+			otdCliente.setDtNascimento(rs.getDate(Pessoa.NM_COLUNA_PESSOA_DT_NASC));
+			otdCliente.setEmail(rs.getString(Pessoa.NM_COLUNA_PESSOA_EE));
+			
+			
+			arrayResposta.add(otdCliente);
+		}
+
+		rs.close();
+		stm.close();
+		conexao.close();
+		return arrayResposta;
+	}
+	
+	
+	
+	
+	public OTDCliente consultarDadosCliente(Integer pCdCliente, Integer pCdPessoa) throws SQLException {
+
+		String sqlWhere = "";
+		String sqlConector = "";
+		Connection conexao = null;
+		OTDCliente otdCliente = null;
+
+		conexao = this.getConection();
+		String sql  ="SELECT " +
+		"mydb.cliente.PESSOA_CD, " +
+		"mydb.cliente.CLIENTE_CD, " +
+		"mydb.pessoa.PESSOA_NM, " +
+		"mydb.pessoa.PESSOA_EE, " +
+		"mydb.pessoa.PESSOA_DT_NASC, " +
+		"mydb.pessoa_documento.PESSOA_DOCUMENTO_NU, " +
+		"mydb.cliente.DH_INCLUSAO " +
+		"FROM mydb.cliente " +
+		"inner join mydb.pessoa on mydb.pessoa.PESSOA_CD = mydb.cliente.PESSOA_CD " +
+		"inner join mydb.pessoa_documento on mydb.pessoa_documento.PESSOA_CD = mydb.pessoa.PESSOA_CD ";
+		
+		if (pCdCliente != null) {
+			sqlWhere = sqlWhere + sqlConector + " mydb.cliente.CLIENTE_CD  = " + pCdCliente;
+			sqlConector = " \n AND ";
+		}
+
+		if (pCdPessoa != null) {
+			sqlWhere = sqlWhere + sqlConector + "MYDB.cliente.PESSOA_CD = " + pCdPessoa;
+
+			sqlConector = " \n AND ";
+		}
+
+		// Constroi SQL completo
+		if (sqlWhere.length() != 0) {
+			sql = sql + " \n WHERE " + sqlWhere;
+		}
+
+		Statement stm = conexao.createStatement();
+
+		ResultSet rs = stm.executeQuery(sql);
+
+		while (rs.next()) {
+			otdCliente = new OTDCliente();
+			otdCliente.setCdPessoa(rs.getInt(Cliente.NM_COLUNA_PESSOA_CD));
+			otdCliente.setCdCliente(rs.getInt(Cliente.NM_COLUNA_CLIENTE_CD));
+			otdCliente.setNmCliente(rs.getString(Pessoa.NM_COLUNA_PESSOA_NM).toUpperCase());
+			otdCliente.setDtNascimento(rs.getDate(Pessoa.NM_COLUNA_PESSOA_DT_NASC));
+			otdCliente.setEmail(rs.getString(Pessoa.NM_COLUNA_PESSOA_EE));
+			otdCliente.setNuCPF(rs.getString(PessoaDocumento.NM_COLUNA_PESSOA_DOCUMENTO_NU));			
+
+		}
+
+		rs.close();
+		stm.close();
+		conexao.close();
+		return otdCliente;
+
 	}
 
 }

@@ -110,7 +110,7 @@ public class PRManterFuncionario extends PRManterCadastro {
 				pRequest);
 		String nuCEP = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCEP, pRequest);
 		
-		String dtNascimemnto = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_dtNascimento,
+		String dtNascimento = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_dtNascimento,
 				pRequest);
 		String email = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_email, pRequest);
 
@@ -133,7 +133,7 @@ public class PRManterFuncionario extends PRManterCadastro {
 		otdFuncionario.setNmLogradouro(nmLogradouro);
 		otdFuncionario.setNuLogradouro(nuLogradouro);
 		otdFuncionario.setNuCEP(nuCEP);
-		otdFuncionario.setDtNascimento(!dtNascimemnto.isEmpty() ? Util.formataData(dtNascimemnto) : null);
+		otdFuncionario.setDtNascimento(!dtNascimento.isEmpty() ? Util.formataData(dtNascimento) : null);
 		otdFuncionario.setEmail(email);
 
 		this.aFachadaSGBR.incluirFuncionario(otdFuncionario);
@@ -199,7 +199,7 @@ public class PRManterFuncionario extends PRManterCadastro {
 				pRequest);
 		String nuCEP = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCEP, pRequest);
 		
-		String dtNascimemnto = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_dtNascimento,
+		String dtNascimento = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_dtNascimento,
 				pRequest);
 		String email = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_email, pRequest);
 
@@ -231,7 +231,7 @@ public class PRManterFuncionario extends PRManterCadastro {
 		otdFuncionario.setNmLogradouro(nmLogradouro);
 		otdFuncionario.setNuLogradouro(nuLogradouro);
 		otdFuncionario.setNuCEP(nuCEP);
-		otdFuncionario.setDtNascimento(!dtNascimemnto.isEmpty() ? Util.formataData(dtNascimemnto) : null);
+		otdFuncionario.setDtNascimento(!dtNascimento.isEmpty() ? Util.formataData(dtNascimento) : null);
 		otdFuncionario.setDtDemissao(!dtDemissao.isEmpty() ? Util.formataData(dtDemissao) : null);
 		otdFuncionario.setEmail(email);
 

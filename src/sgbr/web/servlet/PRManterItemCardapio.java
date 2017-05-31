@@ -118,8 +118,8 @@ public class PRManterItemCardapio extends PRManterCadastro{
 		ItemCardapio itemCardapio = new ItemCardapio();
 		String cdItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdItemCardapio, pRequest);
 		String nmItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nmItemCardapio, pRequest);
-		String vlItemCardapio = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_vlItemCardapio, pRequest);
-		String siItemCardapio = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_siItemCardapio, pRequest);
+		String vlItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_vlItemCardapio, pRequest);
+		String siItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_siItemCardapio, pRequest);
 		
 		vlItemCardapio = vlItemCardapio.replaceAll(",", ".");
 		
@@ -128,8 +128,6 @@ public class PRManterItemCardapio extends PRManterCadastro{
 		itemCardapio.setVlItemCardapio(Double.valueOf(vlItemCardapio));
          itemCardapio.setCdItemCardapio(Integer.valueOf(cdItemCardapio));    
 		this.aFachadaSGBR.alterarItemCardapio(itemCardapio);
-//		
-		
 		
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 		

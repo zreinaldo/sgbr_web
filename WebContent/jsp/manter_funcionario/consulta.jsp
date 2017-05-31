@@ -40,7 +40,7 @@ if (otd == null) {
 <body>
 
 	<FORM name="form_principal" method="post" action="">
-
+<%@ include file = "../../jsp/util/menu.jsp" %>
 		<INPUT type="hidden" id="evento" name="<%=PRManterFuncionario.ID_REQ_EVENTO%>" value="">
 
 

@@ -29,7 +29,7 @@ public abstract class PRConsultar extends PRGenerica {
 		throws Exception;
 
 	/**
-	 * -
+	 * - usada quando a quantidade de registros nao couber na tela
 	 *
 	 * @param request
 	 * @param response

@@ -17,6 +17,8 @@ public class OTDCliente {
 	private Date dtNascimento;
 	private String email;
 	private String nuCPF;
+	private String nuTelefone;
+	private String dddTelefone;
 
 	/**
 	 * @return the cdCliente
@@ -106,6 +108,34 @@ public class OTDCliente {
 	 */
 	public void setNuCPF(String pNuCPF) {
 		this.nuCPF = pNuCPF;
+	}
+
+	/**
+	 * @return the nuTelefone
+	 */
+	public String getNuTelefone() {
+		return this.nuTelefone;
+	}
+
+	/**
+	 * @param pNuTelefone the nuTelefone to set
+	 */
+	public void setNuTelefone(String pNuTelefone) {
+		this.nuTelefone = pNuTelefone;
+	}
+
+	/**
+	 * @return the dddTelefone
+	 */
+	public String getDddTelefone() {
+		return this.dddTelefone;
+	}
+
+	/**
+	 * @param pDddTelefone the dddTelefone to set
+	 */
+	public void setDddTelefone(String pDddTelefone) {
+		this.dddTelefone = pDddTelefone;
 	}
 
 }

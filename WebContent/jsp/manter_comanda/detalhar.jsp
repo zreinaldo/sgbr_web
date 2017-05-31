@@ -38,9 +38,9 @@
 	%>
 
 <body>
-<%@ include file = "../../jsp/util/menu.jsp" %>
 
 	<FORM name="form_principal" method="post" action="">
+<%@ include file = "../../jsp/util/menu.jsp" %>
 
 		<INPUT type="hidden" id="evento" name="<%=PRManterComanda.ID_REQ_EVENTO%>" value="">
 			<INPUT type="hidden" id="cdComanda" name="<%=PRManterComanda.ID_REQ_ATR_cdComanda%>" value="<%=comanda.getCdComanda()%> ">

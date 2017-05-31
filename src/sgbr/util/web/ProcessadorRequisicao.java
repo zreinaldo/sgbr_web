@@ -209,6 +209,7 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 	}
 
 	/**
+	 * usado pbasicmante para passar OTDs
 	 * retorna um atributo opcional
 	 * @param pNmAtributo
 	 * @param pRetornarVazioSeAtributoNaoEncontrado
