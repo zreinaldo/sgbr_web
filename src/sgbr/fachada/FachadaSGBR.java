@@ -11,16 +11,19 @@ import sgbr.controlador.ControladorCliente;
 import sgbr.controlador.ControladorComanda;
 import sgbr.controlador.ControladorFuncionario;
 import sgbr.controlador.ControladorItemCardapio;
+import sgbr.controlador.ControladorPromocao;
 import sgbr.controlador.ControladorTipoDocumento;
 import sgbr.controlador.ControladorTipoFuncionario;
 import sgbr.entidades.Comanda;
 import sgbr.entidades.ItemCardapio;
+import sgbr.entidades.Promocao;
 import sgbr.entidades.TipoDocumento;
 import sgbr.entidades.TipoFuncionario;
 import sgbr.util.OTDCliente;
 import sgbr.util.OTDComanda;
 import sgbr.util.OTDFuncionario;
 import sgbr.util.OTDItemCardapio;
+import sgbr.util.OTDPromocao;
 import sgbr.util.OTDTipoFuncionario;
 
 /**
@@ -230,4 +233,33 @@ public class FachadaSGBR {
 	public void excluirCliente(OTDCliente pOtdCliente) {
 		ControladorCliente.getInstancia().excluir(pOtdCliente);
 	}
+	
+	public void incluirPromocao(Promocao pPromocao) throws SQLException {
+		ControladorPromocao.getInstancia().incluir(pPromocao);
+	}
+
+	public void alterarPromocao(Promocao pPromocao) throws SQLException {
+		ControladorPromocao.getInstancia().alterar(pPromocao);
+	}
+
+	public void excluirPromocao(Promocao pPromocao) throws SQLException {
+		ControladorPromocao.getInstancia().excluir(pPromocao);
+	}
+	public ArrayList<OTDPromocao> consultaTelaManterPromocao(String pCdItemCardapio,
+			String pInRetornarApenasVigentes,  String pDiaSemanaPromocao) throws SQLException {
+		return ControladorPromocao.getInstancia().consultaTelaManterPromocao(pCdItemCardapio, pInRetornarApenasVigentes, pDiaSemanaPromocao);
+	}
+
+	public Promocao consultaPromocaoPorChavePrimaria(Promocao pPromocao) throws SQLException {
+		return ControladorPromocao.getInstancia().consultaPorChavePrimaria(pPromocao);
+	}
+
+	
+	public Collection<Promocao> consultaTodosRegistrosPromocao(String pInRetornarApenasVigentes)
+			throws SQLException {
+		return ControladorPromocao.getInstancia().consultaTodosRegistrosPromocao(pInRetornarApenasVigentes);
+	}
+	
+	
+	
 }

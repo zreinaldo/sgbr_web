@@ -16,11 +16,11 @@
 	indicadorExclusao = (Boolean) PRManterItemCardapio.getAtributoOpcional(PRManterItemCardapio.ID_REQ_indicadorExclusao, request);
 	if (indicadorExclusao) {
 %>
-<title>Excluir Item Cardápio</title>
+<title>Excluir Promoção</title>
 <%
 	} else {
 %>
-<title>Detalhar Item Cardápio</title>
+<title>Detalhar Promoção</title>
 <%
 	}
 %>

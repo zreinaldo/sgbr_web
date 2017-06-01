@@ -14,6 +14,7 @@ import java.util.Collection;
 
 import sgbr.cadastros.IntfDAOItemCardapio;
 import sgbr.entidades.ItemCardapio;
+import sgbr.util.Constantes;
 import sgbr.util.DAO_MYSQL;
 import sgbr.util.OTDItemCardapio;
 import sgbr.util.Util;
@@ -158,7 +159,7 @@ public class DAOItemCardapio extends DAO_MYSQL implements IntfDAOItemCardapio {
 		String sql = "SELECT * FROM mydb.ITEM_CARDAPIO ";
 		
 		if (pInRetornarApenasVigentes){
-			sql = sql + " where mydb.ITEM_CARDAPIO.dt_fim_vigencia is null";
+			sql = sql + " where mydb.ITEM_CARDAPIO.ITEM_CARDAPIO_SI = '" + Constantes.SI_ITEM_CARDAPIO_DISPONIVEL + "'";
 		}
 
 		Statement stm = conexao.createStatement();
