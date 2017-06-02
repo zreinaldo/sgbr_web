@@ -243,7 +243,6 @@ public class DAOTipoFuncionario extends DAO_MYSQL implements IntfDAOTipoFunciona
 		String sqlWhere = "";
 		String sqlConector = "";
 		Connection conexao = null;
-		ArrayList<OTDTipoFuncionario> arrayResposta = new ArrayList<>();
 		TipoFuncionario tipoFuncionario = null;
 
 		conexao = this.getConection();

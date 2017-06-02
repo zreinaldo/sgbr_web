@@ -1,9 +1,7 @@
 <%@page import="sgbr.util.OTDCliente"%>
 <%@page import="sgbr.util.Util"%>
-<%@page import="sgbr.util.OTDFuncionario"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="sgbr.web.servlet.selects.SelectTipoDocumento"%>
-<%@page import="sgbr.web.servlet.selects.SelectTipoFuncionario"%>
 <%@page import="sgbr.web.servlet.PRManterCliente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>

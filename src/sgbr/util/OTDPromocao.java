@@ -17,8 +17,10 @@ public class OTDPromocao {
 	private Date dtInicioPromocao;
 	private Date dtFimPromocao;
 	private String nmItemCardapio;
-	private String cdDiaSemanaPromocao;
-	private String dsDiaSemanaPromocao;
+	private String[] listaDiasSemanaPromocao;
+	private Integer cdDiaSemanaPromocao;
+	
+	
 	/**
 	 * @return the cdPromocao
 	 */
@@ -91,30 +93,30 @@ public class OTDPromocao {
 	public void setNmItemCardapio(String pNmItemCardapio) {
 		this.nmItemCardapio = pNmItemCardapio;
 	}
+
 	/**
-	 * @return the diaSemanaPromocao
+	 * @return the listaDiasSemanaPromocao
 	 */
-	public String getCdDiaSemanaPromocao() {
+	public String[] getListaDiasSemanaPromocao() {
+		return this.listaDiasSemanaPromocao;
+	}
+	/**
+	 * @param pListaDiasSemanaPromocao the listaDiasSemanaPromocao to set
+	 */
+	public void setListaDiasSemanaPromocao(String[] pListaDiasSemanaPromocao) {
+		this.listaDiasSemanaPromocao = pListaDiasSemanaPromocao;
+	}
+	/**
+	 * @return the cdDiaSemanaPromocao
+	 */
+	public Integer getCdDiaSemanaPromocao() {
 		return this.cdDiaSemanaPromocao;
 	}
 	/**
 	 * @param pCdDiaSemanaPromocao the cdDiaSemanaPromocao to set
 	 */
-	public void setCdDiaSemanaPromocao(String pCdDiaSemanaPromocao) {
+	public void setCdDiaSemanaPromocao(Integer pCdDiaSemanaPromocao) {
 		this.cdDiaSemanaPromocao = pCdDiaSemanaPromocao;
 	}
-	/**
-	 * @return the dsDiaSemanaPromocao
-	 */
-	public String getDsDiaSemanaPromocao() {
-		return this.dsDiaSemanaPromocao;
-	}
-	/**
-	 * @param pDsDiaSemanaPromocao the dsDiaSemanaPromocao to set
-	 */
-	public void setDsDiaSemanaPromocao(String pDsDiaSemanaPromocao) {
-		this.dsDiaSemanaPromocao = pDsDiaSemanaPromocao;
-	}
-	
 
 }

@@ -15,6 +15,7 @@ import java.util.Collection;
 import sgbr.cadastros.IntfDAOPromocao;
 import sgbr.entidades.ItemCardapio;
 import sgbr.entidades.Promocao;
+import sgbr.entidades.PromocaoDiaSemana;
 import sgbr.util.Constantes;
 import sgbr.util.DAO_MYSQL;
 import sgbr.util.OTDPromocao;
@@ -264,7 +265,7 @@ public class DAOPromocao extends DAO_MYSQL implements IntfDAOPromocao {
 			otdPromocao.setDtInicioPromocao(rs.getDate(Promocao.NM_COLUNA_PROMOCAO_DT_INICIO));
 			otdPromocao.setDtFimPromocao(rs.getDate(Promocao.NM_COLUNA_PROMOCAO_DT_FIM));
 			otdPromocao.setNmItemCardapio(rs.getString(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM));
-			//TODO otdPromocao.setCdDiaSemanaPromocao(rs.getString(Promocao.NM_COLUNA_PROMOCAO_DIA_SEMANA_CD));
+			otdPromocao.setCdDiaSemanaPromocao(rs.getInt(PromocaoDiaSemana.NM_COLUNA_PROMOCAO_DIA_CD) );
 			
 			
 
@@ -286,7 +287,6 @@ public class DAOPromocao extends DAO_MYSQL implements IntfDAOPromocao {
 		String sqlWhere = "";
 		String sqlConector = "";
 		Connection conexao = null;
-		ArrayList<OTDPromocao> arrayResposta = new ArrayList<>();
 		Promocao promocao = null;
 
 		conexao = this.getConection();

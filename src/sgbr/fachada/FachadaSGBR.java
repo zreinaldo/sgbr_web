@@ -234,8 +234,8 @@ public class FachadaSGBR {
 		ControladorCliente.getInstancia().excluir(pOtdCliente);
 	}
 	
-	public void incluirPromocao(Promocao pPromocao) throws SQLException {
-		ControladorPromocao.getInstancia().incluir(pPromocao);
+	public void incluirPromocao(OTDPromocao pOtdPromocao) throws SQLException {
+		ControladorPromocao.getInstancia().incluir(pOtdPromocao);
 	}
 
 	public void alterarPromocao(Promocao pPromocao) throws SQLException {

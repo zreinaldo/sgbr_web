@@ -16,7 +16,7 @@ import sgbr.util.Constantes;
 public abstract class SelectGenerico {
 
 	/**
-	 * deverar se utilizado nas jsps e ira retornar um html de um campo select
+	 * deverar se utilizado nas jsps e irá retornar um html de um campo select
 	 * 
 	 * @param pRequest
 	 * @param pNmSelect

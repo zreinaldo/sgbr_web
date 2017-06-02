@@ -60,9 +60,8 @@ public class SelectSimNao extends SelectGenerico {
 	protected String getColecaoComoHTMLSelect(Collection<?> pColecao, String pNmSelect, String pIdSelect,
 			String pCampoSelecionado,boolean pObrigatorio, boolean pComTodos) throws Exception {
 
-		Iterator it;
+		
 		StringBuffer bufferHtml = new StringBuffer(200);
-		HashMap<String,String> hash = null;
 
 		this.criarSelect(pNmSelect, pIdSelect, bufferHtml, pObrigatorio, pComTodos);
 		

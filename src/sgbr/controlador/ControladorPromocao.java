@@ -9,6 +9,7 @@ import java.util.Collection;
 
 import sgbr.cadastros.sql.DAOPromocao;
 import sgbr.entidades.Promocao;
+import sgbr.regras.promocao.RNIncluirPromocao;
 import sgbr.util.OTDPromocao;
 
 /**
@@ -68,8 +69,8 @@ public class ControladorPromocao {
 		return DAOPromocao.getInstancia().consultaTelaManterPromocao( pCdItemCardapio, pInRetornarApenasVigentes, pDiaSemanaPromocao);
 	}
 	
-	public void incluir (Promocao pPromocao) throws SQLException {		
-		 DAOPromocao.getInstancia().incluir(pPromocao);
+	public void incluir (OTDPromocao pOtdPromocao) throws SQLException {		
+		RNIncluirPromocao.getInstancia().processar(pOtdPromocao);
 	}
 	
 	public void alterar (Promocao pPromocao) throws SQLException {		

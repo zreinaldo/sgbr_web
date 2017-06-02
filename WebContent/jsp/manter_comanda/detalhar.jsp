@@ -1,10 +1,6 @@
 <%@page import="sgbr.web.servlet.PRManterComanda"%>
 <%@page import="sgbr.entidades.Comanda"%>
 <%@page import="sgbr.util.Util"%>
-<%@page import="sgbr.util.OTDFuncionario"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="sgbr.web.servlet.selects.SelectTipoFuncionario"%>
-<%@page import="sgbr.web.servlet.PRManterComanda"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

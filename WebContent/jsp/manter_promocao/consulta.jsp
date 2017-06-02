@@ -1,3 +1,4 @@
+<%@page import="sgbr.web.servlet.selects.SelectDiaSemana"%>
 <%@page import="sgbr.web.servlet.selects.SelectSimNao"%>
 <%@page import="sgbr.web.servlet.selects.SelectItemCardapio"%>
 <%@page import="sgbr.util.OTDPromocao"%>
@@ -17,13 +18,10 @@
 </head>
 <%
 
-String cdPromocao = PRManterPromocao.getAtributoOuParametroStringOpcional(PRManterPromocao.ID_REQ_ATR_cdPromocao, request);
+
 String cdItemCardapio = PRManterPromocao.getAtributoOuParametroStringOpcional(PRManterPromocao.ID_REQ_ATR_cdItemCardapio, request);
-String dtInicioPromocao = PRManterPromocao.getAtributoOuParametroStringOpcional(PRManterPromocao.ID_REQ_ATR_dtInicioPromocao, request);
-String dtFimPromocao = PRManterPromocao.getAtributoOuParametroStringOpcional(PRManterPromocao.ID_REQ_ATR_dtFimPromocao, request);
-
-
-
+String inRetornarApenasVigentes = PRManterPromocao.getAtributoOuParametroStringOpcional(PRManterPromocao.ID_REQ_ATR_inRetornarApenasVigentes, request);
+String diaSemanaPromocao = PRManterPromocao.getAtributoOuParametroStringOpcional(PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao, request);
 ArrayList<OTDPromocao> otd =  (ArrayList)PRManterPromocao.getAtributoOpcional(PRManterPromocao.ID_REQ_ATR_otdPromocao,request); 
 
 if (otd == null) {
@@ -38,9 +36,9 @@ if (otd == null) {
 
 <body>
 
-<%@ include file = "../../jsp/util/menu.jsp" %>
-
 	<FORM name="form_principal" method="post" action="">
+
+<%@ include file = "../../jsp/util/menu.jsp" %>
 
 		<INPUT type="hidden" id="evento" name="<%=PRManterPromocao.ID_REQ_EVENTO%>" value="">
 
@@ -50,18 +48,18 @@ if (otd == null) {
 							
 				<tr>
 					<td><label for="<%=PRManterPromocao.ID_REQ_ATR_cdItemCardapio%>">Item do Cardápio:</label></td>
-					<td><%= SelectItemCardapio.getInstancia().getHTML(request, PRManterPromocao.ID_REQ_ATR_cdItemCardapio, PRManterPromocao.ID_REQ_ATR_cdItemCardapio, "",false,true)%></td>
+					<td><%= SelectItemCardapio.getInstancia().getHTML(request, PRManterPromocao.ID_REQ_ATR_cdItemCardapio, PRManterPromocao.ID_REQ_ATR_cdItemCardapio,cdItemCardapio,false,true)%></td>
 				</tr>		
 				
 				<tr>
 					<td><label for="<%=PRManterPromocao.ID_REQ_ATR_inRetornarApenasVigentes%>">Promoção Ativa:</label></td>
-					<td><%= SelectSimNao.getInstancia().getHTML(request, PRManterPromocao.ID_REQ_ATR_inRetornarApenasVigentes, PRManterPromocao.ID_REQ_ATR_inRetornarApenasVigentes, "",false,true)%></td>
+					<td><%= SelectSimNao.getInstancia().getHTML(request, PRManterPromocao.ID_REQ_ATR_inRetornarApenasVigentes, PRManterPromocao.ID_REQ_ATR_inRetornarApenasVigentes, inRetornarApenasVigentes,false,true)%></td>
 				</tr>
 				
 							
 				<tr>
 					<td><label for="diaPromocao">Informar dia da semana para promoção:</label> </td>
-					<td>***********************************************************</td>
+						<td><%= SelectDiaSemana.getInstancia().getHTML(request, PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao, PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao,diaSemanaPromocao,false,true)%></td>
 				</tr>
 								
 				
@@ -80,19 +78,35 @@ if (otd == null) {
 														
 				
 					</tr>
-		 <% for (OTDPromocao campos : otd) {		 
-		
-			 %>		 
-					<tr>
-					<td><INPUT type="radio" id="radio_consulta_promocao" name="<%=PRManterPromocao.ID_REQ_ATR_radio_consulta_promocao%>" value="<%=campos.getCdPromocao()%>"></td>
+		 <% Integer cdPromocaoAtual = null;
+		   Integer cdItemCardapioAtual = null;
+		   String dsDiasDePromocao = "";
+		 
+		 for (OTDPromocao campos : otd) {		 
+			 
+			if (!campos.getCdPromocao().equals(cdPromocaoAtual) && !campos.getCdItemCardapio().equals(cdItemCardapioAtual) && !dsDiasDePromocao.isEmpty()){
 					
-						<td><%=campos.getNmItemCardapio()%></td>
-						<td><%=campos.getVlPromocao()%></td>
-						<td><%=campos.getDtInicioPromocao() != null ? Util.formataDataParaString(campos.getDtInicioPromocao()) : "" %></td>
-						<td><%=campos.getDtFimPromocao() != null ? Util.formataDataParaString(campos.getDtFimPromocao()) : "" %></td>
-						<td></td>
-					</tr>
-			<%} %>	
+			%>
+			<td colspan="3"><%=dsDiasDePromocao%></td ></tr>	
+			<% dsDiasDePromocao = ""; 
+			} else {
+					 dsDiasDePromocao = dsDiasDePromocao + ", <br>" + Util.getDsDiaSemana(campos.getCdDiaSemanaPromocao());
+			 }			 
+			 
+			 if (!campos.getCdPromocao().equals(cdPromocaoAtual) && !campos.getCdItemCardapio().equals(cdItemCardapioAtual)){  
+						cdPromocaoAtual = campos.getCdPromocao();
+						cdItemCardapioAtual = campos.getCdItemCardapio();	%>
+					<tr>
+					   <td colspan="1"><INPUT type="radio" id="radio_consulta_promocao" name="<%=PRManterPromocao.ID_REQ_ATR_radio_consulta_promocao%>" value="<%=campos.getCdPromocao()%>"></td>
+						<td colspan="1"><%=campos.getNmItemCardapio()%></td>
+						<td colspan="1"><%=campos.getVlPromocao()%></td>
+						<td colspan="1"><%=campos.getDtInicioPromocao() != null ? Util.formataDataParaString(campos.getDtInicioPromocao()) : "" %></td>
+						<td  colspan="1"><%=campos.getDtFimPromocao() != null ? Util.formataDataParaString(campos.getDtFimPromocao()) : "" %></td>
+					   
+						
+			<% dsDiasDePromocao = Util.getDsDiaSemana(campos.getCdDiaSemanaPromocao());	}
+		}%>	
+		 <td colspan="3"><%=dsDiasDePromocao%></td ></tr>	
 				</table>
 				
 				<table>

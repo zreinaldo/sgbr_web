@@ -73,8 +73,6 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 	public static final String EVENTO_EXIBIR_DETALHAMENTO_CONSULTA = "exibirDetalhamentoConsulta";
 	
 	
-	public static final String NM_JSP_SUCESSO = "/jsp/util/sucesso.jsp";
-	
 	/**
 	 * implementao doget
 	 */
@@ -112,20 +110,6 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 
 		this.getServletContext().getRequestDispatcher(pNmRecurso).forward(pRequest, pResponse);
 
-	}
-
-	/**
-	 * pega o caminho do contexto
-	 * 
-	 * @param pRequest
-	 * @return
-	 */
-	public static String getNmContextoWeb(HttpServletRequest pRequest) {
-		String nmContextoWeb = pRequest.getContextPath();
-
-		nmContextoWeb = nmContextoWeb.substring(1);
-
-		return nmContextoWeb;
 	}
 
 	/**
@@ -209,7 +193,7 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 	}
 
 	/**
-	 * usado pbasicmante para passar OTDs
+	 * usado pbasicmante para passar OTDs e entidades
 	 * retorna um atributo opcional
 	 * @param pNmAtributo
 	 * @param pRetornarVazioSeAtributoNaoEncontrado
@@ -221,6 +205,21 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 
 		return pRequest.getAttribute(pNmAtributo);
 	}
+	
+	
+	/**
+	 * retorna uma colecao de parametros do form
+	 * 
+	 * @param pNmAtributo
+	 * @param pRequest
+	 * @return
+	 * @throws Exception
+	 */
+	public static Object[] getParametros(String pNmAtributo,	HttpServletRequest pRequest) throws Exception {
+
+		return pRequest.getParameterValues(pNmAtributo);
+	}
+
 
 	
 	/**

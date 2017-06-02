@@ -29,7 +29,8 @@ public class PRManterPromocao extends PRManterCadastro{
 	public static final String ID_REQ_ATR_vlPromocao = "vlPromocao";
 	public static final String ID_REQ_ATR_dtInicioPromocao = "dtInicioPromocao";
 	public static final String ID_REQ_ATR_dtFimPromocao = "dtFimPromocao";
-	public static final String ID_REQ_ATR_diaSemanaPromocao = "diaSemanaPromocao";
+	public static final String ID_REQ_ATR_diasSemanaPromocao = "diaSemanaPromocao";
+	
 	public static final String ID_REQ_ATR_inRetornarApenasVigentes = "inRetornarApenasVigentes";
 	
 	public static final String ID_REQ_ATR_Promocao = "Promocao";
@@ -66,25 +67,24 @@ public class PRManterPromocao extends PRManterCadastro{
 	 * 
 	 * @see sgbr.util.web.PRManterCadastro#processarInclusao(javax.servlet.http.
 	 * HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 */
-	@SuppressWarnings("static-access")
+	 */	
 	@Override
 	public void processarInclusao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
-		Promocao promocao = new Promocao();
+				
+		String cdItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdItemCardapio, pRequest);
+		String vlPromocao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_vlPromocao, pRequest);
+		String dtInicioPromocao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dtInicioPromocao, pRequest);
+		String dtFimPromocao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dtFimPromocao, pRequest);				
+		String[] arrayDiasDaSemana = (String[]) this.getParametros(this.ID_REQ_ATR_diasSemanaPromocao, pRequest);		
 		
-		String cdItemCardapio = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_cdItemCardapio, pRequest);
-		String vlPromocao = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_vlPromocao, pRequest);
-		String dtInicioPromocao = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_dtInicioPromocao, pRequest);
-		String dtFimPromocao = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_dtFimPromocao, pRequest);
-		
+		OTDPromocao otdPromocao = new OTDPromocao();		
 		vlPromocao = vlPromocao.replaceAll(",", ".");
-		
-		promocao.setCdItemCardapio(!cdItemCardapio.isEmpty() ? Integer.parseInt(cdItemCardapio) : null );
-		promocao.setVlPromocao(!vlPromocao.isEmpty() ? Double.valueOf(vlPromocao) : null );
-		promocao.setDtInicioPromocao(!dtInicioPromocao.isEmpty() ? Util.formataData(dtInicioPromocao) : null);
-		promocao.setDtInicioPromocao(!dtFimPromocao.isEmpty() ? Util.formataData(dtFimPromocao) : null);
-		
-		this.aFachadaSGBR.incluirPromocao(promocao);
+		otdPromocao.setCdItemCardapio(!cdItemCardapio.isEmpty() ? Integer.parseInt(cdItemCardapio) : null );
+		otdPromocao.setVlPromocao(!vlPromocao.isEmpty() ? Double.valueOf(vlPromocao) : null );
+		otdPromocao.setDtInicioPromocao(!dtInicioPromocao.isEmpty() ? Util.formataData(dtInicioPromocao) : null);
+		otdPromocao.setDtFimPromocao(!dtFimPromocao.isEmpty() ? Util.formataData(dtFimPromocao) : null);
+		otdPromocao.setListaDiasSemanaPromocao(arrayDiasDaSemana);
+		this.aFachadaSGBR.incluirPromocao(otdPromocao);
 		
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
@@ -119,20 +119,20 @@ public class PRManterPromocao extends PRManterCadastro{
 	 */
 	@Override
 	public void processarAlteracao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
-		Promocao promocao = new Promocao();
+		
 		String cdPromocao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdPromocao, pRequest);
-		String cdItemCardapio = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_cdItemCardapio, pRequest);
-		String vlPromocao = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_vlPromocao, pRequest);
-		String dtInicioPromocao = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_dtInicioPromocao, pRequest);
-		String dtFimPromocao = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_dtFimPromocao, pRequest);
+		String cdItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdItemCardapio, pRequest);
+		String vlPromocao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_vlPromocao, pRequest);
+		String dtInicioPromocao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dtInicioPromocao, pRequest);
+		String dtFimPromocao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dtFimPromocao, pRequest);
 		
 		vlPromocao = vlPromocao.replaceAll(",", ".");
-		
+		Promocao promocao = new Promocao();
 		promocao.setCdPromocao(Integer.parseInt(cdPromocao) );
 		promocao.setCdItemCardapio(!cdItemCardapio.isEmpty() ? Integer.parseInt(cdItemCardapio) : null );
 		promocao.setVlPromocao(!vlPromocao.isEmpty() ? Double.valueOf(vlPromocao) : null );
 		promocao.setDtInicioPromocao(!dtInicioPromocao.isEmpty() ? Util.formataData(dtInicioPromocao) : null);
-		promocao.setDtInicioPromocao(!dtFimPromocao.isEmpty() ? Util.formataData(dtFimPromocao) : null);
+		promocao.setDtFimPromocao(!dtFimPromocao.isEmpty() ? Util.formataData(dtFimPromocao) : null);
 		this.aFachadaSGBR.alterarPromocao(promocao);
 		
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
@@ -208,9 +208,9 @@ public class PRManterPromocao extends PRManterCadastro{
 	@Override
 	public void processarConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 		
-		String cdItemCardapio = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_cdItemCardapio, pRequest);
-		String inRetornarApenasVigentes = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_inRetornarApenasVigentes, pRequest);
-		String diaSemanaPromocao = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_diaSemanaPromocao, pRequest);
+		String cdItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdItemCardapio, pRequest);
+		String inRetornarApenasVigentes = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_inRetornarApenasVigentes, pRequest);
+		String diaSemanaPromocao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_diasSemanaPromocao, pRequest);
 		
 		if (cdItemCardapio.equals(Constantes.CD_TODOS)){
 			cdItemCardapio = "";
@@ -220,12 +220,22 @@ public class PRManterPromocao extends PRManterCadastro{
 			inRetornarApenasVigentes = "";
 		}
 		
+		if (diaSemanaPromocao.equals(Constantes.CD_TODOS)){
+			diaSemanaPromocao = "";
+		}
+		
+		
 		
 		ArrayList<OTDPromocao> otdResposta = this.aFachadaSGBR.consultaTelaManterPromocao(cdItemCardapio,inRetornarApenasVigentes,diaSemanaPromocao);
 		
-		pRequest.setAttribute(this.ID_REQ_ATR_otdPromocao, otdResposta);
+		pRequest.setAttribute(this.ID_REQ_ATR_otdPromocao, otdResposta);		
 		
-		pRequest.setAttribute(this.ID_REQ_indicadorExclusao, false);
+		
+		pRequest.setAttribute(this.ID_REQ_ATR_cdItemCardapio,cdItemCardapio);
+		pRequest.setAttribute(this.ID_REQ_ATR_inRetornarApenasVigentes,inRetornarApenasVigentes);
+		pRequest.setAttribute(this.ID_REQ_ATR_diasSemanaPromocao,diaSemanaPromocao);
+		
+		
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 	}
 

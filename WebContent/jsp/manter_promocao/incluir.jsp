@@ -1,3 +1,4 @@
+<%@page import="sgbr.util.Constantes"%>
 <%@page import="sgbr.web.servlet.selects.SelectItemCardapio"%>
 <%@page import="sgbr.web.servlet.PRManterPromocao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -12,8 +13,10 @@
 <body>
 	<FORM name="form_principal" method="post" action="">
 
-		<INPUT type="hidden" id="evento"
-			name="<%=PRManterPromocao.ID_REQ_EVENTO%>" value="">
+
+<%@ include file = "../../jsp/util/menu.jsp" %>
+
+		<INPUT type="hidden" id="evento" name="<%=PRManterPromocao.ID_REQ_EVENTO%>" value="">
 
 
 		<fieldset>
@@ -48,8 +51,17 @@
 				</tr>
 				
 				<tr>
-					<td><label for="diaPromocao">Informar dias da semana para promoção:</label></td>
-					<td>*******************************************************</td>
+					<td><label for="diaPromocao">Dias da semana para promoção:</label></td>
+					<td>
+					       <input type="checkbox" name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>" value="1">Domingo<br>
+      	                    <input type="checkbox" name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>"  value="2">Segunda-Feira<br>
+							<input type="checkbox" name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>" value="3">Terça-Feira<br>
+							<input type="checkbox" name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>" value="4">Quarta-Feira<br>
+							<input type="checkbox" name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>" value="5">Quinta-Feira<br>
+							<input type="checkbox" name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>" value="6">Sexta-Feira<br>
+							<input type="checkbox" name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>" value="7">Sábado<br>
+					</td>
+
 				</tr>
 			
 				<tr>
