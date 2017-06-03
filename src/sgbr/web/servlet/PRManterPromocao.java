@@ -140,6 +140,26 @@ public class PRManterPromocao extends PRManterCadastro {
 		promocao.setDtInicioPromocao(!dtInicioPromocao.isEmpty() ? Util.formataData(dtInicioPromocao) : null);
 		promocao.setDtFimPromocao(!dtFimPromocao.isEmpty() ? Util.formataData(dtFimPromocao) : null);
 		this.aFachadaSGBR.alterarPromocao(promocao);
+		
+
+		String[] arrayDiasDaSemana = (String[]) this.getParametros(this.ID_REQ_ATR_diasSemanaPromocao, pRequest);
+
+		OTDPromocao otdPromocao = new OTDPromocao();
+		vlPromocao = vlPromocao.replaceAll(",", ".");
+		otdPromocao.setCdItemCardapio(!cdItemCardapio.isEmpty() ? Integer.parseInt(cdItemCardapio) : null);
+		otdPromocao.setVlPromocao(!vlPromocao.isEmpty() ? Double.valueOf(vlPromocao) : null);
+		otdPromocao.setDtInicioPromocao(!dtInicioPromocao.isEmpty() ? Util.formataData(dtInicioPromocao) : null);
+		otdPromocao.setDtFimPromocao(!dtFimPromocao.isEmpty() ? Util.formataData(dtFimPromocao) : null);
+		otdPromocao.setListaDiasSemanaPromocao(arrayDiasDaSemana);
+
+
+		
+		
+		
+		
+		
+		
+		
 
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
