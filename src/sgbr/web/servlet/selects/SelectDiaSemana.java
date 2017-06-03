@@ -4,8 +4,6 @@
 package sgbr.web.servlet.selects;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 

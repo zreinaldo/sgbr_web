@@ -1,3 +1,7 @@
+<%@page import="sgbr.util.web.CheckBoxDiaSemana"%>
+<%@page import="java.awt.Checkbox"%>
+<%@page import="sgbr.entidades.PromocaoDiaSemana"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="sgbr.web.servlet.selects.SelectItemCardapio"%>
 <%@page import="sgbr.web.servlet.PRManterPromocao"%>
 <%@page import="sgbr.entidades.Promocao"%>
@@ -18,8 +22,7 @@
 	
 
 	Promocao promocao =  (Promocao) PRManterPromocao.getAtributoOpcional(PRManterPromocao.ID_REQ_ATR_Promocao,request); 
-
-		
+   
 	%>
 
 <body>
@@ -63,8 +66,13 @@
 				</tr>
 				
 				<tr>
-					<td><label for="diaPromocao">Informar dias da semana para promoção:</label></td>
-					<td>*******************************************************</td>
+					<td><label for="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>">Dias da semana para promoção:</label></td>
+					<td> 
+					<%=CheckBoxDiaSemana.getInstancia().getHTML(request, PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao, "idSelect", promocao.getCdPromocao())%>
+					
+					   
+					</td>
+
 				</tr>
 
 				

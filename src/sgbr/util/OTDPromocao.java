@@ -4,6 +4,9 @@
 package sgbr.util;
 
 import java.sql.Date;
+import java.util.ArrayList;
+
+import sgbr.entidades.PromocaoDiaSemana;
 
 /**
  * @author Reinaldo
@@ -17,8 +20,10 @@ public class OTDPromocao {
 	private Date dtInicioPromocao;
 	private Date dtFimPromocao;
 	private String nmItemCardapio;
+	private String colecaoDsPromocaoDiasSemana;
 	private String[] listaDiasSemanaPromocao;
 	private Integer cdDiaSemanaPromocao;
+	private ArrayList<PromocaoDiaSemana> arrayPromocaoDiaSemana;
 	
 	
 	/**
@@ -117,6 +122,30 @@ public class OTDPromocao {
 	 */
 	public void setCdDiaSemanaPromocao(Integer pCdDiaSemanaPromocao) {
 		this.cdDiaSemanaPromocao = pCdDiaSemanaPromocao;
+	}
+	/**
+	 * @return the colecaoDiasSemana
+	 */
+	public String getColecaoDsPromocaoDiasSemana() {
+		return this.colecaoDsPromocaoDiasSemana;
+	}
+	/**
+	 * @param pColecaoDiasSemana the colecaoDiasSemana to set
+	 */
+	public void setColecaoDsPromocaoDiasSemana(String pColecaoDiasSemana) {
+		this.colecaoDsPromocaoDiasSemana = pColecaoDiasSemana;
+	}
+	/**
+	 * @return the arrayPromocaoDiaSemana
+	 */
+	public ArrayList<PromocaoDiaSemana> getArrayPromocaoDiaSemana() {
+		return this.arrayPromocaoDiaSemana;
+	}
+	/**
+	 * @param pArrayPromocaoDiaSemana the arrayPromocaoDiaSemana to set
+	 */
+	public void setArrayPromocaoDiaSemana(ArrayList<PromocaoDiaSemana> pArrayPromocaoDiaSemana) {
+		this.arrayPromocaoDiaSemana = pArrayPromocaoDiaSemana;
 	}
 
 }

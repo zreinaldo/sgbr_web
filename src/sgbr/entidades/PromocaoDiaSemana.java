@@ -16,7 +16,7 @@ import sgbr.util.EntidadeGenerica;
 public class PromocaoDiaSemana extends EntidadeGenerica {
 
 	public static final String NM_COLUNA_PROMOCAO_CD = "PROMOCAO_CD";
-	public static final String NM_COLUNA_PROMOCAO_DIA_CD = "PROMOCAO_DIA_CD";
+	public static final String NM_COLUNA_DIA_SEMANA_CD = "DIA_SEMANA_CD";
 
 	private Integer cdPromocao;
 	private Integer cdDiaPromocao;

@@ -220,12 +220,21 @@ public class DAOPromocao extends DAO_MYSQL implements IntfDAOPromocao {
 				+ " MYDB.PROMOCAO.PROMOCAO_DT_INICIO,  "
 				+ " MYDB.PROMOCAO.PROMOCAO_DT_FIM, "
 				+ " MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_NM, "
-				+ " MYDB.promocao_dia_semana.PROMOCAO_DIA_CD "
+				 + "group_concat( MYDB.dia_semana.DIA_SEMANA_DS) as DIA_SEMANA_DS,"
+				+ " group_concat( MYDB.dia_semana.DIA_SEMANA_CD) as DIA_SEMANA_CD"
 				+ " FROM MYDB.PROMOCAO "
-				+ " INNER JOIN MYDB.ITEM_CARDAPIO "
-				+ " ON MYDB.PROMOCAO.ITEM_CARDAPIO_CD  = " + " MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_CD"
-				+ " LEFT JOIN MYDB.promocao_dia_semana "
-				+ "ON MYDB.promocao_dia_semana.PROMOCAO_CD = " + "MYDB.PROMOCAO.PROMOCAO_CD";
+				+ "INNER JOIN MYDB.ITEM_CARDAPIO ON MYDB.PROMOCAO.ITEM_CARDAPIO_CD = MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_CD "
+				+ "LEFT JOIN MYDB.promocao_dia_semana ON MYDB.promocao_dia_semana.PROMOCAO_CD = MYDB.PROMOCAO.PROMOCAO_CD " 
+				+ "LEFT JOIN MYDB.dia_semana ON MYDB.promocao_dia_semana.DIA_SEMANA_CD = MYDB.dia_semana.DIA_SEMANA_CD ";
+
+		
+		String groupBY = " GROUP BY " +
+				"MYDB.PROMOCAO.PROMOCAO_CD, " +
+				"MYDB.PROMOCAO.ITEM_CARDAPIO_CD, " +
+				"MYDB.PROMOCAO.PROMOCAO_VL, " +
+				"MYDB.PROMOCAO.PROMOCAO_DT_INICIO, " +
+				"MYDB.PROMOCAO.PROMOCAO_DT_FIM, " +
+				"MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_NM ";
 			
 
 		if (!pCdItemCardapio.isEmpty()) {
@@ -234,7 +243,7 @@ public class DAOPromocao extends DAO_MYSQL implements IntfDAOPromocao {
 		}
 		
 		if (!pDiaSemanaPromocao.isEmpty()) {
-			sqlWhere =  sqlWhere + sqlConector + " MYDB.promocao_dia_semana.PROMOCAO_DIA_CD = " + pDiaSemanaPromocao;
+			sqlWhere =  sqlWhere + sqlConector + " MYDB.promocao_dia_semana.DIA_SEMANA_CD = " + pDiaSemanaPromocao;
 			sqlConector = " \n AND ";
 		}
 		
@@ -249,9 +258,12 @@ public class DAOPromocao extends DAO_MYSQL implements IntfDAOPromocao {
 		
 		// Constroi SQL completo
 		if (sqlWhere.length() != 0) {
-			sql = sql + " \n WHERE " + sqlWhere;
+			sql = sql + " \n WHERE " + sqlWhere + groupBY;
+		}else {
+			sql = sql + groupBY;
 		}
 
+		
 		Statement stm = conexao.createStatement();
 
 		ResultSet rs = stm.executeQuery(sql);
@@ -264,8 +276,15 @@ public class DAOPromocao extends DAO_MYSQL implements IntfDAOPromocao {
 			otdPromocao.setVlPromocao(rs.getDouble(Promocao.NM_COLUNA_PROMOCAO_VL));
 			otdPromocao.setDtInicioPromocao(rs.getDate(Promocao.NM_COLUNA_PROMOCAO_DT_INICIO));
 			otdPromocao.setDtFimPromocao(rs.getDate(Promocao.NM_COLUNA_PROMOCAO_DT_FIM));
-			otdPromocao.setNmItemCardapio(rs.getString(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM));
-			otdPromocao.setCdDiaSemanaPromocao(rs.getInt(PromocaoDiaSemana.NM_COLUNA_PROMOCAO_DIA_CD) );
+			otdPromocao.setNmItemCardapio(rs.getString(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM));			
+			String diasSemana = rs.getString("DIA_SEMANA_CD");			
+			
+			if (diasSemana != null) {
+			String[] colDiasSemana = diasSemana.split(",");
+			otdPromocao.setListaDiasSemanaPromocao(colDiasSemana);
+			}
+			
+			otdPromocao.setColecaoDsPromocaoDiasSemana(rs.getString("DIA_SEMANA_DS") );
 			
 			
 
@@ -309,13 +328,13 @@ public class DAOPromocao extends DAO_MYSQL implements IntfDAOPromocao {
 
 		while (rs.next()) {
 			promocao = new Promocao();
-			promocao.setCdPromocao(rs.getInt(promocao.NM_COLUNA_PROMOCAO_CD));
-			promocao.setCdItemCardapio(rs.getInt(promocao.NM_COLUNA_ITEM_CARDAPIO_CD));
-			promocao.setVlPromocao(rs.getDouble(promocao.NM_COLUNA_PROMOCAO_VL));
-			promocao.setDtInicioPromocao(rs.getDate(promocao.NM_COLUNA_PROMOCAO_DT_INICIO));
-			promocao.setDtFimPromocao(rs.getDate(promocao.NM_COLUNA_PROMOCAO_DT_FIM));
-			promocao.setDhIncusaoRegistro(rs.getTimestamp(promocao.NM_COLUNA_DH_INCLUSAO_REGISTRO));
-			promocao.setDhAlteracaoRegistro(rs.getTimestamp( promocao.NM_COLUNA_DH_ALTERACAO_REGISTRO));
+			promocao.setCdPromocao(rs.getInt(Promocao.NM_COLUNA_PROMOCAO_CD));
+			promocao.setCdItemCardapio(rs.getInt(Promocao.NM_COLUNA_ITEM_CARDAPIO_CD));
+			promocao.setVlPromocao(rs.getDouble(Promocao.NM_COLUNA_PROMOCAO_VL));
+			promocao.setDtInicioPromocao(rs.getDate(Promocao.NM_COLUNA_PROMOCAO_DT_INICIO));
+			promocao.setDtFimPromocao(rs.getDate(Promocao.NM_COLUNA_PROMOCAO_DT_FIM));
+			promocao.setDhIncusaoRegistro(rs.getTimestamp(Promocao.NM_COLUNA_DH_INCLUSAO_REGISTRO));
+			promocao.setDhAlteracaoRegistro(rs.getTimestamp( Promocao.NM_COLUNA_DH_ALTERACAO_REGISTRO));
 			
 
 		}
@@ -326,5 +345,79 @@ public class DAOPromocao extends DAO_MYSQL implements IntfDAOPromocao {
 		return promocao;
 	}
 
+	
+	
+	public OTDPromocao consultaDadosPromocao(Integer pCdPromocao) throws SQLException {
+
+		String sqlWhere = "";
+		String sqlConector = "";
+		Connection conexao = null;
+		ArrayList<OTDPromocao> arrayResposta = new ArrayList<>();
+		OTDPromocao otdPromocao = null;
+
+		conexao = this.getConection();
+		
+		String sql = "SELECT " + " MYDB.PROMOCAO.PROMOCAO_CD, " 
+				+ " MYDB.PROMOCAO.ITEM_CARDAPIO_CD,  "
+				+ " MYDB.PROMOCAO.PROMOCAO_VL,  "
+				+ " MYDB.PROMOCAO.PROMOCAO_DT_INICIO,  "
+				+ " MYDB.PROMOCAO.PROMOCAO_DT_FIM, "
+				+ " MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_NM, "				 
+				+ " group_concat( MYDB.dia_semana.DIA_SEMANA_CD) as DIA_SEMANA_CD"
+				+ " FROM MYDB.PROMOCAO "
+				+ "INNER JOIN MYDB.ITEM_CARDAPIO ON MYDB.PROMOCAO.ITEM_CARDAPIO_CD = MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_CD "
+				+ "LEFT JOIN MYDB.promocao_dia_semana ON MYDB.promocao_dia_semana.PROMOCAO_CD = MYDB.PROMOCAO.PROMOCAO_CD " 
+				+ "LEFT JOIN MYDB.dia_semana ON MYDB.promocao_dia_semana.DIA_SEMANA_CD = MYDB.dia_semana.DIA_SEMANA_CD ";
+
+		
+		String groupBY = " GROUP BY " +
+				"MYDB.PROMOCAO.PROMOCAO_CD, " +
+				"MYDB.PROMOCAO.ITEM_CARDAPIO_CD, " +
+				"MYDB.PROMOCAO.PROMOCAO_VL, " +
+				"MYDB.PROMOCAO.PROMOCAO_DT_INICIO, " +
+				"MYDB.PROMOCAO.PROMOCAO_DT_FIM, " +
+				"MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_NM ";
+			
+
+		
+			sqlWhere = sqlWhere + sqlConector + " MYDB.PROMOCAO.PROMOCAO_CD =  " + pCdPromocao;
+		
+		
+		// Constroi SQL completo
+
+		sql = sql + " \n WHERE " + sqlWhere + groupBY;
+
+		
+		Statement stm = conexao.createStatement();
+
+		ResultSet rs = stm.executeQuery(sql);
+
+		while (rs.next()) {
+						
+			otdPromocao = new OTDPromocao();
+			otdPromocao.setCdPromocao(rs.getInt(Promocao.NM_COLUNA_PROMOCAO_CD));
+			otdPromocao.setCdItemCardapio(rs.getInt(Promocao.NM_COLUNA_ITEM_CARDAPIO_CD));
+			otdPromocao.setVlPromocao(rs.getDouble(Promocao.NM_COLUNA_PROMOCAO_VL));
+			otdPromocao.setDtInicioPromocao(rs.getDate(Promocao.NM_COLUNA_PROMOCAO_DT_INICIO));
+			otdPromocao.setDtFimPromocao(rs.getDate(Promocao.NM_COLUNA_PROMOCAO_DT_FIM));
+			otdPromocao.setNmItemCardapio(rs.getString(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM));			
+			String diasSemana = rs.getString("DIA_SEMANA_CD");			
+			
+			if (diasSemana != null) {
+			String[] colDiasSemana = diasSemana.split(",");
+			otdPromocao.setListaDiasSemanaPromocao(colDiasSemana);
+			}
+			
+			otdPromocao.setColecaoDsPromocaoDiasSemana(rs.getString("DIA_SEMANA_DS") );
+			
+			
+		}
+
+		rs.close();
+		stm.close();
+		conexao.close();
+		return otdPromocao;
+	}
+	
 
 }

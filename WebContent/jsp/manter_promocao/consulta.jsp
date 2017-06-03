@@ -83,30 +83,25 @@ if (otd == null) {
 		   String dsDiasDePromocao = "";
 		 
 		 for (OTDPromocao campos : otd) {		 
+		
 			 
-			if (!campos.getCdPromocao().equals(cdPromocaoAtual) && !campos.getCdItemCardapio().equals(cdItemCardapioAtual) && !dsDiasDePromocao.isEmpty()){
-					
-			%>
-			<td colspan="3"><%=dsDiasDePromocao%></td ></tr>	
-			<% dsDiasDePromocao = ""; 
-			} else {
-					 dsDiasDePromocao = dsDiasDePromocao + ", <br>" + Util.getDsDiaSemana(campos.getCdDiaSemanaPromocao());
-			 }			 
-			 
-			 if (!campos.getCdPromocao().equals(cdPromocaoAtual) && !campos.getCdItemCardapio().equals(cdItemCardapioAtual)){  
-						cdPromocaoAtual = campos.getCdPromocao();
-						cdItemCardapioAtual = campos.getCdItemCardapio();	%>
+	%>
 					<tr>
+					
 					   <td colspan="1"><INPUT type="radio" id="radio_consulta_promocao" name="<%=PRManterPromocao.ID_REQ_ATR_radio_consulta_promocao%>" value="<%=campos.getCdPromocao()%>"></td>
 						<td colspan="1"><%=campos.getNmItemCardapio()%></td>
 						<td colspan="1"><%=campos.getVlPromocao()%></td>
 						<td colspan="1"><%=campos.getDtInicioPromocao() != null ? Util.formataDataParaString(campos.getDtInicioPromocao()) : "" %></td>
 						<td  colspan="1"><%=campos.getDtFimPromocao() != null ? Util.formataDataParaString(campos.getDtFimPromocao()) : "" %></td>
+		
+						<td><%=campos.getColecaoDsPromocaoDiasSemana()%></td>
+											
+					</tr>
 					   
 						
-			<% dsDiasDePromocao = Util.getDsDiaSemana(campos.getCdDiaSemanaPromocao());	}
-		}%>	
-		 <td colspan="3"><%=dsDiasDePromocao%></td ></tr>	
+			
+		<%}%>	
+		 	
 				</table>
 				
 				<table>

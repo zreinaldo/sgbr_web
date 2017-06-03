@@ -69,7 +69,7 @@ public class ControladorPromocao {
 		return DAOPromocao.getInstancia().consultaTelaManterPromocao( pCdItemCardapio, pInRetornarApenasVigentes, pDiaSemanaPromocao);
 	}
 	
-	public void incluir (OTDPromocao pOtdPromocao) throws SQLException {		
+	public void incluir (OTDPromocao pOtdPromocao) throws Exception {		
 		RNIncluirPromocao.getInstancia().processar(pOtdPromocao);
 	}
 	

@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import sgbr.cadastros.IntfDAOPromocaoDiaSemana;
 import sgbr.entidades.Promocao;
@@ -59,7 +60,7 @@ public class DAOPromocaoDiaSemana extends DAO_MYSQL implements IntfDAOPromocaoDi
 		pPromocaoDiaSemana.setDhIncusaoRegistro(new Timestamp(System.currentTimeMillis()));
 
 		String sql = "INSERT INTO mydb.promocao_dia_semana " + "(" + PromocaoDiaSemana.NM_COLUNA_PROMOCAO_CD + " , "
-				+ PromocaoDiaSemana.NM_COLUNA_PROMOCAO_DIA_CD + " , " + PromocaoDiaSemana.NM_COLUNA_DH_INCLUSAO_REGISTRO
+				+ PromocaoDiaSemana.NM_COLUNA_DIA_SEMANA_CD + " , " + PromocaoDiaSemana.NM_COLUNA_DH_INCLUSAO_REGISTRO
 				+ ") VALUES " + "(?,?,?) " ;
 
 		ppSt = conexao.prepareStatement(sql);
@@ -112,6 +113,36 @@ public class DAOPromocaoDiaSemana extends DAO_MYSQL implements IntfDAOPromocaoDi
 	public PromocaoDiaSemana consultaPorChavePrimaria(PromocaoDiaSemana pPromocaoDiaSemana) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	
+	public ArrayList<Integer> consultaPromocaoDiasSemana(Integer pCdPromocao) throws SQLException {	
+
+	Connection conexao = null;
+	PromocaoDiaSemana promocaoDiaSemana = null;
+	ArrayList<Integer> aPromocaoDiaSemana = new ArrayList<>();
+
+	conexao = this.getConection();
+
+	String sql = "select * from mydb.promocao_dia_semana where mydb.promocao_dia_semana.PROMOCAO_CD = " + pCdPromocao;
+
+
+	Statement stm = conexao.createStatement();
+
+	ResultSet rs = stm.executeQuery(sql);
+
+	while (rs.next()) {
+//		promocaoDiaSemana = new PromocaoDiaSemana();
+//		promocaoDiaSemana.setCdPromocao(rs.getInt(PromocaoDiaSemana.NM_COLUNA_PROMOCAO_CD));
+//		promocaoDiaSemana.setCdDiaPromocao(rs.getInt(PromocaoDiaSemana.NM_COLUNA_PROMOCAO_CD));
+		aPromocaoDiaSemana.add(rs.getInt(PromocaoDiaSemana.NM_COLUNA_DIA_SEMANA_CD));
+
+	}
+
+	rs.close();
+	stm.close();
+	conexao.close();
+	return aPromocaoDiaSemana;
 	}
 
 }

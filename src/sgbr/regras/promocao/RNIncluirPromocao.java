@@ -37,7 +37,7 @@ public class RNIncluirPromocao {
 		return RNIncluirPromocao.aRNIncluirPromocao;
 	}
 
-	public void processar(OTDPromocao pOtdPromocao) {
+	public void processar(OTDPromocao pOtdPromocao) throws Exception {
 
 		try {
 
@@ -55,11 +55,13 @@ public class RNIncluirPromocao {
 				PromocaoDiaSemana promocaoDiaSemana = new PromocaoDiaSemana(promocao.getCdPromocao(),
 						Integer.valueOf(diaSemana));
 				DAOPromocaoDiaSemana.getInstancia().incluir(promocaoDiaSemana);
-			}
-
+			}		
+			
 		} catch (Exception e) {
-			// TODO gerar erro generico
+			
+			//FIXME deveria tratar caso seja levantada uma chave duplicada
 			e.printStackTrace();
+//			throw e;
 		}
 	}
 }

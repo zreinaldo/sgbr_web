@@ -1,3 +1,4 @@
+<%@page import="sgbr.util.web.CheckBoxDiaSemana"%>
 <%@page import="sgbr.util.Constantes"%>
 <%@page import="sgbr.web.servlet.selects.SelectItemCardapio"%>
 <%@page import="sgbr.web.servlet.PRManterPromocao"%>
@@ -53,13 +54,7 @@
 				<tr>
 					<td><label for="diaPromocao">Dias da semana para promoção:</label></td>
 					<td>
-					       <input type="checkbox" name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>" value="1">Domingo<br>
-      	                    <input type="checkbox" name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>"  value="2">Segunda-Feira<br>
-							<input type="checkbox" name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>" value="3">Terça-Feira<br>
-							<input type="checkbox" name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>" value="4">Quarta-Feira<br>
-							<input type="checkbox" name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>" value="5">Quinta-Feira<br>
-							<input type="checkbox" name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>" value="6">Sexta-Feira<br>
-							<input type="checkbox" name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>" value="7">Sábado<br>
+					      <%=CheckBoxDiaSemana.getInstancia().getHTML(request, PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao, "idSelect", null)%>
 					</td>
 
 				</tr>
