@@ -1,3 +1,4 @@
+<%@page import="sgbr.web.servlet.selects.SelectSituacaoItemCardapio"%>
 <%@page import="sgbr.web.servlet.PRManterItemCardapio"%>
 <%@page import="sgbr.entidades.ItemCardapio"%>
 <%@page import="sgbr.util.Util"%>
@@ -43,14 +44,14 @@
 						maxlength="58"></td>
 				</tr>
 				<tr>
-					<td><label for="cdItemCardapio">Descrição:</label></td>
+					<td><label for="nmItemCardapio">Descrição:</label></td>
 					<td><input type="text"
 						id="<%=PRManterItemCardapio.ID_REQ_ATR_nmItemCardapio%>"
 						name="<%=PRManterItemCardapio.ID_REQ_ATR_nmItemCardapio%>" value="<%=itemCardapio.getNmItemCardapio()%>"
 						maxlength="58"></td>
 				</tr>
 				<tr>
-					<td><label for="dtFimValidade">Valor:</label></td>
+					<td><label for="vlItemCardapio">Valor:</label></td>
 					<td><input type="text"
 						id="<%=PRManterItemCardapio.ID_REQ_ATR_vlItemCardapio%>"
 						name="<%=PRManterItemCardapio.ID_REQ_ATR_vlItemCardapio%>" maxlength="58" value="<%=itemCardapio.getVlItemCardapio()%>"> </td>
@@ -58,10 +59,10 @@
 			
 			
 			<tr>
-					<td><label for="dtFimValidade">Situação:</label></td>
-					<td><input type="text"
-						id="<%=PRManterItemCardapio.ID_REQ_ATR_siItemCardapio%>"
-						name="<%=PRManterItemCardapio.ID_REQ_ATR_siItemCardapio%>" maxlength="58" value="<%=itemCardapio.getSiItemCardapio()%>"> </td>
+					<td><label for="siItemCardapio">Situação:</label></td>
+					
+					<td><%= SelectSituacaoItemCardapio.getInstancia().getHTML(request, PRManterItemCardapio.ID_REQ_ATR_siItemCardapio, PRManterItemCardapio.ID_REQ_ATR_siItemCardapio, itemCardapio.getSiItemCardapio(),false,false)%></td>
+					
 				</tr>
 
 				

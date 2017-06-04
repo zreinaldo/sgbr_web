@@ -83,17 +83,17 @@ public class DAOPromocaoDiaSemana extends DAO_MYSQL implements IntfDAOPromocaoDi
 	 * sgbr.cadastros.IntfDAOPromocaoDiaSemana#excluir(sgbr.entidades.Promocao)
 	 */
 	@Override
-	public void excluir(Promocao pPromocao) throws SQLException {
+	public void excluir(Integer pCdPromocao) throws SQLException {
 
 		Connection conexao = null;
 
 		conexao = this.getConection();
 
-		String sql = "delete from mydb.PROMOCAO WHERE " + Promocao.NM_COLUNA_PROMOCAO_CD + " = ?";
+		String sql = "delete from mydb.promocao_dia_semana WHERE " + PromocaoDiaSemana.NM_COLUNA_PROMOCAO_CD + " = ?";
 
 		PreparedStatement ppSt = conexao.prepareStatement(sql);
 
-		ppSt.setInt(1, pPromocao.getCdPromocao());
+		ppSt.setInt(1, pCdPromocao);
 
 		ppSt.execute();
 

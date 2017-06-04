@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 import sgbr.cadastros.sql.DAOPromocaoDiaSemana;
+import sgbr.entidades.DiaSemana;
 import sgbr.entidades.Promocao;
 import sgbr.entidades.PromocaoDiaSemana;
 import sgbr.fachada.FachadaSGBR;
@@ -30,6 +31,7 @@ public class PRManterPromocao extends PRManterCadastro {
 
 	public static final String ID_REQ_ATR_cdPromocao = "cdPromocao";
 	public static final String ID_REQ_ATR_cdItemCardapio = "cdItemCardapio";
+	public static final String ID_REQ_ATR_nmItemCardapio = "nmItemCardapio";
 	public static final String ID_REQ_ATR_vlPromocao = "vlPromocao";
 	public static final String ID_REQ_ATR_dtInicioPromocao = "dtInicioPromocao";
 	public static final String ID_REQ_ATR_dtFimPromocao = "dtFimPromocao";
@@ -106,11 +108,9 @@ public class PRManterPromocao extends PRManterCadastro {
 
 		Promocao promocao = new Promocao();
 		promocao.setCdPromocao(Integer.valueOf(valueRadio));
-		promocao = this.aFachadaSGBR.consultaPromocaoPorChavePrimaria(promocao);		
-	
-		
-		pRequest.setAttribute(this.ID_REQ_ATR_Promocao, promocao);
+		promocao = this.aFachadaSGBR.consultaPromocaoPorChavePrimaria(promocao);
 
+		pRequest.setAttribute(this.ID_REQ_ATR_Promocao, promocao);
 
 		this.redirecionar(this.NM_JSP_ALTERAR, pRequest, pResponse);
 
@@ -140,7 +140,6 @@ public class PRManterPromocao extends PRManterCadastro {
 		promocao.setDtInicioPromocao(!dtInicioPromocao.isEmpty() ? Util.formataData(dtInicioPromocao) : null);
 		promocao.setDtFimPromocao(!dtFimPromocao.isEmpty() ? Util.formataData(dtFimPromocao) : null);
 		this.aFachadaSGBR.alterarPromocao(promocao);
-		
 
 		String[] arrayDiasDaSemana = (String[]) this.getParametros(this.ID_REQ_ATR_diasSemanaPromocao, pRequest);
 
@@ -151,15 +150,6 @@ public class PRManterPromocao extends PRManterCadastro {
 		otdPromocao.setDtInicioPromocao(!dtInicioPromocao.isEmpty() ? Util.formataData(dtInicioPromocao) : null);
 		otdPromocao.setDtFimPromocao(!dtFimPromocao.isEmpty() ? Util.formataData(dtFimPromocao) : null);
 		otdPromocao.setListaDiasSemanaPromocao(arrayDiasDaSemana);
-
-
-		
-		
-		
-		
-		
-		
-		
 
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
@@ -177,12 +167,11 @@ public class PRManterPromocao extends PRManterCadastro {
 		String cdPromocao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_promocao,
 				pRequest);
 
-		Promocao promocao = new Promocao();
-		promocao.setCdPromocao(Integer.valueOf(cdPromocao));
+		OTDPromocao otdPromocao = new OTDPromocao();
 
-		promocao = this.aFachadaSGBR.consultaPromocaoPorChavePrimaria(promocao);
+		otdPromocao = this.aFachadaSGBR.consultaDadosPromocao(Integer.valueOf(cdPromocao));
 
-		pRequest.setAttribute(this.ID_REQ_ATR_Promocao, promocao);
+		pRequest.setAttribute(this.ID_REQ_ATR_otdPromocao, otdPromocao);
 
 		pRequest.setAttribute(this.ID_REQ_indicadorExclusao, true);
 
@@ -201,10 +190,9 @@ public class PRManterPromocao extends PRManterCadastro {
 
 		String cdPromocao = this.getAtributoOuParametroStringOpcional(PRManterPromocao.ID_REQ_ATR_cdPromocao, pRequest);
 
-		Promocao promocao = new Promocao();
-		promocao.setCdPromocao(Integer.valueOf(cdPromocao));
-
-		this.aFachadaSGBR.excluirPromocao(promocao);
+		if (!cdPromocao.isEmpty()) {
+			this.aFachadaSGBR.excluirPromocao(Integer.valueOf(cdPromocao));
+		}
 
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
@@ -273,13 +261,12 @@ public class PRManterPromocao extends PRManterCadastro {
 			throws Exception {
 		String cdPromocao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_promocao,
 				pRequest);
+		OTDPromocao otdPromocao = new OTDPromocao();
 
-		Promocao promocao = new Promocao();
-		promocao.setCdPromocao(Integer.valueOf(cdPromocao));
+		otdPromocao = this.aFachadaSGBR.consultaDadosPromocao(Integer.valueOf(cdPromocao));
 
-		promocao = this.aFachadaSGBR.consultaPromocaoPorChavePrimaria(promocao);
+		pRequest.setAttribute(this.ID_REQ_ATR_otdPromocao, otdPromocao);
 
-		pRequest.setAttribute(this.ID_REQ_ATR_Promocao, promocao);
 		pRequest.setAttribute(this.ID_REQ_indicadorExclusao, false);
 
 		this.redirecionar(this.NM_JSP_DETALHAR, pRequest, pResponse);

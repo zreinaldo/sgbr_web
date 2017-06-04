@@ -2,6 +2,7 @@ package sgbr.controlador;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import sgbr.cadastros.sql.DAOFuncionario;
 import sgbr.regras.funcionario.RNAlterarFuncionario;
@@ -84,6 +85,12 @@ public class ControladorFuncionario {
 
 		return DAOFuncionario.getInstancia().consultaTelaManterFuncionario(pNome, pTpDocumento, pNuDocumento,
 				pTpFuncionario, pInAtivos);
+	}
+	
+	
+	public Collection<OTDFuncionario> consultaTodosRegistrosFuncionario(Boolean pIsFuncionarioSemUsuario) throws SQLException{
+		return  DAOFuncionario.getInstancia().consultaTodosRegistrosFuncionario(pIsFuncionarioSemUsuario);
+		
 	}
 
 }

@@ -14,8 +14,14 @@ public class Constantes {
 	public static final Integer CD_TIPO_DOCUMENTO_CARTEIRA_TRABALHO = 3;
 	public static final String CD_TODOS = "value_todos";
 	public static final String CD_SIM = "S";
-	public static final String CD_NAO= "N";
+	public static final String CD_NAO = "N";
+	public static final String DS_SIM = "SIM";
+	public static final String DS_NAO = "NÃO";
 	
+	public static final int CD_TIPO_USUARIO_GESTOR = 1;
+	public static final int CD_TIPO_USUARIO_GARCOM = 2;
+	public static final String DS_TIPO_USUARIO_GESTOR = "GESTOR";
+	public static final String DS_TIPO_USUARIO_GARCOM = "GARÇOM";
 	
 	public static final String SI_ITEM_CARDAPIO_DISPONIVEL = "D";
 	public static final String SI_ITEM_CARDAPIO_INDISPONIVEL= "I";

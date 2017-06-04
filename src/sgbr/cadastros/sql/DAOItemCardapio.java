@@ -96,12 +96,14 @@ public class DAOItemCardapio extends DAO_MYSQL implements IntfDAOItemCardapio {
 	@Override
 	public void alterar(ItemCardapio pItemCardapio) throws SQLException {
 		Connection conexao = null;
-
+		int i = 1;
 		conexao = this.getConection();
 
+		
 		String sql = "UPDATE mydb.ITEM_CARDAPIO SET  " 
 		+ ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM +" = ?, "  
 		+ ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_VL +" = ?, " 
+		+ ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_SI +" = ?, " 
 		+   ItemCardapio.NM_COLUNA_DH_ALTERACAO_REGISTRO +" = CURRENT_TIMESTAMP " ;
 		
 		sql = sql + " WHERE " + ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_CD +" = ? ";
@@ -112,7 +114,8 @@ public class DAOItemCardapio extends DAO_MYSQL implements IntfDAOItemCardapio {
 				
 		ppSt.setDouble(2, pItemCardapio.getVlItemCardapio());
 		
-		ppSt.setInt(3, pItemCardapio.getCdItemCardapio());
+		ppSt.setString(3, pItemCardapio.getSiItemCardapio());
+		ppSt.setInt(4, pItemCardapio.getCdItemCardapio());
 		ppSt.execute();
 
 		ppSt.close();

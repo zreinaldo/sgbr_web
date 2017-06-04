@@ -9,6 +9,8 @@ import java.util.Collection;
 
 import sgbr.cadastros.sql.DAOPromocao;
 import sgbr.entidades.Promocao;
+import sgbr.regras.cliente.RNExcluirCliente;
+import sgbr.regras.promocao.RNExcluirPromocao;
 import sgbr.regras.promocao.RNIncluirPromocao;
 import sgbr.util.OTDPromocao;
 
@@ -77,11 +79,17 @@ public class ControladorPromocao {
 		 DAOPromocao.getInstancia().alterar(pPromocao);
 	}
 
-	public void excluir (Promocao pPromocao) throws SQLException {		
-		DAOPromocao.getInstancia().excluir(pPromocao);
+
+	
+	public void excluir (Integer pCdPromocao) throws Exception {		
+		RNExcluirPromocao.getInstancia().processar(pCdPromocao);
 	}
 	
 	public Promocao consultaPorChavePrimaria (Promocao pPromocao) throws SQLException {
 		return DAOPromocao.getInstancia().consultaPorChavePrimaria(pPromocao);
+	}
+	
+	public OTDPromocao consultaDadosPromocao(Integer pCdPromocao) throws SQLException {
+		return DAOPromocao.getInstancia().consultaDadosPromocao(pCdPromocao);
 	}
 }

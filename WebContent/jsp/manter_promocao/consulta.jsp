@@ -94,7 +94,7 @@ if (otd == null) {
 						<td colspan="1"><%=campos.getDtInicioPromocao() != null ? Util.formataDataParaString(campos.getDtInicioPromocao()) : "" %></td>
 						<td  colspan="1"><%=campos.getDtFimPromocao() != null ? Util.formataDataParaString(campos.getDtFimPromocao()) : "" %></td>
 		
-						<td><%=campos.getColecaoDsPromocaoDiasSemana()%></td>
+						<td><%=campos.getColecaoDsPromocaoDiasSemana() != null ? campos.getColecaoDsPromocaoDiasSemana() : "" %></td>
 											
 					</tr>
 					   

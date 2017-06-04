@@ -14,17 +14,20 @@ import sgbr.controlador.ControladorItemCardapio;
 import sgbr.controlador.ControladorPromocao;
 import sgbr.controlador.ControladorTipoDocumento;
 import sgbr.controlador.ControladorTipoFuncionario;
+import sgbr.controlador.ControladorUsuario;
 import sgbr.entidades.Comanda;
 import sgbr.entidades.ItemCardapio;
 import sgbr.entidades.Promocao;
 import sgbr.entidades.TipoDocumento;
 import sgbr.entidades.TipoFuncionario;
+import sgbr.entidades.Usuario;
 import sgbr.util.OTDCliente;
 import sgbr.util.OTDComanda;
 import sgbr.util.OTDFuncionario;
 import sgbr.util.OTDItemCardapio;
 import sgbr.util.OTDPromocao;
 import sgbr.util.OTDTipoFuncionario;
+import sgbr.util.OTDUsuario;
 
 /**
  * @author Reinaldo
@@ -80,6 +83,10 @@ public class FachadaSGBR {
 	 */
 	public void excluirFuncionario(OTDFuncionario pOTDFuncionario) {
 		ControladorFuncionario.getInstancia().excluirFuncionario(pOTDFuncionario);
+	}
+	
+	public Collection<OTDFuncionario> consultaTodosRegistrosFuncionario(Boolean pIsFuncionarioSemUsuario) throws SQLException{
+		return ControladorFuncionario.getInstancia().consultaTodosRegistrosFuncionario(pIsFuncionarioSemUsuario);
 	}
 
 	/**
@@ -242,8 +249,8 @@ public class FachadaSGBR {
 		ControladorPromocao.getInstancia().alterar(pPromocao);
 	}
 
-	public void excluirPromocao(Promocao pPromocao) throws SQLException {
-		ControladorPromocao.getInstancia().excluir(pPromocao);
+	public void excluirPromocao(Integer pCdPromocao) throws Exception {
+		ControladorPromocao.getInstancia().excluir(pCdPromocao);
 	}
 	public ArrayList<OTDPromocao> consultaTelaManterPromocao(String pCdItemCardapio,
 			String pInRetornarApenasVigentes,  String pDiaSemanaPromocao) throws SQLException {
@@ -254,10 +261,50 @@ public class FachadaSGBR {
 		return ControladorPromocao.getInstancia().consultaPorChavePrimaria(pPromocao);
 	}
 
-	
+	public OTDPromocao consultaDadosPromocao(Integer pCdPromocao) throws SQLException {
+		return ControladorPromocao.getInstancia().consultaDadosPromocao(pCdPromocao);
+		
+	}
 	public Collection<Promocao> consultaTodosRegistrosPromocao(String pInRetornarApenasVigentes)
 			throws SQLException {
 		return ControladorPromocao.getInstancia().consultaTodosRegistrosPromocao(pInRetornarApenasVigentes);
+	}
+	
+	public void incluirUsuario(Usuario pUsuario) throws SQLException {
+		ControladorUsuario.getInstancia().incluir(pUsuario);
+	}
+
+	public void alterarUsuario(Usuario pUsuario) throws SQLException {
+		ControladorUsuario.getInstancia().alterar(pUsuario);
+	}
+
+	public void excluirUsuario(Usuario pUsuario) throws SQLException {
+		ControladorUsuario.getInstancia().excluir(pUsuario);
+	}
+
+	public ArrayList<OTDUsuario> consultaTelaManterUsuario(String pLoginUsuario, String pTpUsuario,
+			String pCdFuncionario, String pInBloqueioUsuario) throws SQLException {
+		return ControladorUsuario.getInstancia().consultaTelaManterUsuario(pLoginUsuario, pTpUsuario,
+				pCdFuncionario, pInBloqueioUsuario);
+	}
+
+	public Usuario consultaUsuarioPorChavePrimaria(Usuario pUsuario) throws SQLException {
+		return ControladorUsuario.getInstancia().consultaPorChavePrimaria(pUsuario);
+	}
+	
+	public OTDUsuario consultaDadosUsuario(Integer pCdUsuario) throws SQLException {
+		return ControladorUsuario.getInstancia().consultaDadosUsuario(pCdUsuario);
+	}
+
+	/**
+	 * 
+	 * @param pInRetornarApenasVigentes
+	 * @return
+	 * @throws SQLException
+	 */
+	public Collection<Usuario> consultaTodosRegistrosUsuario(boolean pInRetornarApenasVigentes)
+			throws SQLException {
+		return ControladorUsuario.getInstancia().consultaTodosRegistrosUsuario(pInRetornarApenasVigentes);
 	}
 	
 	

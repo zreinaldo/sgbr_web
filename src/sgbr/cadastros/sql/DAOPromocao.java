@@ -133,7 +133,7 @@ public class DAOPromocao extends DAO_MYSQL implements IntfDAOPromocao {
 	/* (non-Javadoc)
 	 * @see sgbr.cadastros.IntfDAOPromocao#excluir(sgbr.entidades.Promocao)
 	 */
-	public void excluir(Promocao pPromocao) throws SQLException {
+	public void excluir(Integer pCdPromocao) throws SQLException {
 		Connection conexao = null;		
 
 		conexao = this.getConection();
@@ -143,7 +143,7 @@ public class DAOPromocao extends DAO_MYSQL implements IntfDAOPromocao {
 		PreparedStatement ppSt = conexao.prepareStatement(sql);
 
 		
-		ppSt.setInt(1, pPromocao.getCdPromocao());
+		ppSt.setInt(1, pCdPromocao);
 		
 
 		ppSt.execute();
@@ -363,6 +363,7 @@ public class DAOPromocao extends DAO_MYSQL implements IntfDAOPromocao {
 				+ " MYDB.PROMOCAO.PROMOCAO_DT_INICIO,  "
 				+ " MYDB.PROMOCAO.PROMOCAO_DT_FIM, "
 				+ " MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_NM, "				 
+				+ "group_concat( MYDB.dia_semana.DIA_SEMANA_DS) as DIA_SEMANA_DS,"
 				+ " group_concat( MYDB.dia_semana.DIA_SEMANA_CD) as DIA_SEMANA_CD"
 				+ " FROM MYDB.PROMOCAO "
 				+ "INNER JOIN MYDB.ITEM_CARDAPIO ON MYDB.PROMOCAO.ITEM_CARDAPIO_CD = MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_CD "
@@ -418,6 +419,5 @@ public class DAOPromocao extends DAO_MYSQL implements IntfDAOPromocao {
 		conexao.close();
 		return otdPromocao;
 	}
-	
 
 }

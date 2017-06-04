@@ -4,8 +4,10 @@
 package sgbr.cadastros;
 
 import java.sql.SQLException;
+import java.util.Collection;
 
 import sgbr.entidades.Funcionario;
+import sgbr.util.OTDFuncionario;
 
 /**
  * @author Reinaldo
@@ -29,4 +31,6 @@ public interface IntfDAOFuncionario {
 	 */
 	public void excluir(Funcionario pFuncionario) throws SQLException;
 
+	public Collection<OTDFuncionario> consultaTodosRegistrosFuncionario(Boolean pIsFuncionarioSemUsuario) throws SQLException;
+	
 }

@@ -16,7 +16,7 @@ public interface IntfDAOPromocaoDiaSemana {
 	
 	public void incluir(PromocaoDiaSemana pPromocaoDiaSemana) throws SQLException;
 
-	public void excluir(Promocao pPromocao) throws SQLException;
+	public void excluir(Integer pCdPromocao) throws SQLException;
 
 	public PromocaoDiaSemana consultaPorChavePrimaria(PromocaoDiaSemana pPromocaoDiaSemana) throws SQLException;
 

@@ -113,5 +113,40 @@ public class Util {
 		}
 		return diaSemana;
 	}
+	
+	public static String getDsTpUsuario(int pCdTpUsuario) {
+		String dsTpUsuario;
 
+		switch (pCdTpUsuario) {
+		case Constantes.CD_TIPO_USUARIO_GESTOR:
+			dsTpUsuario = Constantes.DS_TIPO_USUARIO_GESTOR;
+			break;
+		case Constantes.CD_TIPO_USUARIO_GARCOM:
+			dsTpUsuario = Constantes.DS_TIPO_USUARIO_GARCOM;
+			break;
+		
+
+		default:
+			dsTpUsuario = "";
+			break;
+		}
+		return dsTpUsuario;
+	}
+	
+	public static String getDsSimNao(String pCdSimNao) {
+		String dsTpUsuario;
+
+		switch (pCdSimNao) {
+		case Constantes.CD_SIM:
+			dsTpUsuario = Constantes.DS_SIM;
+			break;
+		case Constantes.CD_NAO:
+			dsTpUsuario = Constantes.DS_NAO;
+			break;
+		default:
+			dsTpUsuario = "";
+			break;
+		}
+		return dsTpUsuario;
+	}
 }

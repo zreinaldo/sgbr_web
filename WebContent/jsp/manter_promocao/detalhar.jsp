@@ -1,9 +1,7 @@
-<%@page import="sgbr.web.servlet.PRManterItemCardapio"%>
-<%@page import="sgbr.entidades.ItemCardapio"%>
+<%@page import="sgbr.util.OTDPromocao"%>
+<%@page import="sgbr.web.servlet.PRManterPromocao"%>
+<%@page import="sgbr.entidades.Promocao"%>
 <%@page import="sgbr.util.Util"%>
-<%@page import="sgbr.util.OTDItemCardapio"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="sgbr.web.servlet.PRManterItemCardapio"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,7 +11,7 @@
 
 <%
 	boolean indicadorExclusao = false;
-	indicadorExclusao = (Boolean) PRManterItemCardapio.getAtributoOpcional(PRManterItemCardapio.ID_REQ_indicadorExclusao, request);
+	indicadorExclusao = (Boolean) PRManterPromocao.getAtributoOpcional(PRManterPromocao.ID_REQ_indicadorExclusao, request);
 	if (indicadorExclusao) {
 %>
 <title>Excluir Promoção</title>
@@ -31,7 +29,7 @@
 	<%
 	
 
-	ItemCardapio itemCardapio =  (ItemCardapio) PRManterItemCardapio.getAtributoOpcional(PRManterItemCardapio.ID_REQ_ATR_ItemCardapio,request); 
+	OTDPromocao otdPromocao =  (OTDPromocao) PRManterPromocao.getAtributoOpcional(PRManterPromocao.ID_REQ_ATR_otdPromocao,request); 
 
 		
 	%>
@@ -41,8 +39,8 @@
 
 	<FORM name="form_principal" method="post" action="">
 
-		<INPUT type="hidden" id="evento" name="<%=PRManterItemCardapio.ID_REQ_EVENTO%>" value="">
-			<INPUT type="hidden" id="cdItemCardapio" name="<%=PRManterItemCardapio.ID_REQ_ATR_cdItemCardapio%>" value="<%=itemCardapio.getCdItemCardapio()%> ">
+		<INPUT type="hidden" id="evento" name="<%=PRManterPromocao.ID_REQ_EVENTO%>" value="">
+			<INPUT type="hidden" id="cdPromocao" name="<%=PRManterPromocao.ID_REQ_ATR_cdPromocao%>" value="<%=otdPromocao.getCdPromocao()%> ">
 
 
 		<fieldset>
@@ -50,36 +48,44 @@
 				
 
 				<tr>
-					<td><label for="cdItemCardapio">Código Item Cardápio:</label></td>
+					<td><label for="nmItemCardapio">Item Cardápio:</label></td>
 					<td><input type="text" disabled="disabled"
-						id="<%=PRManterItemCardapio.ID_REQ_ATR_cdItemCardapio%>"
-						name="<%=PRManterItemCardapio.ID_REQ_ATR_cdItemCardapio%>" value="<%=itemCardapio.getCdItemCardapio() %>"
+						id="<%=PRManterPromocao.ID_REQ_ATR_nmItemCardapio%>"
+						name="<%=PRManterPromocao.ID_REQ_ATR_nmItemCardapio%>" value="<%=otdPromocao.getNmItemCardapio() %>"
 						maxlength="58"></td>
 				</tr>
 				<tr>
-					<td><label for="cdItemCardapio">Descrição :</label></td>
+					<td><label for="vlPromocao">Valor Promocional:</label></td>
 					<td><input type="text" disabled="disabled"
-						id="<%=PRManterItemCardapio.ID_REQ_ATR_nmItemCardapio%>"
-						name="<%=PRManterItemCardapio.ID_REQ_ATR_nmItemCardapio%>" value="<%=itemCardapio.getNmItemCardapio() %>"
+						id="<%=PRManterPromocao.ID_REQ_ATR_vlPromocao%>"
+						name="<%=PRManterPromocao.ID_REQ_ATR_vlPromocao%>" value="<%=otdPromocao.getVlPromocao() %>"
 						maxlength="58"></td>
 				</tr>
 				<tr>
-					<td><label for="cdItemCardapio">Situação:</label></td>
+					<td><label for="dtInicioPromocao">Data de Início:</label></td>
 					<td><input type="text" disabled="disabled"
-						id="<%=PRManterItemCardapio.ID_REQ_ATR_siItemCardapio%>"
-						name="<%=PRManterItemCardapio.ID_REQ_ATR_siItemCardapio%>" value="<%=Util.getDsSiItemCardapio(itemCardapio.getSiItemCardapio()) %>"
+						id="<%=PRManterPromocao.ID_REQ_ATR_dtInicioPromocao%>"
+						name="<%=PRManterPromocao.ID_REQ_ATR_dtInicioPromocao%>" value="<%=Util.formataDataParaString(otdPromocao.getDtInicioPromocao()) %>"
 						maxlength="58"></td>
 				</tr>
-
-					<tr>
-					<td><label for="dtFimValidade">Valor:</label></td>
-					<td><input type="text" disabled="disabled"
-						id="<%=PRManterItemCardapio.ID_REQ_ATR_vlItemCardapio%>"
-						name="<%=PRManterItemCardapio.ID_REQ_ATR_vlItemCardapio%>" maxlength="58" value="<%=itemCardapio.getVlItemCardapio()%>"> </td>
-				</tr>
-			
-
 				
+								<tr>
+					<td><label for="dtFimPromocao">Data de Início:</label></td>
+					<td><input type="text" disabled="disabled"
+						id="<%=PRManterPromocao.ID_REQ_ATR_dtFimPromocao%>"
+						name="<%=PRManterPromocao.ID_REQ_ATR_dtFimPromocao%>" value="<%=Util.formataDataParaString(otdPromocao.getDtFimPromocao()) %>"
+						maxlength="58"></td>
+				</tr>
+
+				<tr>
+					<td><label for="diasSemanaPromocao">Dias da Semana:</label></td>
+					<td><input type="text" disabled="disabled"
+						id="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>"
+						name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>" value="<%=otdPromocao.getColecaoDsPromocaoDiasSemana() %>"
+						maxlength="100" size="100"></td>
+				</tr>
+
+
 				<tr>
 					<td colspan="2" id="botoes">
 							<%
@@ -87,7 +93,7 @@
 						%>
 						<input type="button"
 						value="Excluir"
-						onclick="submeterFormulario('<%=PRManterItemCardapio.NM_SERVLET%>','<%=PRManterItemCardapio.EVENTO_PROCESSAR_EXCLUSAO%>')"
+						onclick="submeterFormulario('<%=PRManterPromocao.NM_SERVLET%>','<%=PRManterPromocao.EVENTO_PROCESSAR_EXCLUSAO%>')"
 						id="excluir">
 						<%}%>                      
 						<input type="button" value="Voltar"

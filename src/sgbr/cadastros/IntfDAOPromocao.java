@@ -21,12 +21,14 @@ public interface IntfDAOPromocao {
 
 	public void alterar(Promocao pPromocao) throws SQLException;
 
-	public void excluir(Promocao pPromocao) throws SQLException;
+	public void excluir(Integer pCdPromocao) throws SQLException;
 	
 	public Collection<Promocao> consultaTodosRegistros( String pInRetornarApenasVigentes)  throws SQLException;
 	
 	public ArrayList<OTDPromocao> consultaTelaManterPromocao(String pCdItemCardapio,
 			String pInRetornarApenasVigentes,  String pDiaSemanaPromocao) throws SQLException;
+	
+	public OTDPromocao consultaDadosPromocao(Integer pCdPromocao) throws SQLException;
 	
 	public Promocao consultaPorChavePrimaria(Promocao pPromocao) throws SQLException;
 	

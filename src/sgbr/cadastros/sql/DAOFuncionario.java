@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import sgbr.cadastros.IntfDAOFuncionario;
 import sgbr.entidades.Funcionario;
@@ -289,4 +290,44 @@ public class DAOFuncionario extends DAO_MYSQL implements IntfDAOFuncionario {
 		return arrayResposta;
 	}
 
+	
+	public Collection<OTDFuncionario> consultaTodosRegistrosFuncionario(Boolean pIsFuncionarioSemUsuario) throws SQLException {
+
+		String sqlWhere = "";
+		String sqlConector = "";
+		Connection conexao = null;
+		OTDFuncionario otdFuncionario = null;
+		Collection<OTDFuncionario> colecaoFuncionario = new ArrayList<OTDFuncionario>();
+
+		conexao = this.getConection();
+
+		String sql = "SELECT  MYDB.PESSOA.PESSOA_NM,  MYDB.FUNCIONARIO.FUNCIONARIO_CD FROM MYDB.PESSOA INNER JOIN MYDB.FUNCIONARIO ON MYDB.FUNCIONARIO.PESSOA_CD = MYDB.PESSOA.PESSOA_CD ";
+		if (pIsFuncionarioSemUsuario) {
+			sqlWhere = sqlWhere + sqlConector + " NOT EXISTS (SELECT * FROM MYDB.USUARIO WHERE MYDB.USUARIO.FUNCIONARIO_CD = MYDB.FUNCIONARIO.FUNCIONARIO_CD) ";
+			sqlConector = " \n AND ";
+		}
+
+		// Constroi SQL completo
+		if (sqlWhere.length() != 0) {
+			sql = sql + " \n WHERE " + sqlWhere;
+		}
+
+		Statement stm = conexao.createStatement();
+
+		ResultSet rs = stm.executeQuery(sql);
+
+		while (rs.next()) {
+			otdFuncionario = new OTDFuncionario();
+			otdFuncionario.setNmFuncionario(rs.getString(Pessoa.NM_COLUNA_PESSOA_NM).toUpperCase());
+			otdFuncionario.setCdFuncionario(rs.getInt(Funcionario.NM_COLUNA_FUNCIONARIO_CD));
+			
+			colecaoFuncionario.add(otdFuncionario);
+		}
+
+		rs.close();
+		stm.close();
+		conexao.close();
+		return colecaoFuncionario;
+
+	}
 }
