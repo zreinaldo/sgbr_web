@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import sgbr.cadastros.sql.DAOTipoFuncionario;
-import sgbr.cadastros.sql.DAOTipoFuncionario;
-import sgbr.entidades.TipoFuncionario;
 import sgbr.entidades.TipoFuncionario;
 import sgbr.util.OTDTipoFuncionario;
 

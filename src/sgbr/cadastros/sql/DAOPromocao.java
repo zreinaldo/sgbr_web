@@ -15,11 +15,9 @@ import java.util.Collection;
 import sgbr.cadastros.IntfDAOPromocao;
 import sgbr.entidades.ItemCardapio;
 import sgbr.entidades.Promocao;
-import sgbr.entidades.PromocaoDiaSemana;
 import sgbr.util.Constantes;
 import sgbr.util.DAO_MYSQL;
 import sgbr.util.OTDPromocao;
-import sgbr.util.Util;
 
 /**
  * @author Reinaldo

@@ -45,7 +45,7 @@ public class ControladorUsuario {
 	
 	
 	/**
-	 * retorna todos os registros da tabela tipo_funcionario
+	 * retorna todos os registros da tabela usuario
 	 * 
 	 * @param pInRetornarApenasVigentes
 	 * @return
@@ -86,5 +86,9 @@ public class ControladorUsuario {
 	
 	public OTDUsuario consultaDadosUsuario (Integer pCdUsuario) throws SQLException {
 		return DAOUsuario.getInstancia().consultaDadosUsuario(pCdUsuario);
+	}
+	
+	public OTDUsuario consultaUsuarioSenha(String pLoginUsuario, String pSenhaUsuario) throws SQLException{
+		return DAOUsuario.getInstancia().consultaUsuarioSenha(pLoginUsuario, pSenhaUsuario);
 	}
 }

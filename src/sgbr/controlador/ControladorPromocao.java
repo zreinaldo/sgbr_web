@@ -9,7 +9,6 @@ import java.util.Collection;
 
 import sgbr.cadastros.sql.DAOPromocao;
 import sgbr.entidades.Promocao;
-import sgbr.regras.cliente.RNExcluirCliente;
 import sgbr.regras.promocao.RNExcluirPromocao;
 import sgbr.regras.promocao.RNIncluirPromocao;
 import sgbr.util.OTDPromocao;
@@ -48,7 +47,7 @@ public class ControladorPromocao {
 	
 	
 	/**
-	 * retorna todos os registros da tabela tipo_funcionario
+	 * retorna todos os registros da tabela promocao
 	 * 
 	 * @param pInRetornarApenasVigentes
 	 * @return

@@ -22,22 +22,22 @@ public class PRManterFuncionario extends PRManterCadastro {
 
 	public static final String ID_REQ_ATR_cdPessoa = "cdPessoa";
 	public static final String ID_REQ_ATR_cdFuncionario = "cdFuncionario";
-	
+
 	public static final String ID_REQ_ATR_tpDocumento = "tpDocumento";
 	public static final String ID_REQ_ATR_nuDocumento = "nuDocumento";
 	public static final String ID_REQ_ATR_nmFuncionario = "nmFuncionario";
 
-	//FIXME retirar campos
-	public static final String ID_REQ_ATR_tpCargo = "nmCargo";	
+	// FIXME retirar campos
+	public static final String ID_REQ_ATR_tpCargo = "nmCargo";
 	public static final String ID_REQ_ATR_nuCPF = "nuCPF";
 	public static final String ID_REQ_ATR_nuRG = "nuRG";
 	public static final String ID_REQ_ATR_nuCarteira = "nuCarteira";
-	//fim FIXME
-	
+	// fim FIXME
+
 	public static final String ID_REQ_ATR_otdFuncionario = "OTDFuncionario";
-	
-	public static final String ID_REQ_ATR_radio_consulta_funcionario = "radio_consulta_funcionario" ;
-	
+
+	public static final String ID_REQ_ATR_radio_consulta_funcionario = "radio_consulta_funcionario";
+
 	public static final String ID_REQ_ATR_nmBanco = "nmBanco";
 	public static final String ID_REQ_ATR_nuAgencia = "nuAgencia";
 	public static final String ID_REQ_ATR_nuCC = "nuCC";
@@ -88,10 +88,10 @@ public class PRManterFuncionario extends PRManterCadastro {
 
 		String nmFuncionario = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_nmFuncionario, pRequest);
 		String tpCargo = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_tpCargo, pRequest);
-		String nuCPF = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCPF,
-				pRequest);
+		String nuCPF = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCPF, pRequest);
 		String nuRG = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuRG, pRequest);
-		String nuCarteira = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCarteira, pRequest);
+		String nuCarteira = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCarteira,
+				pRequest);
 		String nmBanco = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmBanco, pRequest);
 		String nuAgencia = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuAgencia,
 				pRequest);
@@ -100,7 +100,7 @@ public class PRManterFuncionario extends PRManterCadastro {
 				pRequest);
 		String dtAdmissao = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_dtAdmissao,
 				pRequest);
-		
+
 		String nmUF = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmUF, pRequest);
 		String nmCidade = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmCidade, pRequest);
 		String nmBairro = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmBairro, pRequest);
@@ -109,11 +109,10 @@ public class PRManterFuncionario extends PRManterCadastro {
 		String nuLogradouro = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuLogradouro,
 				pRequest);
 		String nuCEP = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCEP, pRequest);
-		
+
 		String dtNascimento = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_dtNascimento,
 				pRequest);
 		String email = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_email, pRequest);
-
 
 		OTDFuncionario otdFuncionario = new OTDFuncionario();
 		otdFuncionario.setNmFuncionario(nmFuncionario);
@@ -137,7 +136,7 @@ public class PRManterFuncionario extends PRManterCadastro {
 		otdFuncionario.setEmail(email);
 
 		this.aFachadaSGBR.incluirFuncionario(otdFuncionario);
-		
+
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
 	}
@@ -151,16 +150,16 @@ public class PRManterFuncionario extends PRManterCadastro {
 	@Override
 	public void exibirAlteracao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 
-		String valueRadio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_funcionario, pRequest);
-		
-		String[] valores = valueRadio.split(",",2);
-		
-		
-		
-		OTDFuncionario otdFuncionario =  this.aFachadaSGBR.consultarDadosFuncionario(Integer.valueOf(valores[0]), Integer.valueOf(valores[1]));
-		
+		String valueRadio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_funcionario,
+				pRequest);
+
+		String[] valores = valueRadio.split(",", 2);
+
+		OTDFuncionario otdFuncionario = this.aFachadaSGBR.consultarDadosFuncionario(Integer.valueOf(valores[0]),
+				Integer.valueOf(valores[1]));
+
 		pRequest.setAttribute(this.ID_REQ_ATR_otdFuncionario, otdFuncionario);
-		
+
 		this.redirecionar(this.NM_JSP_ALTERAR, pRequest, pResponse);
 
 	}
@@ -174,44 +173,35 @@ public class PRManterFuncionario extends PRManterCadastro {
 	 */
 	@Override
 	public void processarAlteracao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
-   
-		String nmFuncionario = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_nmFuncionario, pRequest);
-		String tpCargo = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_tpCargo, pRequest);
-		String nuCPF = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCPF,
-				pRequest);
-		String nuRG = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuRG, pRequest);
-		String nuCarteira = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCarteira, pRequest);
-		String nmBanco = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmBanco, pRequest);
-		String nuAgencia = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuAgencia,
-				pRequest);
-		String nuCC = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCC, pRequest);
-		String vlSalario = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_vlSalario,
-				pRequest);
-		String dtAdmissao = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_dtAdmissao,
-				pRequest);
-		
-		String nmUF = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmUF, pRequest);
-		String nmCidade = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmCidade, pRequest);
-		String nmBairro = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmBairro, pRequest);
-		String nmLogradouro = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmLogradouro,
-				pRequest);
-		String nuLogradouro = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuLogradouro,
-				pRequest);
-		String nuCEP = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCEP, pRequest);
-		
-		String dtNascimento = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_dtNascimento,
-				pRequest);
-		String email = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_email, pRequest);
 
-		String cdPessoa = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_cdPessoa,
-				pRequest);
-		String cdFuncionario = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_cdFuncionario, pRequest);
+		String nmFuncionario = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nmFuncionario, pRequest);
+		String tpCargo = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_tpCargo, pRequest);
+		String nuCPF = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuCPF, pRequest);
+		String nuRG = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuRG, pRequest);
+		String nuCarteira = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuCarteira, pRequest);
+		String nmBanco = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nmBanco, pRequest);
+		String nuAgencia = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuAgencia, pRequest);
+		String nuCC = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuCC, pRequest);
+		String vlSalario = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_vlSalario, pRequest);
+		String dtAdmissao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dtAdmissao, pRequest);
 
-		String dtDemissao = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_dtDemissao,
-				pRequest);
+		String nmUF = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nmUF, pRequest);
+		String nmCidade = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nmCidade, pRequest);
+		String nmBairro = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nmBairro, pRequest);
+		String nmLogradouro = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nmLogradouro, pRequest);
+		String nuLogradouro = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuLogradouro, pRequest);
+		String nuCEP = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuCEP, pRequest);
+
+		String dtNascimento = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dtNascimento, pRequest);
+		String email = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_email, pRequest);
+
+		String cdPessoa = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdPessoa, pRequest);
+		String cdFuncionario = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdFuncionario, pRequest);
+
+		String dtDemissao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dtDemissao, pRequest);
 
 		OTDFuncionario otdFuncionario = new OTDFuncionario();
-		
+
 		otdFuncionario.setCdFuncionario(Integer.valueOf(cdFuncionario));
 		otdFuncionario.setCdPessoa(Integer.valueOf(cdPessoa));
 		otdFuncionario.setNmFuncionario(nmFuncionario);
@@ -236,11 +226,8 @@ public class PRManterFuncionario extends PRManterCadastro {
 		otdFuncionario.setEmail(email);
 
 		this.aFachadaSGBR.alterarFuncionario(otdFuncionario);
-		
-		
-		
+
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
-		
 
 	}
 
@@ -253,14 +240,14 @@ public class PRManterFuncionario extends PRManterCadastro {
 	@Override
 	public void exibirExclusao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 
-		String valueRadio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_funcionario, pRequest);
-		
-		String[] valores = valueRadio.split(",",2);
-		
-		
-		
-		OTDFuncionario otdFuncionario =  this.aFachadaSGBR.consultarDadosFuncionario(Integer.valueOf(valores[0]), Integer.valueOf(valores[1]));
-		
+		String valueRadio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_funcionario,
+				pRequest);
+
+		String[] valores = valueRadio.split(",", 2);
+
+		OTDFuncionario otdFuncionario = this.aFachadaSGBR.consultarDadosFuncionario(Integer.valueOf(valores[0]),
+				Integer.valueOf(valores[1]));
+
 		pRequest.setAttribute(this.ID_REQ_ATR_otdFuncionario, otdFuncionario);
 		pRequest.setAttribute(this.ID_REQ_indicadorExclusao, true);
 		this.redirecionar(this.NM_JSP_DETALHAR, pRequest, pResponse);
@@ -276,24 +263,23 @@ public class PRManterFuncionario extends PRManterCadastro {
 	@Override
 	public void processarExclusao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 
-		String cdPessoa = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_cdPessoa,
-				pRequest);
-		String cdFuncionario = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_cdFuncionario, pRequest);
-		
-		String nuCPF = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCPF, pRequest);
-		String nuRG = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuRG, pRequest);
-		String nuCarteira = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCarteira, pRequest);
+		String cdPessoa = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdPessoa, pRequest);
+		String cdFuncionario = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdFuncionario, pRequest);
+
+		String nuCPF = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuCPF, pRequest);
+		String nuRG = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuRG, pRequest);
+		String nuCarteira = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuCarteira, pRequest);
 
 		OTDFuncionario otdFuncionario = new OTDFuncionario();
-		
+
 		otdFuncionario.setCdFuncionario(Integer.valueOf(cdFuncionario));
 		otdFuncionario.setCdPessoa(Integer.valueOf(cdPessoa));
 		otdFuncionario.setNuCPF(nuCPF);
 		otdFuncionario.setNuRG(nuRG);
 		otdFuncionario.setNuCarteira(nuCarteira);
-		
+
 		this.aFachadaSGBR.excluirFuncionario(otdFuncionario);
-		
+
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
 	}
@@ -320,30 +306,30 @@ public class PRManterFuncionario extends PRManterCadastro {
 	 */
 	@Override
 	public void processarConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
-		
-		String tpDocumento = this.getParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_tpDocumento, true, pRequest);
-		String nuDocumento = this.getParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuDocumento, true, pRequest);
-		String tpCargo = this.getParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_tpCargo, true, pRequest);
-		String nmFuncionario = this.getParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nmFuncionario, true, pRequest);
-		
+
+		String tpDocumento = this.getParametroStringOpcional(this.ID_REQ_ATR_tpDocumento, true, pRequest);
+		String nuDocumento = this.getParametroStringOpcional(this.ID_REQ_ATR_nuDocumento, true, pRequest);
+		String tpCargo = this.getParametroStringOpcional(this.ID_REQ_ATR_tpCargo, true, pRequest);
+		String nmFuncionario = this.getParametroStringOpcional(this.ID_REQ_ATR_nmFuncionario, true, pRequest);
+
 		if (tpCargo.equals(Constantes.CD_TODOS)) {
 			tpCargo = "";
 		}
-		
+
 		if (tpDocumento.equals(Constantes.CD_TODOS)) {
 			tpDocumento = "";
 		}
-		
-		
-		ArrayList<OTDFuncionario> otdResposta = this.aFachadaSGBR.consultaTelaManterFuncionario(nmFuncionario, tpDocumento, nuDocumento, tpCargo, false);
-		
+
+		ArrayList<OTDFuncionario> otdResposta = this.aFachadaSGBR.consultaTelaManterFuncionario(nmFuncionario,
+				tpDocumento, nuDocumento, tpCargo, false);
+
 		pRequest.setAttribute(this.ID_REQ_ATR_otdFuncionario, otdResposta);
-		
+
 		pRequest.setAttribute(this.ID_REQ_ATR_tpDocumento, tpDocumento);
 		pRequest.setAttribute(this.ID_REQ_ATR_nuDocumento, nuDocumento);
 		pRequest.setAttribute(this.ID_REQ_ATR_tpCargo, tpCargo);
 		pRequest.setAttribute(this.ID_REQ_ATR_nmFuncionario, nmFuncionario);
-		
+
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 	}
 
@@ -358,14 +344,14 @@ public class PRManterFuncionario extends PRManterCadastro {
 	public void exibirDetalhamentoConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse)
 			throws Exception {
 
-		String valueRadio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_funcionario, pRequest);
-		
-		String[] valores = valueRadio.split(",",2);
-		
-		
-		
-		OTDFuncionario otdFuncionario =  this.aFachadaSGBR.consultarDadosFuncionario(Integer.valueOf(valores[0]), Integer.valueOf(valores[1]));
-		
+		String valueRadio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_funcionario,
+				pRequest);
+
+		String[] valores = valueRadio.split(",", 2);
+
+		OTDFuncionario otdFuncionario = this.aFachadaSGBR.consultarDadosFuncionario(Integer.valueOf(valores[0]),
+				Integer.valueOf(valores[1]));
+
 		pRequest.setAttribute(this.ID_REQ_ATR_otdFuncionario, otdFuncionario);
 		pRequest.setAttribute(this.ID_REQ_indicadorExclusao, false);
 		this.redirecionar(this.NM_JSP_DETALHAR, pRequest, pResponse);

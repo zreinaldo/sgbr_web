@@ -19,7 +19,6 @@ import sgbr.entidades.Usuario;
 import sgbr.util.Constantes;
 import sgbr.util.DAO_MYSQL;
 import sgbr.util.OTDUsuario;
-import sgbr.util.Util;
 
 /**
  * @author Reinaldo
@@ -103,30 +102,30 @@ public class DAOUsuario extends DAO_MYSQL implements IntfDAOUsuario {
 	@Override
 	public void alterar(Usuario pUsuario) throws SQLException {
 		Connection conexao = null;
-		String conector = "";
+		String sqlSeparador = "";
 		int i = 1;
 		conexao = this.getConection();
 
 		String sql = "UPDATE mydb.USUARIO SET  " + Usuario.NM_COLUNA_DH_ALTERACAO_REGISTRO + " = CURRENT_TIMESTAMP ,";
 
 		if (pUsuario.getLoginUsuario() != null && !pUsuario.getLoginUsuario().isEmpty()) {
-			sql = sql + conector + Usuario.NM_COLUNA_USUARIO_LOGIN + " = ? ";
-			conector = ", ";
+			sql = sql + sqlSeparador + Usuario.NM_COLUNA_USUARIO_LOGIN + " = ? ";
+			sqlSeparador = ", ";
 		}
 
 		if (pUsuario.getInBloqueioUsuario() != null && !pUsuario.getInBloqueioUsuario().isEmpty()) {
-			sql = sql + conector + Usuario.NM_COLUNA_USUARIO_IN_BLOQUEIO + " = ? ";
-			conector = ", ";
+			sql = sql + sqlSeparador + Usuario.NM_COLUNA_USUARIO_IN_BLOQUEIO + " = ? ";
+			sqlSeparador = ", ";
 		}
 
 		if (pUsuario.getSenhaUsuario() != null && !pUsuario.getSenhaUsuario().isEmpty()) {
-			sql = sql + conector + Usuario.NM_COLUNA_USUARIO_SENHA + " = ?";
-			conector = ", ";
+			sql = sql + sqlSeparador + Usuario.NM_COLUNA_USUARIO_SENHA + " = ?";
+			sqlSeparador = ", ";
 		}
 
 		if (pUsuario.getCdTpUsuario() != null) {
-			sql = sql + conector + Usuario.NM_COLUNA_TIPO_USUARIO_CD + " = ? ";
-			conector = ", ";
+			sql = sql + sqlSeparador + Usuario.NM_COLUNA_TIPO_USUARIO_CD + " = ? ";
+			sqlSeparador = ", ";
 		}
 
 		// WHERE
@@ -250,10 +249,12 @@ public class DAOUsuario extends DAO_MYSQL implements IntfDAOUsuario {
 
 		conexao = this.getConection();
 		String sql = "SELECT MYDB.USUARIO.USUARIO_CD," + " MYDB.USUARIO.USUARIO_LOGIN, "
-				+ " MYDB.USUARIO.TIPO_USUARIO_CD, " + "MYDB.PESSOA.PESSOA_NM," + "MYDB.USUARIO.USUARIO_IN_BLOQUEIO "
+				+ " MYDB.USUARIO.TIPO_USUARIO_CD, " + " MYDB.TIPO_USUARIO.TIPO_USUARIO_NM, " + "MYDB.PESSOA.PESSOA_NM," + "MYDB.USUARIO.USUARIO_IN_BLOQUEIO "
 				+ "FROM MYDB.USUARIO " + "INNER JOIN MYDB.FUNCIONARIO "
 				+ "ON MYDB.USUARIO.FUNCIONARIO_CD = MYDB.FUNCIONARIO.FUNCIONARIO_CD " + "INNER JOIN MYDB.PESSOA "
-				+ "ON MYDB.FUNCIONARIO.PESSOA_CD = MYDB.PESSOA.PESSOA_CD ";
+				+ "ON MYDB.FUNCIONARIO.PESSOA_CD = MYDB.PESSOA.PESSOA_CD "
+				+ "INNER JOIN MYDB.TIPO_USUARIO " 
+				+ "ON MYDB.TIPO_USUARIO.TIPO_USUARIO_CD = MYDB.USUARIO.TIPO_USUARIO_CD_ ";
 
 		if (!pLoginUsuario.isEmpty()) {
 			sqlWhere = sqlWhere + sqlConector + " MYDB.USUARIO.USUARIO_LOGIN LIKE '%" + pLoginUsuario + "%' ";
@@ -291,7 +292,8 @@ public class DAOUsuario extends DAO_MYSQL implements IntfDAOUsuario {
 			otdUsuario.setCdTpUsuario(rs.getInt(Usuario.NM_COLUNA_TIPO_USUARIO_CD));
 			otdUsuario.setNmFuncionario(rs.getString(Pessoa.NM_COLUNA_PESSOA_NM));
 			otdUsuario.setInBloqueioUsuario(rs.getString(Usuario.NM_COLUNA_USUARIO_IN_BLOQUEIO));
-
+			otdUsuario.setNmTpUsuario(rs.getString(TipoUsuario.NM_COLUNA_TIPO_USUARIO_NM));
+			
 			arrayResposta.add(otdUsuario);
 		}
 
@@ -361,7 +363,7 @@ public class DAOUsuario extends DAO_MYSQL implements IntfDAOUsuario {
 
 		conexao = this.getConection();
 
-		String sql = "SELECT " + "MYDB.USUARIO.*,MYDB.PESSOA.PESSOA_NM,MYDB.TIPO_USUARIO.TIPO_USUARIO_NM "
+		String sql = "SELECT " + "MYDB.USUARIO.*,MYDB.PESSOA.PESSOA_NM, MYDB.TIPO_USUARIO.TIPO_USUARIO_NM "
 				+ "FROM MYDB.USUARIO "
 				+ "INNER JOIN MYDB.FUNCIONARIO ON MYDB.USUARIO.FUNCIONARIO_CD = MYDB.FUNCIONARIO.FUNCIONARIO_CD "
 				+ "INNER JOIN MYDB.PESSOA ON MYDB.FUNCIONARIO.PESSOA_CD = MYDB.PESSOA.PESSOA_CD "
@@ -401,4 +403,66 @@ public class DAOUsuario extends DAO_MYSQL implements IntfDAOUsuario {
 		conexao.close();
 		return otdUsuario;
 	}
+	
+	
+	public OTDUsuario consultaUsuarioSenha(String pLoginUsuario, String pSenhaUsuario) throws SQLException {
+		String sqlWhere = "";
+		String sqlConector = "";
+		Connection conexao = null;
+		OTDUsuario otdUsuario = null;
+
+		conexao = this.getConection();
+
+		String sql = "SELECT MYDB.USUARIO.*, " +
+				"MYDB.PESSOA.PESSOA_NM " +
+				"FROM MYDB.USUARIO " +
+				"INNER JOIN MYDB.FUNCIONARIO " +
+				"ON MYDB.FUNCIONARIO.FUNCIONARIO_CD = MYDB.USUARIO.FUNCIONARIO_CD " +
+				"AND MYDB.USUARIO.USUARIO_IN_BLOQUEIO = 'N'"+
+				"INNER JOIN MYDB.PESSOA " +
+				"ON MYDB.FUNCIONARIO.PESSOA_CD = MYDB.PESSOA.PESSOA_CD ";
+		
+		if (pLoginUsuario != null && !pLoginUsuario.isEmpty()) {
+			sqlWhere = sqlWhere + sqlConector + "mydb.USUARIO.USUARIO_LOGIN = '" + pLoginUsuario + "'";
+			sqlConector = " \n AND ";
+		}
+		
+		if (pSenhaUsuario != null && !pSenhaUsuario.isEmpty()) {
+			sqlWhere = sqlWhere + sqlConector + "mydb.USUARIO.USUARIO_SENHA = '" + pSenhaUsuario + "'";
+			sqlConector = " \n AND ";
+		}
+
+		// Constroi SQL completo
+		if (sqlWhere.length() != 0) {
+			sql = sql + " \n WHERE " + sqlWhere  ;
+		}
+		Statement stm = conexao.createStatement();
+
+		ResultSet rs = stm.executeQuery(sql);
+
+		while (rs.next()) {
+			otdUsuario = new OTDUsuario();
+			otdUsuario.setCdUsuario(rs.getInt(Usuario.NM_COLUNA_USUARIO_CD));
+			otdUsuario.setCdTpUsuario(rs.getInt(Usuario.NM_COLUNA_TIPO_USUARIO_CD));
+			otdUsuario.setCdFuncionario(rs.getInt(Usuario.NM_COLUNA_FUNCIONARIO_CD));
+			otdUsuario.setInBloqueioUsuario(rs.getString(Usuario.NM_COLUNA_USUARIO_IN_BLOQUEIO));
+			otdUsuario.setSenhaUsuario(rs.getString(Usuario.NM_COLUNA_USUARIO_SENHA));
+			otdUsuario.setLoginUsuario(rs.getString(Usuario.NM_COLUNA_USUARIO_LOGIN));
+			otdUsuario.setNmFuncionario(rs.getString(Pessoa.NM_COLUNA_PESSOA_NM));
+			otdUsuario.setDhAlteracao(rs.getTimestamp(Usuario.NM_COLUNA_DH_ALTERACAO_REGISTRO));
+			otdUsuario.setDhInclusao(rs.getTimestamp(Usuario.NM_COLUNA_DH_INCLUSAO_REGISTRO));
+
+		}
+
+		rs.close();
+		stm.close();
+		conexao.close();
+		return otdUsuario;
+	}
+	
+	
+	
+	
+	
+	
 }

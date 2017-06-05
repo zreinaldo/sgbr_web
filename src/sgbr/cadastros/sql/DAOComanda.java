@@ -8,19 +8,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import sgbr.cadastros.IntfDAOComanda;
 import sgbr.entidades.Comanda;
-import sgbr.entidades.Funcionario;
-import sgbr.entidades.Pessoa;
-import sgbr.entidades.PessoaDocumento;
-import sgbr.entidades.TipoFuncionario;
 import sgbr.util.DAO_MYSQL;
 import sgbr.util.OTDComanda;
-import sgbr.util.OTDFuncionario;
 
 /**
  * @author Reinaldo

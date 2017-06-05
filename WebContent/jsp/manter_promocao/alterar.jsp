@@ -66,7 +66,7 @@
 				</tr>
 				
 				<tr>
-					<td><label for="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>">Dias da semana para promoção:</label></td>
+					<td><label for="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>">Dias da semana:</label></td>
 					<td> 
 					<%=CheckBoxDiaSemana.getInstancia().getHTML(request, PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao, "idSelect", promocao.getCdPromocao())%>
 					

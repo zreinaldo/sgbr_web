@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import sgbr.fachada.FachadaSGBR;
 import sgbr.util.Constantes;
 import sgbr.util.OTDCliente;
-import sgbr.util.OTDFuncionario;
 import sgbr.util.Util;
 import sgbr.util.web.PRManterCadastro;
 
@@ -48,11 +47,7 @@ public class PRManterCliente extends PRManterCadastro {
 	public static final String NM_JSP_ALTERAR = "/jsp/manter_cliente/alterar.jsp";
 	public static final String NM_JSP_DETALHAR = "/jsp/manter_cliente/detalhar.jsp";
 
-	private FachadaSGBR aFachadaSGBR;
 
-	public void init() throws ServletException {
-		this.aFachadaSGBR = FachadaSGBR.getInstancia();
-	}
 
 	/*
 	 * (non-Javadoc)

@@ -2,14 +2,14 @@ package sgbr.util.web;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * processador de requisicao 
- * metodos comuns a todos os servlets
+ * processador de requisicao metodos comuns a todos os servlets
  * 
  * @author Reinaldo
  *
@@ -71,8 +71,7 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 	 * Evento que exibe detalhe da consulta
 	 */
 	public static final String EVENTO_EXIBIR_DETALHAMENTO_CONSULTA = "exibirDetalhamentoConsulta";
-	
-	
+
 	/**
 	 * implementao doget
 	 */
@@ -109,6 +108,25 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 			throws Exception {
 
 		this.getServletContext().getRequestDispatcher(pNmRecurso).forward(pRequest, pResponse);
+
+	}
+
+	/**
+	 * redireriona para um servlet diferente
+	 * @param pNmServlet
+	 * @param pNmRecurso
+	 * @param pRequest
+	 * @param pResponse
+	 * @throws Exception
+	 */
+	public void redirecionar(String pNmServlet, String pNmRecurso, HttpServletRequest pRequest,
+			HttpServletResponse pResponse) throws Exception {
+
+		ServletContext contexto = null;
+
+		contexto = this.getServletContext().getContext("/sgbr_web/" + pNmServlet);
+
+		contexto.getRequestDispatcher(pNmRecurso).forward(pRequest, pResponse);
 
 	}
 
@@ -170,8 +188,8 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 	}
 
 	/**
-	 *  retorna um parametro do request
-	 *  
+	 * retorna um parametro do request
+	 * 
 	 * @param pNmAtributo
 	 * @param pRetornarVazioSeParametroNaoEncontrado
 	 * @param pRequest
@@ -181,7 +199,7 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 	public static String getParametroStringOpcional(String pNmAtributo, boolean pRetornarVazioSeParametroNaoEncontrado,
 			HttpServletRequest pRequest) throws Exception {
 
-		String strAux =  pRequest.getParameter(pNmAtributo);
+		String strAux = pRequest.getParameter(pNmAtributo);
 
 		if (strAux != null) {
 			strAux = strAux.trim();
@@ -193,20 +211,20 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 	}
 
 	/**
-	 * usado pbasicmante para passar OTDs e entidades
-	 * retorna um atributo opcional
+	 * usado pbasicmante para passar OTDs e entidades retorna um atributo
+	 * opcional
+	 * 
 	 * @param pNmAtributo
 	 * @param pRetornarVazioSeAtributoNaoEncontrado
 	 * @param pRequest
 	 * @return
 	 * @throws Exception
 	 */
-	public static Object getAtributoOpcional(String pNmAtributo,	HttpServletRequest pRequest) throws Exception {
+	public static Object getAtributoOpcional(String pNmAtributo, HttpServletRequest pRequest) throws Exception {
 
 		return pRequest.getAttribute(pNmAtributo);
 	}
-	
-	
+
 	/**
 	 * retorna uma colecao de parametros do form
 	 * 
@@ -215,13 +233,11 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 	 * @return
 	 * @throws Exception
 	 */
-	public static Object[] getParametros(String pNmAtributo,	HttpServletRequest pRequest) throws Exception {
+	public static Object[] getParametros(String pNmAtributo, HttpServletRequest pRequest) throws Exception {
 
 		return pRequest.getParameterValues(pNmAtributo);
 	}
 
-
-	
 	/**
 	 * pega o atributo ou o parametro do request
 	 * 
@@ -244,12 +260,12 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 	}
 
 	/**
-	 * Método utilizado para se obter o evento padrao da servlet
-	 * basicamente para ter um metodo abstrato que sera implementado apenas na PRConsultar
+	 * Método utilizado para se obter o evento padrao da servlet basicamente
+	 * para ter um metodo abstrato que sera implementado apenas na PRConsultar
 	 * 
 	 *
 	 * @return
-	 */	
+	 */
 	public abstract String getEventoPadrao();
 
 }

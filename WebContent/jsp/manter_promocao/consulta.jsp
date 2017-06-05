@@ -58,7 +58,7 @@ if (otd == null) {
 				
 							
 				<tr>
-					<td><label for="diaPromocao">Informar dia da semana para promoção:</label> </td>
+					<td><label for="diaPromocao">Dia da semana:</label> </td>
 						<td><%= SelectDiaSemana.getInstancia().getHTML(request, PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao, PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao,diaSemanaPromocao,false,true)%></td>
 				</tr>
 								

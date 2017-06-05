@@ -14,7 +14,6 @@ import sgbr.entidades.Usuario;
 import sgbr.fachada.FachadaSGBR;
 import sgbr.util.Constantes;
 import sgbr.util.OTDUsuario;
-import sgbr.util.Util;
 import sgbr.util.web.PRManterCadastro;
 
 /**

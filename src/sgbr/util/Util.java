@@ -113,26 +113,7 @@ public class Util {
 		}
 		return diaSemana;
 	}
-	
-	public static String getDsTpUsuario(int pCdTpUsuario) {
-		String dsTpUsuario;
-
-		switch (pCdTpUsuario) {
-		case Constantes.CD_TIPO_USUARIO_GESTOR:
-			dsTpUsuario = Constantes.DS_TIPO_USUARIO_GESTOR;
-			break;
-		case Constantes.CD_TIPO_USUARIO_GARCOM:
-			dsTpUsuario = Constantes.DS_TIPO_USUARIO_GARCOM;
-			break;
-		
-
-		default:
-			dsTpUsuario = "";
-			break;
-		}
-		return dsTpUsuario;
-	}
-	
+			
 	public static String getDsSimNao(String pCdSimNao) {
 		String dsTpUsuario;
 

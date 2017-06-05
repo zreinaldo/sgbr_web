@@ -1,17 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+
+
+<title>Falha no Sistema</title>
 </head>
+<SCRIPT language="JavaScript" type="text/javascript" src="js/funcoes_comuns.js"></SCRIPT>
+
+	
+
 <body>
-erro de chave duplicada
 
-<% String erro = (String)  request.getAttribute("erro"); 
-     out.println(erro);
+	<FORM name="form_principal" method="post" action="">
+<%@ include file = "../../jsp/util/menu.jsp" %>
+		
+<fieldset>
+			<table>
+					
+				<tr>
+					<td><label for="erro">Ops, algo de errado ocorreu...</label></td>
+					
+				</tr>
+					
+				<tr>
+				<td colspan="2" id="botoes">
+							          
+						<input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar">
 
-%>
+                    </td>
+				</tr>
+			</table>
+
+		</fieldset>
+	</FORM>
 </body>
 </html>
+

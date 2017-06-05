@@ -31,4 +31,6 @@ public interface IntfDAOUsuario {
 	public Usuario consultaPorChavePrimaria(Usuario pUsuario) throws SQLException;
 
 	public OTDUsuario consultaDadosUsuario (Integer pCdUsuario) throws SQLException;
+	
+	public OTDUsuario consultaUsuarioSenha(String pLoginUsuario, String pSenhaUsuario) throws SQLException;
 }

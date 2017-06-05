@@ -12,7 +12,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import sgbr.cadastros.IntfDAOPromocaoDiaSemana;
-import sgbr.entidades.Promocao;
 import sgbr.entidades.PromocaoDiaSemana;
 import sgbr.util.DAO_MYSQL;
 

@@ -3,11 +3,6 @@
  */
 package sgbr.controlador;
 
-import java.sql.SQLException;
-
-import sgbr.cadastros.sql.DAOPessoaDocumento;
-import sgbr.entidades.PessoaDocumento;
-
 /**
  * @author Reinaldo
  *

@@ -1,9 +1,7 @@
 <%@page import="sgbr.util.Constantes"%>
-<%@page import="sgbr.web.servlet.selects.SelectSimNao"%>
 <%@page import="sgbr.web.servlet.selects.SelectTipoUsuario"%>
 <%@page import="sgbr.web.servlet.PRManterUsuario"%>
 <%@page import="sgbr.web.servlet.selects.SelectFuncionario"%>
-<%@page import="sgbr.web.servlet.PRManterUsuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,7 +16,7 @@
 
 function validarSenhaConfirmacao() {
 	
-	if (document.form_principal.senhaConfirmacao.value != document.form_principal.senhaUsuario.value){
+	if ((document.form_principal.senhaConfirmacao.value == "" || document.form_principal.senhaUsuario.value == "") || (document.form_principal.senhaConfirmacao.value != document.form_principal.senhaUsuario.value)){
 		
 		alert("Senha Inválida!");
 		
@@ -40,15 +38,14 @@ function validarSenhaConfirmacao() {
 
 		<fieldset>
 			<table>
-							
 				<tr>
 					<td><label for="<%=PRManterUsuario.ID_REQ_ATR_cdFuncionario%>">Funcionário:</label></td>
-					<td><%= SelectFuncionario.getInstancia().getHTML(request, PRManterUsuario.ID_REQ_ATR_cdFuncionario, PRManterUsuario.ID_REQ_ATR_cdFuncionario, "",true,false,true)%></td>
+					<td><%= SelectFuncionario.getInstancia().getHTML(request, PRManterUsuario.ID_REQ_ATR_cdFuncionario, PRManterUsuario.ID_REQ_ATR_cdFuncionario, "",false,false,true)%></td>
 				</tr>
 				
 				<tr>
 					<td><label for="<%=PRManterUsuario.ID_REQ_ATR_cdTpUsuario%>">Tipo de Usuário:</label></td>
-					<td><%= SelectTipoUsuario.getInstancia().getHTML(request, PRManterUsuario.ID_REQ_ATR_cdTpUsuario, PRManterUsuario.ID_REQ_ATR_cdTpUsuario, "",true,false)%></td>
+					<td><%= SelectTipoUsuario.getInstancia().getHTML(request, PRManterUsuario.ID_REQ_ATR_cdTpUsuario, PRManterUsuario.ID_REQ_ATR_cdTpUsuario, "",false,false)%></td>
 				</tr>
 				
 				<tr>

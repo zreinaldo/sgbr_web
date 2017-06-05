@@ -1,4 +1,3 @@
-<%@page import="com.sun.corba.se.pept.transport.InboundConnectionCache"%>
 <%@page import="sgbr.web.servlet.selects.SelectSimNao"%>
 <%@page import="sgbr.web.servlet.selects.SelectFuncionario"%>
 <%@page import="sgbr.web.servlet.selects.SelectTipoUsuario"%>
@@ -93,7 +92,7 @@ if (otd == null) {
 					<td><INPUT type="radio" id="<%=PRManterUsuario.ID_REQ_ATR_radio_consulta_usuario%>" name="<%=PRManterUsuario.ID_REQ_ATR_radio_consulta_usuario%>" value="<%=campos.getCdUsuario()%>"></td>
 					
 						<td><%=campos.getLoginUsuario()%></td>
-						<td><%=Util.getDsTpUsuario(campos.getCdTpUsuario())%></td>
+						<td><%=campos.getNmTpUsuario()%></td>
 						<td><%=campos.getNmFuncionario()%></td>
 						<td><%=Util.getDsSimNao(campos.getInBloqueioUsuario())%></td>
 						

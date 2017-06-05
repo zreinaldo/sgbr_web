@@ -13,13 +13,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import sgbr.cadastros.IntfDAOTipoFuncionario;
-import sgbr.entidades.Comanda;
-import sgbr.entidades.Funcionario;
-import sgbr.entidades.Pessoa;
 import sgbr.entidades.TipoFuncionario;
 import sgbr.util.DAO_MYSQL;
-import sgbr.util.OTDComanda;
-import sgbr.util.OTDFuncionario;
 import sgbr.util.OTDTipoFuncionario;
 
 /**

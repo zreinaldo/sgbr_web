@@ -5,9 +5,6 @@ package sgbr.regras.promocao;
 
 import sgbr.cadastros.sql.DAOPromocao;
 import sgbr.cadastros.sql.DAOPromocaoDiaSemana;
-import sgbr.entidades.Promocao;
-import sgbr.entidades.PromocaoDiaSemana;
-import sgbr.util.OTDPromocao;
 
 /**
  * @author Reinaldo
@@ -49,7 +46,7 @@ public class RNExcluirPromocao {
 		} catch (Exception e) {
 			
 			e.printStackTrace();
-			throw e;
+//			throw e;
 		}
 	}
 }

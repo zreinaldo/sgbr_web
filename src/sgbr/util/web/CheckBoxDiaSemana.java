@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import sgbr.cadastros.sql.DAODiaSemana;
-import sgbr.cadastros.sql.DAOPromocao;
 import sgbr.cadastros.sql.DAOPromocaoDiaSemana;
 import sgbr.entidades.DiaSemana;
-import sgbr.entidades.PromocaoDiaSemana;
 
 /**
  * @author Reinaldo

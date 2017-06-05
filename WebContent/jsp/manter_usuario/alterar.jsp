@@ -15,8 +15,8 @@
 <SCRIPT language="JavaScript" type="text/javascript">
 
 function validarSenhaConfirmacao() {
-	if ( document.form_principal.senhaUsuario.value != "" && (document.form_principal.senhaConfirmacao.value != document.form_principal.senhaUsuario.value
-	|| 	document.form_principal.senhaAnteriorConfirmacao.value != document.form_principal.senhaAnterior.value)	
+	if ( (document.form_principal.senhaUsuario.value != "" && (document.form_principal.senhaConfirmacao.value != document.form_principal.senhaUsuario.value
+	|| 	document.form_principal.senhaAnteriorConfirmacao.value != document.form_principal.senhaAnterior.value))	
 	){
 		alert("Senha Inválida!");
 		

@@ -4,12 +4,12 @@
 package sgbr.web.servlet.selects;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 
-import sgbr.util.Constantes;
+import sgbr.entidades.TipoUsuario;
+import sgbr.fachada.FachadaSGBR;
 import sgbr.util.web.SelectGenerico;
 
 /**
@@ -42,8 +42,9 @@ public class SelectTipoUsuario extends SelectGenerico {
 			throws Exception {
 
 		String html = "";
-		Collection<String> colecao = null;
-	
+		Collection<TipoUsuario> colecao = null;
+
+		colecao = FachadaSGBR.getInstancia().consultaTodosRegistrosTipoUsuario(true);
 
 		html = this.getColecaoComoHTMLSelect(colecao, pNmSelect, pIdSelect, pCampoSelecionado,pObrigatorio,pComTodos);
 
@@ -60,13 +61,19 @@ public class SelectTipoUsuario extends SelectGenerico {
 	protected String getColecaoComoHTMLSelect(Collection<?> pColecao, String pNmSelect, String pIdSelect,
 			String pCampoSelecionado,boolean pObrigatorio, boolean pComTodos) throws Exception {
 
-		
+		Iterator it;
 		StringBuffer bufferHtml = new StringBuffer(200);
+		TipoUsuario tipoUsuario = null;
 
 		this.criarSelect(pNmSelect, pIdSelect, bufferHtml, pObrigatorio, pComTodos);
-		
-			this.valoresOptions(bufferHtml, pCampoSelecionado, Constantes.CD_TIPO_USUARIO_GESTOR + "", "GESTOR");
-			this.valoresOptions(bufferHtml, pCampoSelecionado, Constantes.CD_TIPO_USUARIO_GARCOM + "", "GARÇOM");
+
+		it = pColecao.iterator();
+		while (it.hasNext()) {
+			tipoUsuario = (TipoUsuario) it.next();
+			this.valoresOptions(bufferHtml, pCampoSelecionado, tipoUsuario.getCdTpUsuario().toString(),
+					tipoUsuario.getNmTpUsuario());
+
+		}
 
 		this.finalizarSelect(bufferHtml);
 

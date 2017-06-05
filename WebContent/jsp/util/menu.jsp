@@ -54,14 +54,39 @@ li.dropdown {
 
 
 <ul>
-  <li><a href="#home">Home</a></li>
-  <li><a href="#news">News</a></li>
+  <li><a href="#">Home</a></li>  
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Cadastros</a>
     <div class="dropdown-content">
-      <a href="http://localhost:8080/sgbr_web/PRManterFuncionario">Manter Funcionario</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
+      <a href="http://localhost:8080/sgbr_web/PRManterFuncionario">Manter Funcionário</a>
+      <a href="http://localhost:8080/sgbr_web/PRManterTipoFuncionario">Manter Tipo Funcionário</a>
+      <a href="http://localhost:8080/sgbr_web/PRManterCliente">Manter Cliente</a>
+      <a href="http://localhost:8080/sgbr_web/PRManterUsuario">Manter Usuário</a>
+      <a href="http://localhost:8080/sgbr_web/PRManterComanda">Manter Comanda</a>
+      <a href="http://localhost:8080/sgbr_web/PRManterItemCardapio">Manter Item Cardápio</a>
+      <a href="http://localhost:8080/sgbr_web/PRManterPromocao">Manter Promoção</a>
+     <a href="http://localhost:8080/sgbr_web/PRManterConta">Home</a>
+      
     </div>
   </li>
+   <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">Conta</a>
+    <div class="dropdown-content">
+    	<a href="http://localhost:8080/sgbr_web/PRManterConta">Manter Conta</a>
+     	<a href="http://localhost:8080/sgbr_web/PRManterConta?evento=abrirContaComandaIndividual">Abrir conta por comanda</a>   
+        <a href="http://localhost:8080/sgbr_web/PRManterConta?evento=abrirContaMesa">Abrir conta por mesa</a>
+
+    </div>
+    
+  </li>
+  
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">Pedidos</a>
+    <div class="dropdown-content">
+      <a href="http://localhost:8080/sgbr_web/PRAbrirContaComandaIndividual">Manter Pedidos</a>      
+    </div>
+    
+  </li>
+  
+  <li><a href="#news">Logar/Deslogar</a></li>
 </ul>

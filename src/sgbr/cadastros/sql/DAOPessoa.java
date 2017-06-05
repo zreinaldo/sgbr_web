@@ -13,7 +13,6 @@ import java.sql.Timestamp;
 import sgbr.cadastros.IntfDAOPessoa;
 import sgbr.entidades.Pessoa;
 import sgbr.util.DAO_MYSQL;
-import sgbr.util.OTDFuncionario;
 
 /**
  * @author Reinaldo

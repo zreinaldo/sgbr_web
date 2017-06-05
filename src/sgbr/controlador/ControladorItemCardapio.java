@@ -45,7 +45,7 @@ public class ControladorItemCardapio {
 	
 	
 	/**
-	 * retorna todos os registros da tabela tipo_funcionario
+	 * retorna todos os registros da tabela Item_Cardapio
 	 * 
 	 * @param pInRetornarApenasVigentes
 	 * @return

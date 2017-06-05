@@ -5,7 +5,6 @@ package sgbr.cadastros;
 
 import java.sql.SQLException;
 
-import sgbr.entidades.Promocao;
 import sgbr.entidades.PromocaoDiaSemana;
 
 /**

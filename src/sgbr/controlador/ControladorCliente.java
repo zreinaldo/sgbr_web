@@ -11,7 +11,6 @@ import sgbr.regras.cliente.RNAlterarCliente;
 import sgbr.regras.cliente.RNExcluirCliente;
 import sgbr.regras.cliente.RNIncluirCliente;
 import sgbr.util.OTDCliente;
-import sgbr.util.OTDFuncionario;
 
 /**
  * @author Reinaldo

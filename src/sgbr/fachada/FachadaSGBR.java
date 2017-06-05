@@ -14,12 +14,14 @@ import sgbr.controlador.ControladorItemCardapio;
 import sgbr.controlador.ControladorPromocao;
 import sgbr.controlador.ControladorTipoDocumento;
 import sgbr.controlador.ControladorTipoFuncionario;
+import sgbr.controlador.ControladorTipoUsuario;
 import sgbr.controlador.ControladorUsuario;
 import sgbr.entidades.Comanda;
 import sgbr.entidades.ItemCardapio;
 import sgbr.entidades.Promocao;
 import sgbr.entidades.TipoDocumento;
 import sgbr.entidades.TipoFuncionario;
+import sgbr.entidades.TipoUsuario;
 import sgbr.entidades.Usuario;
 import sgbr.util.OTDCliente;
 import sgbr.util.OTDComanda;
@@ -307,6 +309,25 @@ public class FachadaSGBR {
 		return ControladorUsuario.getInstancia().consultaTodosRegistrosUsuario(pInRetornarApenasVigentes);
 	}
 	
+	//TODO - FALTA FAZER A TELA DE LOGIN
+	public OTDUsuario consultaUsuarioSenha(String pLoginUsuario, String pSenhaUsuario) throws SQLException{
+		return ControladorUsuario.getInstancia().consultaUsuarioSenha(pLoginUsuario, pSenhaUsuario);
+	}
 	
+	
+	public TipoUsuario consultaTipoUsuarioPorChavePrimaria(TipoUsuario pTipoUsuario) throws SQLException {
+		return ControladorTipoUsuario.getInstancia().consultaPorChavePrimaria(pTipoUsuario);
+	}
+
+	/**
+	 * 
+	 * @param pInRetornarApenasVigentes
+	 * @return
+	 * @throws SQLException
+	 */
+	public Collection<TipoUsuario> consultaTodosRegistrosTipoUsuario(boolean pInRetornarApenasVigentes)
+			throws SQLException {
+		return ControladorTipoUsuario.getInstancia().consultaTodosRegistrosTipoUsuario(pInRetornarApenasVigentes);
+	}
 	
 }

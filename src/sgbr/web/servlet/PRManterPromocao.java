@@ -10,12 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
-
-import sgbr.cadastros.sql.DAOPromocaoDiaSemana;
-import sgbr.entidades.DiaSemana;
 import sgbr.entidades.Promocao;
-import sgbr.entidades.PromocaoDiaSemana;
 import sgbr.fachada.FachadaSGBR;
 import sgbr.util.Constantes;
 import sgbr.util.OTDPromocao;
@@ -188,7 +183,7 @@ public class PRManterPromocao extends PRManterCadastro {
 	@Override
 	public void processarExclusao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 
-		String cdPromocao = this.getAtributoOuParametroStringOpcional(PRManterPromocao.ID_REQ_ATR_cdPromocao, pRequest);
+		String cdPromocao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdPromocao, pRequest);
 
 		if (!cdPromocao.isEmpty()) {
 			this.aFachadaSGBR.excluirPromocao(Integer.valueOf(cdPromocao));

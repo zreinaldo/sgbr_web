@@ -3,11 +3,8 @@
  */
 package sgbr.regras.comanda;
 
-import java.sql.Date;
-
 import sgbr.cadastros.sql.DAOComanda;
 import sgbr.entidades.Comanda;
-import sgbr.util.OTDComanda;
 import sgbr.util.Util;
 
 /**
