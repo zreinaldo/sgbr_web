@@ -1,5 +1,7 @@
 package sgbr.web.servlet;
 
+import java.sql.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +17,16 @@ import sgbr.util.web.PRConsultar;
 public class PRManterConta extends PRConsultar {
 	private static final long serialVersionUID = 1L;
 
+	public static final String ID_REQ_ATR_cdConta = "cdConta";
+	public static final String ID_REQ_ATR_cdComanda= "cdComanda";
+	public static final String ID_REQ_ATR_cdMesa= "cdMesa";
+	public static final String ID_REQ_ATR_cdCliente= "cdCliente";
+	public static final String ID_REQ_ATR_vlTotal= "vlTotal";
+	public static final String ID_REQ_ATR_vlDesconto= "vlDesconto";
+	public static final String ID_REQ_ATR_percDesconto= "percDesconto";
+	public static final String ID_REQ_ATR_dhEncerramento= "dhEncerramento";
+    public static final String ID_REQ_ATR_inContaMesa= "inContaMesa";
 
-	public static final String EVENTO_ABRIR_CONTA = "abrirConta";
 	
 	public static final String ID_REQ_ATR_otdConta = "OTDConta";
 	public static final String ID_REQ_ATR_radio_consulta_conta = "radio_consulta_conta";
@@ -28,9 +38,9 @@ public class PRManterConta extends PRConsultar {
 	public static final String NM_JSP_CONTA_PARCIAL = "/jsp/manter_conta/contaparcial.jsp";
 	public static final String NM_JSP_ENCERRAR_CONTA = "/jsp/manter_conta/encerrarconta.jsp";
 
+	public static final String EVENTO_EXIBIR_ABRIR_CONTA = "exibirAbrirConta";
+	public static final String EVENTO_PROCESSAR_ABRIR_CONTA = "processarAbrirConta";
 	
-	private boolean inContaMesa;
-
 	
 	protected FachadaSGBR aFachadaSGBR;
 
@@ -43,14 +53,6 @@ public class PRManterConta extends PRConsultar {
 	 */
 	@Override
 	public void exibirConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
-		
-		boolean bo = this.isInContaMesa();
-		
-		if(bo) {
-			System.out.println("true");
-		}else {
-			System.out.println("false");
-		}
 		
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
  
@@ -76,19 +78,16 @@ public class PRManterConta extends PRConsultar {
 		
 	}
 	
-	public void incluirComandaIndividual(HttpServletRequest pRequest, HttpServletResponse pResponse)
+	public void exibirAbrirConta(HttpServletRequest pRequest, HttpServletResponse pResponse)
+			throws Exception {
+		
+		this.redirecionar(this.NM_JSP_ABRIR_CONTA, pRequest, pResponse);
+	}
+	
+	public void processarAbrirConta(HttpServletRequest pRequest, HttpServletResponse pResponse)
 			throws Exception {
 		
 		System.out.println("individual");
 	}
-	
-
-	/**
-	 * @return the inContaMesa
-	 */
-	public boolean isInContaMesa() {
-		return this.inContaMesa;
-	}
-
 
 }

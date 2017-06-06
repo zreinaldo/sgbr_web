@@ -70,6 +70,7 @@
 					
 					
 					    <input type="button" value="Consultar"	onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_PROCESSAR_CONSULTA%>')" id="consultar">
+					    <input type="button" value="Abrir Conta Mesa"	onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_EXIBIR_ABRIR_CONTA%>')" id="abrirContaMesa">
 					 					    
 					   
 					</td>

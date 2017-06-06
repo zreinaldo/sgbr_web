@@ -1,12 +1,9 @@
 <%@page import="sgbr.util.web.CheckBoxDiaSemana"%>
-<%@page import="java.awt.Checkbox"%>
-<%@page import="sgbr.entidades.PromocaoDiaSemana"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="sgbr.web.servlet.selects.SelectItemCardapio"%>
 <%@page import="sgbr.web.servlet.PRManterPromocao"%>
 <%@page import="sgbr.entidades.Promocao"%>
 <%@page import="sgbr.util.Util"%>
-<%@page import="sgbr.util.OTDPromocao"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

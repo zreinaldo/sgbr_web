@@ -1,6 +1,3 @@
-<%@page import="sgbr.util.web.CheckBoxDiaSemana"%>
-<%@page import="sgbr.util.Constantes"%>
-<%@page import="sgbr.web.servlet.selects.SelectItemCardapio"%>
 <%@page import="sgbr.web.servlet.PRManterConta"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -23,46 +20,25 @@
 		<fieldset>
 			<table>
 				<tr>
-					<td><label for="<%=PRManterConta.ID_REQ_ATR_cdItemCardapio%>">Item do Cardápio:</label></td>
-					<td><%= SelectItemCardapio.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdItemCardapio, PRManterConta.ID_REQ_ATR_cdItemCardapio, "",true,false)%></td>
+					<td><label for="<%=PRManterConta.ID_REQ_ATR_cdMesa%>">Numero Mesa:</label></td>
+					<td>SelectMEsa</td>
 				</tr>			
 
 				<tr>
-					<td><label for="<%=PRManterConta.ID_REQ_ATR_vlPromocao%>">Valor Promocional:</label></td>
-					<td><input type="text" required 
-						id="<%=PRManterConta.ID_REQ_ATR_vlPromocao%>"
-						name="<%=PRManterConta.ID_REQ_ATR_vlPromocao%>"
-						maxlength="58"></td>
-				</tr>
+					<td><label for="<%=PRManterConta.ID_REQ_ATR_cdComanda%>">Numero Comanda:</label></td>
+					<td>SelectComanda</td>
+				</tr>	
 				
 				<tr>
-					<td><label for="<%=PRManterConta.ID_REQ_ATR_dtInicioPromocao%>">Data Início:</label></td>
-					<td><input type="text" required 
-						id="<%=PRManterConta.ID_REQ_ATR_dtInicioPromocao%>"
-						name="<%=PRManterConta.ID_REQ_ATR_dtInicioPromocao%>"
-						maxlength="58"></td>
-				</tr>
-				
-				<tr>
-					<td><label for="<%=PRManterConta.ID_REQ_ATR_dtFimPromocao%>">Data Fim:</label></td>
-					<td><input type="text"  
-						id="<%=PRManterConta.ID_REQ_ATR_dtFimPromocao%>"
-						name="<%=PRManterConta.ID_REQ_ATR_dtFimPromocao%>"
-						maxlength="58"></td>
-				</tr>
-				
-				<tr>
-					<td><label for="diaPromocao">Dias da semana:</label></td>
-					<td>
-					      <%=CheckBoxDiaSemana.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_diasSemanaPromocao, "idSelect", null)%>
-					</td>
-
-				</tr>
+					<td><label for="<%=PRManterConta.ID_REQ_ATR_cdCliente%>">Cliente:</label></td>
+					<td>SelectCliente</td>
+				</tr>	
+			
 			
 				<tr>
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Incluir"
-						onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_PROCESSAR_INCLUSAO%>')"
+						onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_PROCESSAR_ABRIR_CONTA%>')"
 						id="consultar"></td>
 				</tr>
 			</table>
