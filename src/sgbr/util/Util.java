@@ -130,4 +130,8 @@ public class Util {
 		}
 		return dsTpUsuario;
 	}
+	
+	public static String getValorHTML (Object pValor) {
+		return pValor == null ? "" : pValor.toString();
+	}
 }

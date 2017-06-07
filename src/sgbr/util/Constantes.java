@@ -18,6 +18,13 @@ public class Constantes {
 	public static final String DS_SIM = "SIM";
 	public static final String DS_NAO = "NÃO";
 	
+	public static final String SI_CONTA_SITUACAO_ABERTA = "A";
+	public static final String SI_CONTA_SITUACAO_ENCERRADA = "E";	
+	public static final String DS_CONTA_SITUACAO_ABERTA = "ABERTA";
+	public static final String DS_CONTA_SITUACAO_ENCERRADA = "ENCERRADA";
+	
+	
+	
 	public static final String SI_ITEM_CARDAPIO_DISPONIVEL = "D";
 	public static final String SI_ITEM_CARDAPIO_INDISPONIVEL= "I";
 	public static final String SI_ITEM_CARDAPIO_TEMPORARIAMENTE_INDISPONIVEL = "T";

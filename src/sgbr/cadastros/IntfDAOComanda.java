@@ -20,7 +20,7 @@ public interface IntfDAOComanda {
 
 	public void excluir(Comanda pComanda) throws SQLException;
 
-	public Collection<Comanda> consultaTodosRegistros(boolean pInRetornarApenasVigentes) throws SQLException;
+	//public Collection<Comanda> consultaTodosRegistros(boolean pInRetornarApenasVigentes) throws SQLException;
 
 	public Comanda consultaPorChavePrimaria(Comanda pComanda) throws SQLException;
 

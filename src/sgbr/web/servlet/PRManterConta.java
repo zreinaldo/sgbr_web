@@ -1,6 +1,6 @@
 package sgbr.web.servlet;
 
-import java.sql.Date;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sgbr.fachada.FachadaSGBR;
+import sgbr.util.Constantes;
+import sgbr.util.OTDConta;
 import sgbr.util.web.PRConsultar;
 
 /**
@@ -20,6 +22,7 @@ public class PRManterConta extends PRConsultar {
 	public static final String ID_REQ_ATR_cdConta = "cdConta";
 	public static final String ID_REQ_ATR_cdComanda= "cdComanda";
 	public static final String ID_REQ_ATR_cdMesa= "cdMesa";
+	public static final String ID_REQ_ATR_siConta= "siConta";
 	public static final String ID_REQ_ATR_cdCliente= "cdCliente";
 	public static final String ID_REQ_ATR_vlTotal= "vlTotal";
 	public static final String ID_REQ_ATR_vlDesconto= "vlDesconto";
@@ -64,7 +67,26 @@ public class PRManterConta extends PRConsultar {
 	 */
 	@Override
 	public void processarConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
-		// TODO Auto-generated method stub
+		
+		String cdMesa = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdMesa, pRequest);
+		String cdComanda = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdComanda, pRequest);
+		String siConta = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_siConta, pRequest);
+				
+		
+		if (cdMesa.equals(Constantes.CD_TODOS)) {
+			cdMesa = "";
+		}
+		if (cdComanda.equals(Constantes.CD_TODOS)) {
+			cdComanda = "";
+		}
+		
+		
+	ArrayList<OTDConta> otdConta =  this.aFachadaSGBR.consultaTelaManterConta(cdMesa, cdComanda, siConta);
+	
+	pRequest.setAttribute(this.ID_REQ_ATR_otdConta, otdConta);
+	
+	this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
+	
 		
 	}
 

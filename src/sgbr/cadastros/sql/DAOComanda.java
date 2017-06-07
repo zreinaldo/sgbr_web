@@ -77,7 +77,7 @@ public class DAOComanda extends DAO_MYSQL implements IntfDAOComanda {
 	 */
 	@Override
 	public void alterar(Comanda pComanda) throws SQLException {
-		Connection conexao = null;		
+		Connection conexao = null;
 
 		conexao = this.getConection();
 
@@ -88,14 +88,11 @@ public class DAOComanda extends DAO_MYSQL implements IntfDAOComanda {
 		ppSt.setDate(1, pComanda.getDtIniValidade());
 		ppSt.setDate(2, pComanda.getDtFimValidade());
 		ppSt.setInt(3, pComanda.getCdComanda());
-		
 
 		ppSt.execute();
 
 		ppSt.close();
 		conexao.close();
-
-	
 
 	}
 
@@ -106,8 +103,8 @@ public class DAOComanda extends DAO_MYSQL implements IntfDAOComanda {
 	 */
 	@Override
 	public void excluir(Comanda pComanda) throws SQLException {
-		
-		Connection conexao = null;		
+
+		Connection conexao = null;
 
 		conexao = this.getConection();
 
@@ -115,9 +112,7 @@ public class DAOComanda extends DAO_MYSQL implements IntfDAOComanda {
 
 		PreparedStatement ppSt = conexao.prepareStatement(sql);
 
-		
 		ppSt.setInt(1, pComanda.getCdComanda());
-		
 
 		ppSt.execute();
 
@@ -126,39 +121,7 @@ public class DAOComanda extends DAO_MYSQL implements IntfDAOComanda {
 
 	}
 
-	// TODO consulta para verifcar se ja esta em uso
-	public Collection<Comanda> consultaTodosRegistros(boolean pInRetornarApenasVigentes) throws SQLException {
-
-		Connection conexao = null;
-		Comanda comanda = null;
-		Collection<Comanda> colecaoComanda = new ArrayList<Comanda>();
-
-		conexao = this.getConection();
-
-		String sql = "select * from mydb.comanda ";
-
-		if (pInRetornarApenasVigentes) {
-			sql = sql + " where mydb.comanda.COMANDA_DT_FIM_VALIDADE is null";
-		}
-
-		Statement stm = conexao.createStatement();
-
-		ResultSet rs = stm.executeQuery(sql);
-
-		while (rs.next()) {
-			comanda = new Comanda();
-			comanda.setCdComanda(rs.getInt(Comanda.NM_COLUNA_COMANDA_CD));
-			comanda.setDtIniValidade(rs.getDate(Comanda.NM_COLUNA_COMANDA_DT_INI_VALIDADE));
-			comanda.setDtFimValidade(rs.getDate(Comanda.NM_COLUNA_COMANDA_DT_FIM_VALIDADE));
-			colecaoComanda.add(comanda);
-		}
-
-		rs.close();
-		stm.close();
-		conexao.close();
-
-		return colecaoComanda;
-	}
+	
 
 	public ArrayList<OTDComanda> consultaTelaManterComanda(String pCodigo, String pSituacao) throws SQLException {
 

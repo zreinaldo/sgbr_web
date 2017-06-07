@@ -3,7 +3,9 @@
  */
 package sgbr.util;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+
+
 
 /**
  * @author Reinaldo
@@ -15,11 +17,14 @@ public class OTDConta {
 	private Integer cdComanda;
 	private Integer cdMesa;
 	private Integer cdCliente;
+	private String nmCliente;
 	private double vlTotal;
 	private double vlDesconto;
 	private double percDesconto;
-	private Date dhEncerramento;
+	private Timestamp dhEncerramento;
+	private Timestamp dhAbertura;
 	private boolean inContaMesa;
+	private String siConta;
 
 	/**
 	 * @return the cdConta
@@ -126,20 +131,6 @@ public class OTDConta {
 		this.percDesconto = pPercDesconto;
 	}
 
-	/**
-	 * @return the dhEncerramento
-	 */
-	public Date getDhEncerramento() {
-		return this.dhEncerramento;
-	}
-
-	/**
-	 * @param pDhEncerramento
-	 *            the dhEncerramento to set
-	 */
-	public void setDhEncerramento(Date pDhEncerramento) {
-		this.dhEncerramento = pDhEncerramento;
-	}
 
 	/**
 	 * @return the inContaMesa
@@ -154,6 +145,62 @@ public class OTDConta {
 	 */
 	public void setInContaMesa(boolean pInContaMesa) {
 		this.inContaMesa = pInContaMesa;
+	}
+
+	/**
+	 * @return the nmCliente
+	 */
+	public String getNmCliente() {
+		return this.nmCliente;
+	}
+
+	/**
+	 * @param pNmCliente the nmCliente to set
+	 */
+	public void setNmCliente(String pNmCliente) {
+		this.nmCliente = pNmCliente;
+	}
+
+	/**
+	 * @return the siConta
+	 */
+	public String getSiConta() {
+		return this.siConta;
+	}
+
+	/**
+	 * @param pSiConta the siConta to set
+	 */
+	public void setSiConta(String pSiConta) {
+		this.siConta = pSiConta;
+	}
+
+	/**
+	 * @return the dhEncerramento
+	 */
+	public Timestamp getDhEncerramento() {
+		return this.dhEncerramento;
+	}
+
+	/**
+	 * @param pDhEncerramento the dhEncerramento to set
+	 */
+	public void setDhEncerramento(Timestamp pDhEncerramento) {
+		this.dhEncerramento = pDhEncerramento;
+	}
+
+	/**
+	 * @return the dhAbertura
+	 */
+	public Timestamp getDhAbertura() {
+		return this.dhAbertura;
+	}
+
+	/**
+	 * @param pDhAbertura the dhAbertura to set
+	 */
+	public void setDhAbertura(Timestamp pDhAbertura) {
+		this.dhAbertura = pDhAbertura;
 	}
 
 }

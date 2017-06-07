@@ -88,5 +88,5 @@ li.dropdown {
     
   </li>
   
-  <li><a href="#news">Logar/Deslogar</a></li>
+  <li><a href="#news">Deslogar</a></li>
 </ul>
