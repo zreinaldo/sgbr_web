@@ -12,6 +12,7 @@ public class Constantes {
 	public static final Integer CD_TIPO_DOCUMENTO_CPF = 1;
 	public static final Integer CD_TIPO_DOCUMENTO_RG = 2;
 	public static final Integer CD_TIPO_DOCUMENTO_CARTEIRA_TRABALHO = 3;
+	
 	public static final String CD_TODOS = "value_todos";
 	public static final String CD_SIM = "S";
 	public static final String CD_NAO = "N";
@@ -53,7 +54,8 @@ public class Constantes {
 	public static final String DS_DIA_SEMANA_SABADO = "SÁBADO";
 	
 	
-	
+	public static final String CD_TIPO_CONTA_MESA = "1";
+	public static final String CD_TIPO_CONTA_COMANDA = "2";
 	
 	
 }

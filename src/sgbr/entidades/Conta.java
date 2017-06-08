@@ -11,8 +11,8 @@ import sgbr.util.EntidadeGenerica;
  * 
  * Table: conta Columns: CONTA_CD int(11) AI PK COMANDA_CD int(11) MESA_CD
  * int(11) CONTA_VL_TOTAL double CLIENTE_CD int(11) CONTA_DESCONTO_VL double
- * CONTA_DESCONTO_PERC double DH_INCLUSAO timestamp(6) DH_ENCERRAMENTO
- * timestamp(6)
+ * CONTA_DESCONTO_PERC double DH_INCLUSAO timestamp(6) DH_ENCERRAMENTO 
+ * timestamp(6) TIPO_CONTA_CD int(11)
  * 
  * @author Reinaldo
  *
@@ -27,11 +27,13 @@ public class Conta extends EntidadeGenerica {
 	public static final String NM_COLUNA_CONTA_DESCONTO_VL = "CONTA_DESCONTO_VL";
 	public static final String NM_COLUNA_CONTA_DESCONTO_PERC = "CONTA_DESCONTO_PERC";
 	public static final String NM_COLUNA_DH_ENCERRAMENTO = "DH_ENCERRAMENTO";
+	public static final String NM_COLUNA_TIPO_CONTA_CD = "TIPO_CONTA_CD";
 
 	private Integer cdConta;
 	private Integer cdComanda;
 	private Integer cdMesa;
 	private Integer cdCliente;
+	private Integer cdTipoConta;
 	private double vlTotal;
 	private double vlDesconto;
 	private double percDesconto;
@@ -153,6 +155,20 @@ public class Conta extends EntidadeGenerica {
 	 */
 	public void setPercDesconto(double pPercDesconto) {
 		this.percDesconto = pPercDesconto;
+	}
+
+	/**
+	 * @return the cdTipoConta
+	 */
+	public Integer getCdTipoConta() {
+		return this.cdTipoConta;
+	}
+
+	/**
+	 * @param pCdTipoConta the cdTipoConta to set
+	 */
+	public void setCdTipoConta(Integer pCdTipoConta) {
+		this.cdTipoConta = pCdTipoConta;
 	}
 
 

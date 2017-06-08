@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import sgbr.entidades.Mesa;
 import sgbr.fachada.FachadaSGBR;
+import sgbr.util.Constantes;
 import sgbr.util.web.SelectGenerico;
 
 /**
@@ -33,12 +34,12 @@ public class SelectMesaConta extends SelectGenerico {
 	}
 
 	public String getHTML(HttpServletRequest pRequest, String pNmSelect, String pIdSelect, String pCampoSelecionado,
-			boolean pObrigatorio, boolean pComTodos, boolean pInUso) throws Exception {
+			boolean pObrigatorio, boolean pComTodos, String pInUso,String pCdTipoConta) throws Exception {
 
 		String html = "";
 		Collection<Mesa> colecao = null;
 
-		colecao = (Collection<Mesa>) FachadaSGBR.getInstancia().consultaMesaConta(pInUso);
+		colecao = (Collection<Mesa>) FachadaSGBR.getInstancia().consultaMesaConta(pInUso, pCdTipoConta);
 
 		html = this.getColecaoComoHTMLSelect(colecao, pNmSelect, pIdSelect, pCampoSelecionado, pObrigatorio, pComTodos);
 
@@ -46,6 +47,11 @@ public class SelectMesaConta extends SelectGenerico {
 
 	}
 
+	public String getHTML(HttpServletRequest pRequest, String pNmSelect, String pIdSelect, String pCampoSelecionado,
+			boolean pObrigatorio, boolean pComTodos, String pInUso) throws Exception{
+		return this.getHTML(pRequest, pNmSelect, pIdSelect, pCampoSelecionado, pObrigatorio, pComTodos, pInUso,null);
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -57,7 +63,7 @@ public class SelectMesaConta extends SelectGenerico {
 	public String getHTML(HttpServletRequest pRequest, String pNmSelect, String pIdSelect, String pCampoSelecionado,
 			boolean pObrigatorio, boolean pComTodos) throws Exception {
 
-		return this.getHTML(pRequest, pNmSelect, pIdSelect, pCampoSelecionado, pObrigatorio, pComTodos, false);
+		return this.getHTML(pRequest, pNmSelect, pIdSelect, pCampoSelecionado, pObrigatorio, pComTodos, Constantes.CD_NAO,null);
 	}
 
 	/*

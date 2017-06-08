@@ -70,9 +70,9 @@ public class PRManterItemCardapio extends PRManterCadastro{
 	public void processarInclusao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 		ItemCardapio itemCardapio = new ItemCardapio();
 		
-		String nmItemCardapio = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_nmItemCardapio, pRequest);
-		String vlItemCardapio = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_vlItemCardapio, pRequest);
-		String siItemCardapio = this.getAtributoOuParametroStringOpcional(ID_REQ_ATR_siItemCardapio, pRequest);
+		String nmItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nmItemCardapio, pRequest);
+		String vlItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_vlItemCardapio, pRequest);
+		String siItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_siItemCardapio, pRequest);
 		
 		vlItemCardapio = vlItemCardapio.replaceAll(",", ".");
 		

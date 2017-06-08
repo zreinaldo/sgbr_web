@@ -25,6 +25,8 @@ public class OTDConta {
 	private Timestamp dhAbertura;
 	private boolean inContaMesa;
 	private String siConta;
+	private String dsTipoConta;
+	private Integer cdTipoConta;
 
 	/**
 	 * @return the cdConta
@@ -201,6 +203,34 @@ public class OTDConta {
 	 */
 	public void setDhAbertura(Timestamp pDhAbertura) {
 		this.dhAbertura = pDhAbertura;
+	}
+
+	/**
+	 * @return the dsTipoConta
+	 */
+	public String getDsTipoConta() {
+		return this.dsTipoConta;
+	}
+
+	/**
+	 * @param pDsTipoConta the dsTipoConta to set
+	 */
+	public void setDsTipoConta(String pDsTipoConta) {
+		this.dsTipoConta = pDsTipoConta;
+	}
+
+	/**
+	 * @return the cdTipoConta
+	 */
+	public Integer getCdTipoConta() {
+		return this.cdTipoConta;
+	}
+
+	/**
+	 * @param pCdTipoConta the cdTipoConta to set
+	 */
+	public void setCdTipoConta(Integer pCdTipoConta) {
+		this.cdTipoConta = pCdTipoConta;
 	}
 
 }

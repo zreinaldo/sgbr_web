@@ -8,48 +8,43 @@ import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 
-import sgbr.entidades.Comanda;
+import sgbr.entidades.Mesa;
 import sgbr.fachada.FachadaSGBR;
-import sgbr.util.Constantes;
+import sgbr.util.OTDCliente;
 import sgbr.util.web.SelectGenerico;
 
 /**
  * @author Reinaldo
  *
  */
-public class SelectComandaConta extends SelectGenerico {
+public class SelectClienteConta extends SelectGenerico {
 
-	private static SelectComandaConta aSelectComanda = new SelectComandaConta();
+	private static SelectClienteConta aSelectConta = new SelectClienteConta();
 
-	private SelectComandaConta() {
+	private SelectClienteConta() {
 		super();
 	}
 
-	public static SelectComandaConta getInstancia() {
-		if (SelectComandaConta.aSelectComanda == null) {
-			SelectComandaConta.aSelectComanda = new SelectComandaConta();
+	public static SelectClienteConta getInstancia() {
+		if (SelectClienteConta.aSelectConta == null) {
+			SelectClienteConta.aSelectConta = new SelectClienteConta();
 		}
 
-		return SelectComandaConta.aSelectComanda;
+		return SelectClienteConta.aSelectConta;
 	}
 
 	public String getHTML(HttpServletRequest pRequest, String pNmSelect, String pIdSelect, String pCampoSelecionado,
-			boolean pObrigatorio, boolean pComTodos, String pInUso,String pCdTipoConta) throws Exception {
+			boolean pObrigatorio, boolean pComTodos, boolean pInUso) throws Exception {
 
 		String html = "";
-		Collection<Comanda> colecao = null;
+		Collection<OTDCliente> colecao = null;
 
-		colecao = (Collection<Comanda>) FachadaSGBR.getInstancia().consultaComandaConta(pInUso, pCdTipoConta);
+		colecao = (Collection<OTDCliente>) FachadaSGBR.getInstancia().consultaClienteConta(pInUso);
 
 		html = this.getColecaoComoHTMLSelect(colecao, pNmSelect, pIdSelect, pCampoSelecionado, pObrigatorio, pComTodos);
 
 		return html;
 
-	}
-	
-	public String getHTML(HttpServletRequest pRequest, String pNmSelect, String pIdSelect, String pCampoSelecionado,
-			boolean pObrigatorio, boolean pComTodos, String pInUso) throws Exception{
-		return this.getHTML(pRequest, pNmSelect, pIdSelect, pCampoSelecionado, pObrigatorio, pComTodos, pInUso,null);
 	}
 
 	/*
@@ -63,7 +58,7 @@ public class SelectComandaConta extends SelectGenerico {
 	public String getHTML(HttpServletRequest pRequest, String pNmSelect, String pIdSelect, String pCampoSelecionado,
 			boolean pObrigatorio, boolean pComTodos) throws Exception {
 
-		return this.getHTML(pRequest, pNmSelect, pIdSelect, pCampoSelecionado, pObrigatorio, pComTodos, Constantes.CD_NAO,null);
+		return this.getHTML(pRequest, pNmSelect, pIdSelect, pCampoSelecionado, pObrigatorio, pComTodos, false);
 	}
 
 	/*
@@ -79,15 +74,15 @@ public class SelectComandaConta extends SelectGenerico {
 
 		Iterator it;
 		StringBuffer bufferHtml = new StringBuffer(200);
-		Comanda Comanda = null;
+		OTDCliente otdCliente = null;
 
 		this.criarSelect(pNmSelect, pIdSelect, bufferHtml, pObrigatorio, pComTodos);
 
 		it = pColecao.iterator();
 		while (it.hasNext()) {
-			Comanda = (Comanda) it.next();
-			this.valoresOptions(bufferHtml, pCampoSelecionado, Comanda.getCdComanda().toString(),
-					Comanda.getCdComanda().toString());
+			otdCliente = (OTDCliente) it.next();
+			this.valoresOptions(bufferHtml, pCampoSelecionado, otdCliente.getCdCliente().toString(),
+					otdCliente.getNmCliente().toString());
 
 		}
 

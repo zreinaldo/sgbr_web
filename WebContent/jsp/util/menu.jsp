@@ -73,8 +73,8 @@ li.dropdown {
     <a href="javascript:void(0)" class="dropbtn">Conta</a>
     <div class="dropdown-content">
     	<a href="http://localhost:8080/sgbr_web/PRManterConta">Manter Conta</a>
-     	<a href="http://localhost:8080/sgbr_web/PRManterConta?evento=abrirContaComandaIndividual">Abrir conta por comanda</a>   
-        <a href="http://localhost:8080/sgbr_web/PRManterConta?evento=abrirContaMesa">Abrir conta por mesa</a>
+     	<a href="http://localhost:8080/sgbr_web/PRManterConta?evento=exibirAbrirContaMesa">Abrir conta por Mesa</a>   
+        <a href="http://localhost:8080/sgbr_web/PRManterConta?evento=exibirAbrirContaComanda">Abrir conta por Comanda Individual</a>
 
     </div>
     
@@ -83,7 +83,7 @@ li.dropdown {
   <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Pedidos</a>
     <div class="dropdown-content">
-      <a href="http://localhost:8080/sgbr_web/PRAbrirContaComandaIndividual">Manter Pedidos</a>      
+      <a href="http://localhost:8080/sgbr_web/PRManterPedido">Manter Pedidos</a>      
     </div>
     
   </li>

@@ -131,7 +131,19 @@ public class Util {
 		return dsTpUsuario;
 	}
 	
+	/**
+	 * @param pValor
+	 * @return
+	 */
 	public static String getValorHTML (Object pValor) {
 		return pValor == null ? "" : pValor.toString();
+	}
+	
+	/**
+	 * @param pValor
+	 * @return
+	 */
+	public static Integer getInteger (String pValor) {
+		return pValor.equals("") ? null : Integer.parseInt(pValor);
 	}
 }

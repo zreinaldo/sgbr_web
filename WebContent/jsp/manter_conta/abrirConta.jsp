@@ -1,3 +1,7 @@
+<%@page import="sgbr.util.Constantes"%>
+<%@page import="sgbr.web.servlet.selects.SelectClienteConta"%>
+<%@page import="sgbr.web.servlet.selects.SelectComandaConta"%>
+<%@page import="sgbr.web.servlet.selects.SelectMesaConta"%>
 <%@page import="sgbr.web.servlet.PRManterConta"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -7,6 +11,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Abrir Conta</title>
 </head>
+
+<%
+  String cdTipoConta = PRManterConta.getAtributoOuParametroStringOpcional(PRManterConta.ID_REQ_ATR_cdTipoConta,request);
+
+%>
+
 <SCRIPT language="JavaScript" type="text/javascript" src="js/funcoes_comuns.js"></SCRIPT>
 <body>
 	<FORM name="form_principal" method="post" action="">
@@ -15,23 +25,27 @@
 <%@ include file = "../../jsp/util/menu.jsp" %>
 
 		<INPUT type="hidden" id="evento" name="<%=PRManterConta.ID_REQ_EVENTO%>" value="">
-
+	<INPUT type="hidden" id="cdTipoConta" name="<%=PRManterConta.ID_REQ_ATR_cdTipoConta%>" value="<%=cdTipoConta%>">
 
 		<fieldset>
 			<table>
-				<tr>
+			
+			
+			<tr>
 					<td><label for="<%=PRManterConta.ID_REQ_ATR_cdMesa%>">Numero Mesa:</label></td>
-					<td>SelectMEsa</td>
+					<td><%=SelectMesaConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdMesa, PRManterConta.ID_REQ_ATR_cdMesa, "", true, false, "", cdTipoConta)	%></td>
 				</tr>			
 
+			<%if (cdTipoConta.equals(Constantes.CD_TIPO_CONTA_COMANDA)) {  %>
 				<tr>
 					<td><label for="<%=PRManterConta.ID_REQ_ATR_cdComanda%>">Numero Comanda:</label></td>
-					<td>SelectComanda</td>
-				</tr>	
+					<td><%=SelectComandaConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdComanda, PRManterConta.ID_REQ_ATR_cdComanda, "", true, false, false)	%></td>
+				</tr>
+				<%} %>	
 				
 				<tr>
 					<td><label for="<%=PRManterConta.ID_REQ_ATR_cdCliente%>">Cliente:</label></td>
-					<td>SelectCliente</td>
+					<td><%=SelectClienteConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdCliente, PRManterConta.ID_REQ_ATR_cdCliente, "", true, false, false)	%></td>
 				</tr>	
 			
 			
