@@ -33,13 +33,18 @@
 			
 			<tr>
 					<td><label for="<%=PRManterConta.ID_REQ_ATR_cdMesa%>">Numero Mesa:</label></td>
-					<td><%=SelectMesaConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdMesa, PRManterConta.ID_REQ_ATR_cdMesa, "", true, false, "", cdTipoConta)	%></td>
+					<%if (cdTipoConta.equals(Constantes.CD_TIPO_CONTA_COMANDA) ) { %>
+					<td><%=SelectMesaConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdMesa, PRManterConta.ID_REQ_ATR_cdMesa, "", true, false, Constantes.CD_NAO, Constantes.CD_TIPO_CONTA_MESA)	%></td>
+					
+					<%} else {  %>
+					<td><%=SelectMesaConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdMesa, PRManterConta.ID_REQ_ATR_cdMesa, "", true, false, Constantes.CD_NAO)%></td>
+					<%} %>
 				</tr>			
 
 			<%if (cdTipoConta.equals(Constantes.CD_TIPO_CONTA_COMANDA)) {  %>
 				<tr>
 					<td><label for="<%=PRManterConta.ID_REQ_ATR_cdComanda%>">Numero Comanda:</label></td>
-					<td><%=SelectComandaConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdComanda, PRManterConta.ID_REQ_ATR_cdComanda, "", true, false, false)	%></td>
+					<td><%=SelectComandaConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdComanda, PRManterConta.ID_REQ_ATR_cdComanda, "", true, false, Constantes.CD_NAO)	%></td>
 				</tr>
 				<%} %>	
 				

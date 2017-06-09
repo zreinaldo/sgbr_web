@@ -23,7 +23,8 @@ import sgbr.util.web.PRManterCadastro;
 @WebServlet("/PRManterItemCardapio")
 public class PRManterItemCardapio extends PRManterCadastro{
 	
-	public static final String ID_REQ_ATR_cdItemCardapio = "cdItemCardapio";
+	public static final String ID_REQ_ATR_cdConta = "cdConta";
+	public static final String ID_REQ_ATR_cdItemCardapio = "cdItemCardapio";	
 	public static final String ID_REQ_ATR_nmItemCardapio = "nmItemCardapio";
 	public static final String ID_REQ_ATR_vlItemCardapio = "vlItemCardapio";
 	public static final String ID_REQ_ATR_siItemCardapio = "siItemCardapio";

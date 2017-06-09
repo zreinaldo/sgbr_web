@@ -174,7 +174,7 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 		}
 
 		if (!pCdComanda.isEmpty()) {
-			sqlWhere = sqlWhere + sqlConector + "mydb.conta.COMANDA_CD = "   + pCdMesa;
+			sqlWhere = sqlWhere + sqlConector + "mydb.conta.COMANDA_CD = "   + pCdComanda;
 			sqlConector = " \n AND ";
 		}
 
@@ -186,11 +186,15 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 			sqlConector = " \n AND ";
 		}
 
+		
 		// Constroi SQL completo
 		if (sqlWhere.length() != 0) {
-			sql = sql + " \n WHERE " + sqlWhere;
+			sql = sql + " \n WHERE " + sqlWhere ;
 		}
 
+		sql = sql + " order by mydb.conta.conta_cd desc";
+		
+		
 		Statement stm = conexao.createStatement();
 
 		ResultSet rs = stm.executeQuery(sql);
@@ -231,34 +235,25 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 		Collection<Comanda> colecaoComanda = new ArrayList<Comanda>();
 
 		conexao = this.getConection();
-		String sql = "SELECT COMANDA_CD FROM mydb.comanda";
+
+		conexao = this.getConection();
+		String sql = "SELECT comanda_CD FROM mydb.comanda";
 		//comandas validas
-		sql = sql + " where  mydb.comanda.COMANDA_DT_FIM_VALIDADE is null ";
+		sql = sql + " where ";
 
-//		String operadorNot = "";
-//		if (!pInUso) {
-//			operadorNot = "not";
-//		}
-//
-//		sql = sql + "and " + operadorNot
-//				+ " EXISTS( SELECT 1 FROM mydb.conta where mydb.conta.COMANDA_CD = mydb.comanda.COMANDA_CD and mydb.conta.DH_ENCERRAMENTO is null)";
-
-		um select par acada tela
-		if (pInUso.equals(Constantes.CD_NAO) && (pCdTipoConta == null || pCdTipoConta.isEmpty() )) {
-			sql = sql + " and NOT EXISTS  ( SELECT 1 FROM mydb.conta where mydb.conta.COMANDA_CD = mydb.comanda.COMANDA_CD and mydb.conta.DH_ENCERRAMENTO is null)";
-		} else if (pInUso.equals(Constantes.CD_SIM)  && (pCdTipoConta == null || pCdTipoConta.isEmpty() )) {
-			
-			sql = sql + " and EXISTS  ( SELECT 1 FROM mydb.conta where mydb.conta.COMANDA_CD =  mydb.comanda.COMANDA_CD and mydb.conta.DH_ENCERRAMENTO is null)";
-		} else {
-			if (pCdTipoConta == Constantes.CD_TIPO_CONTA_MESA){
-				sql = sql + " and not EXISTS( SELECT 1 FROM mydb.conta where mydb.conta.COMANDA_CD =  mydb.comanda.COMANDA_CD and conta.DH_ENCERRAMENTO is null )";
-			} else	if (pInUso.equals(Constantes.CD_SIM) && pCdTipoConta == Constantes.CD_TIPO_CONTA_COMANDA){
-				sql = sql + " and EXISTS( SELECT 1 FROM mydb.conta where mydb.conta.COMANDA_CD =  mydb.comanda.COMANDA_CD and TIPO_CONTA_CD = " + Constantes.CD_TIPO_CONTA_MESA +" and conta.DH_ENCERRAMENTO is null )";
-			}else	if (pCdTipoConta == Constantes.CD_TIPO_CONTA_COMANDA){
-				sql = sql + " and not EXISTS( SELECT 1 FROM mydb.conta where mydb.conta.COMANDA_CD =  mydb.comanda.COMANDA_CD and TIPO_CONTA_CD = " + Constantes.CD_TIPO_CONTA_MESA +" and conta.DH_ENCERRAMENTO is null )";
-			}  
-			
+		String operadorNot = "";
+		if (pInUso.equals(Constantes.CD_NAO)) {
+			operadorNot = "not";
 		}
+		if ( pCdTipoConta != null){
+				sql = sql + operadorNot + " EXISTS( SELECT 1 FROM mydb.conta where mydb.conta.comanda_CD = mydb.comanda.comanda_CD and conta.TIPO_CONTA_CD = " + pCdTipoConta +" and conta.DH_ENCERRAMENTO is null)";
+		} else {
+				sql = sql + operadorNot + " EXISTS( SELECT 1 FROM mydb.conta where mydb.conta.comanda_CD = mydb.comanda.comanda_CD and conta.DH_ENCERRAMENTO is null )";
+		}
+
+		//so retorna comandas validas
+		sql = sql + " and (mydb.comanda.COMANDA_DT_FIM_VALIDADE is null or mydb.comanda.COMANDA_DT_FIM_VALIDADE > CURRENT_TIMESTAMP) ";
+		
 		Statement stm = conexao.createStatement();
 
 		ResultSet rs = stm.executeQuery(sql);
@@ -290,31 +285,14 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 
 		String operadorNot = "";
 		if (pInUso.equals(Constantes.CD_NAO)) {
-			sql = sql + " NOT EXISTS  ( SELECT 1 FROM mydb.conta where mydb.conta.mesa_CD = mydb.mesa.mesa_CD and mydb.conta.DH_ENCERRAMENTO is null)";
-		} else if (pInUso.equals(Constantes.CD_SIM)) {
-			
-			sql = sql + "EXISTS  ( SELECT 1 FROM mydb.conta where mydb.conta.mesa_CD = mydb.mesa.mesa_CD and mydb.conta.DH_ENCERRAMENTO is null)";
-		} else {
-			if (pCdTipoConta == Constantes.CD_TIPO_CONTA_MESA){
-				sql = sql + "not EXISTS( SELECT 1 FROM mydb.conta where mydb.conta.MESA_CD = mydb.mesa.MESA_CD and conta.DH_ENCERRAMENTO is null )";
-			} else	if (pCdTipoConta == Constantes.CD_TIPO_CONTA_COMANDA){
-				sql = sql + "not EXISTS( SELECT 1 FROM mydb.conta where mydb.conta.MESA_CD = mydb.mesa.MESA_CD and TIPO_CONTA_CD = " + Constantes.CD_TIPO_CONTA_MESA +" and conta.DH_ENCERRAMENTO is null )";
-			}
+			operadorNot = "not";
 		}
-		
-		
-		
-//		if (pCdTipoConta == null) {
-//			sql = sql + operadorNot
-//			+ " ( SELECT 1 FROM mydb.conta where mydb.conta.mesa_CD = mydb.mesa.mesa_CD and mydb.conta.DH_ENCERRAMENTO is null)";
-//	     }else {
-//	    	 sql = sql + operadorNot
-//	    				+ " EXISTS( SELECT 1 FROM mydb.conta where "
-//	    				+ " mydb.conta.mesa_CD = mydb.mesa.mesa_CD "
-//	    				+ "and mydb.conta.DH_ENCERRAMENTO is null "
-//	    				+ "and mydb.conta.TIPO_CONTA_CD = " + pCdTipoConta + ")";
-//	     }
-		
+		if ( pCdTipoConta != null){
+				sql = sql + operadorNot + " EXISTS( SELECT 1 FROM mydb.conta where mydb.conta.MESA_CD = mydb.mesa.MESA_CD and conta.TIPO_CONTA_CD = " + pCdTipoConta +" and conta.DH_ENCERRAMENTO is null )";
+		} else {
+				sql = sql + operadorNot + " EXISTS( SELECT 1 FROM mydb.conta where mydb.conta.MESA_CD = mydb.mesa.MESA_CD and conta.DH_ENCERRAMENTO is null )";
+		}
+
 		Statement stm = conexao.createStatement();
 
 		ResultSet rs = stm.executeQuery(sql);
@@ -369,5 +347,6 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 		conexao.close();
 
 		return colecaoCLiente;
-	}
+	}	
+	
 }

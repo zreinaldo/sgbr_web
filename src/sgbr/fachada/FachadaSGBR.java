@@ -366,7 +366,7 @@ public class FachadaSGBR {
 		return ControladorContaItemCardapio.getInstancia().consultaTelaManterPedido(pCdMesa, pCdComanda);
 	}
 	
-	public void incluir(ContaItemCardapio pContaItemCardapio) throws SQLException {
+	public void incluirContaItemCardapio(ContaItemCardapio pContaItemCardapio) throws SQLException {
 		ControladorContaItemCardapio.getInstancia().incluir(pContaItemCardapio);
 	}
 }

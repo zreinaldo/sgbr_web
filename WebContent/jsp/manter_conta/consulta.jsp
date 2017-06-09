@@ -1,5 +1,6 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page import="sgbr.web.servlet.PRManterPedido"%>
 <%@page import="sgbr.util.Constantes"%>
 <%@page import="sgbr.web.servlet.selects.SelectClienteConta"%>
 <%@page import="sgbr.util.Util"%>
@@ -39,9 +40,9 @@ if (otd == null) {
 
 <body>
 
-<%@ include file = "../../jsp/util/menu.jsp" %>
-
 	<FORM name="form_principal" method="post" action="">
+
+<%@ include file = "../../jsp/util/menu.jsp" %>
 
 		<INPUT type="hidden" id="evento" name="<%=PRManterConta.ID_REQ_EVENTO%>" value="">
 
@@ -51,21 +52,21 @@ if (otd == null) {
 							
 				<tr>
 					<td><label for="cdMesa">Numero Mesa em uso:</label></td>
-					<td><%= SelectMesaConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdMesa, PRManterConta.ID_REQ_ATR_cdMesa, cdComanda, false, true, Constantes.CD_SIM)	%></td>
+					<td><%= SelectMesaConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdMesa, PRManterConta.ID_REQ_ATR_cdMesa, cdMesa, false, true, Constantes.CD_SIM)	%></td>
 					
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td><label for="cdComanda">Numero Comanda em uso:</label></td>
-					<td><%= SelectComandaConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdComanda, PRManterConta.ID_REQ_ATR_cdComanda, cdMesa, false, true, true)	%></td>
+					<td><label for="cdComanda">Numero Comanda em uso:</label></td>					
+					<td><%= SelectComandaConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdComanda, PRManterConta.ID_REQ_ATR_cdComanda, cdComanda, false, true, Constantes.CD_SIM)	%></td>
 				</tr>
 				
 				
 								
 				<tr>
 					<td><label for="cdCliente">Nome Cliente em Uso:</label></td>
-					<td><%= SelectClienteConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdCliente, PRManterConta.ID_REQ_ATR_cdCliente, cdMesa, false, true, true)	%></td>
+					<td><%= SelectClienteConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdCliente, PRManterConta.ID_REQ_ATR_cdCliente, cdCliente, false, true, true)	%></td>
 				</tr>
 							
 							
@@ -87,7 +88,7 @@ if (otd == null) {
 						<th>Mesa</th>	
 						<th>Comanda</th>
 						<th>Cliente</th>								
-						<th>Data Abertura</th>
+						<th>Data/Hora Abertura</th>
 						<th>Situação</th>
 				
 					</tr>
@@ -121,7 +122,7 @@ if (otd == null) {
 					    <input type="button" value="Consultar"	onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_PROCESSAR_CONSULTA%>')" id="consultar">
 					    <input type="button" value="Abrir Conta Mesa"	onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_EXIBIR_ABRIR_CONTA_MESA%>')" id="abrirContaMesa">
 					     <input type="button" value="Abrir Conta Comanda"	onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_EXIBIR_ABRIR_CONTA_COMANDA%>')" id="abrirContaComanda">
-					     <input type="button" value="Incluir Pedido"	onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_EXIBIR_INCLUSAO_PEDIDO%>')" id="exibirInclusaoPedido">
+					     <input type="button" value="Incluir Pedido"	onclick="submeterFormulario('<%=PRManterPedido.NM_SERVLET%>','<%=PRManterPedido.EVENTO_EXIBIR_INCLUSAO%>')" id="exibirInclusaoPedido">
 					     <input type="button" value="Encerrar Conta"	onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_EXIBIR_ENCERRAR_CONTA%>')" id="exibirEncerrarConta">
 					     <input type="button" value="Conta Parcial"	onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_EXIBIR_CONTA_PARCIAL%>')" id="exibirContaParcial">
 					 					    

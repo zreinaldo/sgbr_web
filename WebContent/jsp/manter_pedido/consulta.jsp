@@ -84,8 +84,8 @@ if (otd == null) {
 					<tr>
 					<td><INPUT type="radio" id="radio_consulta_pedido" name="<%=PRManterPedido.ID_REQ_ATR_radio_consulta_pedido%>" value="<%=campos.getCdPedido()+"[[*]]"+campos.getCdConta()%>"></td>
 					<td><%=campos.getCdConta()%></td>
-						<td><%=campos.getCdMesa()%></td>
-						<td><%=campos.getCdComanda()%></td>
+						<td><%=Util.getValorHTML(campos.getCdMesa())%></td>
+						<td><%=Util.getValorHTML(campos.getCdComanda())%></td>
 						<td><%=campos.getNmItemCardapio()%></td>
 						<td><%=campos.getQtdItemCardapio()%></td>
 						<td><%=campos.getObsItemCardapio()%></td>

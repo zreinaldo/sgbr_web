@@ -121,7 +121,7 @@ public class DAOContaItemCardapio extends DAO_MYSQL implements IntfDAOContaItemC
 	/* (non-Javadoc)
 	 * @see sgbr.cadastros.IntfDAOContaItemCardapio#alterar(sgbr.entidades.ContaItemCardapio)
 	 */
-	@Override
+	
 	public void alterar(ContaItemCardapio pContaItemCardapio) throws SQLException {
 		Connection conexao = null;
 //		int i = 1;
@@ -148,7 +148,7 @@ public class DAOContaItemCardapio extends DAO_MYSQL implements IntfDAOContaItemC
 //
 //		ppSt.close();
 //		conexao.close();
-		
+				
 	}
 
 
@@ -260,8 +260,8 @@ public class DAOContaItemCardapio extends DAO_MYSQL implements IntfDAOContaItemC
 			otdContaItemCardapio.setNmItemCardapio(rs.getString(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM));
 			otdContaItemCardapio.setQtdItemCardapio(rs.getInt(ContaItemCardapio.NM_COLUNA_CONTA_ITEM_CARDAPIO_QTD));
 			otdContaItemCardapio.setObsItemCardapio(rs.getString(ContaItemCardapio.NM_COLUNA_CONTA_ITEM_CARDAPIO_OBS));
-			otdContaItemCardapio.setCdMesa(rs.getInt(Mesa.NM_COLUNA_MESA_CD));
-			otdContaItemCardapio.setCdComanda(rs.getInt(Comanda.NM_COLUNA_COMANDA_CD));
+			otdContaItemCardapio.setCdMesa(rs.getInt(Mesa.NM_COLUNA_MESA_CD) == 0 ? null : rs.getInt(Mesa.NM_COLUNA_MESA_CD));
+			otdContaItemCardapio.setCdComanda(rs.getInt(Comanda.NM_COLUNA_COMANDA_CD) == 0 ? null : rs.getInt(Comanda.NM_COLUNA_COMANDA_CD));
 			otdContaItemCardapio.setCdConta(rs.getInt(Conta.NM_COLUNA_CONTA_CD));
 
 			arrayResposta.add(otdContaItemCardapio);
@@ -306,9 +306,9 @@ public class DAOContaItemCardapio extends DAO_MYSQL implements IntfDAOContaItemC
 		while (rs.next()) {
 			itemCardapio = new ContaItemCardapio();
 			itemCardapio.setCdContaItemCardapio(rs.getInt(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_CD));
-			itemCardapio.setNmContaItemCardapio(rs.getString(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM));
-			itemCardapio.setSiContaItemCardapio(rs.getString(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_SI));
-			itemCardapio.setVlContaItemCardapio(rs.getDouble(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_VL));
+//			itemCardapio.setNmContaItemCardapio(rs.getString(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM));
+//			itemCardapio.setSiContaItemCardapio(rs.getString(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_SI));
+//			itemCardapio.setVlContaItemCardapio(rs.getDouble(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_VL));
 			itemCardapio.setDhIncusaoRegistro(rs.getTimestamp(ContaItemCardapio.NM_COLUNA_DH_INCLUSAO_REGISTRO));
 			itemCardapio.setDhAlteracaoRegistro(rs.getTimestamp( ContaItemCardapio.NM_COLUNA_DH_ALTERACAO_REGISTRO));
 			

@@ -1,3 +1,4 @@
+<%@page import="sgbr.web.servlet.PRManterItemCardapio"%>
 <%@page import="sgbr.util.Constantes"%>
 <%@page import="sgbr.web.servlet.selects.SelectComandaConta"%>
 <%@page import="sgbr.web.servlet.selects.SelectMesaConta"%>
@@ -9,34 +10,50 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%
+
+String cdConta = PRManterItemCardapio.getAtributoOuParametroStringOpcional(PRManterItemCardapio.ID_REQ_ATR_cdConta,request);
+
+
+
+
+
+
+
+
+
+%>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro Item no Pedido</title>
+<title>Incluir Item Conta</title>
 </head>
 <SCRIPT language="JavaScript" type="text/javascript" src="js/funcoes_comuns.js"></SCRIPT>
 <body>
 	<FORM name="form_principal" method="post" action="">
 
-		<INPUT type="hidden" id="evento"
-			name="<%=PRManterPedido.ID_REQ_EVENTO%>" value="">
+<%@ include file = "../../jsp/util/menu.jsp" %>
+
+		<INPUT type="hidden" id="evento"	name="<%=PRManterPedido.ID_REQ_EVENTO%>" value="">
+		<INPUT type="hidden" id="cdConta"	name="<%=PRManterPedido.ID_REQ_ATR_cdConta%>" value="<%=cdConta%>">
 
 
 		<fieldset>
 			<table>
-							<Th> Conta por:</Th>
+			
+			<% if (cdConta.isEmpty())  {%>
+			
+				
+			<Th align="left">Contas abertas por Mesa:</Th>
 				<tr> 
-					<td><label for="cdMesa">Mesa:</label></td>
-					<td><%= SelectMesaConta.getInstancia().getHTML(request, PRManterPedido.ID_REQ_ATR_cdMesa, PRManterPedido.ID_REQ_ATR_cdMesa, "", false, true, "", Constantes.CD_TIPO_CONTA_MESA)	%></td>
-					
-					<td></td>
-				
-				</tr>			
-
+                  <td><label for="cdMesa">Numero Mesa:</label></td>
+					<td><%= SelectMesaConta.getInstancia().getHTML(request, PRManterPedido.ID_REQ_ATR_cdMesa, PRManterPedido.ID_REQ_ATR_cdMesa, "", true, false, "",Constantes.CD_TIPO_CONTA_MESA)	%></td>									
+				</tr>				
+				<Th align="left">Contas abertas por Comanda:</Th>
 			<tr>
-				
-					<td><label for="cdComanda">Comanda:</label></td>
-					<td><%= SelectComandaConta.getInstancia().getHTML(request, PRManterPedido.ID_REQ_ATR_cdComanda, PRManterPedido.ID_REQ_ATR_cdComanda, "", false, true, Constantes.CD_SIM, Constantes.CD_TIPO_CONTA_COMANDA)	%></td>
-				</tr>			
-
+					<td><label for="cdComanda">Numero Comanda:</label></td>					
+					<td><%= SelectComandaConta.getInstancia().getHTML(request, PRManterPedido.ID_REQ_ATR_cdComanda, PRManterPedido.ID_REQ_ATR_cdComanda, "", true, false, Constantes.CD_SIM,Constantes.CD_TIPO_CONTA_COMANDA)	%></td>
+				</tr>
+					<td>----</td>			
+           <% }%>
 			<tr>
 					<td><label for="cdItemCardapio">Item do Cadápio:</label></td>
 					<td><%= SelectItemCardapio.getInstancia().getHTML(request, PRManterPedido.ID_REQ_ATR_cdItemCardapio, PRManterPedido.ID_REQ_ATR_cdItemCardapio, "",true,false)%></td>
