@@ -1,5 +1,6 @@
 package sgbr.web.servlet;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -7,10 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sgbr.cadastros.sql.DAOConta;
 import sgbr.entidades.Conta;
 import sgbr.fachada.FachadaSGBR;
+import sgbr.regras.conta.RNEncerrarConta;
 import sgbr.util.Constantes;
 import sgbr.util.OTDConta;
+import sgbr.util.OTDContaItemCardapio;
 import sgbr.util.Util;
 import sgbr.util.web.PRConsultar;
 
@@ -27,39 +31,40 @@ public class PRManterConta extends PRConsultar {
 	public static final String ID_REQ_ATR_cdMesa= "cdMesa";
 	public static final String ID_REQ_ATR_siConta= "siConta";
 	public static final String ID_REQ_ATR_cdCliente= "cdCliente";
-	public static final String ID_REQ_ATR_vlTotal= "vlTotal";
-	public static final String ID_REQ_ATR_vlDesconto= "vlDesconto";
+	public static final String ID_REQ_ATR_vlContaFinal= "vlContaFinal";
+	public static final String ID_REQ_ATR_vlContaOriginal= "vlContaOriginal";
+	public static final String ID_REQ_ATR_vlDinheiroDesconto= "vlDinheiroDesconto";
+	public static final String ID_REQ_ATR_vlPercDesconto= "vlPercDesconto";
 	public static final String ID_REQ_ATR_percDesconto= "percDesconto";
 	public static final String ID_REQ_ATR_dhEncerramento= "dhEncerramento";
-    public static final String ID_REQ_ATR_inContaMesa= "inContaMesa";
+    public static final String ID_REQ_ATR_inFecharConta = "inFecharConta";
+    public static final String ID_REQ_ATR_inContaDesconto = "inContaDesconto";
+    
 
-	
+    public static final String ID_REQ_ATR_otdContaItemCardapio = "OTDContaItemCardapio";
 	public static final String ID_REQ_ATR_otdConta = "OTDConta";
 	public static final String ID_REQ_ATR_radio_consulta_conta = "radio_consulta_conta";
 
 	public static final String NM_SERVLET = "PRManterConta";
 	
-	public static final String NM_JSP_CONSULTA = "/jsp/manter_conta/consulta.jsp";
-	public static final String NM_JSP_ABRIR_CONTA = "/jsp/manter_conta/abrirConta.jsp";
-	
-	//public static final String NM_JSP_ABRIR_CONTA = "/jsp/manter_conta/abrirContaComanda.jsp";
 	
 	
-	public static final String NM_JSP_CONTA_PARCIAL = "/jsp/manter_conta/contaparcial.jsp";
-	public static final String NM_JSP_ENCERRAR_CONTA = "/jsp/manter_conta/encerrarconta.jsp";
-
 	public static final String EVENTO_EXIBIR_ABRIR_CONTA_MESA = "exibirAbrirContaMesa";
 	public static final String EVENTO_EXIBIR_ABRIR_CONTA_COMANDA = "exibirAbrirContaComanda";
 	public static final String EVENTO_PROCESSAR_ABRIR_CONTA = "processarAbrirConta";
 	
 	public static final String EVENTO_EXIBIR_INCLUSAO_PEDIDO = "exibirInclusaoPedido";
+	public static final String EVENTO_EXIBIR_CONTA_PARCIAL = "exibirContaParcial";	
+	
+	
 	public static final String EVENTO_EXIBIR_ENCERRAR_CONTA = "exibirEncerrarConta";
-	public static final String EVENTO_EXIBIR_CONTA_PARCIAL = "exibirContaParcial";
-	
-	public static final String EVENTO_PROCESSAR_INCLUSAO_PEDIDO = "processarInclusaoPedido";
 	public static final String EVENTO_PROCESSAR_ENCERRAR_CONTA = "processarEncerrarConta";
-	public static final String EVENTO_PROCESSAR_CONTA_PARCIAL = "processarContaParcial";
 	
+	public static final String EVENTO_ATUALIZAR_DESCONTO_CONTA = "atualizarDescontoConta";
+	
+	public static final String NM_JSP_CONSULTA = "/jsp/manter_conta/consulta.jsp";
+	public static final String NM_JSP_ABRIR_CONTA = "/jsp/manter_conta/abrirConta.jsp";
+	public static final String NM_JSP_CONTA = "/jsp/manter_conta/conta.jsp";
 	
 	protected FachadaSGBR aFachadaSGBR;
 
@@ -154,5 +159,95 @@ public class PRManterConta extends PRConsultar {
 		
 	
 	}
+	
+	
+	public void exibirEncerrarConta(HttpServletRequest pRequest, HttpServletResponse pResponse)
+			throws Exception {
+		
+		String cdConta = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_conta, pRequest);
+		
+		
+		ArrayList<OTDContaItemCardapio> otd = DAOConta.getInstancia().consultarTodosItensConta(Integer.valueOf(cdConta));
+		
+		
+		pRequest.setAttribute(this.ID_REQ_ATR_cdConta, cdConta);
+		pRequest.setAttribute(this.ID_REQ_ATR_otdContaItemCardapio, otd);
+		pRequest.setAttribute(this.ID_REQ_ATR_inFecharConta, Constantes.CD_SIM);
+		this.redirecionar(this.NM_JSP_CONTA, pRequest, pResponse);
+		
+	}
+	
+	public void exibirContaParcial(HttpServletRequest pRequest, HttpServletResponse pResponse)
+			throws Exception {
+		
+		String cdConta = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_conta, pRequest);
+		
+		//TODO usar fachada
+		ArrayList<OTDContaItemCardapio> otd = DAOConta.getInstancia().consultarTodosItensConta(Integer.valueOf(cdConta));
+		
+		
+		pRequest.setAttribute(this.ID_REQ_ATR_cdConta, cdConta);
+		pRequest.setAttribute(this.ID_REQ_ATR_otdContaItemCardapio, otd);
+		pRequest.setAttribute(this.ID_REQ_ATR_inFecharConta, Constantes.CD_NAO);
+		this.redirecionar(this.NM_JSP_CONTA, pRequest, pResponse);
+		
+	}
+	
+	
+	public void processarEncerrarConta(HttpServletRequest pRequest, HttpServletResponse pResponse)
+			throws Exception {
+		
+		String cdConta = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdConta, pRequest);
+		String vlDinheiroDesconto = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_vlDinheiroDesconto, pRequest);
+		String vlPercDesconto = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_vlPercDesconto, pRequest);
+		String vlContaFinal = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_vlContaFinal, pRequest);
+		String vlContaOriginal = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_vlContaOriginal, pRequest);
+		
+		Conta conta = new Conta();
+		conta.setCdConta(Integer.valueOf(cdConta));
+		
+		conta.setVlDescontoConta(vlDinheiroDesconto.isEmpty() ? null: Double.valueOf(vlDinheiroDesconto));		
+		conta.setPercDescontoConta( vlPercDesconto.isEmpty() ? null: Double.valueOf(vlPercDesconto));
+		//TODO colocar cliente
+		//conta.setCdCliente(pCdCliente);
+		conta.setVlContaFinal(Double.valueOf(vlContaFinal));
+		conta.setVlContaOriginal(Double.valueOf(vlContaOriginal));
+		conta.setDhEncerramento(new Timestamp(System.currentTimeMillis()));
+		
+		RNEncerrarConta.getInstancia().processar(conta);
+		
+		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
+	}
+	
+	
+	public void atualizarDescontoConta(HttpServletRequest pRequest, HttpServletResponse pResponse)
+			throws Exception {
+		
+		String cdConta = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdConta, pRequest);
+		String vlDinheiroDesconto = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_vlDinheiroDesconto, pRequest);
+		String vlPercDesconto = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_vlPercDesconto, pRequest);
+		
+		
+		
+		//TODO mudar para fachada
+		ArrayList<OTDContaItemCardapio> otd = DAOConta.getInstancia().consultarTodosItensConta(Integer.valueOf(cdConta));
+		
+		
+		String inContaDesconto = Constantes.CD_SIM;
+		if (vlDinheiroDesconto.isEmpty() && vlPercDesconto.isEmpty()) {
+			inContaDesconto = Constantes.CD_NAO;
+		}
+		
+		pRequest.setAttribute(this.ID_REQ_ATR_cdConta, cdConta);
+		pRequest.setAttribute(this.ID_REQ_ATR_otdContaItemCardapio, otd);
+		pRequest.setAttribute(this.ID_REQ_ATR_vlDinheiroDesconto, vlDinheiroDesconto.replace(",", "."));
+		pRequest.setAttribute(this.ID_REQ_ATR_vlPercDesconto, vlPercDesconto.replace(",", "."));
+		pRequest.setAttribute(this.ID_REQ_ATR_inFecharConta, Constantes.CD_SIM);
+		pRequest.setAttribute(this.ID_REQ_ATR_inContaDesconto, inContaDesconto);
+		
+		this.redirecionar(this.NM_JSP_CONTA, pRequest, pResponse);
+	}
+		
+
 
 }

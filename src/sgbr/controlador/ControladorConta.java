@@ -42,24 +42,24 @@ public class ControladorConta {
 		return ControladorConta.aControladorConta;
 	}
 
-	public Collection<Comanda> consultaComandaConta(String pInUso,String pCdTipoConta) throws SQLException {
-		return DAOConta.getInstancia().consultaComandaConta( pInUso, pCdTipoConta);
+	public Collection<Comanda> consultaComandaConta(String pInUso, String pCdTipoConta) throws SQLException {
+		return DAOConta.getInstancia().consultaComandaConta(pInUso, pCdTipoConta);
 	}
 
-	public Collection<Mesa> consultaMesaConta(String pInUso,String pCdTipoConta) throws SQLException {
-		return DAOConta.getInstancia().consultaMesaConta(pInUso,pCdTipoConta);
+	public Collection<Mesa> consultaMesaConta(String pInUso, String pCdTipoConta) throws SQLException {
+		return DAOConta.getInstancia().consultaMesaConta(pInUso, pCdTipoConta);
 	}
 
 	public ArrayList<OTDConta> consultaTelaManterConta(String pCdMesa, String pCdComanda, String pSiConta)
 			throws SQLException {
 		return DAOConta.getInstancia().consultaTelaManterConta(pCdMesa, pCdComanda, pSiConta);
 	}
-	
+
 	public Collection<OTDCliente> consultaClienteConta(boolean pInUso) throws SQLException {
 		return DAOConta.getInstancia().consultaClienteConta(pInUso);
-				
+
 	}
-	
+
 	public void incluir(Conta pConta) throws SQLException {
 		DAOConta.getInstancia().incluir(pConta);
 	}

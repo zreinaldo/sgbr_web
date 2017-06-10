@@ -217,6 +217,9 @@ public class PRManterPedido extends PRManterCadastro{
 	 */
 	@Override
 	public void exibirConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
+		
+		//TODO informar funcionario que incluiu o item 
+		
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
 	}

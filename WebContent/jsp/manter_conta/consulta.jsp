@@ -94,7 +94,7 @@ if (otd == null) {
 					</tr>
 		 <% for (OTDConta campos : otd) {
 			  
-			 Integer cdConta = campos.getCdConta();			 
+			 Integer cdConta = campos.getCdConta();			 		
 		
 			 %>
 		 
@@ -125,6 +125,7 @@ if (otd == null) {
 					     <input type="button" value="Incluir Pedido"	onclick="submeterFormulario('<%=PRManterPedido.NM_SERVLET%>','<%=PRManterPedido.EVENTO_EXIBIR_INCLUSAO%>')" id="exibirInclusaoPedido">
 					     <input type="button" value="Encerrar Conta"	onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_EXIBIR_ENCERRAR_CONTA%>')" id="exibirEncerrarConta">
 					     <input type="button" value="Conta Parcial"	onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_EXIBIR_CONTA_PARCIAL%>')" id="exibirContaParcial">
+					     <input type="button" value="Detalhar Conta"	onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_EXIBIR_CONTA_PARCIAL%>')" id="exibirContaParcial">
 					 					    
 					   
 					</td>

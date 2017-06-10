@@ -17,6 +17,9 @@ public class OTDContaItemCardapio {
 	private Integer cdComanda;
 	private Integer cdConta;
 	private Integer cdFuncionario;
+	private Double vlTotal;
+	private Double vlItemCardapio;
+	private String inPromocao;
 
 	/**
 	 * @return the cdPedido
@@ -146,10 +149,56 @@ public class OTDContaItemCardapio {
 	}
 
 	/**
-	 * @param pCdFuncionario the cdFuncionario to set
+	 * @param pCdFuncionario
+	 *            the cdFuncionario to set
 	 */
 	public void setCdFuncionario(Integer pCdFuncionario) {
 		this.cdFuncionario = pCdFuncionario;
+	}
+
+	/**
+	 * @return the vlTotal
+	 */
+	public Double getVlTotal() {
+		return this.vlTotal;
+	}
+
+	/**
+	 * @param pVlTotal
+	 *            the vlTotal to set
+	 */
+	public void setVlTotal(Double pVlTotal) {
+		this.vlTotal = pVlTotal;
+	}
+
+	/**
+	 * @return the vlItemCardapio
+	 */
+	public Double getVlItemCardapio() {
+		return this.vlItemCardapio;
+	}
+
+	/**
+	 * @param pVlItemCardapio
+	 *            the vlItemCardapio to set
+	 */
+	public void setVlItemCardapio(Double pVlItemCardapio) {
+		this.vlItemCardapio = pVlItemCardapio;
+	}
+
+	/**
+	 * @return the inPromocao
+	 */
+	public String getInPromocao() {
+		return this.inPromocao;
+	}
+
+	/**
+	 * @param pInPromocao
+	 *            the inPromocao to set
+	 */
+	public void setInPromocao(String pInPromocao) {
+		this.inPromocao = pInPromocao;
 	}
 
 }

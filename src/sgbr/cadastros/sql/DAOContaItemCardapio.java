@@ -306,12 +306,8 @@ public class DAOContaItemCardapio extends DAO_MYSQL implements IntfDAOContaItemC
 		while (rs.next()) {
 			itemCardapio = new ContaItemCardapio();
 			itemCardapio.setCdContaItemCardapio(rs.getInt(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_CD));
-//			itemCardapio.setNmContaItemCardapio(rs.getString(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM));
-//			itemCardapio.setSiContaItemCardapio(rs.getString(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_SI));
-//			itemCardapio.setVlContaItemCardapio(rs.getDouble(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_VL));
 			itemCardapio.setDhIncusaoRegistro(rs.getTimestamp(ContaItemCardapio.NM_COLUNA_DH_INCLUSAO_REGISTRO));
-			itemCardapio.setDhAlteracaoRegistro(rs.getTimestamp( ContaItemCardapio.NM_COLUNA_DH_ALTERACAO_REGISTRO));
-			
+			itemCardapio.setDhAlteracaoRegistro(rs.getTimestamp( ContaItemCardapio.NM_COLUNA_DH_ALTERACAO_REGISTRO));	
 
 		}
 

@@ -65,7 +65,7 @@ public class Util {
 	}
 
 	/**
-	 * pega o dia da semana 
+	 * retorna o dia da semana do calendar 
 	 * @return
 	 */
 	public static String getDiaSemana() {
