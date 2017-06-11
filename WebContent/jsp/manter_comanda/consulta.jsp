@@ -1,3 +1,6 @@
+<%@page import="sgbr.web.servlet.PRManterConta"%>
+<%@page import="sgbr.web.servlet.selects.SelectSimNao"%>
+<%@page import="com.sun.org.apache.bcel.internal.generic.Select"%>
 <%@page import="sgbr.util.OTDComanda"%>
 <%@page import="sgbr.util.Util"%>
 <%@page import="java.util.ArrayList"%>
@@ -8,30 +11,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Manter Funcionario</title>
+<title>Manter Comanda</title>
 
 <SCRIPT language="JavaScript" type="text/javascript" src="js/funcoes_comuns.js"></SCRIPT>
-<style>
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th, td {
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even){background-color: #f2f2f2}
-
-th {
-    background-color: #4CAF50;
-    color: white;
-}
-</style>
 <%
 
 String cdComanda = PRManterComanda.getAtributoOuParametroStringOpcional(PRManterComanda.ID_REQ_ATR_cdComanda, request);
+String inVigentes = PRManterComanda.getAtributoOuParametroStringOpcional(PRManterComanda.ID_REQ_ATR_inVigentes, request);
+
 
 
 
@@ -58,10 +45,12 @@ if (otd == null) {
 
 		<fieldset>
 			<table>		
-							
 				<tr>
-					<td><label for="tpDocumento">Situacao Comanda:</label></td>
-					<td></td>
+			<th align="left">Manter Comanda</th>
+			</tr>			
+				<tr>
+					<td><label for="siComanda">Comanda Vigentes:</label></td>
+					<td><%= SelectSimNao.getInstancia().getHTML(request, PRManterComanda.ID_REQ_ATR_inVigentes, PRManterComanda.ID_REQ_ATR_inVigentes, inVigentes, false, true)	%></td>
 				</tr>
 				
 				<tr>
@@ -79,7 +68,7 @@ if (otd == null) {
 					    <th>Selecione</th>
 						<th>Codigo</th>
 						<th>Data Inicio Vigenca</th>
-						<th>Data Inicio Vigenca</th>								
+						<th>Data Fim Vigenca</th>								
 				
 					</tr>
 		 <% for (OTDComanda campos : otd) {		 

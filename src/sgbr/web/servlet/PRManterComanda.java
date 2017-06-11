@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import sgbr.entidades.Comanda;
 import sgbr.fachada.FachadaSGBR;
+import sgbr.util.Constantes;
 import sgbr.util.OTDComanda;
 import sgbr.util.Util;
 import sgbr.util.web.PRManterCadastro;
@@ -195,8 +196,14 @@ public class PRManterComanda extends PRManterCadastro{
 	public void processarConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 		
 		String cdComanda = this.getParametroStringOpcional(this.ID_REQ_ATR_cdComanda, true, pRequest);
+		String inVigentes = this.getParametroStringOpcional(this.ID_REQ_ATR_inVigentes, true, pRequest);
 		
-		ArrayList<OTDComanda> otdResposta = this.aFachadaSGBR.consultaTelaManterComanda(cdComanda, "");
+		
+		if(inVigentes.equals(Constantes.CD_TODOS)) {
+			inVigentes = "";
+		}
+		
+		ArrayList<OTDComanda> otdResposta = this.aFachadaSGBR.consultaTelaManterComanda(cdComanda, inVigentes);
 		
 		pRequest.setAttribute(this.ID_REQ_ATR_otdComanda, otdResposta);
 		
@@ -222,7 +229,7 @@ public class PRManterComanda extends PRManterCadastro{
          comanda = this.aFachadaSGBR.consultaComandaPorChavePrimaria(comanda);
         
       pRequest.setAttribute(this.ID_REQ_ATR_comanda, comanda);
-//		
+		pRequest.setAttribute(this.ID_REQ_indicadorExclusao, false);
 		
 		
 		this.redirecionar(this.NM_JSP_DETALHAR, pRequest, pResponse);

@@ -3,6 +3,8 @@
  */
 package sgbr.regras.promocao;
 
+import java.util.ArrayList;
+
 import sgbr.cadastros.sql.DAOPromocao;
 import sgbr.cadastros.sql.DAOPromocaoDiaSemana;
 
@@ -34,19 +36,25 @@ public class RNExcluirPromocao {
 		return RNExcluirPromocao.aRNExcluirPromocao;
 	}
 
-	public void processar(Integer pCdPromocao) throws Exception  {
+	public void processar(Integer pCdPromocao) throws Exception {
 
 		try {
 
-			DAOPromocaoDiaSemana.getInstancia().excluir(pCdPromocao);
+			ArrayList<Integer> listaDias = DAOPromocaoDiaSemana.getInstancia().consultaPromocaoDiasSemana(pCdPromocao);
+
+			
+			for (Integer aDiaBase : listaDias) {
+
+				DAOPromocaoDiaSemana.getInstancia().excluir(pCdPromocao, aDiaBase);
+
+			}
 
 			DAOPromocao.getInstancia().excluir(pCdPromocao);
-			
 
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
-//			throw e;
+			// throw e;
 		}
 	}
 }

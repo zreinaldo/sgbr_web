@@ -19,7 +19,9 @@
 
 		<fieldset>
 			<table>
-					
+					<tr>
+			<th align="left">Incluir Cliente</th>
+			</tr>	
 				<tr>
 					<td><label for="nmCliente">Nome:</label></td>
 					<td><input type="text" required 
@@ -41,7 +43,19 @@
 						name="<%=PRManterCliente.ID_REQ_ATR_dtNascimento%>"
 						maxlength="58"></td>
 				</tr>
-
+				
+				<tr>
+				<tr>
+				<td><label for="dddCelular">Telefone Celular:</label></td>
+					<td><input type="text" size="4" 			
+						id="<%=PRManterCliente.ID_REQ_ATR_dddTelefoneCelular%>"
+						name="<%=PRManterCliente.ID_REQ_ATR_dddTelefoneCelular%>"
+						maxlength="3"> - <input type="text"  
+						id="<%=PRManterCliente.ID_REQ_ATR_nuTelefoneCelular%>"
+						name="<%=PRManterCliente.ID_REQ_ATR_nuTelefoneCelular%>"
+						maxlength="10"> </td>
+				</tr>
+			
 				<tr>
 					<td><label for="email">E-mail:</label></td>
 					<td><input type="email" id="<%=PRManterCliente.ID_REQ_ATR_email%>"
@@ -52,7 +66,8 @@
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Incluir"
 						onclick="submeterFormulario('<%=PRManterCliente.NM_SERVLET%>','<%=PRManterCliente.EVENTO_PROCESSAR_INCLUSAO%>')"
-						id="consultar"></td>
+						id="consultar"><input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar"></td>
 				</tr>
 			</table>
 

@@ -5,11 +5,9 @@ package sgbr.cadastros;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import sgbr.entidades.ContaItemCardapio;
-import sgbr.entidades.ItemCardapio;
-import sgbr.util.OTDItemCardapio;
+import sgbr.util.OTDContaItemCardapio;
 
 /**
  * @author Reinaldo
@@ -20,14 +18,16 @@ public interface IntfDAOContaItemCardapio {
 	
 	public ContaItemCardapio incluir(ContaItemCardapio pContaItemCardapio) throws SQLException ;
 //
-//	public void alterar(ItemCardapio pItemCardapio) throws SQLException;
+	public void alterar(ContaItemCardapio pContaItemCardapio) throws SQLException;
 //
 //	public void excluir(ItemCardapio pItemCardapio) throws SQLException;
 //	
 //	public Collection<ItemCardapio> consultaTodosRegistros( boolean pInRetornarApenasVigentes)  throws SQLException;
 //	
-//	public ArrayList<OTDItemCardapio> consultaTelaManterItemCardapio(String pCdItemCardapio, String pDsItemCardapio, String pSiItemCardapio ) throws SQLException;
+	public ArrayList<OTDContaItemCardapio> consultaTelaManterPedido(String pCdMesa, String pCdComanda) throws SQLException;
 //	
 //	public ItemCardapio consultaPorChavePrimaria(ItemCardapio pItemCardapio) throws SQLException;
+	
+	public OTDContaItemCardapio consultaDetalharPedido(String pCdPedido) throws SQLException;
 	
 }

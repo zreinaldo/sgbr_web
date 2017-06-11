@@ -53,7 +53,7 @@ public class RNIncluirPedido {
 						pOTDContaItemCardapio.getCdMesa() != null ? pOTDContaItemCardapio.getCdMesa().toString() : "",
 						pOTDContaItemCardapio.getCdComanda() != null ? pOTDContaItemCardapio.getCdComanda().toString()
 								: "",
-						Constantes.SI_CONTA_SITUACAO_ABERTA);
+						Constantes.SI_CONTA_SITUACAO_ABERTA, "");
 
 			}
 

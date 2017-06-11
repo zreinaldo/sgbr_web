@@ -42,22 +42,22 @@ public class FiltroUsuarioLogado implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
-//		HttpSession session = ((HttpServletRequest) request).getSession();
-//
-//		OTDUsuario usuario = (OTDUsuario) session.getAttribute("usuario");
-//
-//		if (usuario == null) {
-//			session.setAttribute("usuario", new OTDUsuario());
-//
-//			((HttpServletResponse) response).sendRedirect("/sgbr_web/PRLoginUsuario");
-//
-//		} else {
-//
-//			chain.doFilter(request, response);
-//
-//		}
+		HttpSession session = ((HttpServletRequest) request).getSession();
+
+		OTDUsuario usuario = (OTDUsuario) session.getAttribute("usuario");
+
+		if (usuario == null) {
+			session.setAttribute("usuario", new OTDUsuario());
+
+			((HttpServletResponse) response).sendRedirect("/sgbr_web/PRLoginUsuario");
+
+		} else {
+
+			chain.doFilter(request, response);
+
+		}
 		
-		chain.doFilter(request, response);
+//		chain.doFilter(request, response);
 
 	}
 

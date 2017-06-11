@@ -8,9 +8,11 @@ import java.sql.SQLException;
 import sgbr.cadastros.sql.DAOCliente;
 import sgbr.cadastros.sql.DAOPessoa;
 import sgbr.cadastros.sql.DAOPessoaDocumento;
+import sgbr.cadastros.sql.DAOPessoaTelefone;
 import sgbr.entidades.Cliente;
 import sgbr.entidades.Pessoa;
 import sgbr.entidades.PessoaDocumento;
+import sgbr.entidades.PessoaTelefone;
 import sgbr.util.Constantes;
 import sgbr.util.OTDCliente;
 
@@ -51,7 +53,9 @@ public class RNIncluirCliente {
 
 			this.incluirCliente(pessoa);
 
-			incluirPessoaDocumento(pOTDCliente, pessoa);
+			this.incluirPessoaDocumento(pOTDCliente, pessoa);
+
+			this.incluirPessoaTelefone(pOTDCliente, pessoa);
 
 		} catch (Exception e) {
 			// TODO gerar erro generico
@@ -85,6 +89,8 @@ public class RNIncluirCliente {
 	}
 
 	/**
+	 * inclui na tabela pessoa
+	 * 
 	 * @param pOTDCliente
 	 * @return
 	 * @throws SQLException
@@ -97,6 +103,25 @@ public class RNIncluirCliente {
 		pessoa.setEePessoa(pOTDCliente.getEmail());
 		pessoa = DAOPessoa.getInstancia().incluir(pessoa);
 		return pessoa;
+	}
+
+	/**
+	 * inclui na tabela pessoa telefone
+	 * 
+	 * @param pOTDCliente
+	 * @param pessoa
+	 * @throws SQLException
+	 */
+	private void incluirPessoaTelefone(OTDCliente pOTDCliente, Pessoa pessoa) throws SQLException {
+		PessoaTelefone pessoaTelefone;
+		pessoaTelefone = new PessoaTelefone();
+		pessoaTelefone.setCdPessoa(pessoa.getCdPessoa());
+		pessoaTelefone.setNuDDDTelefone(pOTDCliente.getDddTelefone());
+		pessoaTelefone.setNuTelefone(pOTDCliente.getNuTelefone());
+		pessoaTelefone.setTpTelefone(Constantes.CD_TIPO_TELEFONE_CELULAR);
+		// FIXME colcoar telefone
+		DAOPessoaTelefone.getInstancia().incluir(pessoaTelefone);
+
 	}
 
 }

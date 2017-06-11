@@ -71,6 +71,13 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 	 * Evento que exibe detalhe da consulta
 	 */
 	public static final String EVENTO_EXIBIR_DETALHAMENTO_CONSULTA = "exibirDetalhamentoConsulta";
+	
+	/**
+	 * Indicador de Exclusão
+	 */
+	public static final String ID_REQ_indicadorExclusao = "indicador_exclusao";
+	
+	public static final String ID_REQ_ATR_dhInclusao = "dhInclusao";
 
 	/**
 	 * implementao doget

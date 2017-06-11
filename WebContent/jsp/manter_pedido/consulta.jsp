@@ -50,16 +50,18 @@ if (otd == null) {
 
 		<fieldset>
 			<table>		
-							
+			<tr>
+			<th align="left">Manter Pedido</th>
+			</tr>	
 				<tr>
-					<td><label for="cdMesa">Numero Mesa em uso:</label></td>
+					<td><label for="cdMesa">Número Mesa em uso:</label></td>
 					<td><%= SelectMesaConta.getInstancia().getHTML(request, PRManterPedido.ID_REQ_ATR_cdMesa, PRManterPedido.ID_REQ_ATR_cdMesa, cdMesa, false, true, Constantes.CD_SIM)	%></td>
 					
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td><label for="cdComanda">Numero Comanda em uso:</label></td>
+					<td><label for="cdComanda">Número Comanda em uso:</label></td>
 					<td><%= SelectComandaConta.getInstancia().getHTML(request, PRManterPedido.ID_REQ_ATR_cdComanda, PRManterPedido.ID_REQ_ATR_cdComanda, cdComanda, false, true, Constantes.CD_SIM)	%></td>
 				</tr>	
 				
@@ -82,7 +84,7 @@ if (otd == null) {
 		
 			 %>		 
 					<tr>
-					<td><INPUT type="radio" id="radio_consulta_pedido" name="<%=PRManterPedido.ID_REQ_ATR_radio_consulta_pedido%>" value="<%=campos.getCdPedido()+"[[*]]"+campos.getCdConta()%>"></td>
+					<td><INPUT type="radio" id="radio_consulta_pedido" name="<%=PRManterPedido.ID_REQ_ATR_radio_consulta_pedido%>" value="<%=campos.getCdPedido()%>"></td>
 					<td><%=campos.getCdConta()%></td>
 						<td><%=Util.getValorHTML(campos.getCdMesa())%></td>
 						<td><%=Util.getValorHTML(campos.getCdComanda())%></td>

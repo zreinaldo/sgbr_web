@@ -45,7 +45,6 @@
 
 		<fieldset>
 			<table>
-				
 
 				<tr>
 					<td><label for="nmItemCardapio">Item Cardápio:</label></td>

@@ -23,6 +23,8 @@ public class PRLoginUsuario extends PRGenerica {
 
 	public static final String EVENTO_EXIBIR_LOGIN_USUARIO = "exibirLoginUsuario";
 	public static final String EVENTO_PROCESSAR_LOGIN_USUARIO = "processarLoginUsuario";
+	
+	public static final String EVENTO_PROCESSAR_DESLOGAR_USUARIO = "processarDeslogarUsuario";
 
 	public static final String ID_REQ_ATR_loginUsuario = "loginUsuario";
 	public static final String ID_REQ_ATR_senhaUsuario = "senhaUsuario";
@@ -30,7 +32,7 @@ public class PRLoginUsuario extends PRGenerica {
 
 	public static final String ID_REQ_ATR_Usuario = "Usuario";
 	public static final String ID_REQ_ATR_otdUsuario = "OTDUsuario";
-	public static final String ID_REQ_ATR_radio_consulta_usuario = "radio_consulta_usuario";
+	
 
 	public static final String NM_SERVLET = "PRLoginUsuario";
 	public static final String NM_JSP_LOGIN = "/jsp/login_usuario/login.jsp";
@@ -64,7 +66,7 @@ public class PRLoginUsuario extends PRGenerica {
 
 		 HttpSession session = ((HttpServletRequest)pRequest).getSession();
 		 
-		 session.removeAttribute("otdUsuario");
+		 session.removeAttribute("usuario");
 		
 
 		otdUsuario = this.aFachadaSGBR.consultaUsuarioSenha(loginUsuario, senhaUsuario);
@@ -73,10 +75,22 @@ public class PRLoginUsuario extends PRGenerica {
 			pRequest.setAttribute(this.ID_REQ_ATR_isLoginSenhaInvalida, true);
 			this.redirecionar(this.NM_JSP_LOGIN, pRequest, pResponse);
 		} else {			
-	     	 session.setAttribute("otdUsuario", otdUsuario);
+	     	 session.setAttribute("usuario", otdUsuario);
 	     	 //TODO redirecioar para PR de conta
-			this.redirecionar(PRManterCliente.NM_SERVLET, PRManterCliente.NM_JSP_CONSULTA, pRequest, pResponse);
+			this.redirecionar(PRManterConta.NM_SERVLET, PRManterConta.NM_JSP_CONSULTA, pRequest, pResponse);
 		}
+
+	}
+	
+	public void processarDeslogarUsuario(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
+		
+
+		 HttpSession session = ((HttpServletRequest)pRequest).getSession();
+		 
+		 session.removeAttribute("usuario");
+		
+
+	 this.exibirLoginUsuario(pRequest, pResponse);
 
 	}
 

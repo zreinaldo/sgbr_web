@@ -4,7 +4,6 @@
 <%@page import="sgbr.web.servlet.selects.SelectMesaConta"%>
 <%@page import="sgbr.web.servlet.selects.SelectItemCardapio"%>
 <%@page import="sgbr.web.servlet.PRManterPedido"%>
-<%@page import="sgbr.web.servlet.selects.SelectSituacaoItemCardapio"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -38,18 +37,20 @@ String cdConta = PRManterItemCardapio.getAtributoOuParametroStringOpcional(PRMan
 
 		<fieldset>
 			<table>
-			
+			<tr>
+			<th align="left">Incluir Pedido</th>
+			</tr>
 			<% if (cdConta.isEmpty())  {%>
 			
 				
 			<Th align="left">Contas abertas por Mesa:</Th>
 				<tr> 
-                  <td><label for="cdMesa">Numero Mesa:</label></td>
+                  <td><label for="cdMesa">Número Mesa:</label></td>
 					<td><%= SelectMesaConta.getInstancia().getHTML(request, PRManterPedido.ID_REQ_ATR_cdMesa, PRManterPedido.ID_REQ_ATR_cdMesa, "", true, false, "",Constantes.CD_TIPO_CONTA_MESA)	%></td>									
 				</tr>				
 				<Th align="left">Contas abertas por Comanda:</Th>
 			<tr>
-					<td><label for="cdComanda">Numero Comanda:</label></td>					
+					<td><label for="cdComanda">Número Comanda:</label></td>					
 					<td><%= SelectComandaConta.getInstancia().getHTML(request, PRManterPedido.ID_REQ_ATR_cdComanda, PRManterPedido.ID_REQ_ATR_cdComanda, "", true, false, Constantes.CD_SIM,Constantes.CD_TIPO_CONTA_COMANDA)	%></td>
 				</tr>
 					<td>----</td>			
@@ -81,7 +82,8 @@ String cdConta = PRManterItemCardapio.getAtributoOuParametroStringOpcional(PRMan
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Incluir"
 						onclick="submeterFormulario('<%=PRManterPedido.NM_SERVLET%>','<%=PRManterPedido.EVENTO_PROCESSAR_INCLUSAO%>')"
-						id="consultar"></td>
+						id="consultar"><input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar"></td>
 				</tr>
 			</table>
 

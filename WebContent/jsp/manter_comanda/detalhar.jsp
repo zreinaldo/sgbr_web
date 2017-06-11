@@ -44,17 +44,26 @@
 
 		<fieldset>
 			<table>
-				
+																		<%
+	if (indicadorExclusao) {
+	 
+%>
+<th align="left">Excluir Comanda</th>
+
+<%} else {%>
+<th align="left">Detalhar Comanda</th>
+<%} %>	
+		
 
 				<tr>
-					<td><label for="cdComanda">Codigo Comanda:</label></td>
+					<td><label for="cdComanda">Código Comanda:</label></td>
 					<td><input type="text" disabled="disabled"
 						id="<%=PRManterComanda.ID_REQ_ATR_cdComanda%>"
 						name="<%=PRManterComanda.ID_REQ_ATR_cdComanda%>" value="<%=comanda.getCdComanda() %>"
 						maxlength="58"></td>
 				</tr>
 				<tr>
-					<td><label for="dtIniValidade">Data Inicio Validade:</label></td>
+					<td><label for="dtIniValidade">Data Início Validade:</label></td>
 					<td><input type="text" disabled="disabled"
 						id="<%=PRManterComanda.ID_REQ_ATR_dtIniVigencia%>"
 						name="<%=PRManterComanda.ID_REQ_ATR_dtIniVigencia%>" maxlength="58" value="<%=Util.formataDataParaString(comanda.getDtIniValidade())%>"> </td>

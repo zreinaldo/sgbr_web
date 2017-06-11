@@ -11,7 +11,7 @@
 <SCRIPT language="JavaScript" type="text/javascript" src="js/funcoes_comuns.js"></SCRIPT>
 <body>
 	<FORM name="form_principal" method="post" action="">
-
+<%@ include file = "../../jsp/util/menu.jsp" %>
 		<INPUT type="hidden" id="evento"
 			name="<%=PRManterFuncionario.ID_REQ_EVENTO%>" value="">
 
@@ -148,7 +148,8 @@
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Incluir"
 						onclick="submeterFormulario('<%=PRManterFuncionario.NM_SERVLET%>','<%=PRManterFuncionario.EVENTO_PROCESSAR_INCLUSAO%>')"
-						id="consultar"> <input type="submit"></td>
+						id="incluir"> <input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar"> </td>
 				</tr>
 			</table>
 

@@ -39,6 +39,12 @@ public class RNEncerrarConta {
 
 		try {			
 			
+			Conta conta = null;
+			conta = DAOConta.getInstancia().consultaPorChavePrimaria(pConta);
+			
+			pConta.setCdCliente(conta.getCdCliente());
+			
+			
 			DAOConta.getInstancia().alterar(pConta);
 			
 			

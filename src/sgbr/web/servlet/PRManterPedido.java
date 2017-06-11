@@ -9,13 +9,14 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import sgbr.entidades.ContaItemCardapio;
 import sgbr.fachada.FachadaSGBR;
 import sgbr.regras.pedido.RNIncluirPedido;
 import sgbr.util.Constantes;
-import sgbr.util.OTDConta;
 import sgbr.util.OTDContaItemCardapio;
+import sgbr.util.OTDUsuario;
 import sgbr.util.Util;
 import sgbr.util.web.PRManterCadastro;
 
@@ -103,9 +104,12 @@ public class PRManterPedido extends PRManterCadastro{
 		otdContaItemCardapio.setCdConta(Util.getInteger( cdConta));
 		otdContaItemCardapio.setCdMesa(Util.getInteger( cdMesa));
 		
-		//FIXME pegar funcionario logado		
-		otdContaItemCardapio.setCdFuncionario(1);
-		
+
+		HttpSession session = ((HttpServletRequest) pRequest).getSession();
+		OTDUsuario usuario = (OTDUsuario) session.getAttribute("usuario");	
+
+		otdContaItemCardapio.setCdFuncionario(usuario.getCdFuncionario());
+		//FIXME chamar fachada
 		RNIncluirPedido.getInstancia().processar(otdContaItemCardapio);
 		
 //		this.aFachadaSGBR.incluirContaItemCardapio(contaItemCardapio);
@@ -124,11 +128,11 @@ public class PRManterPedido extends PRManterCadastro{
 	public void exibirAlteracao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 
 		String	valueRadio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_pedido, pRequest);
-
-		ContaItemCardapio itemCardapio =  new ContaItemCardapio();
-		itemCardapio.setCdContaItemCardapio(Integer.valueOf(valueRadio));
-//		itemCardapio = this.aFachadaSGBR.consultaContaItemCardapioPorChavePrimaria(itemCardapio);		
-		pRequest.setAttribute(this.ID_REQ_ATR_ContaItemCardapio, itemCardapio);
+		
+		
+		OTDContaItemCardapio otdContaItemCardapio = this.aFachadaSGBR.consultaDetalharPedido(valueRadio);		
+		pRequest.setAttribute(this.ID_REQ_ATR_otdContaItemPedido, otdContaItemCardapio);
+		
 		
 		this.redirecionar(this.NM_JSP_ALTERAR, pRequest, pResponse);
 
@@ -143,19 +147,16 @@ public class PRManterPedido extends PRManterCadastro{
 	 */
 	@Override
 	public void processarAlteracao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
-		ContaItemCardapio itemCardapio = new ContaItemCardapio();
-		String cdContaItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdItemCardapio, pRequest);
-		String nmContaItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nmItemCardapio, pRequest);
-//		String vlContaItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_vlContaItemCardapio, pRequest);
-		String siContaItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_obsItemCardapio, pRequest);
+		ContaItemCardapio contaItemCardapio = new ContaItemCardapio();
+		String cdContaItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdPedido, pRequest);
+		String qtdItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_qtdItemCardapio, pRequest);
+		String obsItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_obsItemCardapio, pRequest);
 		
-//		vlContaItemCardapio = vlContaItemCardapio.replaceAll(",", ".");
-//		
-//		itemCardapio.setNmContaItemCardapio(nmContaItemCardapio);
-//		itemCardapio.setSiContaItemCardapio(siContaItemCardapio);
-//		itemCardapio.setVlContaItemCardapio(Double.valueOf(vlContaItemCardapio));
-//         itemCardapio.setCdContaItemCardapio(Integer.valueOf(cdContaItemCardapio));    
-//		this.aFachadaSGBR.alterarContaItemCardapio(itemCardapio);
+		contaItemCardapio.setCdContaItemCardapio(Util.getInteger(cdContaItemCardapio));
+		contaItemCardapio.setQtdContaItemCardapio(Util.getInteger(qtdItemCardapio));
+		contaItemCardapio.setObsContaItemCardapio(obsItemCardapio);
+		
+		this.aFachadaSGBR.alterarContaItemCardapio(contaItemCardapio);
 //		
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 		
@@ -172,15 +173,12 @@ public class PRManterPedido extends PRManterCadastro{
 	public void exibirExclusao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 
 
-		String cdContaItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_pedido, pRequest);
+	String	valueRadio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_pedido, pRequest);
 		
-         ContaItemCardapio itemCardapio = new ContaItemCardapio();
-         itemCardapio.setCdContaItemCardapio(Integer.valueOf(cdContaItemCardapio));
-         
-//         itemCardapio = this.aFachadaSGBR.consultaContaItemCardapioPorChavePrimaria(itemCardapio);
-        
-        pRequest.setAttribute(this.ID_REQ_ATR_ContaItemCardapio, itemCardapio);
-
+		
+		OTDContaItemCardapio otdContaItemCardapio = this.aFachadaSGBR.consultaDetalharPedido(valueRadio);		
+		pRequest.setAttribute(this.ID_REQ_ATR_otdContaItemPedido, otdContaItemCardapio);
+	
 		pRequest.setAttribute(this.ID_REQ_indicadorExclusao, true);
 		
 		this.redirecionar(this.NM_JSP_DETALHAR, pRequest, pResponse);
@@ -197,13 +195,9 @@ public class PRManterPedido extends PRManterCadastro{
 	@Override
 	public void processarExclusao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 
-		String cdContaItemCardapio = this.getAtributoOuParametroStringOpcional(PRManterPedido.ID_REQ_ATR_cdItemCardapio,pRequest);
+		String cdContaItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdPedido,pRequest);
 				
-				
-		ContaItemCardapio itemCardapio = new ContaItemCardapio();
-		itemCardapio.setCdContaItemCardapio(Integer.valueOf(cdContaItemCardapio));
-
-//     	this.aFachadaSGBR.excluirContaItemCardapio(itemCardapio);
+     	this.aFachadaSGBR.excluirContaItemCardapio(cdContaItemCardapio);
 		
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 		
@@ -218,7 +212,14 @@ public class PRManterPedido extends PRManterCadastro{
 	@Override
 	public void exibirConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
 		
-		//TODO informar funcionario que incluiu o item 
+		//FIXME informar funcionario que incluiu o item
+		
+
+		HttpSession session = ((HttpServletRequest) pRequest).getSession();
+
+		OTDUsuario usuario = (OTDUsuario) session.getAttribute("usuario");
+
+		
 		
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
@@ -245,7 +246,7 @@ public class PRManterPedido extends PRManterCadastro{
 		}
 		
 		
-	ArrayList<OTDContaItemCardapio> otdContaItemPedido =  this.aFachadaSGBR.consultaTelaManterPedido(cdMesa, cdComanda );
+	ArrayList<OTDContaItemCardapio> otdContaItemPedido =  this.aFachadaSGBR.consultaTelaManterPedido(cdMesa, cdComanda);
 	
 	pRequest.setAttribute(this.ID_REQ_ATR_otdContaItemPedido, otdContaItemPedido);
 	
@@ -262,14 +263,12 @@ public class PRManterPedido extends PRManterCadastro{
 	@Override
 	public void exibirDetalhamentoConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse)
 			throws Exception {
-		String cdContaItemCardapio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_pedido, pRequest);
+	String	valueRadio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_pedido, pRequest);
 		
-         ContaItemCardapio itemCardapio = new ContaItemCardapio();
-         itemCardapio.setCdContaItemCardapio(Integer.valueOf(cdContaItemCardapio));
-         
-//         itemCardapio = this.aFachadaSGBR.consultaContaItemCardapioPorChavePrimaria(itemCardapio);
-        
-      pRequest.setAttribute(this.ID_REQ_ATR_ContaItemCardapio, itemCardapio);
+		
+		OTDContaItemCardapio otdContaItemCardapio = this.aFachadaSGBR.consultaDetalharPedido(valueRadio);		
+		pRequest.setAttribute(this.ID_REQ_ATR_otdContaItemPedido, otdContaItemCardapio);
+	
       pRequest.setAttribute(this.ID_REQ_indicadorExclusao, false);
 		
 		

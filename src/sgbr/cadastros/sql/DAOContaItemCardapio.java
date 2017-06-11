@@ -20,7 +20,6 @@ import sgbr.entidades.ItemCardapio;
 import sgbr.entidades.Mesa;
 import sgbr.util.DAO_MYSQL;
 import sgbr.util.OTDContaItemCardapio;
-import sgbr.util.Util;
 
 /**
  * @author Reinaldo
@@ -124,30 +123,25 @@ public class DAOContaItemCardapio extends DAO_MYSQL implements IntfDAOContaItemC
 	
 	public void alterar(ContaItemCardapio pContaItemCardapio) throws SQLException {
 		Connection conexao = null;
-//		int i = 1;
-//		conexao = this.getConection();
-//
-//		
-//		String sql = "UPDATE mydb.ITEM_CARDAPIO SET  " 
-//		+ ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM +" = ?, "  
-//		+ ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_VL +" = ?, " 
-//		+ ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_SI +" = ?, " 
-//		+   ContaItemCardapio.NM_COLUNA_DH_ALTERACAO_REGISTRO +" = CURRENT_TIMESTAMP " ;
-//		
-//		sql = sql + " WHERE " + ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_CD +" = ? ";
-//
-//		PreparedStatement ppSt = conexao.prepareStatement(sql);
-//
-//		ppSt.setString(1, pContaItemCardapio.getNmContaItemCardapio());
-//				
-//		ppSt.setDouble(2, pContaItemCardapio.getVlContaItemCardapio());
-//		
-//		ppSt.setString(3, pContaItemCardapio.getSiContaItemCardapio());
-//		ppSt.setInt(4, pContaItemCardapio.getCdContaItemCardapio());
-//		ppSt.execute();
-//
-//		ppSt.close();
-//		conexao.close();
+		conexao = this.getConection();
+
+		
+		String sql = "UPDATE mydb.CONTA_ITEM_CARDAPIO SET  " 
+		+ ContaItemCardapio.NM_COLUNA_CONTA_ITEM_CARDAPIO_QTD +" = ?, "  
+		+ ContaItemCardapio.NM_COLUNA_CONTA_ITEM_CARDAPIO_OBS +" = ? "  ;
+		
+		sql = sql + " WHERE " + ContaItemCardapio.NM_COLUNA_CONTA_ITEM_CARDAPIO_CD +" = ? ";
+
+		PreparedStatement ppSt = conexao.prepareStatement(sql);
+
+		ppSt.setInt(1, pContaItemCardapio.getQtdContaItemCardapio());
+		ppSt.setString(2, pContaItemCardapio.getObsContaItemCardapio());
+		ppSt.setInt(3, pContaItemCardapio.getCdContaItemCardapio());
+		
+		ppSt.execute();
+
+		ppSt.close();
+		conexao.close();
 				
 	}
 
@@ -155,23 +149,23 @@ public class DAOContaItemCardapio extends DAO_MYSQL implements IntfDAOContaItemC
 	/* (non-Javadoc)
 	 * @see sgbr.cadastros.IntfDAOContaItemCardapio#excluir(sgbr.entidades.ContaItemCardapio)
 	 */
-	public void excluir(ContaItemCardapio pContaItemCardapio) throws SQLException {
+	public void excluir(String pCdContaItemCardapio) throws SQLException {
 		Connection conexao = null;		
 
-//		conexao = this.getConection();
-//
-//		String sql = "delete from mydb.ITEM_CARDAPIO WHERE " + ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_CD + " = ?";
-//
-//		PreparedStatement ppSt = conexao.prepareStatement(sql);
-//
-//		
-//		ppSt.setInt(1, pContaItemCardapio.getCdContaItemCardapio());
-//		
-//
-//		ppSt.execute();
-//
-//		ppSt.close();
-//		conexao.close();
+		conexao = this.getConection();
+
+		String sql = "delete from mydb.CONTA_ITEM_CARDAPIO WHERE " + ContaItemCardapio.NM_COLUNA_CONTA_ITEM_CARDAPIO_CD + " = ?";
+
+		PreparedStatement ppSt = conexao.prepareStatement(sql);
+
+		
+		ppSt.setInt(1, Integer.parseInt(pCdContaItemCardapio));
+		
+
+		ppSt.execute();
+
+		ppSt.close();
+		conexao.close();
 		
 	}
 	
@@ -229,7 +223,7 @@ public class DAOContaItemCardapio extends DAO_MYSQL implements IntfDAOContaItemC
 		OTDContaItemCardapio otdContaItemCardapio = null;
 
 		conexao = this.getConection();
-		String sql = "SELECT  MYDB.CONTA.CONTA_CD, MYDB.CONTA.MESA_CD, MYDB.CONTA.COMANDA_CD , MYDB.CONTA_ITEM_CARDAPIO.ITEM_CARDAPIO_CD, MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_NM, MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_QTD,"
+		String sql = "SELECT  MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_CD, MYDB.CONTA.CONTA_CD, MYDB.CONTA.MESA_CD, MYDB.CONTA.COMANDA_CD , MYDB.CONTA_ITEM_CARDAPIO.ITEM_CARDAPIO_CD, MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_NM, MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_QTD,"
 				+ " MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_OBS FROM mydb.conta_item_cardapio INNER JOIN  mydb.item_cardapio ON mydb.conta_item_cardapio.ITEM_CARDAPIO_CD = mydb.item_cardapio.ITEM_CARDAPIO_CD"
 				+ "  INNER JOIN MYDB.CONTA  ON MYDB.CONTA.CONTA_CD = MYDB.CONTA_ITEM_CARDAPIO.CONTA_CD"
 				+ " and conta.DH_ENCERRAMENTO is null ";
@@ -256,6 +250,7 @@ public class DAOContaItemCardapio extends DAO_MYSQL implements IntfDAOContaItemC
 
 		while (rs.next()) {
 			otdContaItemCardapio = new OTDContaItemCardapio();
+			otdContaItemCardapio.setCdPedido(rs.getInt(ContaItemCardapio.NM_COLUNA_CONTA_ITEM_CARDAPIO_CD));
 			otdContaItemCardapio.setCdItemCardapio(rs.getInt(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_CD));
 			otdContaItemCardapio.setNmItemCardapio(rs.getString(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM));
 			otdContaItemCardapio.setQtdItemCardapio(rs.getInt(ContaItemCardapio.NM_COLUNA_CONTA_ITEM_CARDAPIO_QTD));
@@ -273,6 +268,53 @@ public class DAOContaItemCardapio extends DAO_MYSQL implements IntfDAOContaItemC
 		return arrayResposta;
 	}
 	
+	
+	public OTDContaItemCardapio consultaDetalharPedido(String pCdPedido) throws SQLException{
+		
+		String sqlWhere = "";
+		String sqlConector = "";
+		Connection conexao = null;
+		OTDContaItemCardapio otdContaItemCardapio = null;
+
+		conexao = this.getConection();
+		String sql = "SELECT  MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_CD, MYDB.CONTA.CONTA_CD, MYDB.CONTA.MESA_CD, MYDB.CONTA.COMANDA_CD , MYDB.CONTA_ITEM_CARDAPIO.ITEM_CARDAPIO_CD, MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_NM, MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_QTD,"
+				+ " MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_OBS FROM mydb.conta_item_cardapio INNER JOIN  mydb.item_cardapio ON mydb.conta_item_cardapio.ITEM_CARDAPIO_CD = mydb.item_cardapio.ITEM_CARDAPIO_CD"
+				+ "  INNER JOIN MYDB.CONTA  ON MYDB.CONTA.CONTA_CD = MYDB.CONTA_ITEM_CARDAPIO.CONTA_CD"
+				+ " and conta.DH_ENCERRAMENTO is null ";
+			
+	
+		if (!pCdPedido.isEmpty()) {
+			sqlWhere = sqlWhere + sqlConector + "	 MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_CD = " + pCdPedido;
+			sqlConector = " \n AND ";
+		}
+		
+		// Constroi SQL completo
+		if (sqlWhere.length() != 0) {
+			sql = sql + " \n WHERE " + sqlWhere;
+		}
+
+		Statement stm = conexao.createStatement();
+
+		ResultSet rs = stm.executeQuery(sql);
+
+		while (rs.next()) {
+			otdContaItemCardapio = new OTDContaItemCardapio();
+			otdContaItemCardapio.setCdPedido(rs.getInt(ContaItemCardapio.NM_COLUNA_CONTA_ITEM_CARDAPIO_CD));
+			otdContaItemCardapio.setCdItemCardapio(rs.getInt(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_CD));
+			otdContaItemCardapio.setNmItemCardapio(rs.getString(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM));
+			otdContaItemCardapio.setQtdItemCardapio(rs.getInt(ContaItemCardapio.NM_COLUNA_CONTA_ITEM_CARDAPIO_QTD));
+			otdContaItemCardapio.setObsItemCardapio(rs.getString(ContaItemCardapio.NM_COLUNA_CONTA_ITEM_CARDAPIO_OBS));
+			otdContaItemCardapio.setCdMesa(rs.getInt(Mesa.NM_COLUNA_MESA_CD) == 0 ? null : rs.getInt(Mesa.NM_COLUNA_MESA_CD));
+			otdContaItemCardapio.setCdComanda(rs.getInt(Comanda.NM_COLUNA_COMANDA_CD) == 0 ? null : rs.getInt(Comanda.NM_COLUNA_COMANDA_CD));
+			otdContaItemCardapio.setCdConta(rs.getInt(Conta.NM_COLUNA_CONTA_CD));
+
+		}
+
+		rs.close();
+		stm.close();
+		conexao.close();
+		return otdContaItemCardapio;
+	}
 
 	/* (non-Javadoc)
 	 * @see sgbr.cadastros.IntfDAOContaItemCardapio#consultaPorChavePrimaria(sgbr.entidades.ContaItemCardapio)

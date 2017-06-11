@@ -39,15 +39,13 @@ public class RNIncluirComanda {
 
 		Comanda comanda = null;
 		try {
-			
-			
+
 			for (int aI = 0; aI < pQtdComandas; aI++) {
 				comanda = new Comanda();
 				comanda.setDtIniValidade(Util.getDataHoje());
-				
+
 				DAOComanda.getInstancia().incluir(comanda);
-				
-				
+
 			}
 
 		} catch (Exception e) {

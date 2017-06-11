@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class PRManterCadastro extends PRConsultar {
 	
-	public static final String ID_REQ_indicadorExclusao = "indicador_exclusao";
-	
 
 	/**
 	 * -

@@ -136,7 +136,7 @@ public class Util {
 	 * @return
 	 */
 	public static String getValorHTML (Object pValor) {
-		return pValor == null ? "" : pValor.toString();
+		return pValor == null ? "" : String.valueOf(pValor);
 	}
 	
 	/**

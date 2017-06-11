@@ -4,6 +4,7 @@
 package sgbr.util;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * @author Reinaldo
@@ -19,6 +20,7 @@ public class OTDCliente {
 	private String nuCPF;
 	private String nuTelefone;
 	private String dddTelefone;
+	private Timestamp dhInclusao;
 
 	/**
 	 * @return the cdCliente
@@ -136,6 +138,20 @@ public class OTDCliente {
 	 */
 	public void setDddTelefone(String pDddTelefone) {
 		this.dddTelefone = pDddTelefone;
+	}
+
+	/**
+	 * @return the dhInclusao
+	 */
+	public Timestamp getDhInclusao() {
+		return this.dhInclusao;
+	}
+
+	/**
+	 * @param pDhInclusao the dhInclusao to set
+	 */
+	public void setDhInclusao(Timestamp pDhInclusao) {
+		this.dhInclusao = pDhInclusao;
 	}
 
 }

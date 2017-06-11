@@ -182,8 +182,23 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 	 */
 	@Override
 	public void excluir(Conta pConta) throws SQLException {
-		// TODO Auto-generated method stub
+		Connection conexao = null;		
 
+		conexao = this.getConection();
+
+		String sql = "delete from mydb.CONTA WHERE " + Conta.NM_COLUNA_CONTA_CD + " = ?";
+
+		PreparedStatement ppSt = conexao.prepareStatement(sql);
+
+		
+		ppSt.setInt(1, pConta.getCdConta());
+		
+
+		ppSt.execute();
+
+		ppSt.close();
+		conexao.close();
+		
 	}
 
 	/*
@@ -205,11 +220,49 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 	 */
 	@Override
 	public Conta consultaPorChavePrimaria(Conta pConta) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String sqlWhere = "";
+		String sqlConector = "";
+		Connection conexao = null;
+		Conta conta = null;
+
+		conexao = this.getConection();
+
+		String sql = "SELECT " +
+				"* " +
+				"FROM MYDB.CONTA " +
+				"WHERE MYDB.CONTA.CONTA_CD = " + pConta.getCdConta();
+
+		Statement stm = conexao.createStatement();
+
+		ResultSet rs = stm.executeQuery(sql);
+
+		while (rs.next()) {
+			conta = new Conta();
+			conta.setCdConta(rs.getInt(Conta.NM_COLUNA_CONTA_CD));
+			
+			conta.setCdComanda(
+					rs.getInt(Conta.NM_COLUNA_COMANDA_CD) == 0 ? null : rs.getInt(Conta.NM_COLUNA_COMANDA_CD));
+			conta.setCdMesa(rs.getInt(Conta.NM_COLUNA_MESA_CD) == 0 ? null : rs.getInt(Conta.NM_COLUNA_MESA_CD));
+			conta.setVlContaFinal(rs.getDouble(Conta.NM_COLUNA_CONTA_VL_FINAL) == 0 ? null : rs.getDouble(Conta.NM_COLUNA_CONTA_VL_FINAL));
+			conta.setCdCliente(
+					rs.getInt(Conta.NM_COLUNA_CLIENTE_CD) == 0 ? null : rs.getInt(Conta.NM_COLUNA_CLIENTE_CD));
+			conta.setVlDescontoConta(rs.getDouble(Conta.NM_COLUNA_CONTA_DESCONTO_VL) == 0 ? null : rs.getDouble(Conta.NM_COLUNA_CONTA_DESCONTO_VL));
+			conta.setPercDescontoConta(rs.getDouble(Conta.NM_COLUNA_CONTA_DESCONTO_PERC) == 0 ? null : rs.getDouble(Conta.NM_COLUNA_CONTA_DESCONTO_PERC));
+			conta.setDhIncusaoRegistro(rs.getTimestamp(Conta.NM_COLUNA_DH_INCLUSAO_REGISTRO));
+			conta.setDhEncerramento(rs.getTimestamp(Conta.NM_COLUNA_DH_ENCERRAMENTO));
+			conta.setCdTipoConta(rs.getInt(TipoConta.NM_COLUNA_TIPO_CONTA_CD));
+			conta.setVlContaOriginal(rs.getDouble(Conta.NM_COLUNA_CONTA_VL_ORIGINAL) == 0 ? null : rs.getDouble(Conta.NM_COLUNA_CONTA_VL_ORIGINAL));
+
+		}
+
+		rs.close();
+		stm.close();
+		conexao.close();
+		return conta;
 	}
 
-	public ArrayList<OTDConta> consultaTelaManterConta(String pCdMesa, String pCdComanda, String pSiConta)
+	public ArrayList<OTDConta> consultaTelaManterConta(String pCdMesa, String pCdComanda, String pSiConta, String pCdCliente)
 			throws SQLException {
 
 		String sqlWhere = "";
@@ -221,7 +274,7 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 		conexao = this.getConection();
 
 		String sql = "SELECT " + "mydb.conta.*, " + "mydb.tipo_conta.*, " + "mydb.pessoa.PESSOA_NM, "
-				+ "IF(mydb.conta.DH_ENCERRAMENTO is null,'ABERTO','FECHADO') AS SITUACAO " + "FROM mydb.conta "
+				+ "IF(mydb.conta.DH_ENCERRAMENTO is null,'ABERTA','ENCERRADA') AS SITUACAO " + "FROM mydb.conta "
 				+ " inner join mydb.tipo_conta on mydb.tipo_conta.TIPO_CONTA_CD = mydb.conta.tipo_conta_cd "
 				+ "left join mydb.cliente on mydb.cliente.CLIENTE_CD = mydb.conta.CLIENTE_CD "
 				+ "left join mydb.pessoa on mydb.pessoa.PESSOA_CD = mydb.cliente.PESSOA_CD ";
@@ -241,6 +294,11 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 			sqlConector = " \n AND ";
 		} else if (pSiConta.equals(Constantes.SI_CONTA_SITUACAO_ABERTA)) {
 			sqlWhere = sqlWhere + sqlConector + "conta.DH_ENCERRAMENTO is null ";
+			sqlConector = " \n AND ";
+		}
+		
+		if (!pCdCliente.isEmpty()) {
+			sqlWhere = sqlWhere + sqlConector + "mydb.conta.CLIENTE_CD = " + pCdCliente;
 			sqlConector = " \n AND ";
 		}
 
@@ -276,6 +334,57 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 		conexao.close();
 		return arrayResposta;
 
+	}
+	
+	public OTDConta consultaDetalharConta(String pCdConta) throws SQLException {
+		
+		String sqlWhere = "";
+		String sqlConector = "";
+		Connection conexao = null;
+		OTDConta otdConta = null;
+
+		conexao = this.getConection();
+
+		String sql = "SELECT " + "mydb.conta.*, " + "mydb.tipo_conta.*, " + "mydb.pessoa.PESSOA_NM, "
+				+ "IF(mydb.conta.DH_ENCERRAMENTO is null,'ABERTO','FECHADO') AS SITUACAO " + "FROM mydb.conta "
+				+ " inner join mydb.tipo_conta on mydb.tipo_conta.TIPO_CONTA_CD = mydb.conta.tipo_conta_cd "
+				+ "left join mydb.cliente on mydb.cliente.CLIENTE_CD = mydb.conta.CLIENTE_CD "
+				+ "left join mydb.pessoa on mydb.pessoa.PESSOA_CD = mydb.cliente.PESSOA_CD ";
+
+		if (!pCdConta.isEmpty()) {
+			sqlWhere = sqlWhere + sqlConector + "mydb.conta.CONTA_CD = " + pCdConta;
+			sqlConector = " \n AND ";
+		}
+		
+		// Constroi SQL completo
+		if (sqlWhere.length() != 0) {
+			sql = sql + " \n WHERE " + sqlWhere;
+		}
+
+
+		Statement stm = conexao.createStatement();
+
+		ResultSet rs = stm.executeQuery(sql);
+
+		while (rs.next()) {
+			otdConta = new OTDConta();
+			otdConta.setCdCliente(
+					rs.getInt(Conta.NM_COLUNA_CLIENTE_CD) == 0 ? null : rs.getInt(Conta.NM_COLUNA_CLIENTE_CD));
+			otdConta.setCdComanda(
+					rs.getInt(Conta.NM_COLUNA_COMANDA_CD) == 0 ? null : rs.getInt(Conta.NM_COLUNA_COMANDA_CD));
+			otdConta.setCdConta(rs.getInt(Conta.NM_COLUNA_CONTA_CD));
+			otdConta.setCdMesa(rs.getInt(Conta.NM_COLUNA_MESA_CD) == 0 ? null : rs.getInt(Conta.NM_COLUNA_MESA_CD));
+			otdConta.setNmCliente(rs.getString(Pessoa.NM_COLUNA_PESSOA_NM));
+			otdConta.setSiConta(rs.getString("SITUACAO"));
+			otdConta.setDhAbertura(rs.getTimestamp(Conta.NM_COLUNA_DH_INCLUSAO_REGISTRO));
+			otdConta.setCdTipoConta(rs.getInt(TipoConta.NM_COLUNA_TIPO_CONTA_CD));
+			otdConta.setDsTipoConta(rs.getString(TipoConta.NM_COLUNA_TIPO_CONTA_DS));
+		}
+
+		rs.close();
+		stm.close();
+		conexao.close();
+		return otdConta;
 	}
 
 	/**

@@ -13,6 +13,7 @@ import java.util.Collection;
 
 import sgbr.cadastros.IntfDAOComanda;
 import sgbr.entidades.Comanda;
+import sgbr.util.Constantes;
 import sgbr.util.DAO_MYSQL;
 import sgbr.util.OTDComanda;
 
@@ -123,7 +124,7 @@ public class DAOComanda extends DAO_MYSQL implements IntfDAOComanda {
 
 	
 
-	public ArrayList<OTDComanda> consultaTelaManterComanda(String pCodigo, String pSituacao) throws SQLException {
+	public ArrayList<OTDComanda> consultaTelaManterComanda(String pCodigo, String pInVigentes) throws SQLException {
 
 		String sqlWhere = "";
 		String sqlConector = "";
@@ -140,10 +141,15 @@ public class DAOComanda extends DAO_MYSQL implements IntfDAOComanda {
 			sqlConector = " \n AND ";
 		}
 
-		if (!pSituacao.isEmpty()) {
-			// sqlWhere = sqlWhere + sqlConector + "
-			// MYDB.FUNCIONARIO.FUNCIONARIO_DT_DEMISSAO IS NULL";
+		if (!pInVigentes.isEmpty()) {
+			
+			if(pInVigentes.equals(Constantes.CD_SIM)) {
+			 sqlWhere = sqlWhere + sqlConector + "MYDB.comanda.COMANDA_DT_FIM_VALIDADE is null";
 			sqlConector = " \n AND ";
+			}else {
+				sqlWhere = sqlWhere + sqlConector + "MYDB.comanda.COMANDA_DT_FIM_VALIDADE is not null";
+				sqlConector = " \n AND ";
+			}
 		}
 
 		// Constroi SQL completo

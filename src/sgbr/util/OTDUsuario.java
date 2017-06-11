@@ -3,13 +3,14 @@
  */
 package sgbr.util;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  * @author Reinaldo
  *
  */
-public class OTDUsuario {
+public class OTDUsuario implements Serializable {
 
 
 	private Integer cdUsuario;

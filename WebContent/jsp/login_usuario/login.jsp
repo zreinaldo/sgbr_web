@@ -41,7 +41,11 @@ isLoginSenhaInvalida = (Boolean) PRLoginUsuario.getAtributoOpcional(PRLoginUsuar
 			name="<%=PRLoginUsuario.ID_REQ_EVENTO%>" value="">
 
 		<fieldset>
+		
 			<table>
+			<tr>
+			<th align="left" colspan="2">Sistema de Gerenciamento de Bares e Restaurante - SGBR</th>
+			</tr>
 				<% if (isLoginSenhaInvalida){ %>
 					
 				<tr>

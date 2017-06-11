@@ -57,5 +57,13 @@ public class Constantes {
 	public static final String CD_TIPO_CONTA_MESA = "1";
 	public static final String CD_TIPO_CONTA_COMANDA = "2";
 	
+	public static final Integer CD_TIPO_USUARIO_GESTOR  = 1;
+	public static final Integer CD_TIPO_USUARIO_GARCOM = 2;
+	
+	
+	public static final Integer CD_TIPO_TELEFONE_CONVENCIONAL  = 1;
+	public static final Integer CD_TIPO_TELEFONE_CELULAR = 2;
+
+	
 	
 }

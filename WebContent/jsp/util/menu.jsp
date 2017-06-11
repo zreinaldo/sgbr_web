@@ -1,3 +1,6 @@
+<%@page import="sgbr.util.Constantes"%>
+<%@page import="sgbr.util.OTDUsuario"%>
+<SCRIPT language="JavaScript" type="text/javascript" src="js/funcoes_comuns.js"></SCRIPT>
 <style>
 ul {
     list-style-type: none;
@@ -51,12 +54,17 @@ li.dropdown {
 }
 </style>
 
-
-
 <ul>
-  <li><a href="#">Home</a></li>  
+<% 
+
+
+OTDUsuario usuario = (OTDUsuario) session.getAttribute("usuario");
+
+if (usuario.getCdTpUsuario().equals(Constantes.CD_TIPO_USUARIO_GESTOR)) { %>
+
+  <li><a href="#">SGBR</a></li>  
   <li class="dropdown">
-    <a href="javascript:void(0)" class="dropbtn">Cadastros</a>
+    <a href="javascript:void(0)" class="dropbtn">Cadastros Gerenciais</a>
     <div class="dropdown-content">
       <a href="http://localhost:8080/sgbr_web/PRManterFuncionario">Manter Funcionário</a>
       <a href="http://localhost:8080/sgbr_web/PRManterTipoFuncionario">Manter Tipo Funcionário</a>
@@ -64,11 +72,30 @@ li.dropdown {
       <a href="http://localhost:8080/sgbr_web/PRManterUsuario">Manter Usuário</a>
       <a href="http://localhost:8080/sgbr_web/PRManterComanda">Manter Comanda</a>
       <a href="http://localhost:8080/sgbr_web/PRManterItemCardapio">Manter Item Cardápio</a>
-      <a href="http://localhost:8080/sgbr_web/PRManterPromocao">Manter Promoção</a>
-     <a href="http://localhost:8080/sgbr_web/PRManterConta">Home</a>
+      <a href="http://localhost:8080/sgbr_web/PRManterPromocao">Manter Promoção</a>         
+    </div>
+  </li>
+  
+  <%}%>
+  
+  
+  
+  
+<%if (usuario.getCdTpUsuario().equals(Constantes.CD_TIPO_USUARIO_GARCOM)) { %>
+
+  <li><a href="#">SGBR</a></li>  
+  <li class="dropdown">
+    <a href="javascript:void(0)" class="dropbtn">Cadastros</a>
+    <div class="dropdown-content">      
+      <a href="http://localhost:8080/sgbr_web/PRManterCliente">Manter Cliente</a>
+      
       
     </div>
   </li>
+  
+  <%}%>
+  
+  
    <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn">Conta</a>
     <div class="dropdown-content">
@@ -88,5 +115,9 @@ li.dropdown {
     
   </li>
   
-  <li><a href="#news">Deslogar</a></li>
+  <li><a href="http://localhost:8080/sgbr_web/PRLoginUsuario?evento=processarDeslogarUsuario">Deslogar</a></li>
+  
+  
+  <li><a href="#">Usuario: <%=usuario.getNmFuncionario() %></a></li>  
+  <li><a href="#">Tipo Usuario: <%=usuario.getNmTpUsuario() %></a></li>
 </ul>

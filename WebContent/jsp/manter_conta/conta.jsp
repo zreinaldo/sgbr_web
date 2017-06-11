@@ -1,9 +1,6 @@
-<%@page import="sgbr.web.servlet.PRManterFuncionario"%>
-<%@page import="sgbr.util.Constantes"%>
-<%@page import="sgbr.web.servlet.selects.SelectMesaConta"%>
-<%@page import="sgbr.web.servlet.selects.SelectComandaConta"%>
-<%@page import="sgbr.util.OTDContaItemCardapio"%>
 <%@page import="sgbr.util.Util"%>
+<%@page import="sgbr.util.Constantes"%>
+<%@page import="sgbr.util.OTDContaItemCardapio"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="sgbr.web.servlet.PRManterConta"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -13,10 +10,7 @@
 <head>
 
 <style>
-
-
 tfoot {color:red;}
-
 </style>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -29,6 +23,9 @@ tfoot {color:red;}
 
 
 String cdConta = PRManterConta.getAtributoOuParametroStringOpcional(PRManterConta.ID_REQ_ATR_cdConta, request);
+String cdMesa = PRManterConta.getAtributoOuParametroStringOpcional(PRManterConta.ID_REQ_ATR_cdMesa, request);
+String cdComanda = PRManterConta.getAtributoOuParametroStringOpcional(PRManterConta.ID_REQ_ATR_cdComanda, request);
+
 
 String inFecharConta = PRManterConta.getAtributoOuParametroStringOpcional(PRManterConta.ID_REQ_ATR_inFecharConta, request);
 String inContaDesconto = PRManterConta.getAtributoOuParametroStringOpcional(PRManterConta.ID_REQ_ATR_inContaDesconto, request);
@@ -65,20 +62,23 @@ if (otd == null) {
 			
 			<tr>
 					<td><label for="cdMesa">Conta:</label></td>
-					<td><%=cdConta %></td>				
+					<td><input type="text" value="<%=cdConta %>" disabled="disabled" readonly="readonly"> </td>				
 				</tr>
 			
-			<tr>
+			<% if (!cdMesa.isEmpty()) {%>
+			    <tr>
 					<td><label for="cdMesa">Mesa:</label></td>
-					<td>?</td>				
+					<td><input type="text" value="<%=Util.getValorHTML(cdMesa)%>"  disabled="disabled" readonly="readonly"> </td> 				
 				</tr>
-			<tr>
+		     <% }%>
+				<% if (!cdComanda.isEmpty()) {%>
+			     <tr>
 					<td><label for="cdComanda">Comanda:</label></td>
-					<td>?</td>				
+					<td><input type="text" value="<%=Util.getValorHTML(cdComanda)%>"  disabled="disabled" readonly="readonly"> </td>
 				</tr>
-
+              <% }%>
 			
-			
+			  <%if (inFecharConta.equals(Constantes.CD_SIM)) { %>	
 				<tr>
 					<td><label for="cdMesa">Desconto na conta em R$:</label></td>
 					<td><input type="text" value="<%=vlDinheiroDesconto%>"
@@ -93,7 +93,7 @@ if (otd == null) {
 						name="<%=PRManterConta.ID_REQ_ATR_vlPercDesconto%>"
 						maxlength="58"></td>			
 				</tr>					
-
+  <%} %>	
 				
 			</table>
 
@@ -172,7 +172,7 @@ if (otd == null) {
 					    <input type="button" value="Fechar Conta" onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_PROCESSAR_ENCERRAR_CONTA%>')" id="excluir">
 					    <input type="button" value="Aplicar Desconto" onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_ATUALIZAR_DESCONTO_CONTA%>')" id="excluir">
 					   <%}%>
-					    <input type="button" value="Voltar"  id="excluir">
+					   <input type="button" value="Voltar"	onclick=" window.history.back();" id="voltar">
 					</td>
 				</tr>
 			</table>

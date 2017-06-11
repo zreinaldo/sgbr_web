@@ -50,10 +50,20 @@ public class ControladorConta {
 		return DAOConta.getInstancia().consultaMesaConta(pInUso, pCdTipoConta);
 	}
 
-	public ArrayList<OTDConta> consultaTelaManterConta(String pCdMesa, String pCdComanda, String pSiConta)
+	public ArrayList<OTDConta> consultaTelaManterConta(String pCdMesa, String pCdComanda, String pSiConta, String pCdCliente)
 			throws SQLException {
-		return DAOConta.getInstancia().consultaTelaManterConta(pCdMesa, pCdComanda, pSiConta);
+		return DAOConta.getInstancia().consultaTelaManterConta(pCdMesa, pCdComanda, pSiConta, pCdCliente);
 	}
+	
+	public OTDConta consultaDetalharConta(String pCdConta) throws SQLException {
+		return DAOConta.getInstancia().consultaDetalharConta(pCdConta);
+	}
+	
+	public void alterarClienteConta(Conta pConta) throws SQLException {
+		DAOConta.getInstancia().alterar(pConta);
+	}
+	
+	
 
 	public Collection<OTDCliente> consultaClienteConta(boolean pInUso) throws SQLException {
 		return DAOConta.getInstancia().consultaClienteConta(pInUso);
@@ -62,5 +72,10 @@ public class ControladorConta {
 
 	public void incluir(Conta pConta) throws SQLException {
 		DAOConta.getInstancia().incluir(pConta);
+	}
+	
+
+	public void excluir(Conta pConta) throws SQLException {
+		DAOConta.getInstancia().excluir(pConta);
 	}
 }

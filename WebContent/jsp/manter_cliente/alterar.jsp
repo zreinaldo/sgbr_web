@@ -30,6 +30,9 @@
 
 <fieldset>
 			<table>
+			<tr>
+			<th align="left">Alterar Cliente</th>
+			</tr>
 					
 				<tr>
 					<td><label for="nuCPF">CPF:</label></td>
@@ -54,6 +57,18 @@
 						name="<%=PRManterCliente.ID_REQ_ATR_dtNascimento%>"
 						maxlength="58"></td>
 				</tr>
+				
+				<tr>
+				<td><label for="dddCelular">Telefone Celular:</label></td>
+					<td><input type="text" size="4" 	value="<%=otdCliente.getDddTelefone()%>"		
+						id="<%=PRManterCliente.ID_REQ_ATR_dddTelefoneCelular%>"
+						name="<%=PRManterCliente.ID_REQ_ATR_dddTelefoneCelular%>"
+						maxlength="3"> - <input type="text"  value="<%=otdCliente.getNuTelefone()%>"
+						id="<%=PRManterCliente.ID_REQ_ATR_nuTelefoneCelular%>"
+						name="<%=PRManterCliente.ID_REQ_ATR_nuTelefoneCelular%>"
+						maxlength="10"> </td>
+				</tr>
+			
 
 				<tr>
 					<td><label for="email">E-mail:</label></td>
@@ -66,7 +81,8 @@
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Alterar"
 						onclick="submeterFormulario('<%=PRManterCliente.NM_SERVLET%>','<%=PRManterCliente.EVENTO_PROCESSAR_ALTERACAO%>')"
-						id="Alterar"></td>
+						id="Alterar"><input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar"></td>
 				</tr>
 			</table>
 

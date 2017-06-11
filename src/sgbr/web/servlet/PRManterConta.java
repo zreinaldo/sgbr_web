@@ -31,6 +31,7 @@ public class PRManterConta extends PRConsultar {
 	public static final String ID_REQ_ATR_cdMesa= "cdMesa";
 	public static final String ID_REQ_ATR_siConta= "siConta";
 	public static final String ID_REQ_ATR_cdCliente= "cdCliente";
+	public static final String ID_REQ_ATR_nmCliente= "nmCliente";
 	public static final String ID_REQ_ATR_vlContaFinal= "vlContaFinal";
 	public static final String ID_REQ_ATR_vlContaOriginal= "vlContaOriginal";
 	public static final String ID_REQ_ATR_vlDinheiroDesconto= "vlDinheiroDesconto";
@@ -65,6 +66,8 @@ public class PRManterConta extends PRConsultar {
 	public static final String NM_JSP_CONSULTA = "/jsp/manter_conta/consulta.jsp";
 	public static final String NM_JSP_ABRIR_CONTA = "/jsp/manter_conta/abrirConta.jsp";
 	public static final String NM_JSP_CONTA = "/jsp/manter_conta/conta.jsp";
+	public static final String NM_JSP_DETALHAR = "/jsp/manter_conta/detalhar.jsp";
+	public static final String NM_JSP_ALTERAR = "/jsp/manter_conta/alterar.jsp";
 	
 	protected FachadaSGBR aFachadaSGBR;
 
@@ -92,6 +95,7 @@ public class PRManterConta extends PRConsultar {
 		String cdMesa = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdMesa, pRequest);
 		String cdComanda = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdComanda, pRequest);
 		String siConta = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_siConta, pRequest);
+		String cdCliente = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdCliente, pRequest);
 				
 		
 		if (cdMesa.equals(Constantes.CD_TODOS)) {
@@ -101,8 +105,12 @@ public class PRManterConta extends PRConsultar {
 			cdComanda = "";
 		}
 		
+		if (cdCliente.equals(Constantes.CD_TODOS)) {
+			cdCliente = "";
+		}
 		
-	ArrayList<OTDConta> otdConta =  this.aFachadaSGBR.consultaTelaManterConta(cdMesa, cdComanda, siConta);
+		
+	ArrayList<OTDConta> otdConta =  this.aFachadaSGBR.consultaTelaManterConta(cdMesa, cdComanda, siConta, cdCliente);
 	
 	pRequest.setAttribute(this.ID_REQ_ATR_otdConta, otdConta);
 	
@@ -117,7 +125,16 @@ public class PRManterConta extends PRConsultar {
 	@Override
 	public void exibirDetalhamentoConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse)
 			throws Exception {
-		// TODO Auto-generated method stub
+		String	valueRadio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_conta, pRequest);
+		
+		
+		OTDConta otdConta = this.aFachadaSGBR.consultaDetalharConta(valueRadio);		
+		pRequest.setAttribute(this.ID_REQ_ATR_otdConta, otdConta);
+	
+      pRequest.setAttribute(this.ID_REQ_indicadorExclusao, false);
+		
+		
+		this.redirecionar(this.NM_JSP_DETALHAR, pRequest, pResponse);
 		
 	}
 	
@@ -169,6 +186,14 @@ public class PRManterConta extends PRConsultar {
 		
 		ArrayList<OTDContaItemCardapio> otd = DAOConta.getInstancia().consultarTodosItensConta(Integer.valueOf(cdConta));
 		
+		Conta conta = new Conta();
+		conta.setCdConta(Integer.valueOf(cdConta));
+		conta =	DAOConta.getInstancia().consultaPorChavePrimaria(conta);
+		
+		
+		
+		pRequest.setAttribute(this.ID_REQ_ATR_cdComanda, conta.getCdComanda() == null ? "" : conta.getCdComanda().toString() );
+		pRequest.setAttribute(this.ID_REQ_ATR_cdMesa, conta.getCdMesa() == null ? "" : conta.getCdMesa().toString());		
 		
 		pRequest.setAttribute(this.ID_REQ_ATR_cdConta, cdConta);
 		pRequest.setAttribute(this.ID_REQ_ATR_otdContaItemCardapio, otd);
@@ -185,7 +210,14 @@ public class PRManterConta extends PRConsultar {
 		//TODO usar fachada
 		ArrayList<OTDContaItemCardapio> otd = DAOConta.getInstancia().consultarTodosItensConta(Integer.valueOf(cdConta));
 		
+		Conta conta = new Conta();
+		conta.setCdConta(Integer.valueOf(cdConta));
+		conta =	DAOConta.getInstancia().consultaPorChavePrimaria(conta);
 		
+		
+		
+		pRequest.setAttribute(this.ID_REQ_ATR_cdComanda, conta.getCdComanda() == null ? "" : conta.getCdComanda().toString() );
+		pRequest.setAttribute(this.ID_REQ_ATR_cdMesa, conta.getCdMesa() == null ? "" : conta.getCdMesa().toString());
 		pRequest.setAttribute(this.ID_REQ_ATR_cdConta, cdConta);
 		pRequest.setAttribute(this.ID_REQ_ATR_otdContaItemCardapio, otd);
 		pRequest.setAttribute(this.ID_REQ_ATR_inFecharConta, Constantes.CD_NAO);
@@ -249,5 +281,81 @@ public class PRManterConta extends PRConsultar {
 	}
 		
 
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sgbr.util.web.PRManterCadastro#exibirAlteracao(javax.servlet.http.
+	 * HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
+	public void exibirAlteracao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
+
+		String	valueRadio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_conta, pRequest);
+		
+		
+		OTDConta otdConta = this.aFachadaSGBR.consultaDetalharConta(valueRadio);		
+		pRequest.setAttribute(this.ID_REQ_ATR_otdConta, otdConta);
+		
+		this.redirecionar(this.NM_JSP_ALTERAR, pRequest, pResponse);
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * sgbr.util.web.PRManterCadastro#processarAlteracao(javax.servlet.http.
+	 * HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
+	public void processarAlteracao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
+		String cdConta = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdConta, pRequest);
+		String cdCliente = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdCliente, pRequest);
+		
+		this.aFachadaSGBR.alterarClienteConta(Util.getInteger(cdConta), Util.getInteger(cdCliente));
+		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
+		
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sgbr.util.web.PRManterCadastro#exibirExclusao(javax.servlet.http.
+	 * HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
+	public void exibirExclusao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
+
+
+
+		String	valueRadio = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_radio_consulta_conta, pRequest);
+		
+		
+		OTDConta otdConta = this.aFachadaSGBR.consultaDetalharConta(valueRadio);		
+		pRequest.setAttribute(this.ID_REQ_ATR_otdConta, otdConta);
+		
+		pRequest.setAttribute(this.ID_REQ_indicadorExclusao, true);
+		
+		this.redirecionar(this.NM_JSP_DETALHAR, pRequest, pResponse);
+	
+
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sgbr.util.web.PRManterCadastro#processarExclusao(javax.servlet.http.
+	 * HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
+	public void processarExclusao(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
+
+		String cdConta= this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdConta,pRequest);
+		Conta conta = new Conta();
+		
+		conta.setCdConta(Util.getInteger(cdConta));
+     	this.aFachadaSGBR.excluirConta(conta);
+		
+		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
+		
+	}
 
 }

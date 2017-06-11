@@ -15,6 +15,7 @@ import sgbr.cadastros.IntfDAOCliente;
 import sgbr.entidades.Cliente;
 import sgbr.entidades.Pessoa;
 import sgbr.entidades.PessoaDocumento;
+import sgbr.entidades.PessoaTelefone;
 import sgbr.util.DAO_MYSQL;
 import sgbr.util.OTDCliente;
 
@@ -131,10 +132,14 @@ public class DAOCliente extends DAO_MYSQL implements IntfDAOCliente {
 		String sql = "SELECT mydb.cliente.pessoa_cd"
 				+ ",mydb.cliente.cliente_cd"
 				+ ", mydb.pessoa.PESSOA_NM"
-				+ ", mydb.pessoa.PESSOA_EE"
+				+ ", mydb.pessoa.PESSOA_EE" +
+				", mydb.pessoa_telefone.PESSOA_TELEFONE_DDD " +
+				", mydb.pessoa_telefone.PESSOA_TELEFONE_NU_TEL " 
 				+ ",mydb.pessoa.PESSOA_DT_NASC"
 				+ " FROM mydb.cliente inner join mydb.pessoa on mydb.pessoa.PESSOA_CD = mydb.cliente.PESSOA_CD "
-				+ " inner join mydb.pessoa_documento on mydb.pessoa_documento.PESSOA_CD = mydb.pessoa.PESSOA_CD";
+				+ " inner join mydb.pessoa_documento on mydb.pessoa_documento.PESSOA_CD = mydb.pessoa.PESSOA_CD"
+				
+				+ " left join  mydb.pessoa_telefone on mydb.pessoa.PESSOA_CD = mydb.pessoa_telefone.PESSOA_CD aND MYDB.pessoa_telefone.TIPO_TELEFONE_CD = 2 ";
 
 		if (!pNome.isEmpty()) {
 			sqlWhere = sqlWhere + sqlConector + "MYDB.PESSOA.PESSOA_NM LIKE '%" + pNome.toUpperCase() + "%'";
@@ -166,6 +171,8 @@ public class DAOCliente extends DAO_MYSQL implements IntfDAOCliente {
 			otdCliente.setNmCliente(rs.getString(Pessoa.NM_COLUNA_PESSOA_NM).toUpperCase());
 			otdCliente.setDtNascimento(rs.getDate(Pessoa.NM_COLUNA_PESSOA_DT_NASC));
 			otdCliente.setEmail(rs.getString(Pessoa.NM_COLUNA_PESSOA_EE));
+			otdCliente.setDddTelefone(rs.getString(PessoaTelefone.NM_COLUNA_PESSOA_TELEFONE_DDD) == null ? "" : rs.getString(PessoaTelefone.NM_COLUNA_PESSOA_TELEFONE_DDD) );
+			otdCliente.setNuTelefone(rs.getString(PessoaTelefone.NM_COLUNA_PESSOA_TELEFONE_NU_TEL) == null ? "" : rs.getString(PessoaTelefone.NM_COLUNA_PESSOA_TELEFONE_NU_TEL) );
 			
 			
 			arrayResposta.add(otdCliente);
@@ -194,12 +201,15 @@ public class DAOCliente extends DAO_MYSQL implements IntfDAOCliente {
 		"mydb.pessoa.PESSOA_NM, " +
 		"mydb.pessoa.PESSOA_EE, " +
 		"mydb.pessoa.PESSOA_DT_NASC, " +
+		" mydb.pessoa_telefone.PESSOA_TELEFONE_DDD " +
+		", mydb.pessoa_telefone.PESSOA_TELEFONE_NU_TEL, " +
 		"mydb.pessoa_documento.PESSOA_DOCUMENTO_NU, " +
 		"mydb.cliente.DH_INCLUSAO " +
 		"FROM mydb.cliente " +
 		"inner join mydb.pessoa on mydb.pessoa.PESSOA_CD = mydb.cliente.PESSOA_CD " +
-		"inner join mydb.pessoa_documento on mydb.pessoa_documento.PESSOA_CD = mydb.pessoa.PESSOA_CD ";
-		
+		"inner join mydb.pessoa_documento on mydb.pessoa_documento.PESSOA_CD = mydb.pessoa.PESSOA_CD "
+		+ " left join  mydb.pessoa_telefone on mydb.pessoa.PESSOA_CD = mydb.pessoa_telefone.PESSOA_CD aND MYDB.pessoa_telefone.TIPO_TELEFONE_CD = 2 ";
+
 		if (pCdCliente != null) {
 			sqlWhere = sqlWhere + sqlConector + " mydb.cliente.CLIENTE_CD  = " + pCdCliente;
 			sqlConector = " \n AND ";
@@ -227,7 +237,11 @@ public class DAOCliente extends DAO_MYSQL implements IntfDAOCliente {
 			otdCliente.setNmCliente(rs.getString(Pessoa.NM_COLUNA_PESSOA_NM).toUpperCase());
 			otdCliente.setDtNascimento(rs.getDate(Pessoa.NM_COLUNA_PESSOA_DT_NASC));
 			otdCliente.setEmail(rs.getString(Pessoa.NM_COLUNA_PESSOA_EE));
-			otdCliente.setNuCPF(rs.getString(PessoaDocumento.NM_COLUNA_PESSOA_DOCUMENTO_NU));			
+			otdCliente.setNuCPF(rs.getString(PessoaDocumento.NM_COLUNA_PESSOA_DOCUMENTO_NU));
+			otdCliente.setDhInclusao(rs.getTimestamp(Cliente.NM_COLUNA_DH_INCLUSAO_REGISTRO));
+			otdCliente.setDddTelefone(rs.getString(PessoaTelefone.NM_COLUNA_PESSOA_TELEFONE_DDD) == null ? "" : rs.getString(PessoaTelefone.NM_COLUNA_PESSOA_TELEFONE_DDD) );
+			otdCliente.setNuTelefone(rs.getString(PessoaTelefone.NM_COLUNA_PESSOA_TELEFONE_NU_TEL) == null ? "" : rs.getString(PessoaTelefone.NM_COLUNA_PESSOA_TELEFONE_NU_TEL) );
+		
 
 		}
 

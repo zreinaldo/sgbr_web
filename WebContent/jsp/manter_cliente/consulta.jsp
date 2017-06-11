@@ -45,7 +45,9 @@ if (otd == null) {
 
 		<fieldset>
 			<table>		
-							
+					<tr>
+			<th align="left">Manter Cliente</th>
+			</tr>		
 				<tr>
 					<td><label for="tpDocumento">Tipo Documento:</label></td>
 					<td><%= SelectTipoDocumento.getInstancia().getHTML(request, PRManterCliente.ID_REQ_ATR_tpDocumento, PRManterCliente.ID_REQ_ATR_tpDocumento, tpDocumento,false,true)%></td>
@@ -83,13 +85,19 @@ if (otd == null) {
 			 %>
 					<tr>
 					<td>
-					
-					<INPUT type="radio" id="<%=PRManterCliente.ID_REQ_ATR_radio_consulta_cliente%>" name="<%=PRManterCliente.ID_REQ_ATR_radio_consulta_cliente%>" value="<%=cdCliente+","+cdPessoa%>"></td>
+					<% 
+					String check = "";
+					if(otd.size() == 1 )  {%>
+					<INPUT checked="checked" type="radio" id="<%=PRManterCliente.ID_REQ_ATR_radio_consulta_cliente%>" name="<%=PRManterCliente.ID_REQ_ATR_radio_consulta_cliente%>" value="<%=cdCliente+","+cdPessoa%>"></td>
+					     
+					<% }else {%>
+					<INPUT checked="checked" type="radio" id="<%=PRManterCliente.ID_REQ_ATR_radio_consulta_cliente%>" name="<%=PRManterCliente.ID_REQ_ATR_radio_consulta_cliente%>" value="<%=cdCliente+","+cdPessoa%>"></td>
+					<% }%>
 					
 						<td><%=campos.getNmCliente()%></td>						
 						<td><%= Util.formataDataParaString(campos.getDtNascimento())%></td>
 						<td><%=campos.getEmail()%></td>
-						<td><%=campos.getDddTelefone() + campos.getNuTelefone()%></td>
+						<td><%=campos.getDddTelefone() + "-" + campos.getNuTelefone()%></td>
 						
 					</tr>
 			<%} %>	
@@ -101,7 +109,7 @@ if (otd == null) {
 					    <input type="button" value="Consultar"	onclick="submeterFormulario('<%=PRManterCliente.NM_SERVLET%>','<%=PRManterCliente.EVENTO_PROCESSAR_CONSULTA%>')" id="consultar">
 					    <input type="button" value="Incluir"	onclick="submeterFormulario('<%=PRManterCliente.NM_SERVLET%>','<%=PRManterCliente.EVENTO_EXIBIR_INCLUSAO%>')" id="incluir"> 
 					    <input type="button" value="Alterar" onclick="submeterFormulario('<%=PRManterCliente.NM_SERVLET%>','<%=PRManterCliente.EVENTO_EXIBIR_ALTERACAO%>')" id="alterar"> 
-					    <input type="button" value="Detalhar" onclick="submeterFormulario('<%=PRManterCliente.NM_SERVLET%>','<%=PRManterCliente.EVENTO_EXIBIR_DETALHAMENTO_CONSULTA%>')" id="excluir">
+					    <input type="button" value="Detalhar" onclick="submeterFormulario('<%=PRManterCliente.NM_SERVLET%>','<%=PRManterCliente.EVENTO_EXIBIR_DETALHAMENTO_CONSULTA%>')" id="detalhar">
 					    <input type="button" value="Excluir" onclick="submeterFormulario('<%=PRManterCliente.NM_SERVLET%>','<%=PRManterCliente.EVENTO_EXIBIR_EXCLUSAO%>')" id="excluir">
 					</td>
 				</tr>

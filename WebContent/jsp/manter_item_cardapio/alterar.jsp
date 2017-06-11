@@ -38,21 +38,21 @@
 
 				<tr>
 					<td><label for="cdItemCardapio">Código Item Cardápio:</label></td>
-					<td><input type="text" readonly="readonly"
+					<td><input type="text" readonly="readonly" 
 						id="<%=PRManterItemCardapio.ID_REQ_ATR_cdItemCardapio%>"
 						name="<%=PRManterItemCardapio.ID_REQ_ATR_cdItemCardapio%>" value="<%=itemCardapio.getCdItemCardapio()%>"
 						maxlength="58"></td>
 				</tr>
 				<tr>
 					<td><label for="nmItemCardapio">Descrição:</label></td>
-					<td><input type="text"
+					<td><input type="text" required
 						id="<%=PRManterItemCardapio.ID_REQ_ATR_nmItemCardapio%>"
 						name="<%=PRManterItemCardapio.ID_REQ_ATR_nmItemCardapio%>" value="<%=itemCardapio.getNmItemCardapio()%>"
 						maxlength="58"></td>
 				</tr>
 				<tr>
 					<td><label for="vlItemCardapio">Valor:</label></td>
-					<td><input type="text"
+					<td><input type="text" required
 						id="<%=PRManterItemCardapio.ID_REQ_ATR_vlItemCardapio%>"
 						name="<%=PRManterItemCardapio.ID_REQ_ATR_vlItemCardapio%>" maxlength="58" value="<%=itemCardapio.getVlItemCardapio()%>"> </td>
 				</tr>
@@ -70,8 +70,8 @@
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Alterar"
 						onclick="submeterFormulario('<%=PRManterItemCardapio.NM_SERVLET%>','<%=PRManterItemCardapio.EVENTO_PROCESSAR_ALTERACAO%>')"
-						id="alterar"><input type="button" value="Home"
-						onClick=""></td>
+						id="alterar"><input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar"></td>
 				</tr>
 			</table>
 

@@ -7,14 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import sgbr.cadastros.sql.DAOConta;
 import sgbr.controlador.ControladorCliente;
 import sgbr.controlador.ControladorComanda;
 import sgbr.controlador.ControladorConta;
 import sgbr.controlador.ControladorContaItemCardapio;
 import sgbr.controlador.ControladorFuncionario;
 import sgbr.controlador.ControladorItemCardapio;
-import sgbr.controlador.ControladorPessoaDocumento;
 import sgbr.controlador.ControladorPromocao;
 import sgbr.controlador.ControladorTipoDocumento;
 import sgbr.controlador.ControladorTipoFuncionario;
@@ -30,6 +28,8 @@ import sgbr.entidades.TipoDocumento;
 import sgbr.entidades.TipoFuncionario;
 import sgbr.entidades.TipoUsuario;
 import sgbr.entidades.Usuario;
+import sgbr.regras.conta.RNAlterarClienteConta;
+import sgbr.regras.conta.RNExcluirConta;
 import sgbr.util.OTDCliente;
 import sgbr.util.OTDComanda;
 import sgbr.util.OTDConta;
@@ -348,10 +348,24 @@ public class FachadaSGBR {
 		return ControladorConta.getInstancia().consultaMesaConta(pInUso,pCdTipoConta);
 	}
 
-	public ArrayList<OTDConta> consultaTelaManterConta(String pCdMesa, String pCdComanda, String pSiConta)
+	public ArrayList<OTDConta> consultaTelaManterConta(String pCdMesa, String pCdComanda, String pSiConta, String pCdCliente)
 			throws SQLException {
-		return ControladorConta.getInstancia().consultaTelaManterConta(pCdMesa, pCdComanda, pSiConta);
+		return ControladorConta.getInstancia().consultaTelaManterConta(pCdMesa, pCdComanda, pSiConta, pCdCliente);
 	}
+	
+	public OTDConta consultaDetalharConta(String pCdConta)
+			throws SQLException {
+		return ControladorConta.getInstancia().consultaDetalharConta(pCdConta);
+	}
+	
+	public void alterarClienteConta(Integer pCdConta, Integer pCdCliente) throws SQLException {
+		RNAlterarClienteConta.getInstancia().processar(pCdConta,pCdCliente);
+	}
+	
+	public void excluirConta(Conta pConta) throws SQLException {
+		RNExcluirConta.getInstancia().processar(pConta);
+	}
+	
 	
 	public Collection<OTDCliente> consultaClienteConta(boolean pInUso) throws SQLException {
 		return ControladorConta.getInstancia().consultaClienteConta(pInUso);
@@ -366,7 +380,23 @@ public class FachadaSGBR {
 		return ControladorContaItemCardapio.getInstancia().consultaTelaManterPedido(pCdMesa, pCdComanda);
 	}
 	
+	public OTDContaItemCardapio consultaDetalharPedido(String pCdPedido)
+			throws SQLException {
+		return ControladorContaItemCardapio.getInstancia().consultaDetalharPedido(pCdPedido);
+	}
+	
+	public void alterarContaItemCardapio(ContaItemCardapio pContaItemCardapio)
+			throws SQLException {
+		ControladorContaItemCardapio.getInstancia().alterar(pContaItemCardapio);
+	}
+	
 	public void incluirContaItemCardapio(ContaItemCardapio pContaItemCardapio) throws SQLException {
 		ControladorContaItemCardapio.getInstancia().incluir(pContaItemCardapio);
 	}
+	
+	public void excluirContaItemCardapio(String pCdContaItemCardapio) throws SQLException {
+		ControladorContaItemCardapio.getInstancia().excluir(pCdContaItemCardapio);
+	}
+	
+	
 }

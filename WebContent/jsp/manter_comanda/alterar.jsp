@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Alterar Funcionario</title>
+<title>Alterar Comanda</title>
 </head>
 <SCRIPT language="JavaScript" type="text/javascript" src="js/funcoes_comuns.js"></SCRIPT>
 
@@ -30,17 +30,19 @@
 
 		<fieldset>
 			<table>
-				
+				<tr>
+			<th align="left">Alterar Comanda</th>
+			</tr>
 
 				<tr>
-					<td><label for="cdComanda">Codigo Comanda:</label></td>
+					<td><label for="cdComanda">Código Comanda:</label></td>
 					<td><input type="text" readonly="readonly"
 						id="<%=PRManterComanda.ID_REQ_ATR_cdComanda%>"
 						name="<%=PRManterComanda.ID_REQ_ATR_cdComanda%>" value="<%=comanda.getCdComanda() %>"
 						maxlength="58"></td>
 				</tr>
 				<tr>
-					<td><label for="dtIniValidade">Data Inicio Validade:</label></td>
+					<td><label for="dtIniValidade">Data Início Validade:</label></td>
 					<td><input type="text"
 						id="<%=PRManterComanda.ID_REQ_ATR_dtIniVigencia%>"
 						name="<%=PRManterComanda.ID_REQ_ATR_dtIniVigencia%>" maxlength="58" value="<%=Util.formataDataParaString(comanda.getDtIniValidade())%>"> </td>
@@ -59,8 +61,8 @@
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Alterar"
 						onclick="submeterFormulario('<%=PRManterComanda.NM_SERVLET%>','<%=PRManterComanda.EVENTO_PROCESSAR_ALTERACAO%>')"
-						id="alterar"><input type="button" value="Home"
-						onClick=""></td>
+						id="alterar"><input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar"></td>
 				</tr>
 			</table>
 

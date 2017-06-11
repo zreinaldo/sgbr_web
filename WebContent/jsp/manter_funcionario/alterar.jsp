@@ -172,8 +172,9 @@
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Alterar"
 						onclick="submeterFormulario('<%=PRManterFuncionario.NM_SERVLET%>','<%=PRManterFuncionario.EVENTO_PROCESSAR_ALTERACAO%>')"
-						id="alterar"><input type="button" value="Home"
-						onClick=""></td>
+						id="alterar">
+						<input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar"></td>
 				</tr>
 			</table>
 

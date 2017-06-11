@@ -29,10 +29,18 @@
 
 		<fieldset>
 			<table>
-			
+									<%
+	if (cdTipoConta.equals((Constantes.CD_TIPO_CONTA_COMANDA))) {
+	 
+%>
+<th>Abrir Conta por Comanda</th>
+
+<%} else {%>
+<th>Abrir Conta por Mesa</th>
+<%} %>
 			
 			<tr>
-					<td><label for="<%=PRManterConta.ID_REQ_ATR_cdMesa%>">Numero Mesa:</label></td>
+					<td><label for="<%=PRManterConta.ID_REQ_ATR_cdMesa%>">Número Mesa:</label></td>
 					<%if (cdTipoConta.equals(Constantes.CD_TIPO_CONTA_COMANDA) ) { %>
 					<td><%=SelectMesaConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdMesa, PRManterConta.ID_REQ_ATR_cdMesa, "", true, false, Constantes.CD_NAO, Constantes.CD_TIPO_CONTA_MESA)	%></td>
 					
@@ -43,7 +51,7 @@
 
 			<%if (cdTipoConta.equals(Constantes.CD_TIPO_CONTA_COMANDA)) {  %>
 				<tr>
-					<td><label for="<%=PRManterConta.ID_REQ_ATR_cdComanda%>">Numero Comanda:</label></td>
+					<td><label for="<%=PRManterConta.ID_REQ_ATR_cdComanda%>">Número Comanda:</label></td>
 					<td><%=SelectComandaConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdComanda, PRManterConta.ID_REQ_ATR_cdComanda, "", true, false, Constantes.CD_NAO)	%></td>
 				</tr>
 				<%} %>	
@@ -58,7 +66,8 @@
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Incluir"
 						onclick="submeterFormulario('<%=PRManterConta.NM_SERVLET%>','<%=PRManterConta.EVENTO_PROCESSAR_ABRIR_CONTA%>')"
-						id="consultar"></td>
+						id="consultar">  <input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar"></td>
 				</tr>
 			</table>
 

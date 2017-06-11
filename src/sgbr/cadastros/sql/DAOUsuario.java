@@ -414,11 +414,13 @@ public class DAOUsuario extends DAO_MYSQL implements IntfDAOUsuario {
 		conexao = this.getConection();
 
 		String sql = "SELECT MYDB.USUARIO.*, " +
-				"MYDB.PESSOA.PESSOA_NM " +
+				"MYDB.PESSOA.PESSOA_NM, " +
+				"MYDB.tipo_usuario.TIPO_USUARIO_NM "+
 				"FROM MYDB.USUARIO " +
 				"INNER JOIN MYDB.FUNCIONARIO " +
 				"ON MYDB.FUNCIONARIO.FUNCIONARIO_CD = MYDB.USUARIO.FUNCIONARIO_CD " +
-				"AND MYDB.USUARIO.USUARIO_IN_BLOQUEIO = 'N'"+
+				"AND MYDB.USUARIO.USUARIO_IN_BLOQUEIO = 'N' "+
+				"INNER JOIN MYDB.tipo_usuario ON MYDB.tipo_usuario.TIPO_USUARIO_CD = MYDB.USUARIO.TIPO_USUARIO_CD " +
 				"INNER JOIN MYDB.PESSOA " +
 				"ON MYDB.FUNCIONARIO.PESSOA_CD = MYDB.PESSOA.PESSOA_CD ";
 		
@@ -449,6 +451,7 @@ public class DAOUsuario extends DAO_MYSQL implements IntfDAOUsuario {
 			otdUsuario.setSenhaUsuario(rs.getString(Usuario.NM_COLUNA_USUARIO_SENHA));
 			otdUsuario.setLoginUsuario(rs.getString(Usuario.NM_COLUNA_USUARIO_LOGIN));
 			otdUsuario.setNmFuncionario(rs.getString(Pessoa.NM_COLUNA_PESSOA_NM));
+			otdUsuario.setNmTpUsuario(rs.getString(TipoUsuario.NM_COLUNA_TIPO_USUARIO_NM));
 			otdUsuario.setDhAlteracao(rs.getTimestamp(Usuario.NM_COLUNA_DH_ALTERACAO_REGISTRO));
 			otdUsuario.setDhInclusao(rs.getTimestamp(Usuario.NM_COLUNA_DH_INCLUSAO_REGISTRO));
 

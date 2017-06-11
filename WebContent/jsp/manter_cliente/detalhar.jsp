@@ -43,7 +43,15 @@
 
 <fieldset>
 			<table>
-					
+														<%
+	if (indicadorExclusao) {
+	 
+%>
+<th align="left">Excluir Cliente</th>
+
+<%} else {%>
+<th align="left">Detalhar Cliente</th>
+<%} %>	
 				<tr>
 					<td><label for="nuCPF">CPF:</label></td>
 					<td><input type="text"  value="<%=otdCliente.getNuCPF()%>" disabled="disabled"
@@ -73,6 +81,13 @@
 					<td><input type="email" value="<%=otdCliente.getEmail()%>"  disabled="disabled"
 					id="<%=PRManterCliente.ID_REQ_ATR_email%>"
 						name="<%=PRManterCliente.ID_REQ_ATR_email%>" maxlength="58"></td>
+				</tr>
+				
+				<tr>
+					<td><label for="dhInclusao">Data-Hora Inclusão:</label></td>
+					<td><input type="text" value="<%=otdCliente.getDhInclusao()%>"  disabled="disabled"
+					id="<%=PRManterCliente.ID_REQ_ATR_dhInclusao%>"
+						name="<%=PRManterCliente.ID_REQ_ATR_dhInclusao%>" maxlength="58"></td>
 				</tr>
 
 				<tr>

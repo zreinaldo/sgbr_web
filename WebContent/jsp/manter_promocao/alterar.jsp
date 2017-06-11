@@ -28,7 +28,7 @@
 	<FORM name="form_principal" method="post" action="">
 <%@ include file = "../../jsp/util/menu.jsp" %>
 		<INPUT type="hidden" id="evento" name="<%=PRManterPromocao.ID_REQ_EVENTO%>" value="">
-		<INPUT type="hidden" id="cdPromocao" name="<%=PRManterPromocao.ID_REQ_ATR_cdPromocao%>" value="">
+		<INPUT type="hidden" id="cdPromocao" name="<%=PRManterPromocao.ID_REQ_ATR_cdPromocao%>" value="<%=promocao.getCdPromocao()%>">
 		<INPUT type="hidden" id="cdDiasPromocao" name="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>" value="">
 
 
@@ -65,7 +65,7 @@
 				<tr>
 					<td><label for="<%=PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao%>">Dias da semana:</label></td>
 					<td> 
-					<%=CheckBoxDiaSemana.getInstancia().getHTML(request, PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao, "idSelect", promocao.getCdPromocao())%>
+					<%=CheckBoxDiaSemana.getInstancia().getHTML(request, PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao, PRManterPromocao.ID_REQ_ATR_diasSemanaPromocao, promocao.getCdPromocao())%>
 					
 					   
 					</td>
@@ -77,8 +77,8 @@
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Alterar"
 						onclick="submeterFormulario('<%=PRManterPromocao.NM_SERVLET%>','<%=PRManterPromocao.EVENTO_PROCESSAR_ALTERACAO%>')"
-						id="alterar"><input type="button" value="Home"
-						onClick=""></td>
+						id="alterar"><input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar"></td>
 				</tr>
 			</table>
 

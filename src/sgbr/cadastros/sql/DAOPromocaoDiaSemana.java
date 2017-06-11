@@ -60,7 +60,7 @@ public class DAOPromocaoDiaSemana extends DAO_MYSQL implements IntfDAOPromocaoDi
 
 		String sql = "INSERT INTO mydb.promocao_dia_semana " + "(" + PromocaoDiaSemana.NM_COLUNA_PROMOCAO_CD + " , "
 				+ PromocaoDiaSemana.NM_COLUNA_DIA_SEMANA_CD + " , " + PromocaoDiaSemana.NM_COLUNA_DH_INCLUSAO_REGISTRO
-				+ ") VALUES " + "(?,?,?) " ;
+				+ ") VALUES " + "(?,?,?) ";
 
 		ppSt = conexao.prepareStatement(sql);
 
@@ -82,17 +82,19 @@ public class DAOPromocaoDiaSemana extends DAO_MYSQL implements IntfDAOPromocaoDi
 	 * sgbr.cadastros.IntfDAOPromocaoDiaSemana#excluir(sgbr.entidades.Promocao)
 	 */
 	@Override
-	public void excluir(Integer pCdPromocao) throws SQLException {
+	public void excluir(Integer pCdPromocao, Integer pCdDiaSemana) throws SQLException {
 
 		Connection conexao = null;
 
 		conexao = this.getConection();
 
-		String sql = "delete from mydb.promocao_dia_semana WHERE " + PromocaoDiaSemana.NM_COLUNA_PROMOCAO_CD + " = ?";
+		String sql = "delete from mydb.promocao_dia_semana WHERE " + PromocaoDiaSemana.NM_COLUNA_PROMOCAO_CD
+				+ " = ? and " + PromocaoDiaSemana.NM_COLUNA_DIA_SEMANA_CD + " = ?";
 
 		PreparedStatement ppSt = conexao.prepareStatement(sql);
 
 		ppSt.setInt(1, pCdPromocao);
+		ppSt.setInt(2, pCdDiaSemana);
 
 		ppSt.execute();
 
@@ -113,35 +115,30 @@ public class DAOPromocaoDiaSemana extends DAO_MYSQL implements IntfDAOPromocaoDi
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	public ArrayList<Integer> consultaPromocaoDiasSemana(Integer pCdPromocao) throws SQLException {	
 
-	Connection conexao = null;
-	PromocaoDiaSemana promocaoDiaSemana = null;
-	ArrayList<Integer> aPromocaoDiaSemana = new ArrayList<>();
+	public ArrayList<Integer> consultaPromocaoDiasSemana(Integer pCdPromocao) throws SQLException {
 
-	conexao = this.getConection();
+		Connection conexao = null;
+		PromocaoDiaSemana promocaoDiaSemana = null;
+		ArrayList<Integer> aPromocaoDiaSemana = new ArrayList<>();
 
-	String sql = "select * from mydb.promocao_dia_semana where mydb.promocao_dia_semana.PROMOCAO_CD = " + pCdPromocao;
+		conexao = this.getConection();
 
+		String sql = "select * from mydb.promocao_dia_semana where mydb.promocao_dia_semana.PROMOCAO_CD = "
+				+ pCdPromocao;
 
-	Statement stm = conexao.createStatement();
+		Statement stm = conexao.createStatement();
 
-	ResultSet rs = stm.executeQuery(sql);
+		ResultSet rs = stm.executeQuery(sql);
 
-	while (rs.next()) {
-//		promocaoDiaSemana = new PromocaoDiaSemana();
-//		promocaoDiaSemana.setCdPromocao(rs.getInt(PromocaoDiaSemana.NM_COLUNA_PROMOCAO_CD));
-//		promocaoDiaSemana.setCdDiaPromocao(rs.getInt(PromocaoDiaSemana.NM_COLUNA_PROMOCAO_CD));
-		aPromocaoDiaSemana.add(rs.getInt(PromocaoDiaSemana.NM_COLUNA_DIA_SEMANA_CD));
+		while (rs.next()) {
+			aPromocaoDiaSemana.add(rs.getInt(PromocaoDiaSemana.NM_COLUNA_DIA_SEMANA_CD));
+		}
 
-	}
-
-	rs.close();
-	stm.close();
-	conexao.close();
-	return aPromocaoDiaSemana;
+		rs.close();
+		stm.close();
+		conexao.close();
+		return aPromocaoDiaSemana;
 	}
 
 }

@@ -5,19 +5,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro Funcionario</title>
+<title>Incluir Comanda</title>
 </head>
 <SCRIPT language="JavaScript" type="text/javascript" src="js/funcoes_comuns.js"></SCRIPT>
 <body>
 	<FORM name="form_principal" method="post" action="">
-
+<%@ include file = "../../jsp/util/menu.jsp" %>
 		<INPUT type="hidden" id="evento"
 			name="<%=PRManterComanda.ID_REQ_EVENTO%>" value="">
 
 
 		<fieldset>
 			<table>
-							
+			<tr>
+			<th align="left">Incluir Comanda</th>
+			</tr>	
 
 				<tr>
 					<td><label for="qtdDemandas">Quantidades de comandas a serem geradas:</label></td>
@@ -31,7 +33,8 @@
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Incluir"
 						onclick="submeterFormulario('<%=PRManterComanda.NM_SERVLET%>','<%=PRManterComanda.EVENTO_PROCESSAR_INCLUSAO%>')"
-						id="consultar"></td>
+						id="consultar"> <input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar"></td>
 				</tr>
 			</table>
 

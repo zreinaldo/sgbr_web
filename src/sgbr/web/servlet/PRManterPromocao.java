@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import sgbr.entidades.Promocao;
 import sgbr.fachada.FachadaSGBR;
+import sgbr.regras.promocao.RNAlterarPromocao;
 import sgbr.util.Constantes;
 import sgbr.util.OTDPromocao;
 import sgbr.util.Util;
@@ -128,23 +129,27 @@ public class PRManterPromocao extends PRManterCadastro {
 		String dtFimPromocao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dtFimPromocao, pRequest);
 
 		vlPromocao = vlPromocao.replaceAll(",", ".");
-		Promocao promocao = new Promocao();
-		promocao.setCdPromocao(Integer.parseInt(cdPromocao));
-		promocao.setCdItemCardapio(!cdItemCardapio.isEmpty() ? Integer.parseInt(cdItemCardapio) : null);
-		promocao.setVlPromocao(!vlPromocao.isEmpty() ? Double.valueOf(vlPromocao) : null);
-		promocao.setDtInicioPromocao(!dtInicioPromocao.isEmpty() ? Util.formataData(dtInicioPromocao) : null);
-		promocao.setDtFimPromocao(!dtFimPromocao.isEmpty() ? Util.formataData(dtFimPromocao) : null);
-		this.aFachadaSGBR.alterarPromocao(promocao);
+//		Promocao promocao = new Promocao();
+//		promocao.setCdPromocao(Integer.parseInt(cdPromocao));
+//		promocao.setCdItemCardapio(!cdItemCardapio.isEmpty() ? Integer.parseInt(cdItemCardapio) : null);
+//		promocao.setVlPromocao(!vlPromocao.isEmpty() ? Double.valueOf(vlPromocao) : null);
+//		promocao.setDtInicioPromocao(!dtInicioPromocao.isEmpty() ? Util.formataData(dtInicioPromocao) : null);
+//		promocao.setDtFimPromocao(!dtFimPromocao.isEmpty() ? Util.formataData(dtFimPromocao) : null);
+//		this.aFachadaSGBR.alterarPromocao(promocao);
 
 		String[] arrayDiasDaSemana = (String[]) this.getParametros(this.ID_REQ_ATR_diasSemanaPromocao, pRequest);
 
 		OTDPromocao otdPromocao = new OTDPromocao();
+		otdPromocao.setCdPromocao(Integer.parseInt(cdPromocao));
 		vlPromocao = vlPromocao.replaceAll(",", ".");
 		otdPromocao.setCdItemCardapio(!cdItemCardapio.isEmpty() ? Integer.parseInt(cdItemCardapio) : null);
 		otdPromocao.setVlPromocao(!vlPromocao.isEmpty() ? Double.valueOf(vlPromocao) : null);
 		otdPromocao.setDtInicioPromocao(!dtInicioPromocao.isEmpty() ? Util.formataData(dtInicioPromocao) : null);
 		otdPromocao.setDtFimPromocao(!dtFimPromocao.isEmpty() ? Util.formataData(dtFimPromocao) : null);
 		otdPromocao.setListaDiasSemanaPromocao(arrayDiasDaSemana);
+		
+		
+		RNAlterarPromocao.getInstancia().processar(otdPromocao);
 
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
