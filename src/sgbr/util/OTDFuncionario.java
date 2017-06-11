@@ -38,6 +38,10 @@ public class OTDFuncionario  {
 	private Integer cdFuncionario;
 	private Integer cdPessoa;
 	private Date dtDemissao;
+	private String nuTelefoneConvencional;
+	private String dddTelefoneConvencional;	
+	private String nuTelefoneCelular;
+	private String dddTelefoneCelular;
 	
 
 	/**
@@ -366,6 +370,62 @@ public class OTDFuncionario  {
 	 */
 	public void setDtDemissao(Date pDtDemissao) {
 		this.dtDemissao = pDtDemissao;
+	}
+
+	/**
+	 * @return the nuTelefoneConvencional
+	 */
+	public String getNuTelefoneConvencional() {
+		return this.nuTelefoneConvencional;
+	}
+
+	/**
+	 * @param pNuTelefoneConvencional the nuTelefoneConvencional to set
+	 */
+	public void setNuTelefoneConvencional(String pNuTelefoneConvencional) {
+		this.nuTelefoneConvencional = pNuTelefoneConvencional;
+	}
+
+	/**
+	 * @return the dddTelefoneConvencional
+	 */
+	public String getDddTelefoneConvencional() {
+		return this.dddTelefoneConvencional;
+	}
+
+	/**
+	 * @param pDddTelefoneConvencional the dddTelefoneConvencional to set
+	 */
+	public void setDddTelefoneConvencional(String pDddTelefoneConvencional) {
+		this.dddTelefoneConvencional = pDddTelefoneConvencional;
+	}
+
+	/**
+	 * @return the nuTelefoneCelular
+	 */
+	public String getNuTelefoneCelular() {
+		return this.nuTelefoneCelular;
+	}
+
+	/**
+	 * @param pNuTelefoneCelular the nuTelefoneCelular to set
+	 */
+	public void setNuTelefoneCelular(String pNuTelefoneCelular) {
+		this.nuTelefoneCelular = pNuTelefoneCelular;
+	}
+
+	/**
+	 * @return the dddTelefoneCelular
+	 */
+	public String getDddTelefoneCelular() {
+		return this.dddTelefoneCelular;
+	}
+
+	/**
+	 * @param pDddTelefoneCelular the dddTelefoneCelular to set
+	 */
+	public void setDddTelefoneCelular(String pDddTelefoneCelular) {
+		this.dddTelefoneCelular = pDddTelefoneCelular;
 	}
 
 }

@@ -16,8 +16,10 @@ import sgbr.cadastros.IntfDAOContaItemCardapio;
 import sgbr.entidades.Comanda;
 import sgbr.entidades.Conta;
 import sgbr.entidades.ContaItemCardapio;
+import sgbr.entidades.Funcionario;
 import sgbr.entidades.ItemCardapio;
 import sgbr.entidades.Mesa;
+import sgbr.entidades.Pessoa;
 import sgbr.util.DAO_MYSQL;
 import sgbr.util.OTDContaItemCardapio;
 
@@ -95,12 +97,7 @@ public class DAOContaItemCardapio extends DAO_MYSQL implements IntfDAOContaItemC
 			ppSt.setInt(5, pContaItemCardapio.getCdFuncionario());
 		} else {
 			ppSt.setNull(5, java.sql.Types.INTEGER);
-		}
-		
-		
-		
-//		ppSt.setTimestamp(4, pContaItemCardapio.getDhIncusaoRegistro());
-//		ppSt.setTimestamp(5, pContaItemCardapio.getDhAlteracaoRegistro());
+		}		
 
 		ppSt.execute();
 
@@ -169,44 +166,6 @@ public class DAOContaItemCardapio extends DAO_MYSQL implements IntfDAOContaItemC
 		
 	}
 	
-	/* (non-Javadoc)
-	 * @see sgbr.cadastros.IntfDAOContaItemCardapio#consultaTodosRegistros(boolean)
-	 */
-	public Collection<ContaItemCardapio> consultaTodosRegistros( boolean pInRetornarApenasVigentes) throws SQLException {
-		
-		Connection conexao = null;
-		PreparedStatement ppSt = null;
-		ContaItemCardapio itemCardapio = null;
-		Collection<ContaItemCardapio> colecaoContaItemCardapio = new ArrayList<ContaItemCardapio>();
-
-//		conexao = this.getConection();
-//		
-//		String sql = "SELECT * FROM mydb.ITEM_CARDAPIO ";
-//		
-//		if (pInRetornarApenasVigentes){
-//			sql = sql + " where mydb.ITEM_CARDAPIO.ITEM_CARDAPIO_SI = '" + Constantes.SI_ITEM_CARDAPIO_DISPONIVEL + "'";
-//		}
-//
-//		Statement stm = conexao.createStatement();
-//				
-//		ResultSet rs = stm.executeQuery(sql);
-//
-//		while (rs.next()) {
-//			itemCardapio = new ContaItemCardapio();
-//			itemCardapio.setCdContaItemCardapio(rs.getInt(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_CD));
-//			itemCardapio.setNmContaItemCardapio(rs.getString(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM));
-//			itemCardapio.setDhIncusaoRegistro(rs.getTimestamp(ContaItemCardapio.NM_COLUNA_DH_INCLUSAO_REGISTRO));
-//			itemCardapio.setDhAlteracaoRegistro(rs.getTimestamp(ContaItemCardapio.NM_COLUNA_DH_ALTERACAO_REGISTRO));
-//			itemCardapio.setVlContaItemCardapio(rs.getDouble(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_VL));
-//			colecaoContaItemCardapio.add(itemCardapio);
-//		}
-//
-//		rs.close();
-//		stm.close();
-//		conexao.close();
-//		
-		return colecaoContaItemCardapio;
-	}
 	
 	
 	
@@ -223,10 +182,20 @@ public class DAOContaItemCardapio extends DAO_MYSQL implements IntfDAOContaItemC
 		OTDContaItemCardapio otdContaItemCardapio = null;
 
 		conexao = this.getConection();
-		String sql = "SELECT  MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_CD, MYDB.CONTA.CONTA_CD, MYDB.CONTA.MESA_CD, MYDB.CONTA.COMANDA_CD , MYDB.CONTA_ITEM_CARDAPIO.ITEM_CARDAPIO_CD, MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_NM, MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_QTD,"
-				+ " MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_OBS FROM mydb.conta_item_cardapio INNER JOIN  mydb.item_cardapio ON mydb.conta_item_cardapio.ITEM_CARDAPIO_CD = mydb.item_cardapio.ITEM_CARDAPIO_CD"
+		String sql = "SELECT  MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_CD, "
+				+ "MYDB.CONTA.CONTA_CD, MYDB.CONTA.MESA_CD, "
+				+ "MYDB.CONTA.COMANDA_CD , "
+				+ "MYDB.CONTA_ITEM_CARDAPIO.ITEM_CARDAPIO_CD, "
+				+ "MYDB.ITEM_CARDAPIO.ITEM_CARDAPIO_NM, "
+				+ "MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_QTD,"
+				+ " MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_OBS, "
+				+ " MYDB.CONTA_ITEM_CARDAPIO.FUNCIONARIO_CD, " 
+				+" MYDB.pessoa.PESSOA_NM "
+				+ "FROM mydb.conta_item_cardapio INNER JOIN  mydb.item_cardapio ON mydb.conta_item_cardapio.ITEM_CARDAPIO_CD = mydb.item_cardapio.ITEM_CARDAPIO_CD"
 				+ "  INNER JOIN MYDB.CONTA  ON MYDB.CONTA.CONTA_CD = MYDB.CONTA_ITEM_CARDAPIO.CONTA_CD"
-				+ " and conta.DH_ENCERRAMENTO is null ";
+				+ " and conta.DH_ENCERRAMENTO is null "
+				+" INNER JOIN MYDB.funcionario ON MYDB.conta_item_cardapio.FUNCIONARIO_CD = MYDB.funcionario.FUNCIONARIO_CD " 
+				+" INNER JOIN MYDB.pessoa ON MYDB.pessoa.PESSOA_CD = MYDB.funcionario.PESSOA_CD ";
 			
 
 		if (!pCdMesa.isEmpty()) {
@@ -258,6 +227,8 @@ public class DAOContaItemCardapio extends DAO_MYSQL implements IntfDAOContaItemC
 			otdContaItemCardapio.setCdMesa(rs.getInt(Mesa.NM_COLUNA_MESA_CD) == 0 ? null : rs.getInt(Mesa.NM_COLUNA_MESA_CD));
 			otdContaItemCardapio.setCdComanda(rs.getInt(Comanda.NM_COLUNA_COMANDA_CD) == 0 ? null : rs.getInt(Comanda.NM_COLUNA_COMANDA_CD));
 			otdContaItemCardapio.setCdConta(rs.getInt(Conta.NM_COLUNA_CONTA_CD));
+			otdContaItemCardapio.setCdFuncionario(rs.getInt(Funcionario.NM_COLUNA_FUNCIONARIO_CD));
+			otdContaItemCardapio.setNmFuncionario(rs.getString(Pessoa.NM_COLUNA_PESSOA_NM));
 
 			arrayResposta.add(otdContaItemCardapio);
 		}

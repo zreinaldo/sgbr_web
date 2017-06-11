@@ -17,17 +17,11 @@ public interface IntfDAOContaItemCardapio {
 
 	
 	public ContaItemCardapio incluir(ContaItemCardapio pContaItemCardapio) throws SQLException ;
-//
+
 	public void alterar(ContaItemCardapio pContaItemCardapio) throws SQLException;
-//
-//	public void excluir(ItemCardapio pItemCardapio) throws SQLException;
-//	
-//	public Collection<ItemCardapio> consultaTodosRegistros( boolean pInRetornarApenasVigentes)  throws SQLException;
-//	
+
 	public ArrayList<OTDContaItemCardapio> consultaTelaManterPedido(String pCdMesa, String pCdComanda) throws SQLException;
-//	
-//	public ItemCardapio consultaPorChavePrimaria(ItemCardapio pItemCardapio) throws SQLException;
-	
+
 	public OTDContaItemCardapio consultaDetalharPedido(String pCdPedido) throws SQLException;
 	
 }

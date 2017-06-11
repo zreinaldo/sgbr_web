@@ -33,6 +33,10 @@
 
 
 		<fieldset>
+			<tr>
+			<th align="left">Alterar Promoção</th>
+			</tr>	
+		
 			<table>
 				<tr>
 					<td><label for="<%=PRManterPromocao.ID_REQ_ATR_cdItemCardapio%>">Item do Cardápio:</label></td>

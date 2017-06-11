@@ -29,6 +29,7 @@ function validarSenhaConfirmacao() {
 }
 </SCRIPT>
 <body>
+<%@ include file = "../../jsp/util/menu.jsp" %>
 	<FORM name="form_principal" method="post" action="">
 
 		<INPUT type="hidden" id="evento"
@@ -38,6 +39,9 @@ function validarSenhaConfirmacao() {
 
 		<fieldset>
 			<table>
+				<tr>
+			<th align="left">Incluir Usuário</th>
+			</tr>	
 				<tr>
 					<td><label for="<%=PRManterUsuario.ID_REQ_ATR_cdFuncionario%>">Funcionário:</label></td>
 					<td><%= SelectFuncionario.getInstancia().getHTML(request, PRManterUsuario.ID_REQ_ATR_cdFuncionario, PRManterUsuario.ID_REQ_ATR_cdFuncionario, "",false,false,true)%></td>
@@ -76,7 +80,10 @@ function validarSenhaConfirmacao() {
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Incluir"
 						onclick="return validarSenhaConfirmacao();"
-						id="consultar"></td>
+						id="consultar">
+						<input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar">
+						</td>
 				</tr>
 			</table>
 

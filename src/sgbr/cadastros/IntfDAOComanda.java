@@ -4,9 +4,10 @@
 package sgbr.cadastros;
 
 import java.sql.SQLException;
-import java.util.Collection;
+import java.util.ArrayList;
 
 import sgbr.entidades.Comanda;
+import sgbr.util.OTDComanda;
 
 /**
  * @author Reinaldo
@@ -20,7 +21,7 @@ public interface IntfDAOComanda {
 
 	public void excluir(Comanda pComanda) throws SQLException;
 
-	//public Collection<Comanda> consultaTodosRegistros(boolean pInRetornarApenasVigentes) throws SQLException;
+	public ArrayList<OTDComanda> consultaTelaManterComanda(String pCodigo, String pInVigentes) throws SQLException;
 
 	public Comanda consultaPorChavePrimaria(Comanda pComanda) throws SQLException;
 

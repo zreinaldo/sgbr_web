@@ -204,17 +204,6 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see sgbr.cadastros.IntfDAOConta#consultaTodosRegistros(boolean)
-	 */
-	@Override
-	public Collection<Conta> consultaTodosRegistros(boolean pInRetornarApenasVigentes) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see sgbr.cadastros.IntfDAOConta#consultaPorChavePrimaria(sgbr.entidades.
 	 * Conta)
 	 */

@@ -22,11 +22,6 @@ public interface IntfDAOCliente {
 	/**
 	 * @param pCliente
 	 */
-	public void alterar(Cliente pCliente) throws SQLException;
-
-	/**
-	 * @param pCliente
-	 */
 	public void excluir(Cliente pCliente) throws SQLException;
 
 }

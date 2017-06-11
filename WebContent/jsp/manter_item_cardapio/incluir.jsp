@@ -10,6 +10,7 @@
 </head>
 <SCRIPT language="JavaScript" type="text/javascript" src="js/funcoes_comuns.js"></SCRIPT>
 <body>
+<%@ include file = "../../jsp/util/menu.jsp" %>
 	<FORM name="form_principal" method="post" action="">
 
 		<INPUT type="hidden" id="evento"
@@ -18,7 +19,9 @@
 
 		<fieldset>
 			<table>
-							
+						<tr>
+			<th align="left">Incluir Item Cardápio</th>
+			</tr>			
 
 				<tr>
 					<td><label for="<%=PRManterItemCardapio.ID_REQ_ATR_nmItemCardapio%>">Descrição Item Cardápio:</label></td>

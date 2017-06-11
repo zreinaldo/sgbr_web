@@ -34,6 +34,9 @@
 
 		<fieldset>
 			<table>
+					<tr>
+			<th align="left">Alterar Item Cardápio</th>
+			</tr>	
 				
 
 				<tr>

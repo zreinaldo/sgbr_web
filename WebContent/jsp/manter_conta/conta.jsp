@@ -59,7 +59,13 @@ if (otd == null) {
 		<INPUT type="hidden" id="cdConta" name="<%=PRManterConta.ID_REQ_ATR_cdConta%>" value="<%=cdConta%>">
 		<fieldset>
 			<table>
-			
+<%	if (inFecharConta.equals(Constantes.CD_SIM)) { %>
+<th align="left">Encerrar Conta</th>
+
+<%} else {%>
+<th align="left">Conta Parcial</th>
+<%} %>	
+		
 			<tr>
 					<td><label for="cdMesa">Conta:</label></td>
 					<td><input type="text" value="<%=cdConta %>" disabled="disabled" readonly="readonly"> </td>				

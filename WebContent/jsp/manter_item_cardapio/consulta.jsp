@@ -45,6 +45,9 @@ if (otd == null) {
 
 		<fieldset>
 			<table>		
+			<tr>
+			<th align="left">Manter Item Cardápio</th>
+			</tr>	
 							
 				<tr>
 					<td><label for="cdItemCardapio">Código Item Cardápio:</label></td>

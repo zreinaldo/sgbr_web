@@ -140,6 +140,12 @@ public class PRManterCliente extends PRManterCadastro {
 				pRequest);
 		String cdCliente = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdCliente, pRequest);
 		
+		
+		
+		String nuTelefone = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuTelefoneCelular, pRequest);
+		String dddTelefone = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dddTelefoneCelular, pRequest);
+		
+		
 		OTDCliente otdCliente = new OTDCliente();
 		otdCliente.setCdCliente(Integer.valueOf(cdCliente));
 		otdCliente.setCdPessoa(Integer.valueOf(cdPessoa));
@@ -147,7 +153,8 @@ public class PRManterCliente extends PRManterCadastro {
 		otdCliente.setDtNascimento(!dtNascimento.isEmpty() ? Util.formataData(dtNascimento) : null);
 		otdCliente.setEmail(email);
 		otdCliente.setNuCPF(nuDocumento);
-
+		otdCliente.setNuTelefone(nuTelefone);
+		otdCliente.setDddTelefone(dddTelefone);
 		
 		this.aFachadaSGBR.alterarCliente(otdCliente);
 		

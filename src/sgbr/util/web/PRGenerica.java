@@ -41,6 +41,7 @@ public abstract class PRGenerica extends ProcessadorRequisicao {
 
 		} catch (Exception e) {
 
+			//TODO tratamentos de erros
 			// vai redirecionar para uma tela simples, informando q tem erro
 			// this.getServletContext().getRequestDispatcher(this.NM_JSP_ERRO).forward(pRequest,
 			// pResponse);

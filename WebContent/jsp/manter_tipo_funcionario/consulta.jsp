@@ -42,7 +42,9 @@ if (otd == null) {
 
 		<fieldset>
 			<table>		
-							
+					<tr>
+			<th align="left">Manter Tipo Funcionário</th>
+			</tr>						
 				<tr>
 					<td><label for="cdTpFuncionario">Código Tipo Funcionário:</label></td>
 					<td><input type="search" id="<%=PRManterTipoFuncionario.ID_REQ_ATR_cdTipoFuncionario%>" value="<%=cdTpFuncionario%>" name="<%=PRManterTipoFuncionario.ID_REQ_ATR_cdTipoFuncionario%>" maxlength="15"></td>

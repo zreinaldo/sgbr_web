@@ -46,6 +46,13 @@
 
 		<fieldset>
 			<table>
+			<%	if (indicadorExclusao) { %>
+<th align="left">Excluir Funcionário</th>
+
+<%} else {%>
+<th align="left">Detalhar Funcionário</th>
+<%} %>	
+		<tr>
 					<td><label for="nmCargo">Cargo:</label></td>
 
 					<td><%= SelectTipoFuncionario.getInstancia().getHTML(request, PRManterFuncionario.ID_REQ_ATR_tpCargo, PRManterFuncionario.ID_REQ_ATR_tpCargo, otdFuncionario.getTpFuncionario().toString(),false,false)%></td>
@@ -170,8 +177,10 @@
 					<td><input type="text"
 						id="<%=PRManterFuncionario.ID_REQ_ATR_nmLogradouro%>" disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nmLogradouro%>"
-						maxlength="58" size="50" value="<%=otdFuncionario.getNmLogradouro()%>"> <label for="nuLogradouro">Número:</label><input
-						type="text" id="<%=PRManterFuncionario.ID_REQ_ATR_nuLogradouro%>"
+						maxlength="58" size="50" value="<%=otdFuncionario.getNmLogradouro()%>"> 
+						
+						<label for="nuLogradouro">Número:</label><input
+						type="text" id="<%=PRManterFuncionario.ID_REQ_ATR_nuLogradouro%>"  disabled="disabled"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nuLogradouro%>"
 						maxlength="8" size="10" value="<%=otdFuncionario.getNuLogradouro()%>"></td>
 				</tr>				

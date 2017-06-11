@@ -53,6 +53,12 @@ public class PRManterFuncionario extends PRManterCadastro {
 	public static final String ID_REQ_ATR_nuLogradouro = "nuLogradouro";
 	public static final String ID_REQ_ATR_nuCEP = "nuCEP";
 
+	public static final String ID_REQ_ATR_nuTelefoneConvencional = "nuTelefoneConvencional";
+	public static final String ID_REQ_ATR_dddTelefoneConvencional = "dddTelefoneConvencional";
+
+	public static final String ID_REQ_ATR_nuTelefoneCelular = "nuTelefoneCelular";
+	public static final String ID_REQ_ATR_dddTelefoneCelular = "dddTelefoneCelular";
+
 	public static final String NM_SERVLET = "PRManterFuncionario";
 	public static final String NM_JSP_CONSULTA = "/jsp/manter_funcionario/consulta.jsp";
 	public static final String NM_JSP_INCLUIR = "/jsp/manter_funcionario/incluir.jsp";
@@ -98,6 +104,7 @@ public class PRManterFuncionario extends PRManterCadastro {
 		String nuCC = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_nuCC, pRequest);
 		String vlSalario = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_vlSalario,
 				pRequest);
+		vlSalario = vlSalario.replace(",", ".");
 		String dtAdmissao = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_dtAdmissao,
 				pRequest);
 
@@ -113,6 +120,15 @@ public class PRManterFuncionario extends PRManterCadastro {
 		String dtNascimento = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_dtNascimento,
 				pRequest);
 		String email = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_email, pRequest);
+
+		String nuTelefoneConvenciona = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuTelefoneConvencional,
+				pRequest);
+		String dddTelefoneConvenciona = this
+				.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dddTelefoneConvencional, pRequest);
+		String nuTelefoneCelular = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuTelefoneCelular,
+				pRequest);
+		String dddTelefoneCelular = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dddTelefoneCelular,
+				pRequest);
 
 		OTDFuncionario otdFuncionario = new OTDFuncionario();
 		otdFuncionario.setNmFuncionario(nmFuncionario);
@@ -134,6 +150,11 @@ public class PRManterFuncionario extends PRManterCadastro {
 		otdFuncionario.setNuCEP(nuCEP);
 		otdFuncionario.setDtNascimento(!dtNascimento.isEmpty() ? Util.formataData(dtNascimento) : null);
 		otdFuncionario.setEmail(email);
+
+		otdFuncionario.setNuTelefoneCelular(nuTelefoneCelular);
+		otdFuncionario.setDddTelefoneCelular(dddTelefoneCelular);
+		otdFuncionario.setNuTelefoneConvencional(nuTelefoneConvenciona);
+		otdFuncionario.setDddTelefoneConvencional(dddTelefoneConvenciona);
 
 		this.aFachadaSGBR.incluirFuncionario(otdFuncionario);
 
@@ -183,6 +204,7 @@ public class PRManterFuncionario extends PRManterCadastro {
 		String nuAgencia = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuAgencia, pRequest);
 		String nuCC = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuCC, pRequest);
 		String vlSalario = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_vlSalario, pRequest);
+		vlSalario = vlSalario.replace(",", ".");
 		String dtAdmissao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dtAdmissao, pRequest);
 
 		String nmUF = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nmUF, pRequest);

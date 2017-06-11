@@ -18,6 +18,9 @@
 
 		<fieldset>
 			<table>
+	<tr>
+			<th align="left">Incluir Funcionário</th>
+			</tr>	
 					
 				<tr>
 					<td><label for="nmCargo">Cargo:</label></td>
@@ -59,6 +62,30 @@
 						id="<%=PRManterFuncionario.ID_REQ_ATR_dtNascimento%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_dtNascimento%>"
 						maxlength="58"></td>
+				</tr>
+				
+						
+				<tr>
+				<td><label for="dddCelular">Telefone Convencional:</label></td>
+					<td><input type="text" size="4" 			
+						id="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneConvencional%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneConvencional%>"
+						maxlength="3"> - <input type="text"  
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nuTelefoneConvencional%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nuTelefoneConvencional%>"
+						maxlength="10"> </td>
+				</tr>
+				
+						
+				<tr>
+				<td><label for="dddCelular">Telefone Celular:</label></td>
+					<td><input type="text" size="4" 			
+						id="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneCelular%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneCelular%>"
+						maxlength="3"> - <input type="text"  
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nuTelefoneCelular%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nuTelefoneCelular%>"
+						maxlength="10"> </td>
 				</tr>
 
 				<tr>

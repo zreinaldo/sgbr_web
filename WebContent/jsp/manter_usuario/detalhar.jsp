@@ -47,7 +47,13 @@
 		<fieldset>
 			<table>
 				
+<%	if (indicadorExclusao) { %>
+<th align="left">Excluir Usuário</th>
 
+<%} else {%>
+<th align="left">Detalhar Usuário</th>
+<%} %>	
+		
 				<tr>
 					<td><label for="nmFuncionario">Funcionário:</label></td>
 					<td><input type="text" readonly="readonly"

@@ -45,7 +45,13 @@
 
 		<fieldset>
 			<table>
+<%	if (indicadorExclusao) { %>
+<th align="left">Excluir Promoção</th>
 
+<%} else {%>
+<th align="left">Detalhar Promoção</th>
+<%} %>	
+		
 				<tr>
 					<td><label for="nmItemCardapio">Item Cardápio:</label></td>
 					<td><input type="text" disabled="disabled"

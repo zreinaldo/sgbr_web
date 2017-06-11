@@ -44,7 +44,7 @@
 						maxlength="58"></td>
 				</tr>
 				
-				<tr>
+				
 				<tr>
 				<td><label for="dddCelular">Telefone Celular:</label></td>
 					<td><input type="text" size="4" 			

@@ -17,6 +17,7 @@ public class OTDContaItemCardapio {
 	private Integer cdComanda;
 	private Integer cdConta;
 	private Integer cdFuncionario;
+	private String nmFuncionario;
 	private Double vlTotal;
 	private Double vlItemCardapio;
 	private String inPromocao;
@@ -199,6 +200,20 @@ public class OTDContaItemCardapio {
 	 */
 	public void setInPromocao(String pInPromocao) {
 		this.inPromocao = pInPromocao;
+	}
+
+	/**
+	 * @return the nmFuncionario
+	 */
+	public String getNmFuncionario() {
+		return this.nmFuncionario;
+	}
+
+	/**
+	 * @param pNmFuncionario the nmFuncionario to set
+	 */
+	public void setNmFuncionario(String pNmFuncionario) {
+		this.nmFuncionario = pNmFuncionario;
 	}
 
 }

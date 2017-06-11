@@ -3,6 +3,8 @@
  */
 package sgbr.regras.funcionario;
 
+import java.sql.SQLException;
+
 import sgbr.cadastros.sql.DAOFuncionario;
 import sgbr.cadastros.sql.DAOPessoa;
 import sgbr.entidades.Funcionario;
@@ -42,34 +44,10 @@ public class RNAlterarFuncionario {
 	public void processar(OTDFuncionario pOtdFuncionario) {
 
 		try {
-			Pessoa pessoa = new Pessoa();
-
-			pessoa.setCdPessoa(pOtdFuncionario.getCdPessoa());
-			pessoa.setNmPessoa(pOtdFuncionario.getNmFuncionario());
-			pessoa.setDtNascPessoa(pOtdFuncionario.getDtNascimento());
-			pessoa.setEePessoa(pOtdFuncionario.getEmail());
-			pessoa.setNmBairro(pOtdFuncionario.getNmBairro());
-			pessoa.setNmCidade(pOtdFuncionario.getNmCidade());
-			pessoa.setNmLogradouro(pOtdFuncionario.getNmLogradouro());
-			pessoa.setNmUF(pOtdFuncionario.getNmUF());
-			pessoa.setNuLogradouro(pOtdFuncionario.getNuLogradouro());
-			pessoa.setNuCEP(pOtdFuncionario.getNuCEP());
-
-			DAOPessoa.getInstancia().alterar(pessoa);
 			
-			Funcionario funcionario = new Funcionario();
+			this.alterarPessoa(pOtdFuncionario);
 			
-			funcionario.setCdPessoa(pOtdFuncionario.getCdPessoa());
-			funcionario.setCdFuncionario(pOtdFuncionario.getCdFuncionario());
-			funcionario.setVlSalario(pOtdFuncionario.getVlSalario());
-			funcionario.setTpFuncionario( pOtdFuncionario.getTpFuncionario());
-			funcionario.setDtAdmissao(pOtdFuncionario.getDtAdmissao());
-			funcionario.setDtDemissao(pOtdFuncionario.getDtDemissao());
-			funcionario.setNuBancoAgencia(pOtdFuncionario.getNuAgencia());
-			funcionario.setNuBancoConta(pOtdFuncionario.getNuCC());
-			funcionario.setNuBancoAgencia(pOtdFuncionario.getNuAgencia());
-			funcionario.setNmBanco(pOtdFuncionario.getNmBanco());			
-			DAOFuncionario.getInstancia().alterar(funcionario);
+			this.alterarFuncionario(pOtdFuncionario);
 
 
 			//FIXME alterar o pessoaDocumento
@@ -79,6 +57,44 @@ public class RNAlterarFuncionario {
 			// TODO gerar erro generico
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @param pOtdFuncionario
+	 * @throws SQLException
+	 */
+	private void alterarFuncionario(OTDFuncionario pOtdFuncionario) throws SQLException {
+		Funcionario funcionario = new Funcionario();			
+		funcionario.setCdPessoa(pOtdFuncionario.getCdPessoa());
+		funcionario.setCdFuncionario(pOtdFuncionario.getCdFuncionario());
+		funcionario.setVlSalario(pOtdFuncionario.getVlSalario());
+		funcionario.setTpFuncionario( pOtdFuncionario.getTpFuncionario());
+		funcionario.setDtAdmissao(pOtdFuncionario.getDtAdmissao());
+		funcionario.setDtDemissao(pOtdFuncionario.getDtDemissao());
+		funcionario.setNuBancoAgencia(pOtdFuncionario.getNuAgencia());
+		funcionario.setNuBancoConta(pOtdFuncionario.getNuCC());
+		funcionario.setNuBancoAgencia(pOtdFuncionario.getNuAgencia());
+		funcionario.setNmBanco(pOtdFuncionario.getNmBanco());			
+		DAOFuncionario.getInstancia().alterar(funcionario);
+	}
+
+	/**
+	 * @param pOtdFuncionario
+	 * @throws SQLException
+	 */
+	private void alterarPessoa(OTDFuncionario pOtdFuncionario) throws SQLException {
+		Pessoa pessoa = new Pessoa();
+		pessoa.setCdPessoa(pOtdFuncionario.getCdPessoa());
+		pessoa.setNmPessoa(pOtdFuncionario.getNmFuncionario());
+		pessoa.setDtNascPessoa(pOtdFuncionario.getDtNascimento());
+		pessoa.setEePessoa(pOtdFuncionario.getEmail());
+		pessoa.setNmBairro(pOtdFuncionario.getNmBairro());
+		pessoa.setNmCidade(pOtdFuncionario.getNmCidade());
+		pessoa.setNmLogradouro(pOtdFuncionario.getNmLogradouro());
+		pessoa.setNmUF(pOtdFuncionario.getNmUF());
+		pessoa.setNuLogradouro(pOtdFuncionario.getNuLogradouro());
+		pessoa.setNuCEP(pOtdFuncionario.getNuCEP());
+		DAOPessoa.getInstancia().alterar(pessoa);
 	}
 
 }

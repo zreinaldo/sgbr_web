@@ -33,6 +33,10 @@
 
 		<fieldset>
 			<table>
+				<tr>
+			<th align="left">Alterar Funcionário</th>
+			</tr>	
+			
 					<td><label for="nmCargo">Cargo:</label></td>
 
 					<td><%= SelectTipoFuncionario.getInstancia().getHTML(request, PRManterFuncionario.ID_REQ_ATR_tpCargo, PRManterFuncionario.ID_REQ_ATR_tpCargo, otdFuncionario.getTpFuncionario().toString(),true,false)%></td>

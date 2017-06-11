@@ -22,6 +22,10 @@
 
 		<fieldset>
 			<table>
+			
+						<tr>
+			<th align="left">Incluir Promoção</th>
+			</tr>	
 				<tr>
 					<td><label for="<%=PRManterPromocao.ID_REQ_ATR_cdItemCardapio%>">Item do Cardápio:</label></td>
 					<td><%= SelectItemCardapio.getInstancia().getHTML(request, PRManterPromocao.ID_REQ_ATR_cdItemCardapio, PRManterPromocao.ID_REQ_ATR_cdItemCardapio, "",true,false)%></td>
@@ -63,7 +67,8 @@
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Incluir"
 						onclick="submeterFormulario('<%=PRManterPromocao.NM_SERVLET%>','<%=PRManterPromocao.EVENTO_PROCESSAR_INCLUSAO%>')"
-						id="consultar"></td>
+						id="consultar"> <input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar"></td>
 				</tr>
 			</table>
 

@@ -42,18 +42,7 @@ public class ControladorContaItemCardapio {
 
 		return ControladorContaItemCardapio.aControladorItemCardapio;
 	}
-	
-	
-	/**
-	 * retorna todos os registros da tabela Item_Cardapio
-	 * 
-	 * @param pInRetornarApenasVigentes
-	 * @return
-	 * @throws SQLException
-	 */
-	public Collection<ContaItemCardapio> consultaTodosRegistrosItemCardapio(boolean pInRetornarApenasVigentes) throws SQLException {
-		return DAOContaItemCardapio.getInstancia().consultaTodosRegistros(pInRetornarApenasVigentes);
-	}
+
 
 	/**
 	 * utilizada na tela de consultar Pedido

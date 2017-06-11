@@ -48,7 +48,9 @@ if (otd == null) {
 		<fieldset>
 			<table>
 		
-										
+					<tr>
+			<th align="left">Manter Usuário</th>
+			</tr>							
 				<tr>
 					<td><label for="<%=PRManterUsuario.ID_REQ_ATR_cdFuncionario%>">Funcionário:</label></td>
 					<td><%= SelectFuncionario.getInstancia().getHTML(request, PRManterUsuario.ID_REQ_ATR_cdFuncionario, PRManterUsuario.ID_REQ_ATR_cdFuncionario, cdFuncionario,false,true,false)%></td>

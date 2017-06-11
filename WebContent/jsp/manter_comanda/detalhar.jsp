@@ -44,10 +44,7 @@
 
 		<fieldset>
 			<table>
-																		<%
-	if (indicadorExclusao) {
-	 
-%>
+<%	if (indicadorExclusao) { %>
 <th align="left">Excluir Comanda</th>
 
 <%} else {%>

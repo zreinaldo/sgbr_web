@@ -45,6 +45,9 @@ if (otd == null) {
 
 		<fieldset>
 			<table>		
+						<tr>
+			<th align="left">Manter Promoção</th>
+			</tr>	
 							
 				<tr>
 					<td><label for="<%=PRManterPromocao.ID_REQ_ATR_cdItemCardapio%>">Item do Cardápio:</label></td>

@@ -46,6 +46,9 @@ if (otd == null) {
 
 		<fieldset>
 			<table>		
+						<tr>
+			<th align="left">Manter Funcionário</th>
+			</tr>	
 							
 				<tr>
 					<td><label for="tpDocumento">Tipo Documento:</label></td>

@@ -26,6 +26,9 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 	 * executado
 	 */
 	public static final String ID_REQ_EVENTO = "evento";
+	
+	public static final String ID_REQ_ATR_dhInclusao = "dhInclusao";
+	public static final String ID_REQ_ATR_dhAlteracao = "dhAlteracao";
 
 	/**
 	 * Evento que exibe a consulta do servlert
@@ -77,7 +80,6 @@ public abstract class ProcessadorRequisicao extends HttpServlet {
 	 */
 	public static final String ID_REQ_indicadorExclusao = "indicador_exclusao";
 	
-	public static final String ID_REQ_ATR_dhInclusao = "dhInclusao";
 
 	/**
 	 * implementao doget

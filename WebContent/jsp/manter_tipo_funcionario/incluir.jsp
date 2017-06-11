@@ -18,7 +18,9 @@
 		<fieldset>
 			<table>
 							
-
+	<tr>
+			<th align="left">Incluir Tipo Funcionário</th>
+			</tr>			
 				<tr>
 					<td><label for="dsTipoFuncionario">Descrição Tipo Funcionário:</label></td>
 					<td><input type="text" required 
@@ -31,7 +33,8 @@
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Incluir"
 						onclick="submeterFormulario('<%=PRManterTipoFuncionario.NM_SERVLET%>','<%=PRManterTipoFuncionario.EVENTO_PROCESSAR_INCLUSAO%>')"
-						id="consultar"></td>
+						id="consultar"><input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar"></td>
 				</tr>
 			</table>
 

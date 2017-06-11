@@ -84,8 +84,15 @@
 				</tr>
 				
 				<tr>
+					<td><label for="telefone">Telefone Celular:</label></td>
+					<td><input type="email" value="<%=otdCliente.getDddTelefone()%>"  size="4" disabled="disabled" maxlength="58">-
+					<input type="email" value="<%=otdCliente.getNuTelefone()%>"  size="10" disabled="disabled" maxlength="58">
+					</td>
+				</tr>
+				
+				<tr>
 					<td><label for="dhInclusao">Data-Hora Inclusão:</label></td>
-					<td><input type="text" value="<%=otdCliente.getDhInclusao()%>"  disabled="disabled"
+					<td><input type="text" value="<%=otdCliente.getDhIncusaoRegistro()%>"  disabled="disabled"
 					id="<%=PRManterCliente.ID_REQ_ATR_dhInclusao%>"
 						name="<%=PRManterCliente.ID_REQ_ATR_dhInclusao%>" maxlength="58"></td>
 				</tr>

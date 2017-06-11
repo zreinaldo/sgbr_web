@@ -48,7 +48,13 @@
 		<fieldset>
 			<table>
 				
+<%	if (indicadorExclusao) { %>
+<th align="left">Excluir Tipo Funcionário</th>
 
+<%} else {%>
+<th align="left">Detalhar Tipo Funcionário</th>
+<%} %>	
+		
 				<tr>
 					<td><label for="cdTipoFuncionario">Código Tipo Funcionário:</label></td>
 					<td><input type="text" disabled="disabled"

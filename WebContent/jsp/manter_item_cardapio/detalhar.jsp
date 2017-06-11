@@ -47,7 +47,13 @@
 
 		<fieldset>
 			<table>
-				
+	<%	if (indicadorExclusao) { %>
+<th align="left">Excluir Item Cardápio</th>
+
+<%} else {%>
+<th align="left">Detalhar Item Cardápio</th>
+<%} %>	
+					
 
 				<tr>
 					<td><label for="cdItemCardapio">Código Item Cardápio:</label></td>

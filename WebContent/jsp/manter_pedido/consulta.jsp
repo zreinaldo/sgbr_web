@@ -77,7 +77,8 @@ if (otd == null) {
 					    <th>Comanda</th>
 						<th>Item Cardápio</th>	
 						<th>Quantidade</th>
-						<th>Observação</th>								
+						<th>Observação</th>
+						<th>Funcionario</th>								
 				
 					</tr>
 		 <% for (OTDContaItemCardapio campos : otd) {		 
@@ -91,6 +92,7 @@ if (otd == null) {
 						<td><%=campos.getNmItemCardapio()%></td>
 						<td><%=campos.getQtdItemCardapio()%></td>
 						<td><%=campos.getObsItemCardapio()%></td>
+						<td><%=campos.getNmFuncionario()%></td>
 						
 					</tr>
 			<%} %>	

@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import sgbr.cadastros.IntfDAOComanda;
 import sgbr.entidades.Comanda;
@@ -122,12 +121,19 @@ public class DAOComanda extends DAO_MYSQL implements IntfDAOComanda {
 
 	}
 
-	
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * sgbr.cadastros.IntfDAOComanda#consultaTelaManterComanda(java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
 	public ArrayList<OTDComanda> consultaTelaManterComanda(String pCodigo, String pInVigentes) throws SQLException {
 
 		String sqlWhere = "";
 		String sqlConector = "";
+
 		Connection conexao = null;
 		ArrayList<OTDComanda> arrayResposta = new ArrayList<>();
 		OTDComanda otdComanda = null;
@@ -142,11 +148,11 @@ public class DAOComanda extends DAO_MYSQL implements IntfDAOComanda {
 		}
 
 		if (!pInVigentes.isEmpty()) {
-			
-			if(pInVigentes.equals(Constantes.CD_SIM)) {
-			 sqlWhere = sqlWhere + sqlConector + "MYDB.comanda.COMANDA_DT_FIM_VALIDADE is null";
-			sqlConector = " \n AND ";
-			}else {
+
+			if (pInVigentes.equals(Constantes.CD_SIM)) {
+				sqlWhere = sqlWhere + sqlConector + "MYDB.comanda.COMANDA_DT_FIM_VALIDADE is null";
+				sqlConector = " \n AND ";
+			} else {
 				sqlWhere = sqlWhere + sqlConector + "MYDB.comanda.COMANDA_DT_FIM_VALIDADE is not null";
 				sqlConector = " \n AND ";
 			}

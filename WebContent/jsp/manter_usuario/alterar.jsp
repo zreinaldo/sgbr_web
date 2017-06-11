@@ -50,7 +50,9 @@ function validarSenhaConfirmacao() {
 
 		<fieldset>
 			<table>
-				
+					<tr>
+			<th align="left">Alterar Usuário</th>
+			</tr>	
 				<tr>
 					<td><label for="nmFuncionario">Funcionário:</label></td>
 					<td><input type="text" readonly="readonly"
@@ -102,7 +104,8 @@ function validarSenhaConfirmacao() {
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Alterar"
 						onclick="return validarSenhaConfirmacao();"
-						id="alterar"></td>
+						id="alterar"> <input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar"></td>
 				</tr>
 			</table>
 

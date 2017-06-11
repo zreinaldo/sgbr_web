@@ -30,7 +30,9 @@
 
 		<fieldset>
 			<table>
-				
+		<tr>
+			<th align="left">Alterar Tipo Funcionário</th>
+			</tr>			
 
 				<tr>
 					<td><label for="cdTipoFuncionario">Código Tipo Funcionario:</label></td>
@@ -59,8 +61,8 @@
 					<td colspan="2" id="botoes"><input type="submit"
 						value="Alterar"
 						onclick="submeterFormulario('<%=PRManterTipoFuncionario.NM_SERVLET%>','<%=PRManterTipoFuncionario.EVENTO_PROCESSAR_ALTERACAO%>')"
-						id="alterar"><input type="button" value="Home"
-						onClick=""></td>
+						id="alterar"><input type="button" value="Voltar"
+						onclick=" window.history.back();" id="voltar"></td>
 				</tr>
 			</table>
 

@@ -1,7 +1,6 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="sgbr.web.servlet.selects.SelectSituacaoConta"%>
-<%@page import="sgbr.web.servlet.selects.SelectSimNao"%>
 <%@page import="sgbr.web.servlet.PRManterPedido"%>
 <%@page import="sgbr.util.Constantes"%>
 <%@page import="sgbr.web.servlet.selects.SelectClienteConta"%>
@@ -51,7 +50,7 @@ if (otd == null) {
 
 		<fieldset>
 			<table>		
-<th>Manter Conta</th>	
+<th align="left">Manter Conta</th>	
 				<tr>
 					<td><label for="cdMesa">Conta por Mesa /Nº Mesa em uso:</label></td>
 					<td><%= SelectMesaConta.getInstancia().getHTML(request, PRManterConta.ID_REQ_ATR_cdMesa, PRManterConta.ID_REQ_ATR_cdMesa, cdMesa, false, true, Constantes.CD_SIM,Constantes.CD_TIPO_CONTA_MESA)	%></td>
