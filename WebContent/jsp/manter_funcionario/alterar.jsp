@@ -1,3 +1,4 @@
+<%@page import="sgbr.web.servlet.selects.SelectEstado"%>
 <%@page import="sgbr.util.Util"%>
 <%@page import="sgbr.util.OTDFuncionario"%>
 <%@page import="java.util.ArrayList"%>
@@ -25,7 +26,7 @@
 <body>
 
 	<FORM name="form_principal" method="post" action="">
-
+<%@ include file = "../../jsp/util/menu.jsp" %>
 		<INPUT type="hidden" id="evento" name="<%=PRManterFuncionario.ID_REQ_EVENTO%>" value="">
 		<INPUT type="hidden" id="cdPessoa" name="<%=PRManterFuncionario.ID_REQ_ATR_cdPessoa%>" value="<%=otdFuncionario.getCdPessoa()%> ">
 		<INPUT type="hidden" id="cdFuncionario" name="<%=PRManterFuncionario.ID_REQ_ATR_cdFuncionario%>" value="<%=otdFuncionario.getCdFuncionario()%>">
@@ -76,6 +77,28 @@
 						id="<%=PRManterFuncionario.ID_REQ_ATR_dtNascimento%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_dtNascimento%>"
 						maxlength="58" value="<%=Util.formataDataParaString(otdFuncionario.getDtNascimento()) %>"></td>
+				</tr>
+				<tr>
+					<td><label for="convencional">Telefone Convencional:</label></td>
+					<td><input type="text" size="4" 			
+						id="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneConvencional%>" value="<%=otdFuncionario.getDddTelefoneConvencional()%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneConvencional%>"
+						maxlength="3"> - <input type="text"  value="<%=otdFuncionario.getNuTelefoneConvencional()  %>"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nuTelefoneConvencional%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nuTelefoneConvencional%>"
+						maxlength="10"> </td>
+				</tr>
+				
+						
+				<tr>
+				<td><label for="celular">Telefone Celular:</label></td>
+					<td><input type="text" size="4" 			
+						id="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneCelular%>" value="<%=otdFuncionario.getDddTelefoneCelular()%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneCelular%>"
+						maxlength="3"> - <input type="text"  
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nuTelefoneCelular%>" value="<%=otdFuncionario.getNuTelefoneCelular()%>"
+						name="<%=PRManterFuncionario.ID_REQ_ATR_nuTelefoneCelular%>"
+						maxlength="10"> </td>
 				</tr>
 				
 
@@ -135,13 +158,9 @@
 				<td>-</td>			
 				<tr>
 					<td><label for="nmUF">Estado:</label></td>
-					<td><select id="<%=PRManterFuncionario.ID_REQ_ATR_nmUF%>"
-						name="<%=PRManterFuncionario.ID_REQ_ATR_nmUF%>">
-							<option value="PE">Pernambuco</option>
-							<option value="PB" selected="selected">Paraiba</option>
-							<option value="RJ">Rio de Janeiro</option>
-							<option value="AL">Alagoas</option>
-					</select></td>
+					<td><%=SelectEstado.getInstancia().getHTML(request, PRManterFuncionario.ID_REQ_ATR_nmUF, PRManterFuncionario.ID_REQ_ATR_nmUF, otdFuncionario.getNmUF(), true, false) %>
+					
+                     </td>
 				</tr>
 				<tr>
 					<td><label for="nmCidade">Cidade:</label></td>

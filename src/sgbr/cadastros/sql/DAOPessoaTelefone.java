@@ -98,7 +98,7 @@ public class DAOPessoaTelefone extends DAO_MYSQL implements IntfDAOPessoaTelefon
 		ppSt.setString(1, pPessoaTelefone.getNuDDDTelefone());
 		ppSt.setString(2, pPessoaTelefone.getNuTelefone());
 		ppSt.setTimestamp(3, pPessoaTelefone.getDhAlteracaoRegistro());
-		
+
 		ppSt.setInt(4, pPessoaTelefone.getCdPessoa());
 		ppSt.setInt(5, pPessoaTelefone.getTpTelefone());
 
@@ -117,7 +117,22 @@ public class DAOPessoaTelefone extends DAO_MYSQL implements IntfDAOPessoaTelefon
 	 */
 	@Override
 	public void excluir(PessoaTelefone pPessoaTelefone) throws SQLException {
-		// TODO Auto-generated method stub
+		Connection conexao = null;
+
+		conexao = this.getConection();
+		String sql = "delete from mydb.pessoa_telefone ";
+
+		sql = sql + " WHERE PESSOA_CD = ? " + " and TIPO_TELEFONE_CD= ? ";
+
+		PreparedStatement ppSt = conexao.prepareStatement(sql);
+
+		ppSt.setInt(1, pPessoaTelefone.getCdPessoa());
+		ppSt.setInt(2, pPessoaTelefone.getTpTelefone());
+
+		ppSt.execute();
+
+		ppSt.close();
+		conexao.close();
 
 	}
 
@@ -147,7 +162,7 @@ public class DAOPessoaTelefone extends DAO_MYSQL implements IntfDAOPessoaTelefon
 
 			pessoaTelefone.setCdPessoa(rs.getInt(PessoaTelefone.NM_COLUNA_PESSOA_CD));
 			pessoaTelefone.setNuTelefone(rs.getString(PessoaTelefone.NM_COLUNA_PESSOA_TELEFONE_NU_TEL));
-			pessoaTelefone.setNuDDDTelefone(rs.getString(PessoaTelefone.NM_COLUNA_PESSOA_TELEFONE_DDD));			
+			pessoaTelefone.setNuDDDTelefone(rs.getString(PessoaTelefone.NM_COLUNA_PESSOA_TELEFONE_DDD));
 			pessoaTelefone.setDhAlteracaoRegistro(rs.getTimestamp(PessoaTelefone.NM_COLUNA_DH_ALTERACAO_REGISTRO));
 			pessoaTelefone.setDhIncusaoRegistro(rs.getTimestamp(PessoaTelefone.NM_COLUNA_DH_INCLUSAO_REGISTRO));
 

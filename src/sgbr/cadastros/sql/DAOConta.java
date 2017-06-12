@@ -70,7 +70,7 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 
 		pConta.setDhIncusaoRegistro(new Timestamp(System.currentTimeMillis()));
 
-		String sql = "INSERT INTO mydb.conta (COMANDA_CD,MESA_CD,TIPO_CONTA_CD,CLIENTE_CD,DH_INCLUSAO ) VALUES  (?,?,?,?,?)";
+		String sql = "INSERT INTO mydb.conta (COMANDA_CD,MESA_CD,TIPO_CONTA_CD,CLIENTE_CD,FUNCIONARIO_CD,DH_INCLUSAO ) VALUES  (?,?,?,?,?,?)";
 
 		ppSt = conexao.prepareStatement(sql);
 		if (pConta.getCdComanda() != null) {
@@ -100,8 +100,16 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 		} else {
 			ppSt.setNull(4, java.sql.Types.INTEGER);
 		}
+		
+		
+		if (pConta.getCdFuncionario() != null) {
+			
+			ppSt.setInt(5, pConta.getCdFuncionario());
+		} else {
+			ppSt.setNull(5, java.sql.Types.INTEGER);
+		}
 
-		ppSt.setTimestamp(5, pConta.getDhIncusaoRegistro());
+		ppSt.setTimestamp(6, pConta.getDhIncusaoRegistro());
 
 		ppSt.execute();
 
@@ -262,11 +270,16 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 
 		conexao = this.getConection();
 
-		String sql = "SELECT " + "mydb.conta.*, " + "mydb.tipo_conta.*, " + "mydb.pessoa.PESSOA_NM, "
+		String sql = "SELECT " + "mydb.conta.*, " + "mydb.tipo_conta.*, " + "mydb.pessoa.PESSOA_NM as CLIENTE_NM, " 
+				+ " pf.pessoa_nm AS FUNCIONARIO_NM , "
+				
 				+ "IF(mydb.conta.DH_ENCERRAMENTO is null,'ABERTA','ENCERRADA') AS SITUACAO " + "FROM mydb.conta "
 				+ " inner join mydb.tipo_conta on mydb.tipo_conta.TIPO_CONTA_CD = mydb.conta.tipo_conta_cd "
 				+ "left join mydb.cliente on mydb.cliente.CLIENTE_CD = mydb.conta.CLIENTE_CD "
-				+ "left join mydb.pessoa on mydb.pessoa.PESSOA_CD = mydb.cliente.PESSOA_CD ";
+				+ "left join mydb.pessoa on mydb.pessoa.PESSOA_CD = mydb.cliente.PESSOA_CD "
+		
+				+ "LEFT join mydb.funcionario on mydb.funcionario.FUNCIONARIO_CD = mydb.conta.FUNCIONARIO_CD " 
+				+ "LEFT join mydb.pessoa as pf on pf.PESSOA_CD = mydb.funcionario.PESSOA_CD ";
 
 		if (!pCdMesa.isEmpty()) {
 			sqlWhere = sqlWhere + sqlConector + "mydb.conta.MESA_CD = " + pCdMesa;
@@ -301,7 +314,7 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 		Statement stm = conexao.createStatement();
 
 		ResultSet rs = stm.executeQuery(sql);
-
+		
 		while (rs.next()) {
 			otdConta = new OTDConta();
 			otdConta.setCdCliente(
@@ -310,11 +323,13 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 					rs.getInt(Conta.NM_COLUNA_COMANDA_CD) == 0 ? null : rs.getInt(Conta.NM_COLUNA_COMANDA_CD));
 			otdConta.setCdConta(rs.getInt(Conta.NM_COLUNA_CONTA_CD));
 			otdConta.setCdMesa(rs.getInt(Conta.NM_COLUNA_MESA_CD) == 0 ? null : rs.getInt(Conta.NM_COLUNA_MESA_CD));
-			otdConta.setNmCliente(rs.getString(Pessoa.NM_COLUNA_PESSOA_NM));
+			otdConta.setNmCliente(rs.getString("CLIENTE_NM"));
 			otdConta.setSiConta(rs.getString("SITUACAO"));
 			otdConta.setDhAbertura(rs.getTimestamp(Conta.NM_COLUNA_DH_INCLUSAO_REGISTRO));
-			otdConta.setCdTipoConta(rs.getInt(TipoConta.NM_COLUNA_TIPO_CONTA_CD));
-			otdConta.setDsTipoConta(rs.getString(TipoConta.NM_COLUNA_TIPO_CONTA_DS));
+			otdConta.setCdTipoConta(rs.getInt(TipoConta.NM_COLUNA_TIPO_CONTA_CD));			
+			otdConta.setDsTipoConta(rs.getString(TipoConta.NM_COLUNA_TIPO_CONTA_DS));			
+			otdConta.setNmFuncionario(rs.getString("FUNCIONARIO_NM"));
+			
 			arrayResposta.add(otdConta);
 		}
 
@@ -368,6 +383,14 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 			otdConta.setDhAbertura(rs.getTimestamp(Conta.NM_COLUNA_DH_INCLUSAO_REGISTRO));
 			otdConta.setCdTipoConta(rs.getInt(TipoConta.NM_COLUNA_TIPO_CONTA_CD));
 			otdConta.setDsTipoConta(rs.getString(TipoConta.NM_COLUNA_TIPO_CONTA_DS));
+			
+			otdConta.setVlDescontoConta(this.getDoubleOpcional( rs,Conta.NM_COLUNA_CONTA_DESCONTO_VL));
+			otdConta.setVlContaOriginal(this.getDoubleOpcional( rs,Conta.NM_COLUNA_CONTA_VL_ORIGINAL));
+			otdConta.setPercDescontoConta(this.getDoubleOpcional( rs,Conta.NM_COLUNA_CONTA_DESCONTO_PERC));
+			otdConta.setVlContaFinal(this.getDoubleOpcional( rs,Conta.NM_COLUNA_CONTA_VL_FINAL));
+			otdConta.setDhEncerramento(rs.getTimestamp(Conta.NM_COLUNA_DH_ENCERRAMENTO));	
+			
+			
 		}
 
 		rs.close();

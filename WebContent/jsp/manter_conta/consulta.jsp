@@ -92,6 +92,7 @@ if (otd == null) {
 						<th>Cliente</th>								
 						<th>Data/Hora Abertura</th>
 						<th>Situação</th>
+						<th>Funcionario</th>
 				
 					</tr>
 		 <% for (OTDConta campos : otd) {
@@ -116,6 +117,7 @@ if (otd == null) {
 						<td><%=Util.getValorHTML(campos.getNmCliente())%></td>						
 						<td><%=campos.getDhAbertura()%></td>
 						<td><%=campos.getSiConta()%></td>
+						<td><%=Util.getValorHTML(campos.getNmFuncionario())%></td>
 						
 					</tr>
 			<%} %>	

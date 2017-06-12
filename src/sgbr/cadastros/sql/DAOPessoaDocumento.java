@@ -87,7 +87,27 @@ public class DAOPessoaDocumento extends DAO_MYSQL implements IntfDAOPessoaDocume
 	 */
 	@Override
 	public void alterar(PessoaDocumento pPessoaDocumento) throws SQLException {
-		// TODO Auto-generated method stub
+		Connection conexao = null;
+
+		conexao = this.getConection();
+		pPessoaDocumento.setDhAlteracaoRegistro(new Timestamp(System.currentTimeMillis()));
+		String sql = "UPDATE mydb.pessoa_documento SET PESSOA_DOCUMENTO_NU = ?, "
+				+ "DH_ALTERACAO = ? ";
+
+		sql = sql + " WHERE PESSOA_CD = ? " + " and TIPO_DOCUMENTO_CD=? ";
+
+		PreparedStatement ppSt = conexao.prepareStatement(sql);
+
+		ppSt.setString(1, pPessoaDocumento.getNuDocumento());
+		ppSt.setTimestamp(2, pPessoaDocumento.getDhAlteracaoRegistro());
+		ppSt.setInt(3, pPessoaDocumento.getCdPessoa());
+		ppSt.setInt(4, pPessoaDocumento.getTpDocumento());
+
+		ppSt.execute();
+
+		ppSt.close();
+		conexao.close();
+
 
 	}
 
@@ -100,7 +120,6 @@ public class DAOPessoaDocumento extends DAO_MYSQL implements IntfDAOPessoaDocume
 	@Override
 	public void excluir(PessoaDocumento pPessoaDocumento) throws SQLException {
 
-		String sqlConector = "";
 		Connection conexao = null;
 
 		conexao = this.getConection();
@@ -152,11 +171,6 @@ public class DAOPessoaDocumento extends DAO_MYSQL implements IntfDAOPessoaDocume
 		conexao.close();
 		return pessoaDocumento;
 
-	}
-
-	public PessoaDocumento consultarPesssoaDocumento(PessoaDocumento pPessoaDocumento) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

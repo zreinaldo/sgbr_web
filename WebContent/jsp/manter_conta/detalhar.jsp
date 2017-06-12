@@ -1,3 +1,4 @@
+<%@page import="sgbr.util.Util"%>
 <%@page import="sgbr.util.OTDConta"%>
 <%@page import="sgbr.web.servlet.PRManterConta"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -70,6 +71,35 @@
 						name="<%=PRManterConta.ID_REQ_ATR_cdComanda%>" maxlength="58" value="<%=otdConta.getCdComanda()%>"> </td>
 				</tr>
 				<% } %>
+				
+				
+				<tr>
+					<td><label for="cdMesa">Desconto na Conta em R$:</label></td>
+					<td><input type="text" value="<%=Util.getValorHTML(otdConta.getVlDescontoConta())%>"  disabled="disabled"						
+						maxlength="58"></td>				
+				</tr>
+				
+						
+				<tr>
+					<td><label for="cdMesa">Desconto na Conta em %:</label></td>
+					<td><input type="text"  value="<%=Util.getValorHTML(otdConta.getPercDescontoConta())%>"  disabled="disabled"					
+						maxlength="58"></td>			
+				</tr>	
+				
+				
+				<tr>
+					<td><label for="cdMesa">Valor da Conta Original R$:</label></td>
+					<td><input type="text"  value="<%=Util.getValorHTML(otdConta.getVlContaOriginal())%>" disabled="disabled"
+						maxlength="58"></td>			
+				</tr>	
+				
+				<tr>
+					<td><label for="cdMesa">Valor Final da Conta R$:</label></td>
+					<td><input type="text" value="<%=Util.getValorHTML(otdConta.getVlContaFinal())%>"	 disabled="disabled"				
+						maxlength="58"></td>				
+				</tr>		
+				
+				
 				
 				<tr>
 					<td><label for="<%=PRManterConta.ID_REQ_ATR_nmCliente%>">Cliente:</label></td>

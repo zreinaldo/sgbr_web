@@ -1,3 +1,4 @@
+<%@page import="sgbr.web.servlet.selects.SelectEstado"%>
 <%@page import="sgbr.web.servlet.selects.SelectTipoFuncionario"%>
 <%@page import="sgbr.web.servlet.PRManterFuncionario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -66,7 +67,7 @@
 				
 						
 				<tr>
-				<td><label for="dddCelular">Telefone Convencional:</label></td>
+				<td><label for="convencional">Telefone Convencional:</label></td>
 					<td><input type="text" size="4" 			
 						id="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneConvencional%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneConvencional%>"
@@ -78,7 +79,7 @@
 				
 						
 				<tr>
-				<td><label for="dddCelular">Telefone Celular:</label></td>
+				<td><label for="celular">Telefone Celular:</label></td>
 					<td><input type="text" size="4" 			
 						id="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneCelular%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneCelular%>"
@@ -134,13 +135,7 @@
 				<td>-</td>			
 				<tr>
 					<td><label for="nmUF">Estado:</label></td>
-					<td><select id="<%=PRManterFuncionario.ID_REQ_ATR_nmUF%>"
-						name="<%=PRManterFuncionario.ID_REQ_ATR_nmUF%>">
-							<option value="PE">Pernambuco</option>
-							<option value="PB" selected="selected">Paraiba</option>
-							<option value="RJ">Rio de Janeiro</option>
-							<option value="AL">Alagoas</option>
-					</select></td>
+					<td><%=SelectEstado.getInstancia().getHTML(request, PRManterFuncionario.ID_REQ_ATR_nmUF, PRManterFuncionario.ID_REQ_ATR_nmUF, "", true, false) %></td>
 				</tr>
 				<tr>
 					<td><label for="nmCidade">Cidade:</label></td>

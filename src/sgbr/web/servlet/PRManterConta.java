@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import sgbr.cadastros.sql.DAOConta;
 import sgbr.entidades.Conta;
@@ -15,6 +16,7 @@ import sgbr.regras.conta.RNEncerrarConta;
 import sgbr.util.Constantes;
 import sgbr.util.OTDConta;
 import sgbr.util.OTDContaItemCardapio;
+import sgbr.util.OTDUsuario;
 import sgbr.util.Util;
 import sgbr.util.web.PRConsultar;
 
@@ -29,6 +31,7 @@ public class PRManterConta extends PRConsultar {
 	public static final String ID_REQ_ATR_cdTipoConta = "cdTipoConta";
 	public static final String ID_REQ_ATR_cdComanda= "cdComanda";
 	public static final String ID_REQ_ATR_cdMesa= "cdMesa";
+	public static final String ID_REQ_ATR_cdFuncionario= "cdFuncionario";
 	public static final String ID_REQ_ATR_siConta= "siConta";
 	public static final String ID_REQ_ATR_cdCliente= "cdCliente";
 	public static final String ID_REQ_ATR_nmCliente= "nmCliente";
@@ -157,19 +160,22 @@ public class PRManterConta extends PRConsultar {
 	
 	public void processarAbrirConta(HttpServletRequest pRequest, HttpServletResponse pResponse)
 			throws Exception {
+		HttpSession session = ((HttpServletRequest) pRequest).getSession();
+		OTDUsuario usuario = (OTDUsuario) session.getAttribute("usuario");	
+		
 		String cdMesa = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdMesa, pRequest);
 		String cdComanda = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdComanda, pRequest);
 		String cdCliente = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdCliente, pRequest);
 		String cdTipoConta = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdTipoConta, pRequest);
 	
 		Conta conta = new Conta();
-		
-		
-		
 		conta.setCdMesa(Util.getInteger(cdMesa));
 		conta.setCdComanda(Util.getInteger(cdComanda));
 		conta.setCdCliente(Util.getInteger(cdCliente));
 		conta.setCdTipoConta(Util.getInteger(cdTipoConta));
+		
+		
+		conta.setCdFuncionario(usuario.getCdFuncionario());
 		this.aFachadaSGBR.incluir(conta);
 		
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
@@ -240,8 +246,6 @@ public class PRManterConta extends PRConsultar {
 		
 		conta.setVlDescontoConta(vlDinheiroDesconto.isEmpty() ? null: Double.valueOf(vlDinheiroDesconto));		
 		conta.setPercDescontoConta( vlPercDesconto.isEmpty() ? null: Double.valueOf(vlPercDesconto));
-		//TODO colocar cliente
-		//conta.setCdCliente(pCdCliente);
 		conta.setVlContaFinal(Double.valueOf(vlContaFinal));
 		conta.setVlContaOriginal(Double.valueOf(vlContaOriginal));
 		conta.setDhEncerramento(new Timestamp(System.currentTimeMillis()));

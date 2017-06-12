@@ -7,8 +7,13 @@ import java.sql.SQLException;
 
 import sgbr.cadastros.sql.DAOFuncionario;
 import sgbr.cadastros.sql.DAOPessoa;
+import sgbr.cadastros.sql.DAOPessoaDocumento;
+import sgbr.cadastros.sql.DAOPessoaTelefone;
 import sgbr.entidades.Funcionario;
 import sgbr.entidades.Pessoa;
+import sgbr.entidades.PessoaDocumento;
+import sgbr.entidades.PessoaTelefone;
+import sgbr.util.Constantes;
 import sgbr.util.OTDFuncionario;
 
 /**
@@ -16,8 +21,6 @@ import sgbr.util.OTDFuncionario;
  *
  */
 public class RNAlterarFuncionario {
-	
-
 
 	private static RNAlterarFuncionario aRNAlterarFuncionario = new RNAlterarFuncionario();
 
@@ -44,19 +47,48 @@ public class RNAlterarFuncionario {
 	public void processar(OTDFuncionario pOtdFuncionario) {
 
 		try {
-			
+
 			this.alterarPessoa(pOtdFuncionario);
-			
+
 			this.alterarFuncionario(pOtdFuncionario);
 
+			this.alterarPessoaTelefone(pOtdFuncionario.getCdPessoa(), pOtdFuncionario.getDddTelefoneCelular(),
+					pOtdFuncionario.getNuTelefoneCelular(), Constantes.CD_TIPO_TELEFONE_CELULAR);
 
-			//FIXME alterar o pessoaDocumento
+			this.alterarPessoaTelefone(pOtdFuncionario.getCdPessoa(), pOtdFuncionario.getDddTelefoneConvencional(),
+					pOtdFuncionario.getNuTelefoneConvencional(), Constantes.CD_TIPO_TELEFONE_CONVENCIONAL);
 
-			
+			this.alterarPessoaDocumento(pOtdFuncionario.getCdPessoa(), pOtdFuncionario.getNuCPF(),
+					Constantes.CD_TIPO_DOCUMENTO_CPF);
+
+			this.alterarPessoaDocumento(pOtdFuncionario.getCdPessoa(), pOtdFuncionario.getNuRG(),
+					Constantes.CD_TIPO_DOCUMENTO_RG);
+
+			this.alterarPessoaDocumento(pOtdFuncionario.getCdPessoa(), pOtdFuncionario.getNuCarteira(),
+					Constantes.CD_TIPO_DOCUMENTO_CARTEIRA_TRABALHO);
+
 		} catch (Exception e) {
 			// TODO gerar erro generico
 			e.printStackTrace();
 		}
+	}
+
+	private void alterarPessoaDocumento(Integer pCdPessoa, String pNuDocumento, Integer pTpDocumento)
+			throws SQLException {
+		PessoaDocumento pessoaDocumento = new PessoaDocumento();
+		pessoaDocumento.setCdPessoa(pCdPessoa);
+		pessoaDocumento.setTpDocumento(pTpDocumento);
+		pessoaDocumento.setNuDocumento(pNuDocumento);
+
+		PessoaDocumento pessoaDocumentoBase = DAOPessoaDocumento.getInstancia()
+				.consultarPorChavePrimaria(pessoaDocumento);
+
+		if (pessoaDocumentoBase == null) {
+			DAOPessoaDocumento.getInstancia().incluir(pessoaDocumento);
+		} else {
+			DAOPessoaDocumento.getInstancia().alterar(pessoaDocumento);
+		}
+
 	}
 
 	/**
@@ -64,17 +96,17 @@ public class RNAlterarFuncionario {
 	 * @throws SQLException
 	 */
 	private void alterarFuncionario(OTDFuncionario pOtdFuncionario) throws SQLException {
-		Funcionario funcionario = new Funcionario();			
+		Funcionario funcionario = new Funcionario();
 		funcionario.setCdPessoa(pOtdFuncionario.getCdPessoa());
 		funcionario.setCdFuncionario(pOtdFuncionario.getCdFuncionario());
 		funcionario.setVlSalario(pOtdFuncionario.getVlSalario());
-		funcionario.setTpFuncionario( pOtdFuncionario.getTpFuncionario());
+		funcionario.setTpFuncionario(pOtdFuncionario.getTpFuncionario());
 		funcionario.setDtAdmissao(pOtdFuncionario.getDtAdmissao());
 		funcionario.setDtDemissao(pOtdFuncionario.getDtDemissao());
 		funcionario.setNuBancoAgencia(pOtdFuncionario.getNuAgencia());
 		funcionario.setNuBancoConta(pOtdFuncionario.getNuCC());
 		funcionario.setNuBancoAgencia(pOtdFuncionario.getNuAgencia());
-		funcionario.setNmBanco(pOtdFuncionario.getNmBanco());			
+		funcionario.setNmBanco(pOtdFuncionario.getNmBanco());
 		DAOFuncionario.getInstancia().alterar(funcionario);
 	}
 
@@ -95,6 +127,35 @@ public class RNAlterarFuncionario {
 		pessoa.setNuLogradouro(pOtdFuncionario.getNuLogradouro());
 		pessoa.setNuCEP(pOtdFuncionario.getNuCEP());
 		DAOPessoa.getInstancia().alterar(pessoa);
+	}
+
+	private void alterarPessoaTelefone(Integer pCdPessoa, String pDddTelefone, String pNuTelefone, Integer pTpTelefone)
+			throws SQLException {
+		boolean inExclusao = false;
+
+		PessoaTelefone pessoaTelefone = new PessoaTelefone();
+		pessoaTelefone.setCdPessoa(pCdPessoa);
+		pessoaTelefone.setNuDDDTelefone(pDddTelefone);
+		pessoaTelefone.setNuTelefone(pNuTelefone);
+		pessoaTelefone.setTpTelefone(pTpTelefone);
+
+		if (pessoaTelefone.getNuDDDTelefone().isEmpty() && pessoaTelefone.getNuDDDTelefone().isEmpty()) {
+			DAOPessoaTelefone.getInstancia().excluir(pessoaTelefone);
+			inExclusao = true;
+		}
+
+		if (!inExclusao) {
+			PessoaTelefone pessoaTelefoneBase = DAOPessoaTelefone.getInstancia()
+					.consultarPorChavePrimaria(pessoaTelefone);
+			if (pessoaTelefoneBase == null) {
+				DAOPessoaTelefone.getInstancia().incluir(pessoaTelefone);
+
+			} else {
+
+				DAOPessoaTelefone.getInstancia().alterar(pessoaTelefone);
+			}
+		}
+
 	}
 
 }

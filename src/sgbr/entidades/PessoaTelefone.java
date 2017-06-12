@@ -20,11 +20,21 @@ public class PessoaTelefone extends EntidadeGenerica {
 	public static final String NM_COLUNA_PESSOA_TELEFONE_DDD = "PESSOA_TELEFONE_DDD";
 	public static final String NM_COLUNA_PESSOA_TELEFONE_NU_TEL = "PESSOA_TELEFONE_NU_TEL";
 
-	private int cdPessoa;
-	private int tpTelefone;
+	private Integer cdPessoa;
+	private Integer tpTelefone;
 	private String nuDDDTelefone;
 	private String nuTelefone;
 
+	
+	public PessoaTelefone (){
+		
+	}
+	
+	public PessoaTelefone (Integer pCdPessoa, Integer pTpTelefone){
+		this.cdPessoa = pCdPessoa;
+		this.tpTelefone = pTpTelefone;
+	}
+	
 	/**
 	 * @return the cdPessoa
 	 */

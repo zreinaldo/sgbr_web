@@ -14,13 +14,38 @@ import java.sql.SQLException;
  * @author Reinaldo
  *
  */
+/**
+ * @author Reinaldo
+ *
+ */
 public class DAO_MYSQL {
 	
+	/**
+	 * retorna um campo date opcionar
+	 * @param pRs
+	 * @param pCampo
+	 * @return
+	 */
 	protected Date getDateOpcional (ResultSet pRs, String pCampo) {
 		Date retorno = null;
 		try {
 			retorno = pRs.getDate(pCampo) != null ? pRs.getDate(pCampo) : null;
 		} catch (SQLException e) {			
+		} 
+		return retorno;
+	}
+	
+	/**
+	 * @param pRs
+	 * @param pCampo
+	 * @return
+	 */
+	protected Double getDoubleOpcional (ResultSet pRs, String pCampo) {
+		Double retorno = null;
+		try {
+			retorno = pRs.getDouble(pCampo) == 0 ?  null : pRs.getDouble(pCampo) ;
+		} catch (SQLException e) {			
+			e.printStackTrace();
 		} 
 		return retorno;
 	}

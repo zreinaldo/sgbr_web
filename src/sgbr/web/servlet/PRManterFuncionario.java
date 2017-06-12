@@ -121,9 +121,9 @@ public class PRManterFuncionario extends PRManterCadastro {
 				pRequest);
 		String email = this.getAtributoOuParametroStringOpcional(PRManterFuncionario.ID_REQ_ATR_email, pRequest);
 
-		String nuTelefoneConvenciona = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuTelefoneConvencional,
+		String nuTelefoneConvencional = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuTelefoneConvencional,
 				pRequest);
-		String dddTelefoneConvenciona = this
+		String dddTelefoneConvencional = this
 				.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dddTelefoneConvencional, pRequest);
 		String nuTelefoneCelular = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuTelefoneCelular,
 				pRequest);
@@ -153,8 +153,8 @@ public class PRManterFuncionario extends PRManterCadastro {
 
 		otdFuncionario.setNuTelefoneCelular(nuTelefoneCelular);
 		otdFuncionario.setDddTelefoneCelular(dddTelefoneCelular);
-		otdFuncionario.setNuTelefoneConvencional(nuTelefoneConvenciona);
-		otdFuncionario.setDddTelefoneConvencional(dddTelefoneConvenciona);
+		otdFuncionario.setNuTelefoneConvencional(nuTelefoneConvencional);
+		otdFuncionario.setDddTelefoneConvencional(dddTelefoneConvencional);
 
 		this.aFachadaSGBR.incluirFuncionario(otdFuncionario);
 
@@ -221,6 +221,16 @@ public class PRManterFuncionario extends PRManterCadastro {
 		String cdFuncionario = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_cdFuncionario, pRequest);
 
 		String dtDemissao = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dtDemissao, pRequest);
+		
+		String nuTelefoneConvencional = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuTelefoneConvencional,
+				pRequest);
+		String dddTelefoneConvencional = this
+				.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dddTelefoneConvencional, pRequest);
+		String nuTelefoneCelular = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_nuTelefoneCelular,
+				pRequest);
+		String dddTelefoneCelular = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_dddTelefoneCelular,
+				pRequest);
+
 
 		OTDFuncionario otdFuncionario = new OTDFuncionario();
 
@@ -246,6 +256,10 @@ public class PRManterFuncionario extends PRManterCadastro {
 		otdFuncionario.setDtNascimento(!dtNascimento.isEmpty() ? Util.formataData(dtNascimento) : null);
 		otdFuncionario.setDtDemissao(!dtDemissao.isEmpty() ? Util.formataData(dtDemissao) : null);
 		otdFuncionario.setEmail(email);
+		otdFuncionario.setNuTelefoneCelular(nuTelefoneCelular);
+		otdFuncionario.setDddTelefoneCelular(dddTelefoneCelular);
+		otdFuncionario.setNuTelefoneConvencional(nuTelefoneConvencional);
+		otdFuncionario.setDddTelefoneConvencional(dddTelefoneConvencional);
 
 		this.aFachadaSGBR.alterarFuncionario(otdFuncionario);
 
