@@ -106,11 +106,14 @@ if (otd == null) {
 				<table>
 				<tr>
 					<td colspan="2" id="botoes">
-					    <input type="button" value="Consultar"	onclick="submeterFormulario('<%=PRManterCliente.NM_SERVLET%>','<%=PRManterCliente.EVENTO_PROCESSAR_CONSULTA%>')" id="consultar">
+					    <input type="button" value="Consultar"	onclick="submeterFormulario('<%=PRManterCliente.NM_SERVLET%>','<%=PRManterCliente.EVENTO_PROCESSAR_CONSULTA%>')" id="consultar">					    
 					    <input type="button" value="Incluir"	onclick="submeterFormulario('<%=PRManterCliente.NM_SERVLET%>','<%=PRManterCliente.EVENTO_EXIBIR_INCLUSAO%>')" id="incluir"> 
+					   <%
+                        if (usuario.getCdTpUsuario().equals(Constantes.CD_TIPO_USUARIO_GESTOR)) { %>
 					    <input type="button" value="Alterar" onclick="submeterFormulario('<%=PRManterCliente.NM_SERVLET%>','<%=PRManterCliente.EVENTO_EXIBIR_ALTERACAO%>')" id="alterar"> 
 					    <input type="button" value="Detalhar" onclick="submeterFormulario('<%=PRManterCliente.NM_SERVLET%>','<%=PRManterCliente.EVENTO_EXIBIR_DETALHAMENTO_CONSULTA%>')" id="detalhar">
 					    <input type="button" value="Excluir" onclick="submeterFormulario('<%=PRManterCliente.NM_SERVLET%>','<%=PRManterCliente.EVENTO_EXIBIR_EXCLUSAO%>')" id="excluir">
+					    <%} %>
 					</td>
 				</tr>
 			</table>

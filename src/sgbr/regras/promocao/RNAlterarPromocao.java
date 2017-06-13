@@ -73,10 +73,7 @@ public class RNAlterarPromocao {
 				}
 			}
 
-			//
-
 		} catch (Exception e) {
-
 			// FIXME deveria tratar caso seja levantada uma chave duplicada
 			e.printStackTrace();
 		}
@@ -89,7 +86,6 @@ public class RNAlterarPromocao {
 			if (!pListaDiaSemana[aI].isEmpty()) {
 				lista.add(Integer.valueOf(pListaDiaSemana[aI]));
 			}
-
 		}
 
 		return lista;

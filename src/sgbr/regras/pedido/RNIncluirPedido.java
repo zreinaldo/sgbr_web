@@ -3,7 +3,6 @@
  */
 package sgbr.regras.pedido;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import sgbr.cadastros.sql.DAOConta;

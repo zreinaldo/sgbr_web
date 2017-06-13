@@ -83,4 +83,9 @@ public class ControladorConta {
 		return DAOConta.getInstancia().consultarTodosItensConta(pCdConta);
 
 	}
+	
+	public Conta consultaPorChavePrimaria(Conta pConta) throws SQLException {
+		return DAOConta.getInstancia().consultaPorChavePrimaria(pConta);
+	}
+	
 }

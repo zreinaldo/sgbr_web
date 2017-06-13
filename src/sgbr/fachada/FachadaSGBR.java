@@ -408,4 +408,8 @@ public class FachadaSGBR {
 		return ControladorConta.getInstancia().consultarTodosItensConta(pCdConta);
 
 	}
+	
+	public Conta consultaContaPorChavePrimaria(Conta pConta) throws SQLException {
+		return ControladorConta.getInstancia().consultaPorChavePrimaria(pConta);
+	}
 }

@@ -195,7 +195,6 @@ public class DAOComanda extends DAO_MYSQL implements IntfDAOComanda {
 		String sqlWhere = "";
 		String sqlConector = "";
 		Connection conexao = null;
-		ArrayList<OTDComanda> arrayResposta = new ArrayList<>();
 		Comanda comanda = null;
 
 		conexao = this.getConection();

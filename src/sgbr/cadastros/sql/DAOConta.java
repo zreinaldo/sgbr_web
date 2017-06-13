@@ -219,8 +219,6 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 	@Override
 	public Conta consultaPorChavePrimaria(Conta pConta) throws SQLException {
 		
-		String sqlWhere = "";
-		String sqlConector = "";
 		Connection conexao = null;
 		Conta conta = null;
 

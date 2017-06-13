@@ -27,9 +27,4 @@ public interface IntfDAOPessoa {
 	 */
 	public void excluir(Pessoa pPessoa) throws SQLException;
 
-	/**
-	 * @param pPessoa
-	 * @return
-	 */
-	public Pessoa consultarPorChavePrimaria(Pessoa pPessoa) throws SQLException;
 }

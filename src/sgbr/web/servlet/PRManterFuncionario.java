@@ -327,8 +327,6 @@ public class PRManterFuncionario extends PRManterCadastro {
 	 */
 	@Override
 	public void exibirConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
-		// TODO Auto-generated method stub
-		// FachadaSGBR aFachadaSGBR = FachadaSGBR.getInstancia();
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
 	}

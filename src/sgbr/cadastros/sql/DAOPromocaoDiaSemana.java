@@ -103,23 +103,9 @@ public class DAOPromocaoDiaSemana extends DAO_MYSQL implements IntfDAOPromocaoDi
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * sgbr.cadastros.IntfDAOPromocaoDiaSemana#consultaPorChavePrimaria(sgbr.
-	 * entidades.PromocaoDiaSemana)
-	 */
-	@Override
-	public PromocaoDiaSemana consultaPorChavePrimaria(PromocaoDiaSemana pPromocaoDiaSemana) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public ArrayList<Integer> consultaPromocaoDiasSemana(Integer pCdPromocao) throws SQLException {
 
 		Connection conexao = null;
-		PromocaoDiaSemana promocaoDiaSemana = null;
 		ArrayList<Integer> aPromocaoDiaSemana = new ArrayList<>();
 
 		conexao = this.getConection();

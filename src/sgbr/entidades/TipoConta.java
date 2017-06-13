@@ -32,4 +32,18 @@ public class TipoConta {
 		this.dsTipoConta = pDsTipoConta;
 	}
 
+	/**
+	 * @return the cdTipoConta
+	 */
+	public Integer getCdTipoConta() {
+		return this.cdTipoConta;
+	}
+
+	/**
+	 * @param pCdTipoConta the cdTipoConta to set
+	 */
+	public void setCdTipoConta(Integer pCdTipoConta) {
+		this.cdTipoConta = pCdTipoConta;
+	}
+
 }

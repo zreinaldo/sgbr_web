@@ -4,7 +4,6 @@
 package sgbr.cadastros.sql;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -43,46 +42,13 @@ public class DAOTipoDocumento extends DAO_MYSQL implements IntfDAOTipoDocumento 
 		return DAOTipoDocumento.aDAOTipoDocumento;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * sgbr.cadastros.IntfDAOTipoDocumento#incluir(sgbr.entidades.TipoDocumento)
+
+	/* (non-Javadoc)
+	 * @see sgbr.cadastros.IntfDAOTipoDocumento#consultaTodosRegistros(boolean)
 	 */
-	@Override
-	public TipoDocumento incluir(TipoDocumento pTipoDocumento) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * sgbr.cadastros.IntfDAOTipoDocumento#alterar(sgbr.entidades.TipoDocumento)
-	 */
-	@Override
-	public void alterar(TipoDocumento pTipoDocumento) throws SQLException {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * sgbr.cadastros.IntfDAOTipoDocumento#excluir(sgbr.entidades.TipoDocumento)
-	 */
-	@Override
-	public void excluir(TipoDocumento pTipoDocumento) throws SQLException {
-		// TODO Auto-generated method stub
-
-	}
-
 	public Collection<TipoDocumento> consultaTodosRegistros(boolean pInRetornarApenasVigentes) throws SQLException {
 
 		Connection conexao = null;
-		PreparedStatement ppSt = null;
 		TipoDocumento tpDocumento = null;
 		Collection<TipoDocumento> colecaoTipoFuncionario = new ArrayList<TipoDocumento>();
 

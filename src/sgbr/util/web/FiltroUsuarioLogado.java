@@ -16,7 +16,9 @@ import javax.servlet.http.HttpSession;
 import sgbr.util.OTDUsuario;
 
 /**
- * Servlet Filter implementation class FiltroUsuarioLogado
+ * 
+ * filtro utilizado para verificar se tem usuario logado Servlet Filter
+ * implementation class FiltroUsuarioLogado
  */
 
 @WebFilter("/*")
@@ -26,14 +28,14 @@ public class FiltroUsuarioLogado implements Filter {
 	 * Default constructor.
 	 */
 	public FiltroUsuarioLogado() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		System.out.println( "destroy filter");
+		System.out.println("destroy filter");
 	}
 
 	/**
@@ -52,12 +54,8 @@ public class FiltroUsuarioLogado implements Filter {
 			((HttpServletResponse) response).sendRedirect("/sgbr_web/PRLoginUsuario");
 
 		} else {
-
 			chain.doFilter(request, response);
-
 		}
-		
-//		chain.doFilter(request, response);
 
 	}
 
@@ -65,7 +63,7 @@ public class FiltroUsuarioLogado implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		System.out.println( "init filter");
+		System.out.println("init filter");
 	}
 
 }

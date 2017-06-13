@@ -81,9 +81,9 @@
 				<tr>
 					<td><label for="convencional">Telefone Convencional:</label></td>
 					<td><input type="text" size="4" 			
-						id="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneConvencional%>" value="<%=otdFuncionario.getDddTelefoneConvencional()%>"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneConvencional%>" value="<%=Util.getValorHTML(otdFuncionario.getDddTelefoneConvencional())%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneConvencional%>"
-						maxlength="3"> - <input type="text"  value="<%=otdFuncionario.getNuTelefoneConvencional()  %>"
+						maxlength="3"> - <input type="text"  value="<%=Util.getValorHTML(otdFuncionario.getNuTelefoneConvencional())  %>"
 						id="<%=PRManterFuncionario.ID_REQ_ATR_nuTelefoneConvencional%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nuTelefoneConvencional%>"
 						maxlength="10"> </td>
@@ -93,10 +93,10 @@
 				<tr>
 				<td><label for="celular">Telefone Celular:</label></td>
 					<td><input type="text" size="4" 			
-						id="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneCelular%>" value="<%=otdFuncionario.getDddTelefoneCelular()%>"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneCelular%>" value="<%=Util.getValorHTML(otdFuncionario.getDddTelefoneCelular())%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_dddTelefoneCelular%>"
 						maxlength="3"> - <input type="text"  
-						id="<%=PRManterFuncionario.ID_REQ_ATR_nuTelefoneCelular%>" value="<%=otdFuncionario.getNuTelefoneCelular()%>"
+						id="<%=PRManterFuncionario.ID_REQ_ATR_nuTelefoneCelular%>" value="<%=Util.getValorHTML(otdFuncionario.getNuTelefoneCelular())%>"
 						name="<%=PRManterFuncionario.ID_REQ_ATR_nuTelefoneCelular%>"
 						maxlength="10"> </td>
 				</tr>

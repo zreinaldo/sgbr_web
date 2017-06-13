@@ -60,9 +60,9 @@ public class DAOPessoa extends DAO_MYSQL implements IntfDAOPessoa {
 		String sql = "INSERT INTO mydb.pessoa (" + Pessoa.NM_COLUNA_PESSOA_NM + "," + Pessoa.NM_COLUNA_PESSOA_EE + ","
 				+ Pessoa.NM_COLUNA_PESSOA_DT_NASC + "," + Pessoa.NM_COLUNA_PESSOA_ENDERECO_BAIRRO_NM + ","
 				+ Pessoa.NM_COLUNA_PESSOA_ENDERECO_LOGRADOURO_NM + "," + Pessoa.NM_COLUNA_PESSOA_ENDERECO_LOGRADOURO_NU
-				+ "," + Pessoa.NM_COLUNA_PESSOA_ENDERECO_CIDADE + "," + Pessoa.NM_COLUNA_PESSOA_ENDERECO_UF + "," + Pessoa.NM_COLUNA_PESSOA_ENDERECO_CEP + ","
-				+ Pessoa.NM_COLUNA_DH_INCLUSAO_REGISTRO + "," + Pessoa.NM_COLUNA_DH_ALTERACAO_REGISTRO
-				+ ") VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+				+ "," + Pessoa.NM_COLUNA_PESSOA_ENDERECO_CIDADE + "," + Pessoa.NM_COLUNA_PESSOA_ENDERECO_UF + ","
+				+ Pessoa.NM_COLUNA_PESSOA_ENDERECO_CEP + "," + Pessoa.NM_COLUNA_DH_INCLUSAO_REGISTRO + ","
+				+ Pessoa.NM_COLUNA_DH_ALTERACAO_REGISTRO + ") VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
 		ppSt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -139,7 +139,6 @@ public class DAOPessoa extends DAO_MYSQL implements IntfDAOPessoa {
 	@Override
 	public void excluir(Pessoa pPessoa) throws SQLException {
 
-		String sqlConector = "";
 		Connection conexao = null;
 
 		conexao = this.getConection();
@@ -149,20 +148,5 @@ public class DAOPessoa extends DAO_MYSQL implements IntfDAOPessoa {
 		Statement stm = conexao.createStatement();
 
 		stm.execute(sql);
-
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * sgbr.cadastros.IntfDAOPessoa#consultarPorChavePrimaria(sgbr.entidades.
-	 * Pessoa)
-	 */
-	@Override
-	public Pessoa consultarPorChavePrimaria(Pessoa pPessoa) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

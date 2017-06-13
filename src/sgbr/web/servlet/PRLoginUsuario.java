@@ -76,7 +76,6 @@ public class PRLoginUsuario extends PRGenerica {
 			this.redirecionar(this.NM_JSP_LOGIN, pRequest, pResponse);
 		} else {			
 	     	 session.setAttribute("usuario", otdUsuario);
-	     	 //TODO redirecioar para PR de conta
 			this.redirecionar(PRManterConta.NM_SERVLET, PRManterConta.NM_JSP_CONSULTA, pRequest, pResponse);
 		}
 

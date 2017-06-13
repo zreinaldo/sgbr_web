@@ -54,15 +54,15 @@ if (otd == null) {
 			<th align="left">Manter Pedido</th>
 			</tr>	
 				<tr>
-					<td><label for="cdMesa">Número Mesa em uso:</label></td>
-					<td><%= SelectMesaConta.getInstancia().getHTML(request, PRManterPedido.ID_REQ_ATR_cdMesa, PRManterPedido.ID_REQ_ATR_cdMesa, cdMesa, false, true, Constantes.CD_SIM)	%></td>
+					<td><label for="cdMesa">Conta por Mesa /Nº Mesa em uso:</label></td>
+					<td><%= SelectMesaConta.getInstancia().getHTML(request, PRManterPedido.ID_REQ_ATR_cdMesa, PRManterPedido.ID_REQ_ATR_cdMesa, cdMesa, false, true, Constantes.CD_SIM,Constantes.CD_TIPO_CONTA_MESA)	%></td>
 					
 					<td></td>
 				</tr>
 				
 				<tr>
-					<td><label for="cdComanda">Número Comanda em uso:</label></td>
-					<td><%= SelectComandaConta.getInstancia().getHTML(request, PRManterPedido.ID_REQ_ATR_cdComanda, PRManterPedido.ID_REQ_ATR_cdComanda, cdComanda, false, true, Constantes.CD_SIM)	%></td>
+					<td><label for="cdComanda">Conta por Comanda /Nº Comanda em uso:</label></td>
+					<td><%= SelectComandaConta.getInstancia().getHTML(request, PRManterPedido.ID_REQ_ATR_cdComanda, PRManterPedido.ID_REQ_ATR_cdComanda, cdComanda, false, true, Constantes.CD_SIM,Constantes.CD_TIPO_CONTA_COMANDA)	%></td>
 				</tr>	
 				
 			</table>

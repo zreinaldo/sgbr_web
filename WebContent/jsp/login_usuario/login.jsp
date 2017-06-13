@@ -46,11 +46,6 @@ isLoginSenhaInvalida = (Boolean) PRLoginUsuario.getAtributoOpcional(PRLoginUsuar
 			<tr>
 			<th align="left" colspan="2">Sistema de Gerenciamento de Bares e Restaurante - SGBR</th>
 			</tr>
-				<% if (isLoginSenhaInvalida){ %>
-					
-				<tr>
-					<td><label for="<%=PRLoginUsuario.ID_REQ_ATR_isLoginSenhaInvalida%>">Login/Senha Inválida!</label></td></tr>
-				<% } %>		
 				<tr>
 					<td><label for="<%=PRLoginUsuario.ID_REQ_ATR_loginUsuario%>">Login Usuário:</label></td>
 					<td><input type="text" required 
@@ -66,6 +61,12 @@ isLoginSenhaInvalida = (Boolean) PRLoginUsuario.getAtributoOpcional(PRLoginUsuar
 						name="<%=PRLoginUsuario.ID_REQ_ATR_senhaUsuario%>"
 						maxlength="58"></td>
 				</tr>
+				
+				<% if (isLoginSenhaInvalida){ %>
+					
+				<tr>
+					<td></td><td><label for="<%=PRLoginUsuario.ID_REQ_ATR_isLoginSenhaInvalida%>">Login/Senha Inválida!</label></td></tr>
+				<% } %>		
 			
 					
 				<tr>

@@ -6,9 +6,11 @@ package sgbr.regras.funcionario;
 import sgbr.cadastros.sql.DAOFuncionario;
 import sgbr.cadastros.sql.DAOPessoa;
 import sgbr.cadastros.sql.DAOPessoaDocumento;
+import sgbr.cadastros.sql.DAOPessoaTelefone;
 import sgbr.entidades.Funcionario;
 import sgbr.entidades.Pessoa;
 import sgbr.entidades.PessoaDocumento;
+import sgbr.entidades.PessoaTelefone;
 import sgbr.util.Constantes;
 import sgbr.util.OTDFuncionario;
 
@@ -44,9 +46,9 @@ public class RNExcluirFuncionario {
 		Pessoa pessoa = new Pessoa();
 		Funcionario funcionario = new Funcionario();
 		PessoaDocumento pessoaDocumento = new PessoaDocumento();
+		PessoaTelefone pessoaTelefone = new PessoaTelefone();
 		try {
 
-			// DAOPessoaDocumento.getInstancia().consultarPorChavePrimaria(pPessoaDocumento);
 			try {
 
 				pessoaDocumento.setCdPessoa(pOtdFuncionario.getCdPessoa());
@@ -55,7 +57,7 @@ public class RNExcluirFuncionario {
 				DAOPessoaDocumento.getInstancia().excluir(pessoaDocumento);
 
 			} catch (Exception aE) {
-				// TODO: handle exception
+				// caso a pessoa seja cliente nao deve excluir...
 			}
 			try {
 				pessoaDocumento = new PessoaDocumento();
@@ -64,7 +66,7 @@ public class RNExcluirFuncionario {
 				pessoaDocumento.setTpDocumento(Constantes.CD_TIPO_DOCUMENTO_RG);
 				DAOPessoaDocumento.getInstancia().excluir(pessoaDocumento);
 			} catch (Exception aE) {
-				// TODO: handle exception
+				// caso a pessoa seja cliente nao deve excluir...
 			}
 			try {
 				pessoaDocumento = new PessoaDocumento();
@@ -74,14 +76,37 @@ public class RNExcluirFuncionario {
 				DAOPessoaDocumento.getInstancia().excluir(pessoaDocumento);
 
 			} catch (Exception aE) {
-				// TODO: handle exception
+				// caso a pessoa seja cliente nao deve excluir...
 			}
+
 			funcionario.setCdPessoa(pOtdFuncionario.getCdPessoa());
 			funcionario.setCdFuncionario(pOtdFuncionario.getCdFuncionario());
 			DAOFuncionario.getInstancia().excluir(funcionario);
 
-			pessoa.setCdPessoa(pOtdFuncionario.getCdPessoa());
-			DAOPessoa.getInstancia().excluir(pessoa);
+			try {
+
+				pessoaTelefone.setCdPessoa(pOtdFuncionario.getCdPessoa());
+				pessoaTelefone.setTpTelefone(Constantes.CD_TIPO_TELEFONE_CELULAR);
+				DAOPessoaTelefone.getInstancia().excluir(pessoaTelefone);
+			} catch (Exception aE) {
+				// caso a pessoa seja cliente nao deve excluir...
+			}
+
+			try {
+				pessoaTelefone.setCdPessoa(pOtdFuncionario.getCdPessoa());
+				pessoaTelefone.setTpTelefone(Constantes.CD_TIPO_TELEFONE_CONVENCIONAL);
+				DAOPessoaTelefone.getInstancia().excluir(pessoaTelefone);
+			} catch (Exception aE) {
+				// caso a pessoa seja cliente nao deve excluir...
+			}
+			
+			try {
+
+				pessoa.setCdPessoa(pOtdFuncionario.getCdPessoa());
+				DAOPessoa.getInstancia().excluir(pessoa);
+			} catch (Exception aE) {
+				// caso a pessoa seja cliente nao deve excluir...
+			}
 
 		} catch (Exception e) {
 			// TODO gerar erro generico

@@ -42,19 +42,14 @@ public class RNExcluirPromocao {
 
 			ArrayList<Integer> listaDias = DAOPromocaoDiaSemana.getInstancia().consultaPromocaoDiasSemana(pCdPromocao);
 
-			
 			for (Integer aDiaBase : listaDias) {
-
 				DAOPromocaoDiaSemana.getInstancia().excluir(pCdPromocao, aDiaBase);
-
 			}
 
 			DAOPromocao.getInstancia().excluir(pCdPromocao);
 
 		} catch (Exception e) {
-
 			e.printStackTrace();
-			// throw e;
 		}
 	}
 }

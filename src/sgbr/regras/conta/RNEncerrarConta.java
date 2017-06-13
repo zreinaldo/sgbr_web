@@ -12,7 +12,6 @@ import sgbr.entidades.Conta;
  */
 public class RNEncerrarConta {
 
-
 	private static RNEncerrarConta aRNEncerrarConta = new RNEncerrarConta();
 
 	/**
@@ -37,17 +36,14 @@ public class RNEncerrarConta {
 
 	public void processar(Conta pConta) {
 
-		try {			
-			
+		try {
+
 			Conta conta = null;
 			conta = DAOConta.getInstancia().consultaPorChavePrimaria(pConta);
-			
+
 			pConta.setCdCliente(conta.getCdCliente());
-			
-			
 			DAOConta.getInstancia().alterar(pConta);
-			
-			
+
 		} catch (Exception e) {
 			// TODO gerar erro generico
 			e.printStackTrace();

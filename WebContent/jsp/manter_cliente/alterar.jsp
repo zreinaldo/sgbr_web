@@ -36,7 +36,7 @@
 					
 				<tr>
 					<td><label for="nuCPF">CPF:</label></td>
-					<td><input type="text"  value="<%=otdCliente.getNuCPF()%>" readonly="readonly"
+					<td><input type="text" value="<%=otdCliente.getNuCPF()%>" readonly="readonly"
 						id="<%=PRManterCliente.ID_REQ_ATR_nuDocumento%>"
 						name="<%=PRManterCliente.ID_REQ_ATR_nuDocumento%>" maxlength="58"></td>
 				</tr>
@@ -44,7 +44,7 @@
 					
 				<tr>
 					<td><label for="nmCliente">Nome:</label></td>
-					<td><input type="text"  value="<%=otdCliente.getNmCliente()%>"
+					<td><input type="text" required value="<%=otdCliente.getNmCliente()%>" 
 						id="<%=PRManterCliente.ID_REQ_ATR_nmCliente%>"
 						name="<%=PRManterCliente.ID_REQ_ATR_nmCliente%>"
 						maxlength="58"></td>
@@ -52,7 +52,7 @@
 
 				<tr>
 					<td><label for="dtNascimento">Data Nascimento:</label></td>
-					<td><input type="text"  value="<%=Util.formataDataParaString(otdCliente.getDtNascimento())%>"
+					<td><input type="text"  required value="<%=Util.formataDataParaString(otdCliente.getDtNascimento())%>"
 						id="<%=PRManterCliente.ID_REQ_ATR_dtNascimento%>"
 						name="<%=PRManterCliente.ID_REQ_ATR_dtNascimento%>"
 						maxlength="58"></td>

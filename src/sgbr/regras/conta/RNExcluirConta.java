@@ -15,7 +15,6 @@ import sgbr.util.OTDContaItemCardapio;
  */
 public class RNExcluirConta {
 
-
 	private static RNExcluirConta aRNEncerrarConta = new RNExcluirConta();
 
 	/**
@@ -41,17 +40,12 @@ public class RNExcluirConta {
 	public void processar(Conta pConta) {
 
 		try {
-			
-			ArrayList<OTDContaItemCardapio> colecao = DAOConta.getInstancia().consultarTodosItensConta(pConta.getCdConta());
-			
-			
-			
-			
-			if (colecao.isEmpty()){
+			ArrayList<OTDContaItemCardapio> colecao = DAOConta.getInstancia()
+					.consultarTodosItensConta(pConta.getCdConta());
+			if (colecao.isEmpty()) {
 				DAOConta.getInstancia().excluir(pConta);
-			} 
-			
-			
+			}
+
 		} catch (Exception e) {
 			// TODO gerar erro generico
 			e.printStackTrace();

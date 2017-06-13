@@ -45,7 +45,6 @@ public class RNIncluirComanda {
 				comanda.setDtIniValidade(Util.getDataHoje());
 
 				DAOComanda.getInstancia().incluir(comanda);
-
 			}
 
 		} catch (Exception e) {

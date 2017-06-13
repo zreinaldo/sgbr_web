@@ -14,12 +14,6 @@ import sgbr.entidades.TipoDocumento;
  */
 public interface IntfDAOTipoDocumento {
 
-	public TipoDocumento incluir(TipoDocumento pTipoDocumento) throws SQLException;
-
-	public void alterar(TipoDocumento pTipoDocumento) throws SQLException;
-
-	public void excluir(TipoDocumento pTipoDocumento) throws SQLException;
-
 	public Collection<TipoDocumento> consultaTodosRegistros(boolean pInRetornarApenasVigentes) throws SQLException;
 
 }

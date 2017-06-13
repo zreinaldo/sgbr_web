@@ -15,13 +15,13 @@ import sgbr.util.OTDContaItemCardapio;
  */
 public interface IntfDAOContaItemCardapio {
 
-	
-	public ContaItemCardapio incluir(ContaItemCardapio pContaItemCardapio) throws SQLException ;
+	public ContaItemCardapio incluir(ContaItemCardapio pContaItemCardapio) throws SQLException;
 
 	public void alterar(ContaItemCardapio pContaItemCardapio) throws SQLException;
 
-	public ArrayList<OTDContaItemCardapio> consultaTelaManterPedido(String pCdMesa, String pCdComanda) throws SQLException;
+	public ArrayList<OTDContaItemCardapio> consultaTelaManterPedido(String pCdMesa, String pCdComanda)
+			throws SQLException;
 
 	public OTDContaItemCardapio consultaDetalharPedido(String pCdPedido) throws SQLException;
-	
+
 }

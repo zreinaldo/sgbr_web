@@ -142,7 +142,6 @@ public class DAOFuncionario extends DAO_MYSQL implements IntfDAOFuncionario {
 	@Override
 	public void excluir(Funcionario pFuncionario) throws SQLException {
 
-		String sqlConector = "";
 		Connection conexao = null;
 
 		conexao = this.getConection();
@@ -290,8 +289,8 @@ public class DAOFuncionario extends DAO_MYSQL implements IntfDAOFuncionario {
 		return arrayResposta;
 	}
 
-	
-	public Collection<OTDFuncionario> consultaTodosRegistrosFuncionario(Boolean pIsFuncionarioSemUsuario) throws SQLException {
+	public Collection<OTDFuncionario> consultaTodosRegistrosFuncionario(Boolean pIsFuncionarioSemUsuario)
+			throws SQLException {
 
 		String sqlWhere = "";
 		String sqlConector = "";
@@ -303,7 +302,8 @@ public class DAOFuncionario extends DAO_MYSQL implements IntfDAOFuncionario {
 
 		String sql = "SELECT  MYDB.PESSOA.PESSOA_NM,  MYDB.FUNCIONARIO.FUNCIONARIO_CD FROM MYDB.PESSOA INNER JOIN MYDB.FUNCIONARIO ON MYDB.FUNCIONARIO.PESSOA_CD = MYDB.PESSOA.PESSOA_CD ";
 		if (pIsFuncionarioSemUsuario) {
-			sqlWhere = sqlWhere + sqlConector + " NOT EXISTS (SELECT * FROM MYDB.USUARIO WHERE MYDB.USUARIO.FUNCIONARIO_CD = MYDB.FUNCIONARIO.FUNCIONARIO_CD) ";
+			sqlWhere = sqlWhere + sqlConector
+					+ " NOT EXISTS (SELECT * FROM MYDB.USUARIO WHERE MYDB.USUARIO.FUNCIONARIO_CD = MYDB.FUNCIONARIO.FUNCIONARIO_CD) ";
 			sqlConector = " \n AND ";
 		}
 
@@ -320,7 +320,7 @@ public class DAOFuncionario extends DAO_MYSQL implements IntfDAOFuncionario {
 			otdFuncionario = new OTDFuncionario();
 			otdFuncionario.setNmFuncionario(rs.getString(Pessoa.NM_COLUNA_PESSOA_NM).toUpperCase());
 			otdFuncionario.setCdFuncionario(rs.getInt(Funcionario.NM_COLUNA_FUNCIONARIO_CD));
-			
+
 			colecaoFuncionario.add(otdFuncionario);
 		}
 
