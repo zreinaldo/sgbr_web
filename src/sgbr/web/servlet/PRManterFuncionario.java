@@ -27,12 +27,11 @@ public class PRManterFuncionario extends PRManterCadastro {
 	public static final String ID_REQ_ATR_nuDocumento = "nuDocumento";
 	public static final String ID_REQ_ATR_nmFuncionario = "nmFuncionario";
 
-	// FIXME retirar campos
 	public static final String ID_REQ_ATR_tpCargo = "nmCargo";
 	public static final String ID_REQ_ATR_nuCPF = "nuCPF";
 	public static final String ID_REQ_ATR_nuRG = "nuRG";
 	public static final String ID_REQ_ATR_nuCarteira = "nuCarteira";
-	// fim FIXME
+
 
 	public static final String ID_REQ_ATR_otdFuncionario = "OTDFuncionario";
 

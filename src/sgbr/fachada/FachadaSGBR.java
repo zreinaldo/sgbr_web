@@ -28,8 +28,6 @@ import sgbr.entidades.TipoDocumento;
 import sgbr.entidades.TipoFuncionario;
 import sgbr.entidades.TipoUsuario;
 import sgbr.entidades.Usuario;
-import sgbr.regras.conta.RNAlterarClienteConta;
-import sgbr.regras.conta.RNExcluirConta;
 import sgbr.util.OTDCliente;
 import sgbr.util.OTDComanda;
 import sgbr.util.OTDConta;
@@ -340,63 +338,74 @@ public class FachadaSGBR {
 		return ControladorTipoUsuario.getInstancia().consultaTodosRegistrosTipoUsuario(pInRetornarApenasVigentes);
 	}
 
-	public Collection<Comanda> consultaComandaConta(String pInUso,String pCdTipoConta) throws SQLException {
+	public Collection<Comanda> consultaComandaConta(String pInUso, String pCdTipoConta) throws SQLException {
 		return ControladorConta.getInstancia().consultaComandaConta(pInUso, pCdTipoConta);
 	}
 
 	public Collection<Mesa> consultaMesaConta(String pInUso, String pCdTipoConta) throws SQLException {
-		return ControladorConta.getInstancia().consultaMesaConta(pInUso,pCdTipoConta);
+		return ControladorConta.getInstancia().consultaMesaConta(pInUso, pCdTipoConta);
 	}
 
-	public ArrayList<OTDConta> consultaTelaManterConta(String pCdMesa, String pCdComanda, String pSiConta, String pCdCliente)
-			throws SQLException {
+	public ArrayList<OTDConta> consultaTelaManterConta(String pCdMesa, String pCdComanda, String pSiConta,
+			String pCdCliente) throws SQLException {
 		return ControladorConta.getInstancia().consultaTelaManterConta(pCdMesa, pCdComanda, pSiConta, pCdCliente);
 	}
-	
-	public OTDConta consultaDetalharConta(String pCdConta)
-			throws SQLException {
+
+	public OTDConta consultaDetalharConta(String pCdConta) throws SQLException {
 		return ControladorConta.getInstancia().consultaDetalharConta(pCdConta);
 	}
-	
+
 	public void alterarClienteConta(Integer pCdConta, Integer pCdCliente) throws SQLException {
-		RNAlterarClienteConta.getInstancia().processar(pCdConta,pCdCliente);
+		ControladorConta.getInstancia().alterarClienteConta(pCdConta, pCdCliente);
 	}
-	
+
 	public void excluirConta(Conta pConta) throws SQLException {
-		RNExcluirConta.getInstancia().processar(pConta);
+		ControladorConta.getInstancia().excluir(pConta);
 	}
-	
-	
+
 	public Collection<OTDCliente> consultaClienteConta(boolean pInUso) throws SQLException {
 		return ControladorConta.getInstancia().consultaClienteConta(pInUso);
 	}
-	
+
 	public void incluir(Conta pConta) throws SQLException {
 		ControladorConta.getInstancia().incluir(pConta);
 	}
-	
+
 	public ArrayList<OTDContaItemCardapio> consultaTelaManterPedido(String pCdMesa, String pCdComanda)
 			throws SQLException {
 		return ControladorContaItemCardapio.getInstancia().consultaTelaManterPedido(pCdMesa, pCdComanda);
 	}
-	
-	public OTDContaItemCardapio consultaDetalharPedido(String pCdPedido)
-			throws SQLException {
+
+	public OTDContaItemCardapio consultaDetalharPedido(String pCdPedido) throws SQLException {
 		return ControladorContaItemCardapio.getInstancia().consultaDetalharPedido(pCdPedido);
 	}
-	
-	public void alterarContaItemCardapio(ContaItemCardapio pContaItemCardapio)
-			throws SQLException {
+
+	public void alterarContaItemCardapio(ContaItemCardapio pContaItemCardapio) throws SQLException {
 		ControladorContaItemCardapio.getInstancia().alterar(pContaItemCardapio);
 	}
-	
-	public void incluirContaItemCardapio(ContaItemCardapio pContaItemCardapio) throws SQLException {
-		ControladorContaItemCardapio.getInstancia().incluir(pContaItemCardapio);
+
+	/**
+	 * inclui um pedido
+	 * 
+	 * @param pOtdContaItemCardapio
+	 * @throws SQLException
+	 */
+	public void incluirPedido(OTDContaItemCardapio pOtdContaItemCardapio) throws SQLException {
+		ControladorContaItemCardapio.getInstancia().incluir(pOtdContaItemCardapio);
 	}
-	
+
+	/**
+	 * exclui um item de uma conta
+	 * 
+	 * @param pCdContaItemCardapio
+	 * @throws SQLException
+	 */
 	public void excluirContaItemCardapio(String pCdContaItemCardapio) throws SQLException {
 		ControladorContaItemCardapio.getInstancia().excluir(pCdContaItemCardapio);
 	}
-	
-	
+
+	public ArrayList<OTDContaItemCardapio> consultarTodosItensConta(Integer pCdConta) throws SQLException {
+		return ControladorConta.getInstancia().consultarTodosItensConta(pCdConta);
+
+	}
 }

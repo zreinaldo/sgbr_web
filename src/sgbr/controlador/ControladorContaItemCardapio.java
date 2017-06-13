@@ -5,16 +5,12 @@ package sgbr.controlador;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import sgbr.cadastros.sql.DAOContaItemCardapio;
 import sgbr.entidades.ContaItemCardapio;
+import sgbr.regras.pedido.RNIncluirPedido;
 import sgbr.util.OTDContaItemCardapio;
 
-/**
- * @author Reinaldo
- *
- */
 /**
  * @author Reinaldo
  *
@@ -29,6 +25,7 @@ public class ControladorContaItemCardapio {
 	private ControladorContaItemCardapio() {
 		super();
 	}
+	
 
 	/**
 	 * -
@@ -59,8 +56,8 @@ public class ControladorContaItemCardapio {
 
 		return DAOContaItemCardapio.getInstancia().consultaDetalharPedido(pCdPedido);
 	}
-	public void incluir (ContaItemCardapio pContaItemCardapio) throws SQLException {		
-		 DAOContaItemCardapio.getInstancia().incluir(pContaItemCardapio);
+	public void incluir (OTDContaItemCardapio pOTDContaItemCardapio) throws SQLException {		
+		RNIncluirPedido.getInstancia().processar(pOTDContaItemCardapio);
 	}
 	
 	public void alterar (ContaItemCardapio pContaItemCardapio) throws SQLException {		

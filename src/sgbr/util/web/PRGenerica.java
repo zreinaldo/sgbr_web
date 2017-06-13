@@ -40,11 +40,16 @@ public abstract class PRGenerica extends ProcessadorRequisicao {
 			metodo.invoke(this, new Object[] { pRequest, pResponse });
 
 		} catch (Exception e) {
-
-			//TODO tratamentos de erros
-			// vai redirecionar para uma tela simples, informando q tem erro
-			// this.getServletContext().getRequestDispatcher(this.NM_JSP_ERRO).forward(pRequest,
-			// pResponse);
+			
+			try {
+				//TODO tratamentos de erros
+				// vai redirecionar para uma tela simples, informando q tem erro
+				e.printStackTrace();
+				this.redirecionar(this.NM_JSP_ERRO, pRequest, pResponse);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 
 		}

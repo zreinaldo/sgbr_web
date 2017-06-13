@@ -109,10 +109,8 @@ public class PRManterPedido extends PRManterCadastro{
 		OTDUsuario usuario = (OTDUsuario) session.getAttribute("usuario");	
 
 		otdContaItemCardapio.setCdFuncionario(usuario.getCdFuncionario());
-		//FIXME chamar fachada
-		RNIncluirPedido.getInstancia().processar(otdContaItemCardapio);
-		
-//		this.aFachadaSGBR.incluirContaItemCardapio(contaItemCardapio);
+
+		this.aFachadaSGBR.incluirPedido(otdContaItemCardapio);
 		
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
@@ -211,16 +209,6 @@ public class PRManterPedido extends PRManterCadastro{
 	 */
 	@Override
 	public void exibirConsulta(HttpServletRequest pRequest, HttpServletResponse pResponse) throws Exception {
-		
-		//FIXME informar funcionario que incluiu o item
-		
-
-		HttpSession session = ((HttpServletRequest) pRequest).getSession();
-
-		OTDUsuario usuario = (OTDUsuario) session.getAttribute("usuario");
-
-		
-		
 		this.redirecionar(this.NM_JSP_CONSULTA, pRequest, pResponse);
 
 	}

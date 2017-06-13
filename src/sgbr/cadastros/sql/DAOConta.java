@@ -20,6 +20,7 @@ import sgbr.entidades.ContaItemCardapio;
 import sgbr.entidades.ItemCardapio;
 import sgbr.entidades.Mesa;
 import sgbr.entidades.Pessoa;
+import sgbr.entidades.Promocao;
 import sgbr.entidades.TipoConta;
 import sgbr.util.Constantes;
 import sgbr.util.DAO_MYSQL;
@@ -543,7 +544,7 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 
 		conexao = this.getConection();
 		String sqlItemEmPromocao = "SELECT " + "item_cardapio.ITEM_CARDAPIO_CD, " + "item_cardapio.ITEM_CARDAPIO_NM, "
-				+ "item_cardapio.ITEM_CARDAPIO_VL, " + "MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_QTD, "
+				+ "mydb.promocao.PROMOCAO_VL, " + "MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_QTD, "
 				+ "(mydb.promocao.PROMOCAO_VL * MYDB.CONTA_ITEM_CARDAPIO.CONTA_ITEM_CARDAPIO_QTD)as VL_TOTAL, "
 				+ "'SIM' AS ITEM_IN_PROMOCAO " + "FROM mydb.conta_item_cardapio "
 				+ "INNER JOIN mydb.item_cardapio ON mydb.conta_item_cardapio.ITEM_CARDAPIO_CD = mydb.item_cardapio.ITEM_CARDAPIO_CD "
@@ -553,7 +554,7 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 				+ "( " + "   SELECT " + "   1 " + "   FROM mydb.promocao_dia_semana " + "   where "
 				+ "       mydb.promocao_dia_semana.PROMOCAO_CD = mydb.promocao.PROMOCAO_CD "
 				+ "   and mydb.promocao_dia_semana.DIA_SEMANA_CD = " + diaSemana
-				+ " and (mydb.promocao.PROMOCAO_DT_FIM is not null or mydb.promocao.PROMOCAO_DT_FIM > current_date) "
+				+ " and (mydb.promocao.PROMOCAO_DT_FIM is null or mydb.promocao.PROMOCAO_DT_FIM > current_date) "
 				+ ") ";
 
 		String sqlItem = "SELECT " + "item_cardapio.ITEM_CARDAPIO_CD, " + "item_cardapio.ITEM_CARDAPIO_NM, "
@@ -567,7 +568,7 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 				+ "   inner join mydb.promocao_dia_semana on mydb.promocao_dia_semana.PROMOCAO_CD = mydb.promocao.PROMOCAO_CD "
 				+ "   where mydb.conta_item_cardapio.ITEM_CARDAPIO_CD = mydb.promocao.ITEM_CARDAPIO_CD "
 				+ "   and mydb.promocao_dia_semana.DIA_SEMANA_CD = " + diaSemana
-				+ "    and (mydb.promocao.PROMOCAO_DT_FIM is not null or mydb.promocao.PROMOCAO_DT_FIM > current_date) "
+				+ "    and (mydb.promocao.PROMOCAO_DT_FIM is null or mydb.promocao.PROMOCAO_DT_FIM > current_date) "
 				+ ") ";
 
 		sqlFinal = sqlItemEmPromocao + " UNION ALL " + sqlItem;
@@ -581,7 +582,7 @@ public class DAOConta extends DAO_MYSQL implements IntfDAOConta {
 			otdContaItemCardapio.setCdItemCardapio(rs.getInt(ContaItemCardapio.NM_COLUNA_ITEM_CARDAPIO_CD));
 			otdContaItemCardapio.setNmItemCardapio(rs.getString(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_NM));
 			otdContaItemCardapio.setQtdItemCardapio(rs.getInt(ContaItemCardapio.NM_COLUNA_CONTA_ITEM_CARDAPIO_QTD));
-			otdContaItemCardapio.setVlItemCardapio(rs.getDouble(ItemCardapio.NM_COLUNA_ITEM_CARDAPIO_VL));
+			otdContaItemCardapio.setVlItemCardapio(rs.getDouble(Promocao.NM_COLUNA_PROMOCAO_VL));
 			otdContaItemCardapio.setVlTotal(rs.getDouble("VL_TOTAL"));
 			otdContaItemCardapio.setInPromocao(rs.getString("ITEM_IN_PROMOCAO"));
 

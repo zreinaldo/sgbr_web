@@ -5,7 +5,6 @@ package sgbr.controlador;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import sgbr.cadastros.sql.DAOComanda;
 import sgbr.entidades.Comanda;

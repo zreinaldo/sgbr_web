@@ -1,8 +1,6 @@
 <%@page import="sgbr.util.OTDConta"%>
 <%@page import="sgbr.util.Constantes"%>
 <%@page import="sgbr.web.servlet.selects.SelectClienteConta"%>
-<%@page import="sgbr.web.servlet.selects.SelectComandaConta"%>
-<%@page import="sgbr.web.servlet.selects.SelectMesaConta"%>
 <%@page import="sgbr.web.servlet.PRManterConta"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>

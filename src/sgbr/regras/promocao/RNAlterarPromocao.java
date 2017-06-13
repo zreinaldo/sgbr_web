@@ -79,7 +79,6 @@ public class RNAlterarPromocao {
 
 			// FIXME deveria tratar caso seja levantada uma chave duplicada
 			e.printStackTrace();
-			// throw e;
 		}
 	}
 

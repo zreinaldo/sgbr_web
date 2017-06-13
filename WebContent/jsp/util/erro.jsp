@@ -21,7 +21,10 @@
 			<table>
 					
 				<tr>
-					<td><label for="erro">Ops, algo de errado ocorreu...</label></td>
+					<td><label for="erro"><p>Ops, algo não ocorreu como o planejado...  </p>
+					         <p>Você pode ter digitado algo errado ou feito algo que não deveria.</p>
+					         <p>Vamos tentar outra vez.</p>
+					         </label></td>
 					
 				</tr>
 					

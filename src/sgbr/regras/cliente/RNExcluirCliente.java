@@ -48,7 +48,6 @@ public class RNExcluirCliente {
 		PessoaDocumento pessoaDocumento = new PessoaDocumento();
 		try {
 
-//			// DAOPessoaDocumento.getInstancia().consultarPorChavePrimaria(pPessoaDocumento);
 			try {
 
 				pessoaDocumento.setCdPessoa(pOtdCliente.getCdPessoa());
@@ -59,25 +58,7 @@ public class RNExcluirCliente {
 			} catch (Exception aE) {
 				// TODO: handle exception
 			}
-//			try {
-//				pessoaDocumento = new PessoaDocumento();
-//				pessoaDocumento.setCdPessoa(pOtdFuncionario.getCdPessoa());
-//				pessoaDocumento.setNuDocumento(pOtdFuncionario.getNuRG());
-//				pessoaDocumento.setTpDocumento(Constantes.CD_TIPO_DOCUMENTO_RG);
-//				DAOPessoaDocumento.getInstancia().excluir(pessoaDocumento);
-//			} catch (Exception aE) {
-//				// TODO: handle exception
-//			}
-//			try {
-//				pessoaDocumento = new PessoaDocumento();
-//				pessoaDocumento.setCdPessoa(pOtdFuncionario.getCdPessoa());
-//				pessoaDocumento.setNuDocumento(pOtdFuncionario.getNuCarteira());
-//				pessoaDocumento.setTpDocumento(Constantes.CD_TIPO_DOCUMENTO_CARTEIRA_TRABALHO);
-//				DAOPessoaDocumento.getInstancia().excluir(pessoaDocumento);
-//
-//			} catch (Exception aE) {
-//				// TODO: handle exception
-//			}
+
 			cliente.setCdPessoa(pOtdCliente.getCdPessoa());
 			cliente.setCdCliente(pOtdCliente.getCdCliente());
 			DAOCliente.getInstancia().excluir(cliente);

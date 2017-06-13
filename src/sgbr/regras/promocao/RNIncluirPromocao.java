@@ -55,13 +55,12 @@ public class RNIncluirPromocao {
 				PromocaoDiaSemana promocaoDiaSemana = new PromocaoDiaSemana(promocao.getCdPromocao(),
 						Integer.valueOf(diaSemana));
 				DAOPromocaoDiaSemana.getInstancia().incluir(promocaoDiaSemana);
-			}		
-			
+			}
+
 		} catch (Exception e) {
-			
-			//FIXME deveria tratar caso seja levantada uma chave duplicada
+			// FIXME deveria tratar caso seja levantada uma chave duplicada
 			e.printStackTrace();
-//			throw e;
+
 		}
 	}
 }

@@ -264,9 +264,7 @@ public class PRManterConta extends PRConsultar {
 		String vlPercDesconto = this.getAtributoOuParametroStringOpcional(this.ID_REQ_ATR_vlPercDesconto, pRequest);
 		
 		
-		
-		//TODO mudar para fachada
-		ArrayList<OTDContaItemCardapio> otd = DAOConta.getInstancia().consultarTodosItensConta(Integer.valueOf(cdConta));
+		ArrayList<OTDContaItemCardapio> otd = this.aFachadaSGBR.consultarTodosItensConta(Integer.valueOf(cdConta));
 		
 		
 		String inContaDesconto = Constantes.CD_SIM;

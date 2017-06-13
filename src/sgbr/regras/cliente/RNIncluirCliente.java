@@ -119,7 +119,6 @@ public class RNIncluirCliente {
 		pessoaTelefone.setNuDDDTelefone(pOTDCliente.getDddTelefone());
 		pessoaTelefone.setNuTelefone(pOTDCliente.getNuTelefone());
 		pessoaTelefone.setTpTelefone(Constantes.CD_TIPO_TELEFONE_CELULAR);
-		// FIXME colcoar telefone
 		DAOPessoaTelefone.getInstancia().incluir(pessoaTelefone);
 
 	}

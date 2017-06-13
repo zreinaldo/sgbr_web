@@ -134,7 +134,7 @@ public class PRManterUsuario extends PRManterCadastro {
 		usuario.setInBloqueioUsuario(inBloqueioUsuario);
 		usuario.setCdTpUsuario(!cdTpUsuario.isEmpty() ? Integer.valueOf(cdTpUsuario) : null);
 		usuario.setCdUsuario(!cdUsuario.isEmpty() ? Integer.valueOf(cdUsuario) : null);
-		//FIXME 
+
 		if (!cdUsuario.isEmpty()) {
 			this.aFachadaSGBR.alterarUsuario(usuario);
 		}

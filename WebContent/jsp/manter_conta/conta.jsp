@@ -155,7 +155,7 @@ if (otd == null) {
 				    
 				    
 				    %>
-				     <td colspan="2"> <strike>R$<%=vlContaOriginal %> </strike> <br> <b>R$<%=vlFinalComDesconto %> </b> </td>
+				     <td colspan="2"> <strike>R$ <%=vlContaOriginal %> </strike> <br> <b>R$ <%=vlFinalComDesconto %> </b> </td>
 				    
 				    <INPUT type="hidden" id="<%=PRManterConta.ID_REQ_ATR_vlDinheiroDesconto%>" name="<%=PRManterConta.ID_REQ_ATR_vlDinheiroDesconto%>" value="<%=vlDinheiroDesconto%>">
 				    <INPUT type="hidden" id="<%=PRManterConta.ID_REQ_ATR_vlPercDesconto%>" name="<%=PRManterConta.ID_REQ_ATR_vlPercDesconto%>" value="<%=vlPercDesconto%>">
@@ -164,7 +164,7 @@ if (otd == null) {
 				       <%}else { 
 				    	   vlFinalComDesconto = vlContaOriginal;
 				       %>
-				    <td colspan="2"> R$<%=vlContaOriginal %></td>
+				    <td colspan="2"> R$ <%=vlContaOriginal %></td>
 				    <%}%>	
 				    <INPUT type="hidden" id="<%=PRManterConta.ID_REQ_ATR_vlContaOriginal%>" name="<%=PRManterConta.ID_REQ_ATR_vlContaOriginal%>" value="<%=vlContaOriginal%>">
 				    <INPUT type="hidden" id="<%=PRManterConta.ID_REQ_ATR_vlContaFinal%>" name="<%=PRManterConta.ID_REQ_ATR_vlContaFinal%>" value="<%=vlFinalComDesconto%>">

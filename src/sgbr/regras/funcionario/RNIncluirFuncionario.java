@@ -64,7 +64,7 @@ public class RNIncluirFuncionario {
 
 			this.incluirPessoaTelefone(pessoa.getCdPessoa(), pOtdFuncionario.getDddTelefoneConvencional(),
 					pOtdFuncionario.getNuTelefoneConvencional(), Constantes.CD_TIPO_TELEFONE_CONVENCIONAL);
-			//FIXME validar preenchimento campo
+
 			this.incluirPessoaTelefone(pessoa.getCdPessoa(), pOtdFuncionario.getDddTelefoneCelular(),
 					pOtdFuncionario.getNuTelefoneCelular(), Constantes.CD_TIPO_TELEFONE_CELULAR);
 		} catch (Exception e) {
@@ -73,7 +73,9 @@ public class RNIncluirFuncionario {
 		}
 	}
 
-	/** inclui na tabela pessoa doccumento
+	/**
+	 * inclui na tabela pessoa doccumento
+	 * 
 	 * @param pCdPessoa
 	 * @param pNuDocumento
 	 * @param pTpDocumento
@@ -90,6 +92,7 @@ public class RNIncluirFuncionario {
 
 	/**
 	 * inclu na tabela pessoa telefone
+	 * 
 	 * @param pCdPessoa
 	 * @param pDddTelefone
 	 * @param pNuTelefone
